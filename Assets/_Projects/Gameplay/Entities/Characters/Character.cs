@@ -1,3 +1,4 @@
+using Asce.Game.Entities.FOVs;
 using UnityEngine;
 
 namespace Asce.Game.Entities
@@ -7,6 +8,7 @@ namespace Asce.Game.Entities
     {
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] private CharacterFOV _fov;
 
         [Space]
         [SerializeField] private Vector2 _moveDirection = Vector2.zero;
@@ -15,6 +17,8 @@ namespace Asce.Game.Entities
 
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
+        public CharacterFOV Fov => _fov;
+
         public Vector2 MoveDirection => _moveDirection;
         public Vector2 LookPosition => _lookPosition;
 
@@ -46,6 +50,12 @@ namespace Asce.Game.Entities
                 Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
                 Rigidbody.MoveRotation(targetRotation);
             }
+        }
+
+        private void LateUpdate()
+        {
+            if (Fov == null) return;
+            Fov.DrawFieldOfView();
         }
     }
 }

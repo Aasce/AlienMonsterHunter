@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4874154971290484568}
   - component: {fileID: 4794821312181696655}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HandL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343649542577300242}
   - component: {fileID: 3204291185197121825}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6301494923322800607}
   - component: {fileID: 1172628337249409083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HandR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5160913039794610379}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6067871384129026562}
   - component: {fileID: 6000696694193085947}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4090602559188383097}
   - component: {fileID: 131112332943060047}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7351844855466763089}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BlueSoldierLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3537394437345610671, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: m_Name
-      value: Blue Soldier Variant
+      value: Blue Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 8186422347695430131, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: m_LocalPosition.x

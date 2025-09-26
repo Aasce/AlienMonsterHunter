@@ -8,6 +8,9 @@ namespace Asce.Game.Players
     public class Player : MonoBehaviourSingleton<Player>
     {
         [SerializeField] private Character _characterPrefab;
+        [SerializeField] private Transform _spawnPoint;
+
+        [Header("Runtime")]
         [SerializeField] private Character _character;
 
         public Character Character
@@ -25,6 +28,8 @@ namespace Asce.Game.Players
             Character = GameObject.Instantiate(_characterPrefab);
             if (Character != null)
             {
+                Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
+                Character.transform.position = spawnPoint;
                 CameraController.Instance.Target = Character.transform;
             }
         }
