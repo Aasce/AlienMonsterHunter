@@ -41,12 +41,13 @@ namespace Asce.Game.Players
             Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
 
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
-
+            bool isShoot = Input.GetMouseButtonDown(0);
 
             if (Character != null)
             {
                 Character.Move(moveDirection);
                 Character.LookAt(worldMousePosition);
+                if (isShoot) Character.Shoot();
             }
         }
     }

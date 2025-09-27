@@ -1,4 +1,5 @@
 using Asce.Game.Entities.FOVs;
+using Asce.Game.Guns;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Asce.Game.Entities
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private CharacterFOV _fov;
+        [SerializeField] private Gun _gun;
 
         [Space]
         [SerializeField] private Vector2 _moveDirection = Vector2.zero;
@@ -20,6 +22,7 @@ namespace Asce.Game.Entities
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
+        public Gun Gun => _gun;
 
         public Vector2 MoveDirection => _moveDirection;
         public Vector2 LookPosition => _lookPosition;
@@ -65,6 +68,13 @@ namespace Asce.Game.Entities
         public void LookAt(Vector2 lookPosition)
         {
             _lookPosition = lookPosition;
+        }
+
+        public void Shoot()
+        {
+            if (Gun == null) return;
+            Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
+            Gun.Shoot(lookDirection);
         }
     }
 }
