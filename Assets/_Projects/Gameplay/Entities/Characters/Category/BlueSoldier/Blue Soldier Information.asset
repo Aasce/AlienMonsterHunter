@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b22fe92fee649243ad9e4d3b744e739, type: 3}
+  m_Name: Blue Soldier Information
+  m_EditorClassIdentifier: 
+  _name: Blue Soldier
+  _description: 
+  _icon: {fileID: 0}
+  _stats: {fileID: 11400000, guid: 2ffc93dc868ac2a41a7f73c9e7a07c0b, type: 2}

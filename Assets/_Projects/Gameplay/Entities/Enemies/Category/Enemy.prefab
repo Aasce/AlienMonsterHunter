@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 782725079248451543}
+  - {fileID: 8360871113489588705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1824989832164351601
@@ -112,3 +113,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6455034772851875770}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8759248493955586036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8360871113489588705}
+  - component: {fileID: 8454178846099897669}
+  m_Layer: 0
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8360871113489588705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759248493955586036}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6455034772851875770}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8454178846099897669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759248493955586036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dba721745a626340bda7d7d92583c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+    _currentValue: 0
+  _armor:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _speed:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _attackDamage:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _attackSpeed:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _attackRange:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0

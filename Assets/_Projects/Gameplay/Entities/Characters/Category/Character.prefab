@@ -65,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 6866528806364630628}
   - {fileID: 2504629879106363361}
+  - {fileID: 6673252821967040889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7269911351320589851
@@ -79,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ed3a731a5bb58408d2400354f1aea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _information: {fileID: 0}
+  _stats: {fileID: 6912903451780248762}
   _collider: {fileID: 3285569828326788888}
   _rigidbody: {fileID: 2125223173831006573}
   _fov: {fileID: 2290359457833200060}
@@ -147,6 +150,72 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &5867197909989179987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6673252821967040889}
+  - component: {fileID: 6912903451780248762}
+  m_Layer: 8
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6673252821967040889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867197909989179987}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8186422347695430131}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6912903451780248762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867197909989179987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf8dc0cdf5b890428605d70f34b93a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+    _currentValue: 0
+  _armor:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _speed:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
 --- !u!1001 &4920424962472699507
 PrefabInstance:
   m_ObjectHideFlags: 0

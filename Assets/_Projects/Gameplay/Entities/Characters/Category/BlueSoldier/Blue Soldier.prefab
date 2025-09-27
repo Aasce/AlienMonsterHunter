@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: _information
+      value: 
+      objectReference: {fileID: 11400000, guid: cc9b15648eacc4d4988609c3116ebb9f, type: 2}
     - target: {fileID: 8186422347695430131, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

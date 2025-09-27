@@ -378,6 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6a32a400bc35e42899ce7d7db3072a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _information: {fileID: 11400000, guid: aca5d9186163f384e821022e401064a2, type: 2}
+  _stats: {fileID: 8683527855374450627}
   _agent: {fileID: 1478019436663364855}
   _target: {fileID: 0}
   _checkCooldown:
@@ -436,3 +438,14 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
   m_PrefabInstance: {fileID: 995665286645039750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8683527855374450627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8454178846099897669, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dba721745a626340bda7d7d92583c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

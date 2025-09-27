@@ -1,5 +1,4 @@
 using Asce.Managers.Utils;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,29 +19,39 @@ namespace Asce.Game.Entities.Enemies
         [Space]
         [SerializeField] protected Cooldown _attackCooldown = new();
 
+        public new EnemyStats Stats => base.Stats as EnemyStats;
+
         public NavMeshAgent Agent => _agent;
+        public Cooldown AttackCooldown => _attackCooldown;
 
         protected override void RefReset()
         {
             base.RefReset();
             this.LoadComponent(out _agent);
         }
-        protected virtual void Start()
-        {
-            _agent.speed = 5f;// Speed.FinalValue;
-            //Speed.OnFinalValueChanged += (oldVal, newVal) =>
-            //{
-            //    _agent.speed = newVal;
-            //};
 
-            //Health.OnCurrentValueChanged += (oldVal, newVal) =>
-            //{
-            //    if (newVal <= 0)
-            //    {
-            //        this.gameObject.SetActive(false);
-            //    }
-            //};
+        protected override void Start()
+        {
+            base.Start();
+            Agent.speed = Stats.Speed.FinalValue;
+            AttackCooldown.BaseTime = Stats.AttackSpeed.FinalValue;
+
+            Stats.Speed.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                Agent.speed = newValue;
+            };
+
+            Stats.AttackSpeed.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                AttackCooldown.BaseTime = newValue;
+            };
+
+            Stats.Health.OnCurrentValueChanged += (oldValue, newValue) =>
+            {
+                if (newValue <= 0f) this.gameObject.SetActive(false);
+            };
         }
+
         protected virtual void Update()
         {
             this.FindTargetHandle();
@@ -55,7 +64,7 @@ namespace Asce.Game.Entities.Enemies
 
         protected virtual void FindTargetHandle()
         {
-            if (_agent == null) return;
+            if (Agent == null) return;
 
             _checkCooldown.Update(Time.deltaTime);
             if (_checkCooldown.IsComplete)
@@ -82,13 +91,14 @@ namespace Asce.Game.Entities.Enemies
         }
         protected virtual void AttackHandle()
         {
-            _attackCooldown.Update(Time.deltaTime);
-            if (_attackCooldown.IsComplete && _target != null)
+            AttackCooldown.Update(Time.deltaTime);
+            if (AttackCooldown.IsComplete && _target != null)
             {
-                if (Vector2.Distance(transform.position, _target.transform.position) <= 1f) //_attackRange)
+                float attackRange = Stats.AttackRange.FinalValue;
+                if (Vector2.Distance(transform.position, _target.transform.position) <= attackRange)
                 {
                     this.Attack();
-                    _attackCooldown.Reset();
+                    AttackCooldown.Reset();
                 }
             }
         }

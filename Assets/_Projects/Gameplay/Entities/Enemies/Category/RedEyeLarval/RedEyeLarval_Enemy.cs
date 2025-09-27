@@ -1,3 +1,4 @@
+using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,17 @@ namespace Asce.Game.Entities.Enemies
 {
     public class RedEyeLarval_Enemy : Enemy
     {
+
+        protected override void Start()
+        {
+            base.Start();
+            Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.9f;
+            Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                Agent.stoppingDistance = newValue;
+            };
+        }
+
         protected override void MoveToTaget()
         {
             _agent.SetDestination(_target.transform.position);
@@ -30,8 +42,8 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void Attack()
         {
-            Debug.Log("Attack");
-            // GameManager.Instance.CombatController.DamageDealing(_target, _attackDamage.FinalValue);
+            float damage = Stats.AttackDamage.FinalValue;
+            CombatController.Instance.DamageDealing(_target, damage);
         }
     }
 }

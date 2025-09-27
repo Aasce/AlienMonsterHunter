@@ -7,6 +7,7 @@ namespace Asce.Game.Entities
     [RequireComponent(typeof(Rigidbody2D))] 
     public class Character : Entity
     {
+        [Header("Character")]
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private CharacterFOV _fov;
