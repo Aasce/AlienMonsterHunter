@@ -54,7 +54,7 @@ MonoBehaviour:
   _edgeDistanceThreshold: 0.5
   _obstacleMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 32960
 --- !u!1 &5867035154368130960
 GameObject:
   m_ObjectHideFlags: 0

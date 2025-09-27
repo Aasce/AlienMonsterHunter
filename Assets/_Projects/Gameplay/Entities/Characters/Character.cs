@@ -1,4 +1,5 @@
 using Asce.Game.Entities.FOVs;
+using Asce.Managers.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Entities
@@ -22,15 +23,12 @@ namespace Asce.Game.Entities
         public Vector2 MoveDirection => _moveDirection;
         public Vector2 LookPosition => _lookPosition;
 
-
-        public void Move(Vector2 direction)
+        protected override void RefReset()
         {
-            _moveDirection = direction;
-        }
-
-        public void LookAt(Vector2 lookPosition)
-        {
-            _lookPosition = lookPosition;
+            base.RefReset();
+            this.LoadComponent(out _collider);
+            this.LoadComponent(out _rigidbody);
+            this.LoadComponent(out _fov);
         }
 
         private void FixedUpdate()
@@ -56,6 +54,16 @@ namespace Asce.Game.Entities
         {
             if (Fov == null) return;
             Fov.DrawFieldOfView();
+        }
+
+        public void Move(Vector2 direction)
+        {
+            _moveDirection = direction;
+        }
+
+        public void LookAt(Vector2 lookPosition)
+        {
+            _lookPosition = lookPosition;
         }
     }
 }

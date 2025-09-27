@@ -14,13 +14,13 @@ TagManager:
   - Ground
   - Obstacle
   - Character
-  - 
+  - Enemy
   - 
   - FOV Mask
   - FOV Behind Mask
   - FOV Filter
   - 
-  - 
+  - Sight Block
   - 
   - 
   - 
