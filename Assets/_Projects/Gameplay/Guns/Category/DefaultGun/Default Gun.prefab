@@ -169,10 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barrel: {fileID: 5765542848989150052}
   _damage: 10
-  _distance: 20
+  _shootCooldown:
+    _baseTime: 0.5
+    _currentTime: 0.5
+  _distance: 100
   _hitLayer:
     serializedVersion: 2
     m_Bits: 704
+  _bulletLineVFXName: Default Gun Bullet Line
 --- !u!4 &5137634337035036143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

@@ -7,7 +7,6 @@ namespace Asce.Game.Entities.Enemies
 {
     public class RedEyeLarval_Enemy : Enemy
     {
-
         protected override void Start()
         {
             base.Start();

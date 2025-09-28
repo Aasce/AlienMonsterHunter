@@ -1,4 +1,5 @@
 using Asce.Managers;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities
@@ -8,6 +9,8 @@ namespace Asce.Game.Entities
         [Header("Entity")]
         [SerializeField] protected SO_EntityInformation _information;
         [SerializeField] protected EntityStats _stats;
+
+        public event Action<float> OnTakeDamage;
 
         public SO_EntityInformation Information => _information;
         public EntityStats Stats => _stats;
@@ -19,5 +22,9 @@ namespace Asce.Game.Entities
             if (Stats != null) Stats.Initialize(Information.Stats);
         }
 
+        public virtual void TakeDamageCallback(float damage)
+        {
+            OnTakeDamage?.Invoke(damage);
+        }
     }
 }

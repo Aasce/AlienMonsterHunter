@@ -16,6 +16,7 @@ namespace Asce.Game.Stats
             if (receiver == null || damage <= 0f) return;
             float finalDamage = this.CalculateDamage(damage, receiver.Stats.Armor.FinalValue);
             receiver.Stats.Health.CurrentValue -= finalDamage;
+            receiver.TakeDamageCallback(finalDamage);
         }
 
         public float CalculateDamage(float damage, float armor)

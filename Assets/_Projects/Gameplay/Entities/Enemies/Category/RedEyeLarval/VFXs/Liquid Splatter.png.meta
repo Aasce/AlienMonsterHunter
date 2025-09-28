@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 516726d8771b811419cacc35359e6812
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4883880353342747333
+    second: Liquid Splatter_0
+  - first:
+      213: -8223301947239410108
+    second: Liquid Splatter_1
+  - first:
+      213: 2272528533155268536
+    second: Liquid Splatter_2
+  - first:
+      213: 3754442434150599331
+    second: Liquid Splatter_3
+  - first:
+      213: -3697740933215883083
+    second: Liquid Splatter_4
+  - first:
+      213: 1153103918150834234
+    second: Liquid Splatter_5
+  - first:
+      213: 7351284125152464135
+    second: Liquid Splatter_6
+  - first:
+      213: -1453503170395133878
+    second: Liquid Splatter_7
+  - first:
+      213: 6525105515575710315
+    second: Liquid Splatter_8
+  - first:
+      213: 7259827887228550237
+    second: Liquid Splatter_9
+  - first:
+      213: -6398213477440076447
+    second: Liquid Splatter_10
+  - first:
+      213: -388213583143527713
+    second: Liquid Splatter_11
+  - first:
+      213: -3320473078565387599
+    second: Liquid Splatter_12
+  - first:
+      213: 4499914046434351180
+    second: Liquid Splatter_13
+  - first:
+      213: -8663576234388788441
+    second: Liquid Splatter_14
+  - first:
+      213: 4152881036564392779
+    second: Liquid Splatter_15
+  - first:
+      213: -5487798456456565165
+    second: Liquid Splatter_16
+  - first:
+      213: -165758105530718931
+    second: Liquid Splatter_17
+  - first:
+      213: -8884262279960718482
+    second: Liquid Splatter_18
+  - first:
+      213: -6457671907983272272
+    second: Liquid Splatter_19
+  - first:
+      213: 620924455343063916
+    second: Liquid Splatter_20
+  - first:
+      213: -576455707067588122
+    second: Liquid Splatter_21
+  - first:
+      213: -4714193094111450949
+    second: Liquid Splatter_22
+  - first:
+      213: -9019100444730090791
+    second: Liquid Splatter_23
+  - first:
+      213: 6834543651144684534
+    second: Liquid Splatter_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Liquid Splatter_0
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 273
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3d0f7dc1b8f83cb0800000000000000
+      internalID: -4883880353342747333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_1
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 269
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 446540aa276f0ed80800000000000000
+      internalID: -8223301947239410108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_2
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 267
+        width: 9
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7c8a819a4a98f10800000000000000
+      internalID: 2272528533155268536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_3
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 271
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa033180857a1430800000000000000
+      internalID: 3754442434150599331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_4
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 32
+        width: 404
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0fe34763cfeacc0800000000000000
+      internalID: -3697740933215883083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_5
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 251
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a38dd7677e5a00010800000000000000
+      internalID: 1153103918150834234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 255
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d4eaa86f1050660800000000000000
+      internalID: 7351284125152464135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_7
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 226
+        width: 39
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a48a1b8419e14dbe0800000000000000
+      internalID: -1453503170395133878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_8
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 248
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6215d915e4dd8a50800000000000000
+      internalID: 6525105515575710315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_9
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 229
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c7bbccff610c460800000000000000
+      internalID: 7259827887228550237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_10
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 256
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1654110ddbaf437a0800000000000000
+      internalID: -6398213477440076447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_11
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 249
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fda9fbf8dc9cc9af0800000000000000
+      internalID: -388213583143527713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_12
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 245
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b2ccd1e35f4be1d0800000000000000
+      internalID: -3320473078565387599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_13
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 243
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c489281dbf7e27e30800000000000000
+      internalID: 4499914046434351180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 206
+        width: 42
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b6db0015bc4c780800000000000000
+      internalID: -8663576234388788441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_15
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 174
+        width: 66
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b60e2cc4ff1a930800000000000000
+      internalID: 4152881036564392779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_16
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 146
+        width: 70
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35e28f3216c67d3b0800000000000000
+      internalID: -5487798456456565165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_17
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 172
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d25233991eb13bdf0800000000000000
+      internalID: -165758105530718931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_18
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 170
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e631a87f682c4b480800000000000000
+      internalID: -8884262279960718482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_19
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 142
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b653a82d9db166a0800000000000000
+      internalID: -6457671907983272272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_20
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 134
+        width: 53
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6383199087fd9800800000000000000
+      internalID: 620924455343063916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_21
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 125
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e16d7fa6940008f0800000000000000
+      internalID: -576455707067588122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_22
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 76
+        width: 29
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb823e69b52d39eb0800000000000000
+      internalID: -4714193094111450949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_23
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 67
+        width: 57
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9da9b464ee7b5d280800000000000000
+      internalID: -9019100444730090791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Liquid Splatter_24
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 32
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f351606d3d29de50800000000000000
+      internalID: 6834543651144684534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Liquid Splatter_0: -4883880353342747333
+      Liquid Splatter_1: -8223301947239410108
+      Liquid Splatter_10: -6398213477440076447
+      Liquid Splatter_11: -388213583143527713
+      Liquid Splatter_12: -3320473078565387599
+      Liquid Splatter_13: 4499914046434351180
+      Liquid Splatter_14: -8663576234388788441
+      Liquid Splatter_15: 4152881036564392779
+      Liquid Splatter_16: -5487798456456565165
+      Liquid Splatter_17: -165758105530718931
+      Liquid Splatter_18: -8884262279960718482
+      Liquid Splatter_19: -6457671907983272272
+      Liquid Splatter_2: 2272528533155268536
+      Liquid Splatter_20: 620924455343063916
+      Liquid Splatter_21: -576455707067588122
+      Liquid Splatter_22: -4714193094111450949
+      Liquid Splatter_23: -9019100444730090791
+      Liquid Splatter_24: 6834543651144684534
+      Liquid Splatter_3: 3754442434150599331
+      Liquid Splatter_4: -3697740933215883083
+      Liquid Splatter_5: 1153103918150834234
+      Liquid Splatter_6: 7351284125152464135
+      Liquid Splatter_7: -1453503170395133878
+      Liquid Splatter_8: 6525105515575710315
+      Liquid Splatter_9: 7259827887228550237
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
