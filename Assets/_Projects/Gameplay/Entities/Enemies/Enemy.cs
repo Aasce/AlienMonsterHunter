@@ -22,6 +22,7 @@ namespace Asce.Game.Entities.Enemies
         public new EnemyStats Stats => base.Stats as EnemyStats;
 
         public NavMeshAgent Agent => _agent;
+        public Cooldown CheckCooldown => _checkCooldown;
         public Cooldown AttackCooldown => _attackCooldown;
 
         protected override void RefReset()
@@ -48,7 +49,7 @@ namespace Asce.Game.Entities.Enemies
 
             Stats.Health.OnCurrentValueChanged += (oldValue, newValue) =>
             {
-                if (newValue <= 0f) this.gameObject.SetActive(false);
+                if (newValue <= 0f) EnemyController.Instance.Despawn(this);
             };
         }
 
@@ -56,6 +57,13 @@ namespace Asce.Game.Entities.Enemies
         {
             this.FindTargetHandle();
             this.AttackHandle();
+        }
+
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            CheckCooldown.Reset();
+            AttackCooldown.Reset();
         }
 
         protected abstract void MoveToTaget();
@@ -66,8 +74,8 @@ namespace Asce.Game.Entities.Enemies
         {
             if (Agent == null) return;
 
-            _checkCooldown.Update(Time.deltaTime);
-            if (_checkCooldown.IsComplete)
+            CheckCooldown.Update(Time.deltaTime);
+            if (CheckCooldown.IsComplete)
             {
                 if (_target != null)
                 {
@@ -86,7 +94,7 @@ namespace Asce.Game.Entities.Enemies
                 {
                     this.FindTarget();
                 }
-                _checkCooldown.Reset();
+                CheckCooldown.Reset();
             }
         }
         protected virtual void AttackHandle()

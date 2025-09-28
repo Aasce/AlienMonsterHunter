@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6447082623949436070
+--- !u!1 &2404143277493780658
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4400025292825598437}
-  - component: {fileID: 1866092650056403646}
+  - component: {fileID: 2240906410388220161}
+  - component: {fileID: 3376820086966089219}
   m_Layer: 0
-  m_Name: Enemy Controller
+  m_Name: Ability Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4400025292825598437
+--- !u!4 &2240906410388220161
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447082623949436070}
+  m_GameObject: {fileID: 2404143277493780658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,22 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1866092650056403646
+--- !u!114 &3376820086966089219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447082623949436070}
+  m_GameObject: {fileID: 2404143277493780658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038116ebddc6ea24b9715511a5b8cd92, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa0b570b4f13574aa999a353b5911f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: {fileID: 11400000, guid: 6031666389281ff428814ac72d4dfc65, type: 2}
-  _enemyNames: []
-  _spawnCooldown:
-    _baseTime: 5
-    _currentTime: 5
-  _spawnAreaX: {x: -53, y: 53}
-  _spawnAreaY: {x: -38, y: 38}
+  _abilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}
+  _updateCooldown:
+    _baseTime: 0.1
+    _currentTime: 0.1

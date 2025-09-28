@@ -9,7 +9,7 @@ namespace Asce.Game.VFXs
     public class VFXController : MonoBehaviourSingleton<VFXController>
     {
         [SerializeField] private SO_VFXs _vfxs;
-        private Dictionary<string, Pool<VFXObject>> _pools = new();
+        private readonly Dictionary<string, Pool<VFXObject>> _pools = new();
 
 
         public VFXObject Spawn(string name, Vector2 position, float angle = 0f)
