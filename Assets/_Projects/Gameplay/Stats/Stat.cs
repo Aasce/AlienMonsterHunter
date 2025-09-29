@@ -20,7 +20,7 @@ namespace Asce.Game.Stats
 
         public event Action<float, float> OnFinalValueChanged;
 
-        public float FinalValue
+        public virtual float FinalValue
         {
             get => _finalValue;
             protected set

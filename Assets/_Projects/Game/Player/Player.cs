@@ -2,6 +2,7 @@ using Asce.Game.Managers;
 using Asce.Game.Entities;
 using Asce.Managers;
 using UnityEngine;
+using System;
 
 namespace Asce.Game.Players
 {
@@ -13,6 +14,8 @@ namespace Asce.Game.Players
         [Header("Runtime")]
         [SerializeField] private Character _character;
 
+        public event Action<Character> OnCharacterChanged;
+
         public Character Character
         {
             get => _character;
@@ -20,6 +23,7 @@ namespace Asce.Game.Players
             {
                 if (_character == value) return;
                 _character = value;
+                OnCharacterChanged?.Invoke(_character);
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Asce.Game.Stats
@@ -11,6 +12,19 @@ namespace Asce.Game.Stats
 
         public event Action<float, float> OnCurrentValueChanged;
 
+
+        public override float FinalValue
+        {
+            get => _finalValue;
+            protected set
+            {
+                float oldValue = _finalValue;
+                base.FinalValue = value;
+                if (_finalValue > oldValue) CurrentValue += _finalValue - oldValue;
+            }
+        }
+
+
         public float CurrentValue
         {
             get => _currentValue;
@@ -20,14 +34,6 @@ namespace Asce.Game.Stats
                 _currentValue = Mathf.Clamp(value, 0, FinalValue);
                 OnCurrentValueChanged?.Invoke(oldValue, _currentValue);
             }
-        }
-
-        public ResourceStat() : base()
-        {
-            OnFinalValueChanged += (oldValue, newValue) => 
-            {
-                if (newValue > oldValue) CurrentValue += newValue - oldValue;
-            };
         }
     }
 }
