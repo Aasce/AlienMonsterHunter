@@ -170,11 +170,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed74acc68ff82c438ca3a2a86e8d6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _information: {fileID: 11400000, guid: 5b9d252a4241dc344bb72255543919d6, type: 2}
   _barrel: {fileID: 5765542848989150052}
   _damage: 10
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
+  _magazineSize: 10
+  _remainingAmmo: 0
+  _currentAmmo: 0
+  _reloadCooldown:
+    _baseTime: 1.5
+    _currentTime: 1.5
   _distance: 100
   _hitLayer:
     serializedVersion: 2

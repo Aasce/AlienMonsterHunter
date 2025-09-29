@@ -15,6 +15,8 @@ namespace Asce.Game.Guns
 
         protected override void Shooting(Vector2 direction)
         {
+            CurrentAmmo--;
+
             RaycastHit2D hit = Physics2D.Raycast(BarrelPosition, direction, _distance, _hitLayer);
             this.SpawnVFX(BarrelPosition, hit.collider != null ? hit.point : BarrelPosition + direction.normalized * _distance);
             if (hit.collider == null) return;

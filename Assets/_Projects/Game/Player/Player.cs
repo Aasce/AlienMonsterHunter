@@ -46,12 +46,14 @@ namespace Asce.Game.Players
 
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
             bool isShoot = Input.GetMouseButtonDown(0);
+            bool isReload = Input.GetKeyDown(KeyCode.R);
 
             if (Character != null)
             {
                 Character.Move(moveDirection);
                 Character.LookAt(worldMousePosition);
                 if (isShoot) Character.Shoot();
+                if (isReload) Character.Reload();
             }
         }
     }

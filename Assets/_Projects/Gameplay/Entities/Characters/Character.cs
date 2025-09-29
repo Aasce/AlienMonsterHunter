@@ -1,5 +1,6 @@
 using Asce.Game.Guns;
 using Asce.Managers.Utils;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities
@@ -17,11 +18,22 @@ namespace Asce.Game.Entities
         [SerializeField] private Vector2 _moveDirection = Vector2.zero;
         [SerializeField] private Vector2 _lookPosition = Vector2.zero;
 
+        public event Action<Gun> OnGunChanged;
+
 
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
-        public Gun Gun => _gun;
+        public Gun Gun
+        {
+            get => _gun;
+            set
+            {
+                if (_gun == value) return;
+                _gun = value;
+                OnGunChanged?.Invoke(_gun);
+            }
+        }
 
         public Vector2 MoveDirection => _moveDirection;
         public Vector2 LookPosition => _lookPosition;
@@ -32,6 +44,12 @@ namespace Asce.Game.Entities
             this.LoadComponent(out _collider);
             this.LoadComponent(out _rigidbody);
             this.LoadComponent(out _fov);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            if (Gun != null) Gun.Initialize();
         }
 
         private void FixedUpdate()
@@ -69,6 +87,12 @@ namespace Asce.Game.Entities
             if (Gun == null) return;
             Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
             Gun.Shoot(lookDirection);
+        }
+
+        public void Reload()
+        {
+            if (Gun == null) return;
+            Gun.Reload();
         }
     }
 }
