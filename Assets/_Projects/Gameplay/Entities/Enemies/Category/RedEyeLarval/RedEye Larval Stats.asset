@@ -18,3 +18,4 @@ MonoBehaviour:
   _attackDamage: 5
   _attackSpeed: 2
   _attackRange: 1.5
+  _viewRange: 18

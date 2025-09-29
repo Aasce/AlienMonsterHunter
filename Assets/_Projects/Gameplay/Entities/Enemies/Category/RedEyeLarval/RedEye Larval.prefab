@@ -363,6 +363,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3739561985502739671}
+    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7154278847365597213}
   m_SourcePrefab: {fileID: 100100000, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
 --- !u!1 &255783305889590310 stripped
 GameObject:
@@ -385,6 +388,9 @@ MonoBehaviour:
   _stats: {fileID: 8683527855374450627}
   _agent: {fileID: 1478019436663364855}
   _target: {fileID: 0}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _checkCooldown:
     _baseTime: 0.2
     _currentTime: 0.2
@@ -445,6 +451,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 4219010634262668761}
   _takeDamageVFXName: RedEye Larval Blood Splatter
+--- !u!114 &7154278847365597213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255783305889590310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_Priority: 0
+  m_ComponentVersion: 5
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_AlphaCutoff: 0.1
+  m_ApplyToSortingLayers: 6964533e000000002797e9f8
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: -0.5, y: 0.49999988, z: 0}
+  - {x: 0.5, y: 0.49999988, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  m_ShapePathHash: 0
+  m_InstanceId: 0
+  m_ShadowShape2DComponent: {fileID: 3808980928891687044}
+  m_ShadowShape2DProvider:
+    rid: 8033853950099456101
+  m_ShadowCastingSource: 2
+  m_ShadowMesh:
+    m_Mesh: {fileID: 0}
+    m_LocalBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    m_EdgeProcessing: 1
+    m_TrimEdge: -1
+    m_FlipX: 0
+    m_FlipY: 0
+    m_InitialTrim: 0
+  m_CastingOption: 1
+  m_PreviousTrimEdge: 0
+  m_PreviousEdgeProcessing: -1
+  m_PreviousShadowCastingSource: -1
+  m_PreviousShadowShape2DSource: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8033853950099456101
+      type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data: 
 --- !u!4 &508233983693092177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

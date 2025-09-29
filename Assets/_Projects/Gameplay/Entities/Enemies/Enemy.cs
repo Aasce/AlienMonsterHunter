@@ -12,7 +12,9 @@ namespace Asce.Game.Entities.Enemies
 
         [Header("Target Detection")]
         [SerializeField] protected Character _target;
+        [SerializeField] protected LayerMask _targetLayer;
 
+        [Space]
         [SerializeField] protected Cooldown _checkCooldown = new(2f);
         [SerializeField] protected LayerMask _seeLayer;
 
@@ -24,6 +26,15 @@ namespace Asce.Game.Entities.Enemies
         public NavMeshAgent Agent => _agent;
         public Cooldown CheckCooldown => _checkCooldown;
         public Cooldown AttackCooldown => _attackCooldown;
+
+        public LayerMask TargetLayer => _targetLayer;
+        public LayerMask SeeLayer => _seeLayer;
+
+        public Character Target
+        {
+            get => _target;
+            set => _target = value;
+        }
 
         protected override void RefReset()
         {

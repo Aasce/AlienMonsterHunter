@@ -1,4 +1,3 @@
-using Asce.Game.Entities.FOVs;
 using Asce.Game.Guns;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -54,11 +53,6 @@ namespace Asce.Game.Entities
             }
         }
 
-        private void LateUpdate()
-        {
-            if (Fov == null) return;
-            Fov.DrawFieldOfView();
-        }
 
         public void Move(Vector2 direction)
         {

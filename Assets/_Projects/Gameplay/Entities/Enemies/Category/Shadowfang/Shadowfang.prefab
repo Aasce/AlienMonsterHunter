@@ -847,6 +847,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 996348799599658602}
+    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3567730634136572893}
   m_SourcePrefab: {fileID: 100100000, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
 --- !u!195 &1370998854991996 stripped
 NavMeshAgent:
@@ -879,6 +882,9 @@ MonoBehaviour:
   _stats: {fileID: 7783401725456655176}
   _agent: {fileID: 1370998854991996}
   _target: {fileID: 0}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _checkCooldown:
     _baseTime: 0.2
     _currentTime: 0.2
@@ -940,6 +946,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 3035042326583770649}
   _takeDamageVFXName: Shadowfang Blood Splatter
+--- !u!114 &3567730634136572893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660312851770388653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_Priority: 0
+  m_ComponentVersion: 5
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_AlphaCutoff: 0.1
+  m_ApplyToSortingLayers: 6964533e000000002797e9f8
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  m_ShapePathHash: 0
+  m_InstanceId: 0
+  m_ShadowShape2DComponent: {fileID: 3651779634959012725}
+  m_ShadowShape2DProvider:
+    rid: 8033853950099456100
+  m_ShadowCastingSource: 2
+  m_ShadowMesh:
+    m_Mesh: {fileID: 0}
+    m_LocalBounds:
+      m_Center: {x: 0, y: 0.20000458, z: 0}
+      m_Extent: {x: 0.625, y: 0.7499924, z: 0}
+    m_EdgeProcessing: 1
+    m_TrimEdge: 0
+    m_FlipX: 0
+    m_FlipY: 0
+    m_InitialTrim: 0
+  m_CastingOption: 1
+  m_PreviousTrimEdge: 0
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 3651779634959012725}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8033853950099456100
+      type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data: 
 --- !u!114 &7783401725456655176 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8454178846099897669, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

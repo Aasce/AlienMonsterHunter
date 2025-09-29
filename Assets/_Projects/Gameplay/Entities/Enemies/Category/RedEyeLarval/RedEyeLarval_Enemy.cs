@@ -1,6 +1,4 @@
 using Asce.Game.Stats;
-using Asce.Managers.Utils;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -17,26 +15,12 @@ namespace Asce.Game.Entities.Enemies
             };
         }
 
-        protected override void MoveToTaget()
-        {
-            _agent.SetDestination(_target.transform.position);
-        }
+        protected override void MoveToTaget() =>  this.DefaultMoveToTaget();       
 
         protected override void FindTarget()
         {
-            List<Character> characters = ComponentUtils.FindAllComponentsInScene<Character>();
-            if (characters.Count == 0) return;
-            foreach (Character character in characters)
-            {
-                Vector2 direction = character.transform.position - transform.position;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, _seeLayer);
-                if (hit.collider != null && hit.collider.gameObject == character.gameObject)
-                {
-                    _target = character;
-                    this.MoveToTaget();
-                    break;
-                }
-            }
+            this.DefaultFindTarget();
+            if (Target != null) this.MoveToTaget();
         }
 
         protected override void Attack()
