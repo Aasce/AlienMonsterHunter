@@ -1,5 +1,4 @@
 using Asce.Game.Entities;
-using Asce.Game.Guns;
 using Asce.Game.Players;
 using Asce.Managers.UIs;
 using Asce.Managers.Utils;
@@ -8,7 +7,7 @@ using UnityEngine;
 namespace Asce.Game.UIs.HUDs
 {
     [RequireComponent(typeof(Canvas))]
-    public class UIHUDController : UIObject
+    public class UIGameHUDController : UIObject
     {
         [SerializeField] private Canvas _canvas;
 
