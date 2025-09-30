@@ -1,4 +1,6 @@
 using Asce.Managers.Utils;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +23,7 @@ namespace Asce.Game.Entities.Enemies
         [Space]
         [SerializeField] protected Cooldown _attackCooldown = new();
 
+        public new EnemyView View => base.View as EnemyView;
         public new EnemyStats Stats => base.Stats as EnemyStats;
 
         public NavMeshAgent Agent => _agent;
@@ -64,10 +67,12 @@ namespace Asce.Game.Entities.Enemies
             };
         }
 
+
         protected virtual void Update()
         {
             this.FindTargetHandle();
             this.AttackHandle();
+            this.ViewHandle();
         }
 
         public override void ResetStatus()
@@ -75,6 +80,8 @@ namespace Asce.Game.Entities.Enemies
             base.ResetStatus();
             CheckCooldown.Reset();
             AttackCooldown.Reset();
+
+            if (View != null) View.ResetStatus();
         }
 
         protected abstract void MoveToTaget();
@@ -122,5 +129,10 @@ namespace Asce.Game.Entities.Enemies
             }
         }
 
+        protected virtual void ViewHandle()
+        {
+            if (View == null) return;
+            View.Animator.SetFloat("Speed", Agent.velocity.magnitude);
+        }
     }
 }
