@@ -1,9 +1,6 @@
 using Asce.Game.Entities;
-using Asce.Game.Players;
-using Asce.Game.Stats;
 using Asce.Managers.UIs;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Asce.Game.UIs.HUDs
 {
@@ -32,7 +29,6 @@ namespace Asce.Game.UIs.HUDs
         private void Start()
         {
             if (HealthBar == null) return;
-            Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
         }
 
         private void Register()
@@ -49,12 +45,5 @@ namespace Asce.Game.UIs.HUDs
         {
             if (Character == null) return;
         }
-
-
-        private void Player_OnCharacterChanged(Character character)
-        {
-            Character = character;
-        }
-
     }
 }

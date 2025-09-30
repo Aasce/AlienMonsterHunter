@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Default Gun
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: afea298293b40f04794206e64debc435, type: 3}
   _damage: 10
   _shootSpeed: 0.5
   _magazineSize: 10

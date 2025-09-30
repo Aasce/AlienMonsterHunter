@@ -25,6 +25,7 @@ namespace Asce.Game.Guns
         public event Action<float> OnRemainingAmmoChanged;
         public event Action<float> OnCurrentAmmoChanged;
         public event Action OnStartReload;
+        public event Action OnFinishReload;
 
 
         public SO_GunInformation Information => _information;
@@ -126,6 +127,7 @@ namespace Asce.Game.Guns
                 CurrentAmmo += RemainingAmmo;
                 RemainingAmmo = 0;
             }
+            OnFinishReload?.Invoke();
         }
     }
 }
