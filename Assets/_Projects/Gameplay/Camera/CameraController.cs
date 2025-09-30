@@ -1,5 +1,5 @@
 using Asce.Managers;
-using Codice.CM.Common;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Managers
@@ -10,6 +10,7 @@ namespace Asce.Game.Managers
 
         [Header("Settings")]
         [SerializeField] private Transform _target;
+        [SerializeField] private Vector2 _offset;
         [SerializeField, Range(0f, 10f)] private float _speed = 1.0f;
         
         public Camera MainCamera
@@ -27,6 +28,13 @@ namespace Asce.Game.Managers
             set => _target = value;
         }
 
+        public Vector2 Offset
+        {
+            get => _offset;
+            set => _offset = value;
+        }
+        
+
         public float Speed
         {
             get => _speed;
@@ -37,7 +45,7 @@ namespace Asce.Game.Managers
         private void LateUpdate()
         {
             if (_target == null) return;
-            Vector3 desiredPosition = new(Target.position.x, Target.position.y, MainCamera.transform.position.z);
+            Vector3 desiredPosition = new Vector3(Target.position.x, Target.position.y, MainCamera.transform.position.z) + (Vector3)Offset;
             Vector3 smoothedPosition = Vector3.Lerp(MainCamera.transform.position, desiredPosition, Speed * Time.deltaTime);
             MainCamera.transform.position = smoothedPosition;
         }

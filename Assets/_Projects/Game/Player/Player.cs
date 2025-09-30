@@ -45,7 +45,9 @@ namespace Asce.Game.Players
             Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
 
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
+
             bool isShoot = Input.GetMouseButtonDown(0);
+            bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
 
             if (Character != null)
@@ -54,6 +56,13 @@ namespace Asce.Game.Players
                 Character.LookAt(worldMousePosition);
                 if (isShoot) Character.Shoot();
                 if (isReload) Character.Reload();
+                if (isAim)
+                {
+                    Vector2 lookDirection = worldMousePosition - (Vector2)Character.transform.position;
+                    float offsetLenght = Mathf.Min(lookDirection.magnitude, 12f) * 0.75f;
+                    CameraController.Instance.Offset = lookDirection.normalized * offsetLenght;
+                }
+                else CameraController.Instance.Offset = Vector2.zero;
             }
         }
     }
