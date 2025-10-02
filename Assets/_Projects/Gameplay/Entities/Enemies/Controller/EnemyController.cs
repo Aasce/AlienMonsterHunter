@@ -1,4 +1,4 @@
-using Asce.Game.VFXs;
+using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
@@ -9,8 +9,6 @@ namespace Asce.Game.Entities.Enemies
 {
     public class EnemyController : MonoBehaviourSingleton<EnemyController>
     {
-        [SerializeField] private SO_Enemies _enemies;
-
         [Space]
         [SerializeField] private List<string> _enemyNames = new();
         [SerializeField] private Cooldown _spawnCooldown = new(5f);
@@ -53,7 +51,6 @@ namespace Asce.Game.Entities.Enemies
         public void Spawn(string name, Vector2 position)
         {
             if (string.IsNullOrEmpty(name)) return;
-            if (_enemies == null) return;
             if (!_pools.ContainsKey(name)) this.CreatePool(name);
             if (!_pools.TryGetValue(name, out Pool<Enemy> pool)) return;
                         
@@ -87,9 +84,7 @@ namespace Asce.Game.Entities.Enemies
 
         private void CreatePool(string name)
         {
-            if (_enemies == null) return;
-
-            Enemy enemyPrefab = _enemies.Get(name);
+            Enemy enemyPrefab = GameManager.Instance.AllEnemies.Get(name);
             if (enemyPrefab == null) return;
 
             GameObject poolParent = new GameObject($"{name} Pool");

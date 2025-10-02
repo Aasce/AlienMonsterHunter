@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ef5c61e68b0874da734e5db8b8f1d4, type: 3}
-  m_Name: Enemies Data
+  m_Script: {fileID: 11500000, guid: 2b3e322e7c84a8d4abccf57fdfba5963, type: 3}
+  m_Name: All Guns
   m_EditorClassIdentifier: 
-  _enemies:
-  - {fileID: 4219010634262668761, guid: daae16066ae44bb43afab7be3ad1d86a, type: 3}
-  - {fileID: 3035042326583770649, guid: 712a43da88a56ff4eb6bb51b07f3e7e4, type: 3}
+  _guns:
+    _list:
+    - {fileID: 381989227653380984, guid: 52061024cf02187439465a7b46b2d570, type: 3}
