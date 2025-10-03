@@ -131,11 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _information: {fileID: 0}
+  _view: {fileID: 0}
   _stats: {fileID: 6912903451780248762}
   _collider: {fileID: 3285569828326788888}
   _rigidbody: {fileID: 2125223173831006573}
-  _fov: {fileID: 0}
+  _fov: {fileID: 1775188087859206294}
   _gun: {fileID: 0}
+  _weaponSlot: {fileID: 0}
   _moveDirection: {x: 0, y: 0}
   _lookPosition: {x: 0, y: 0}
 --- !u!58 &3285569828326788888

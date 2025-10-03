@@ -28,7 +28,7 @@ namespace Asce.PrepareGame.UIs.Collections
         }
         protected abstract void InternalSet(T item);
 
-        public void OnPointerClick(PointerEventData eventData)
+        public virtual void OnPointerClick(PointerEventData eventData)
         {
             if (Collection != null)
             {

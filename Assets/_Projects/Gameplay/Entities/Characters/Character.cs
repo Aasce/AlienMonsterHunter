@@ -15,6 +15,9 @@ namespace Asce.Game.Entities
         [SerializeField] private Gun _gun;
 
         [Space]
+        [SerializeField] private Transform _weaponSlot;
+
+        [Space]
         [SerializeField] private Vector2 _moveDirection = Vector2.zero;
         [SerializeField] private Vector2 _lookPosition = Vector2.zero;
 
@@ -31,9 +34,16 @@ namespace Asce.Game.Entities
             {
                 if (_gun == value) return;
                 _gun = value;
+                if (_gun != null && _weaponSlot != null)
+                {
+                    _gun.transform.SetParent(_weaponSlot);
+                    _gun.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+                }
                 OnGunChanged?.Invoke(_gun);
             }
         }
+
+        public Transform WeaponSlot => _weaponSlot;
 
         public Vector2 MoveDirection => _moveDirection;
         public Vector2 LookPosition => _lookPosition;

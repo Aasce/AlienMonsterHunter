@@ -11,6 +11,10 @@ namespace Asce.Game.UIs
 
         [Space]
         [SerializeField] private bool _isShowFirstTabOnStart = true;
+        [SerializeField] private int _currentTabIndex = -1;
+
+        public List<TabView> TabViews => _tabViews;
+        public int CurrentTab => _currentTabIndex;
 
         public bool IsShowFirstTabOnStart
         {
@@ -34,11 +38,17 @@ namespace Asce.Game.UIs
         /// <summary> Show the view of the selected tab and hide others. </summary>
         private void ShowTab(TabView selected)
         {
-            foreach (TabView tabView in _tabViews)
+            int index = _tabViews.IndexOf(selected);
+            if (index < 0) return;
+            if (index == _currentTabIndex) return;
+            _currentTabIndex = index;
+
+            for (int i = 0; i < _tabViews.Count; i++)
             {
+                TabView tabView = _tabViews[i];
                 if (tabView.View == null) continue;
 
-                bool isEquals = tabView.Equals(selected);
+                bool isEquals = i == index;
                 SetTabVisibility(tabView, isEquals);
             }
         }
@@ -53,9 +63,23 @@ namespace Asce.Game.UIs
         /// <summary> Show tab by button reference. </summary>
         public void ShowTabByButton(Button button)
         {
+            if (button == null) return;
             foreach (var tabView in _tabViews)
             {
                 if (tabView.Tab == button)
+                {
+                    ShowTab(tabView);
+                    return;
+                }
+            }
+        }
+
+        public void ShowTabByTabView(RectTransform view)
+        {
+            if (view == null) return;
+            foreach (var tabView in _tabViews)
+            {
+                if (tabView.View == view)
                 {
                     ShowTab(tabView);
                     return;
@@ -71,21 +95,15 @@ namespace Asce.Game.UIs
                 if (tabView.View == null) continue;
                 SetTabVisibility(tabView, false);
             }
+            _currentTabIndex = -1;
         }
 
         /// <summary> Get the currently visible tab view. </summary>
         /// <returns> Returns null if none is visible. </returns>
         public TabView? GetCurrentTab()
         {
-            foreach (var tabView in _tabViews)
-            {
-                if (tabView.View == null) continue;
-
-                UITabView tabComp = tabView.View.GetComponent<UITabView>();
-                if (tabComp != null && tabComp.IsShow) return tabView;
-                if (tabView.View.gameObject.activeSelf) return tabView;
-            }
-            return null;
+            if (_currentTabIndex < 0) return null;
+            return _tabViews[_currentTabIndex];
         }
 
         /// <summary> Check if any tab view is visible. </summary>
