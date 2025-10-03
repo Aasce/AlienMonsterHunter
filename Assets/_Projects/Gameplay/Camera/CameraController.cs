@@ -49,5 +49,12 @@ namespace Asce.Game.Managers
             Vector3 smoothedPosition = Vector3.Lerp(MainCamera.transform.position, desiredPosition, Speed * Time.deltaTime);
             MainCamera.transform.position = smoothedPosition;
         }
+
+        public void SetToTarget()
+        {
+            if (_target == null) return;
+            Vector3 desiredPosition = new Vector3(Target.position.x, Target.position.y, MainCamera.transform.position.z) + (Vector3)Offset;
+            MainCamera.transform.position = desiredPosition;
+        }
     }
 }

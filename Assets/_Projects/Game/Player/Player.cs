@@ -27,14 +27,14 @@ namespace Asce.Game.Players
             }
         }
 
-        private void Start()
+        public void Initialize()
         {
-            Character = GameObject.Instantiate(_characterPrefab);
             if (Character != null)
             {
                 Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
                 Character.transform.position = spawnPoint;
                 CameraController.Instance.Target = Character.transform;
+                CameraController.Instance.SetToTarget();
             }
         }
 
