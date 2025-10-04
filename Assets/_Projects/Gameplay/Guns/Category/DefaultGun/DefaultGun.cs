@@ -8,7 +8,6 @@ namespace Asce.Game.Guns
     public class DefaultGun : Gun
     {
         [SerializeField] private float _distance = 20f;
-        [SerializeField] private LayerMask _hitLayer;
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;

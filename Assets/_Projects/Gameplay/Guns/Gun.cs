@@ -10,6 +10,7 @@ namespace Asce.Game.Guns
         [Header("Setup")]
         [SerializeField] protected SO_GunInformation _information;
         [SerializeField] protected Transform _barrel;
+        [SerializeField] protected LayerMask _hitLayer;
 
         [Header("Stats")]
         [SerializeField, Min(0f)] protected float _damage = 10f;
