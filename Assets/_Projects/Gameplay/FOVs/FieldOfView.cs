@@ -1,5 +1,4 @@
 using Asce.Managers;
-using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +21,16 @@ namespace Asce.Game.FOVs
         private readonly List<Vector3> _viewPoints = new();
 
         public Mesh ViewMesh => _viewMesh;
-        public float ViewRadius => _viewRadius;
-        public float ViewAngle => _viewAngle;
+        public float ViewRadius
+        {
+            get => _viewRadius;
+            set => _viewRadius = value;
+        }
+        public float ViewAngle
+        {
+            get => _viewAngle;
+            set => _viewAngle = value;
+        }
         public LayerMask ObstacleMask => _obstacleMask;
         public float MeshResolution => _meshResolution;
         public int EdgeResolveIterations => _edgeResolveIterations;

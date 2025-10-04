@@ -1,3 +1,4 @@
+using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
@@ -7,8 +8,7 @@ namespace Asce.Game.Abilities
 {
     public class AbilityController : MonoBehaviourSingleton<AbilityController>
     {
-        [SerializeField] private SO_Abilities _abilities;
-        private Dictionary<string, Pool<Ability>> _pools = new();
+        private readonly Dictionary<string, Pool<Ability>> _pools = new();
 
         [Space]
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
@@ -29,12 +29,11 @@ namespace Asce.Game.Abilities
             }
         }
 
-        public Ability Spawn(string name)
+        public Ability Spawn(string name, GameObject owner)
         {
-            if (_abilities == null) return null;
             if (string.IsNullOrEmpty(name)) return null;
 
-            Ability abilityPrefab = _abilities.Get(name);
+            Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(name);
             if (abilityPrefab == null) return null;
 
             if (!_pools.ContainsKey(name))
@@ -50,13 +49,15 @@ namespace Asce.Game.Abilities
 
             Pool<Ability> pool = _pools[name];
             Ability ability = pool.Activate(out bool isCreated);
+            if (ability == null) return ability;
             if (!isCreated)
             {
                 ability.gameObject.SetActive(true);
             }
 
-            ability.OnSpawn();
+            ability.Owner = owner;
             ability.DespawnTime.Reset();
+            ability.OnSpawn();
             return ability;
         }
 

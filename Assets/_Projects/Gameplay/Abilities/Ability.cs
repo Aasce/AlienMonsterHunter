@@ -6,10 +6,16 @@ namespace Asce.Game.Abilities
 {
     public abstract class Ability : GameComponent
     {
-        [SerializeField] private string _name;
-        [SerializeField] private Cooldown _despawnTime = new (10f);
+        [SerializeField] protected SO_AbilityInformation _information;
+        [SerializeField] protected GameObject _owner;
+        [SerializeField] protected Cooldown _despawnTime = new (10f);
 
-        public string Name => _name;
+        public SO_AbilityInformation Information => _information;
+        public GameObject Owner
+        {
+            get => _owner;
+            set => _owner = value;
+        }
         public Cooldown DespawnTime => _despawnTime;
 
         public virtual void OnSpawn()

@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64dff46c70c587547b2f08c7d33671be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Shadowfang Bullet
+  _information: {fileID: 11400000, guid: 7e5243de7756b494a9f994c269bb20f5, type: 2}
+  _owner: {fileID: 0}
   _despawnTime:
     _baseTime: 10
     _currentTime: 10

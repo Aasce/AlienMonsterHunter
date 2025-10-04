@@ -40,7 +40,7 @@ namespace Asce.Game.Entities.Enemies
         {
             transform.up = _target.transform.position - transform.position;
 
-            ShadowfangBullet_Ability bullet = AbilityController.Instance.Spawn("Shadowfang Bullet") as ShadowfangBullet_Ability;
+            ShadowfangBullet_Ability bullet = AbilityController.Instance.Spawn("Shadowfang Bullet", gameObject) as ShadowfangBullet_Ability;
             if (bullet == null) return;
 
             Vector2 firePosition = _mouth != null ? _mouth.position : transform.position;

@@ -1,3 +1,4 @@
+using Asce.Game.Abilities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
@@ -12,10 +13,12 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllCharacters _allCharacters;
         [SerializeField] private SO_AllEnemies _allEnemies;
         [SerializeField] private SO_AllGuns _allGuns;
+        [SerializeField] private SO_AllAbilities _allAbilities;
 
         public SO_AllCharacters AllCharacters => _allCharacters;
         public SO_AllEnemies AllEnemies => _allEnemies;
         public SO_AllGuns AllGuns => _allGuns;
+        public SO_AllAbilities AllAbilities => _allAbilities;
 
         private void OnValidate()
         {
@@ -27,6 +30,9 @@ namespace Asce.Game.Managers
 
             if (AllGuns == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Guns is not assigned", this);
+
+            if (AllAbilities == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Abilities is not assigned", this);
         }
     }
 }

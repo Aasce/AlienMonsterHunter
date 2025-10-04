@@ -47,3 +47,4 @@ MonoBehaviour:
   _allCharacters: {fileID: 11400000, guid: 4156b936b137d3c4696be2ce45c3fedc, type: 2}
   _allEnemies: {fileID: 11400000, guid: 6c760d0226e618e43bd7adf73adbfd9d, type: 2}
   _allGuns: {fileID: 11400000, guid: acdf6f8430385e54286a7b7752183beb, type: 2}
+  _allAbilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}

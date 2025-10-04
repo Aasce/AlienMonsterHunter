@@ -24,7 +24,7 @@ namespace Asce.Game.Entities.Characters
 
         public event Action<Gun> OnGunChanged;
 
-
+        public new SO_CharacterInformation Information => base.Information as SO_CharacterInformation;
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
@@ -62,6 +62,7 @@ namespace Asce.Game.Entities.Characters
         {
             base.Start();
             if (Gun != null) Gun.Initialize();
+            if (Abilities != null) Abilities.Initialize(this);
         }
 
         private void FixedUpdate()
@@ -105,6 +106,12 @@ namespace Asce.Game.Entities.Characters
         {
             if (Gun == null) return;
             Gun.Reload();
+        }
+
+        public void UseAbility(int index, Vector2 position)
+        {
+            if (Abilities == null) return;
+            Abilities.Use(index, position);
         }
     }
 }

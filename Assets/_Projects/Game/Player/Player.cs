@@ -49,6 +49,8 @@ namespace Asce.Game.Players
             bool isShoot = Input.GetMouseButtonDown(0);
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
+            bool isUseAbility0 = Input.GetKeyDown(KeyCode.E);
+            bool isUseAbility1 = Input.GetKeyDown(KeyCode.Q);
 
             if (Character != null)
             {
@@ -63,6 +65,8 @@ namespace Asce.Game.Players
                     CameraController.Instance.Offset = lookDirection.normalized * offsetLenght;
                 }
                 else CameraController.Instance.Offset = Vector2.zero;
+                if (isUseAbility0) Character.UseAbility(0, worldMousePosition);
+                if (isUseAbility1) Character.UseAbility(1, worldMousePosition);
             }
         }
     }
