@@ -26,7 +26,7 @@ namespace Asce.Game.Entities.Enemies
         protected override void Attack()
         {
             float damage = Stats.AttackDamage.FinalValue;
-            CombatController.Instance.DamageDealing(_target, damage);
+            CombatController.Instance.DamageDealing(Target as ITakeDamageable, damage);
         }
     }
 }

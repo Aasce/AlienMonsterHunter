@@ -13,7 +13,7 @@ namespace Asce.Game.Entities.Enemies
         protected override void MoveToTaget()
         {
             Vector2 currentPosition = transform.position;
-            Vector2 targetPosition = _target.transform.position;
+            Vector2 targetPosition = Target.transform.position;
             Vector2 direction = targetPosition - currentPosition;
 
             float distance = direction.magnitude;
@@ -38,13 +38,13 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void Attack()
         {
-            transform.up = _target.transform.position - transform.position;
+            transform.up = Target.transform.position - transform.position;
 
             ShadowfangBullet_Ability bullet = AbilityController.Instance.Spawn("Shadowfang Bullet", gameObject) as ShadowfangBullet_Ability;
             if (bullet == null) return;
 
             Vector2 firePosition = _mouth != null ? _mouth.position : transform.position;
-            Vector2 direction = (Vector2)_target.transform.position - firePosition;
+            Vector2 direction = (Vector2)Target.transform.position - firePosition;
 
             bullet.DamageDeal = Stats.AttackDamage.FinalValue;
             bullet.Fire(firePosition, direction);

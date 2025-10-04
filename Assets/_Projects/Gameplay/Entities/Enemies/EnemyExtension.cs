@@ -1,4 +1,3 @@
-using Asce.Game.Entities.Characters;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -25,13 +24,13 @@ namespace Asce.Game.Entities.Enemies
             foreach (Collider2D collder in characters)
             {
                 Vector2 direction = (Vector2)collder.transform.position - position;
-                RaycastHit2D hit = Physics2D.Raycast(position, direction, Mathf.Infinity, enemy.SeeLayer);
+                RaycastHit2D hit = Physics2D.Raycast(position, direction, viewRange, enemy.SeeLayer);
                 if (hit.collider == null) continue;
                 if (hit.collider.gameObject != collder.gameObject) continue;
                 
-                if (hit.transform.TryGetComponent(out Character character))
+                if (hit.transform.TryGetComponent(out ITargetable target))
                 {
-                    enemy.Target = character;
+                    enemy.Target = target;
                     break;
                 }
             }

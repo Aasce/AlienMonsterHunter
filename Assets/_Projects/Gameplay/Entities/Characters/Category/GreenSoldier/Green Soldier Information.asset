@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b22fe92fee649243ad9e4d3b744e739, type: 3}
+  m_Script: {fileID: 11500000, guid: a164c91910024bc41a31fe22632f6caa, type: 3}
   m_Name: Green Soldier Information
   m_EditorClassIdentifier: 
   _name: Green Soldier
   _description: 
   _icon: {fileID: 21300000, guid: 997c05df25cc8e7418e5c506d9fea611, type: 3}
   _stats: {fileID: 11400000, guid: bee28e99bde466b4ea2262bd27e69034, type: 2}
+  _abilityNames: []

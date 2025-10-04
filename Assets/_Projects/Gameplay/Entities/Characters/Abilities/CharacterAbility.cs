@@ -43,16 +43,5 @@ namespace Asce.Game.Abilities
             // No obstacle, position within range
             return ownerPos + direction.normalized * distance;
         }
-
-#if UNITY_EDITOR
-        // Debug visualization
-        protected virtual void OnDrawGizmosSelected()
-        {
-            if (_owner == null) return;
-
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(_owner.transform.position, _distance);
-        }
-#endif
     }
 }

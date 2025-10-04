@@ -435,6 +435,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Green Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: _renderers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 30132343746943337}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7375587545716268126}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5857036317219235678}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[3]'
+      value: 
+      objectReference: {fileID: 3151490204530699543}
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _mainHand
       value: 
@@ -446,7 +466,7 @@ PrefabInstance:
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _information
       value: 
-      objectReference: {fileID: 11400000, guid: b630970ba9cfcce4ea8dfbbbd304b2bd, type: 2}
+      objectReference: {fileID: 11400000, guid: 33d2df6be122b884ba88e76a0ec5da1b, type: 2}
     - target: {fileID: 8186422347695430131, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

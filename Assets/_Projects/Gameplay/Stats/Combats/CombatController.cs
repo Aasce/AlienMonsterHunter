@@ -1,4 +1,3 @@
-using Asce.Game.Entities;
 using Asce.Managers;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ namespace Asce.Game.Stats
         public float ArmorReductionFactor => _armorReductionFactor;
 
 
-        public void DamageDealing(Entity receiver, float damage)
+        public void DamageDealing(ITakeDamageable receiver, float damage)
         {
             if (receiver == null || damage <= 0f) return;
-            float finalDamage = this.CalculateDamage(damage, receiver.Stats.Armor.FinalValue);
-            receiver.Stats.Health.CurrentValue -= finalDamage;
+            float finalDamage = this.CalculateDamage(damage, receiver.Armor.FinalValue);
+            receiver.Health.CurrentValue -= finalDamage;
             receiver.TakeDamageCallback(finalDamage);
         }
 

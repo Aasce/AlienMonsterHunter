@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a164c91910024bc41a31fe22632f6caa, type: 3}
-  m_Name: Red Soldier Information
+  m_Script: {fileID: 11500000, guid: 2b22fe92fee649243ad9e4d3b744e739, type: 3}
+  m_Name: Turret Information
   m_EditorClassIdentifier: 
-  _name: Red Soldier
+  _name: Blue Soldier - Turret
   _description: 
-  _icon: {fileID: 21300000, guid: 3bb55c4c51c852248ac0428597699183, type: 3}
-  _stats: {fileID: 11400000, guid: 66df5d1f08ef31547b835c07684d9a1a, type: 2}
-  _abilityNames: []
+  _icon: {fileID: 21300000, guid: 83912b7be7f789a47945b88bc72d2385, type: 3}
+  _stats: {fileID: 11400000, guid: 1c8d244f91faa2b47b87bd72c5f590b1, type: 2}

@@ -40,9 +40,9 @@ namespace Asce.Game.Abilities
         {
             if (this.IsDealing) return;
             if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _layer)) return;
-            if (collision.TryGetComponent(out Character character))
+            if (collision.TryGetComponent(out ITakeDamageable victim))
             {
-                CombatController.Instance.DamageDealing(character, DamageDeal);
+                CombatController.Instance.DamageDealing(victim, DamageDeal);
             }
 
             this.IsDealing = true;

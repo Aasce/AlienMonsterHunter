@@ -435,6 +435,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: _renderers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4794821312181696655}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1172628337249409083}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[2]'
+      value: 
+      objectReference: {fileID: 131112332943060047}
+    - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: '_renderers.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6000696694193085947}
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _mainHand
       value: 

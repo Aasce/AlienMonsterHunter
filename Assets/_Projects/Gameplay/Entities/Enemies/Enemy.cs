@@ -1,4 +1,3 @@
-using Asce.Game.Entities.Characters;
 using Asce.Managers.Utils;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +11,7 @@ namespace Asce.Game.Entities.Enemies
         [SerializeField] protected NavMeshAgent _agent;
 
         [Header("Target Detection")]
-        [SerializeField] protected Character _target;
+        [SerializeField] protected ITargetable _target;
         [SerializeField] protected LayerMask _targetLayer;
 
         [Space]
@@ -32,7 +31,7 @@ namespace Asce.Game.Entities.Enemies
         public LayerMask TargetLayer => _targetLayer;
         public LayerMask SeeLayer => _seeLayer;
 
-        public Character Target
+        public ITargetable Target
         {
             get => _target;
             set => _target = value;
@@ -94,13 +93,14 @@ namespace Asce.Game.Entities.Enemies
             CheckCooldown.Update(Time.deltaTime);
             if (CheckCooldown.IsComplete)
             {
-                if (_target != null)
+                if (Target != null)
                 {
-                    Vector2 direction = _target.transform.position - transform.position;
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, _seeLayer);
-                    if (hit.collider == null || hit.collider.gameObject != _target.gameObject)
+                    float viewRange = Stats.ViewRange.FinalValue;
+                    Vector2 direction = Target.transform.position - transform.position;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewRange, _seeLayer);
+                    if (hit.collider == null || hit.transform != Target.transform)
                     {
-                        _target = null;
+                        Target = null;
                     }
                     else
                     {
@@ -117,10 +117,10 @@ namespace Asce.Game.Entities.Enemies
         protected virtual void AttackHandle()
         {
             AttackCooldown.Update(Time.deltaTime);
-            if (AttackCooldown.IsComplete && _target != null)
+            if (AttackCooldown.IsComplete && Target != null)
             {
                 float attackRange = Stats.AttackRange.FinalValue;
-                if (Vector2.Distance(transform.position, _target.transform.position) <= attackRange)
+                if (Vector2.Distance(transform.position, Target.transform.position) <= attackRange)
                 {
                     this.Attack();
                     AttackCooldown.Reset();

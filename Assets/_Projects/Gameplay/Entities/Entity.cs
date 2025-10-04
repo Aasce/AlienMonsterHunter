@@ -1,3 +1,4 @@
+using Asce.Game.Stats;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Asce.Game.Entities
 {
-    public class Entity : GameComponent
+    public class Entity : GameComponent, ITakeDamageable, ITargetable
     {
         [Header("Entity")]
         [SerializeField] protected SO_EntityInformation _information;
@@ -17,6 +18,9 @@ namespace Asce.Game.Entities
         public SO_EntityInformation Information => _information;
         public EntityView View => _view;
         public EntityStats Stats => _stats;
+
+        ResourceStat ITakeDamageable.Health => Stats.Health;
+        Stat ITakeDamageable.Armor => Stats.Armor;
 
         protected override void RefReset()
         {
@@ -36,7 +40,7 @@ namespace Asce.Game.Entities
             Stats.ResetStats();
         }
 
-        public virtual void TakeDamageCallback(float damage)
+        void ITakeDamageable.TakeDamageCallback(float damage)
         {
             OnTakeDamage?.Invoke(damage);
         }
