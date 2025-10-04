@@ -1,3 +1,4 @@
+using Asce.Game.Entities.Characters;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies

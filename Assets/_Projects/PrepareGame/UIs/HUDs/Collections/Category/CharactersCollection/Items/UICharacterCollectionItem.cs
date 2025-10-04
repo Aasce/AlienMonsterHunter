@@ -1,4 +1,4 @@
-using Asce.Game.Entities;
+using Asce.Game.Entities.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

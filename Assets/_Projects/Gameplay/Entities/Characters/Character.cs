@@ -3,7 +3,7 @@ using Asce.Managers.Utils;
 using System;
 using UnityEngine;
 
-namespace Asce.Game.Entities
+namespace Asce.Game.Entities.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))] 
     public class Character : Entity
@@ -12,6 +12,7 @@ namespace Asce.Game.Entities
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private CharacterFOV _fov;
+        [SerializeField] private CharacterAbilities _abilities;
         [SerializeField] private Gun _gun;
 
         [Space]
@@ -27,6 +28,7 @@ namespace Asce.Game.Entities
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
+        public CharacterAbilities Abilities => _abilities;
         public Gun Gun
         {
             get => _gun;

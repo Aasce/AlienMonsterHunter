@@ -1,6 +1,5 @@
+using Asce.Game.Entities.Characters;
 using Asce.Managers.Utils;
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 

@@ -1,4 +1,4 @@
-using Asce.Game.Entities;
+using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
 using Asce.Managers;
 using Asce.PrepareGame.Players;
