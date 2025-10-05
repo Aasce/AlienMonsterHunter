@@ -1,5 +1,4 @@
 using Asce.Game.Abilities;
-using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using System.Collections.Generic;
@@ -12,10 +11,19 @@ namespace Asce.Game.Entities.Characters
         [SerializeField, Readonly] private Character _owner;
 
         [Space]
-        [SerializeField, Readonly] private List<string> _abilities = new();
+        [SerializeField, Readonly] private List<AbilityContainer> _abilities = new();
 
 
-        public List<string> Abilities => _abilities;
+        public List<AbilityContainer> Abilities => _abilities;
+
+        private void Update()
+        {
+            foreach (AbilityContainer ability in _abilities)
+            {
+                if (ability == null) continue;
+                ability.Cooldown.Update(Time.deltaTime);
+            }
+        }
 
 
         public void Initialize(Character owner)
@@ -28,14 +36,14 @@ namespace Asce.Game.Entities.Characters
             foreach (string abilityName in _owner.Information.AbilitiesName)
             {
                 if (string.IsNullOrEmpty(abilityName)) continue;
-                Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(abilityName);
-                if (abilityPrefab == null)
+                AbilityContainer abilityContainer = new(abilityName);
+                if (!abilityContainer.IsValid)
                 {
                     Debug.LogError($"Abilitiy with name {abilityName} not exist.", _owner.Information);
                     continue;
                 }
 
-                _abilities.Add(abilityName);
+                _abilities.Add(abilityContainer);
             }
         }
 
@@ -44,11 +52,17 @@ namespace Asce.Game.Entities.Characters
             if (_abilities.Count == 0) return;
             if (index < 0 || index >= _abilities.Count) return;
 
-            string abilityName = _abilities[index];
+            AbilityContainer container = _abilities[index];
+            if (container == null) return;
+            if (!container.Cooldown.IsComplete) return;
+
+            string abilityName = container.Name;
             CharacterAbility ability = AbilityController.Instance.Spawn(abilityName, _owner.gameObject) as CharacterAbility;
             if (ability == null) return;
 
             ability.SetPosition(position);
+            ability.gameObject.SetActive(true);
+            container.Cooldown.Reset();
         }
     }
 }

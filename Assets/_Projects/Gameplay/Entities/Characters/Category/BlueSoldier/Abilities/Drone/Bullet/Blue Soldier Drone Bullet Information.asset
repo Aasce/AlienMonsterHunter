@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b9d9707ab1af54387de4c252512c83, type: 3}
-  m_Name: Turret Stats
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: Blue Soldier Drone Bullet Information
   m_EditorClassIdentifier: 
-  _maxHealth: 40
-  _armor: 20
-  _speed: 0
+  _name: Blue Soldier Drone Bullet
+  _description: 
+  _icon: {fileID: 21300000, guid: a08801384c2f8004dafe92f230f340cd, type: 3}
+  _cooldown: 0

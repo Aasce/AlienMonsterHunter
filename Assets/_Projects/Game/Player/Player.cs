@@ -8,7 +8,6 @@ namespace Asce.Game.Players
 {
     public class Player : MonoBehaviourSingleton<Player>
     {
-        [SerializeField] private Character _characterPrefab;
         [SerializeField] private Transform _spawnPoint;
 
         [Header("Runtime")]

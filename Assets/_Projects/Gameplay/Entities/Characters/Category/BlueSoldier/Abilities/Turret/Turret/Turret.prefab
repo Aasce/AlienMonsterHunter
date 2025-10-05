@@ -300,10 +300,10 @@ MonoBehaviour:
   _detectCooldown:
     _baseTime: 0.2
     _currentTime: 0.2
-  _damage: 8
+  _damage: 12
   _attackCooldown:
-    _baseTime: 1.5
-    _currentTime: 1.5
+    _baseTime: 1
+    _currentTime: 1
   _bulletLineVFXName: Default Gun Bullet Line
 --- !u!58 &5190254717659117525
 CircleCollider2D:

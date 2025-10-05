@@ -49,11 +49,7 @@ namespace Asce.Game.Abilities
 
             Pool<Ability> pool = _pools[name];
             Ability ability = pool.Activate(out bool isCreated);
-            if (ability == null) return ability;
-            if (!isCreated)
-            {
-                ability.gameObject.SetActive(true);
-            }
+            if (ability == null) return null;
 
             ability.Owner = owner;
             ability.DespawnTime.Reset();

@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class ShadowfangBullet_Ability : Ability
+    public class BlueSoldier_Drone_Bullet_Ability : Ability
     {
+
         [SerializeField] private Rigidbody2D _rigidbody;
 
         [Space]
@@ -20,7 +21,7 @@ namespace Asce.Game.Abilities
         public float DamageDeal
         {
             get => _damageDeal;
-            set => _damageDeal = value; 
+            set => _damageDeal = value;
         }
 
         public bool IsDealing

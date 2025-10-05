@@ -1,6 +1,4 @@
 using Asce.Game.Abilities;
-using Asce.Managers.Utils;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -47,8 +45,8 @@ namespace Asce.Game.Entities.Enemies
             Vector2 direction = (Vector2)Target.transform.position - firePosition;
 
             bullet.DamageDeal = Stats.AttackDamage.FinalValue;
+            bullet.gameObject.SetActive(true);
             bullet.Fire(firePosition, direction);
-
         }
     }
 }

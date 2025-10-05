@@ -10,9 +10,14 @@ namespace Asce.Game.Abilities
         [SerializeField, TextArea(3, 10)] private string _description;
         [SerializeField, SpritePreview] private Sprite _icon;
 
+        [Space]
+        [SerializeField, Min(0f)] private float _cooldown = 0f;
+
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
+
+        public float Cooldown => _cooldown;
     }
 
 }

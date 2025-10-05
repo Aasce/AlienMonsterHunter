@@ -16,7 +16,6 @@ namespace Asce.Game.Abilities
 
         public virtual void SetPosition(Vector2 position)
         {
-            if (_owner == null) return;
             transform.position = FindValidPosition(position);
         }
 

@@ -1,14 +1,12 @@
-using Asce.Game.Entities.Enemies;
 using Asce.Game.FOVs;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
-using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Machines
 {
-    public class Turret_Entity : Entity
+    public class BlueSoldier_Turret_Entity : Entity
     {
         [SerializeField] private FieldOfView _fov;
 
@@ -74,9 +72,9 @@ namespace Asce.Game.Entities.Machines
                         Vector2 direction = collider.transform.position - transform.position;
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, _viewRadius, _seelayer);
                         if (hit.collider != collider) continue;
-                        if (!collider.TryGetComponent(out Enemy enemy)) continue;
+                        if (!collider.TryGetComponent(out ITargetable target)) continue;
 
-                        _target = enemy;
+                        _target = target;
                         break;
                     }
                 }

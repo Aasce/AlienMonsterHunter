@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
-  m_Name: Shadowfang Bullet Information
+  m_Name: Blue Soldier - Drone Information
   m_EditorClassIdentifier: 
-  _name: Shadowfang Bullet
+  _name: Blue Soldier - Drone
   _description: 
-  _icon: {fileID: 21300000, guid: 87af042fa828b1c438ce619e1acc6a4a, type: 3}
-  _cooldown: 0
+  _icon: {fileID: 21300000, guid: 1aedf100e335f6d41bc4bc4441e06bb8, type: 3}
+  _cooldown: 16

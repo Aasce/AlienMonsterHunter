@@ -5,9 +5,9 @@ namespace Asce.Game.Abilities
 {
     public class BlueSoldier_Turret_Ability : CharacterAbility
     {
-        [SerializeField] private Turret_Entity _turret;
+        [SerializeField] private BlueSoldier_Turret_Entity _turret;
 
-        public Turret_Entity Turret => _turret;
+        public BlueSoldier_Turret_Entity Turret => _turret;
 
         private void Start()
         {

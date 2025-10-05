@@ -18,3 +18,4 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: 2ffc93dc868ac2a41a7f73c9e7a07c0b, type: 2}
   _abilityNames:
   - Blue Soldier - Turret
+  - Blue Soldier - Drone
