@@ -15,6 +15,9 @@ namespace Asce.PrepareGame.UIs
         [Header("Stats")]
         [SerializeField] private UIStatsGroup _statGroup;
 
+        [Header("Abilitites")]
+        [SerializeField] private UIAbilities _abilities;
+
 
         public override void Set(Character character)
         {
@@ -22,7 +25,6 @@ namespace Asce.PrepareGame.UIs
             this.Unregister();
             Item = character;
             this.Register();
-
         }
 
 
@@ -35,6 +37,7 @@ namespace Asce.PrepareGame.UIs
             if (_nameText != null) _nameText.text = Item.Information.Name;
             if (_levelProgess != null) _levelProgess.Set(Item);
             if (_statGroup != null) _statGroup.Set(Item.Information.Stats);
+            if (_abilities != null) _abilities.Set(Item.Information.AbilitiesName);
         }
 
         private void Unregister()

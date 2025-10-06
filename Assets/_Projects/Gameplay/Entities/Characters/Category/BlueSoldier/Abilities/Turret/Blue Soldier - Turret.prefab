@@ -55,7 +55,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _raycastRadius: 0.1
-  _useCircleCast: 1
+  _useCircleCast: 0
   _turret: {fileID: 8547546107352175451}
 --- !u!1001 &1945712418638273055
 PrefabInstance:

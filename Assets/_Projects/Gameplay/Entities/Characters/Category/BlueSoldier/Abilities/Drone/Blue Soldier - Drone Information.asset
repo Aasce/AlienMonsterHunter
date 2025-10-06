@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: Blue Soldier - Drone Information
   m_EditorClassIdentifier: 
   _name: Blue Soldier - Drone
-  _description: 
+  _description: 'Deploy a Drone that exists for {DespawnTime} seconds. This Drone
+    flies straight forward, bouncing back on impact. Fires a barrage of bullets {AttackSpeed}
+    per seconds towards visible targets, each bullet dealing {BulletDamage} damage
+    to the first target hit.
+
+    
+
+    The Drone has {Health} Health, {Armor}
+    Armor, {MoveSpeed} Speed, {ViewRadius} View Radius.
+
+    It can see through
+    some objects.'
   _icon: {fileID: 21300000, guid: 1aedf100e335f6d41bc4bc4441e06bb8, type: 3}
+  _isPassive: 0
   _cooldown: 16

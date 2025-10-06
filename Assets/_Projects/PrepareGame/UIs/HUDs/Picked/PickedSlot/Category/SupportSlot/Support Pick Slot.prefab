@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1148596293243989816, guid: ecd8496a63e02fb4787d1c6ea47a34d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 235
       objectReference: {fileID: 0}
     - target: {fileID: 1148596293243989816, guid: ecd8496a63e02fb4787d1c6ea47a34d0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1148596293243989816, guid: ecd8496a63e02fb4787d1c6ea47a34d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6427408862520428893, guid: ecd8496a63e02fb4787d1c6ea47a34d0, type: 3}
       propertyPath: m_Name
-      value: Support Slot Variant
+      value: Support Pick Slot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

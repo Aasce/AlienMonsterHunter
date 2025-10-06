@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Turret Information
   m_EditorClassIdentifier: 
   _name: Blue Soldier - Turret
-  _description: 
+  _description: 'Deploy a Turret that exists for {LifetimeSeconds} seconds. The turret
+    locks onto a target and fires toward the target every {FireIntervalSeconds} seconds,
+    dealing {DamageAmount} damage to the first target hit.
+
+
+    The turret has {HealthPoints}
+    health and {ArmorPoints} armor, and it cannot move.'
   _icon: {fileID: 21300000, guid: 83912b7be7f789a47945b88bc72d2385, type: 3}
   _stats: {fileID: 11400000, guid: 1c8d244f91faa2b47b87bd72c5f590b1, type: 2}
