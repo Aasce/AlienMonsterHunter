@@ -17,6 +17,10 @@ namespace Asce.Game.Abilities
             set => _owner = value;
         }
         public Cooldown DespawnTime => _despawnTime;
+        protected virtual void Start()
+        {
+            DespawnTime.SetBaseTime(Information.DaspawnTime);
+        }
 
         public virtual void OnSpawn()
         {

@@ -9,8 +9,9 @@ namespace Asce.Game.Abilities
 
         public BlasterDrone_Machine Drone => _drone;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             if (Drone != null)
             {
                 Drone.OnTakeDamage += DroneHealth_OnTakeDamage;

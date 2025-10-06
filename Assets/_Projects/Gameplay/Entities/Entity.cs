@@ -40,6 +40,8 @@ namespace Asce.Game.Entities
             Stats.ResetStats();
         }
 
+        public virtual void Initialize() { }
+
         void ITakeDamageable.TakeDamageCallback(float damage)
         {
             OnTakeDamage?.Invoke(damage);

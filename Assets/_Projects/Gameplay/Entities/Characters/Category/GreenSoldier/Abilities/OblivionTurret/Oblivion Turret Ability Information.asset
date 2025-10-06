@@ -18,3 +18,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 6acb43eb2d2a5e44383f97e5cb751e3d, type: 3}
   _isPassive: 0
   _cooldown: 16
+  _useRangeRadius: 3
+  _despawnTime: 20
+  _customValues:
+    _list: []

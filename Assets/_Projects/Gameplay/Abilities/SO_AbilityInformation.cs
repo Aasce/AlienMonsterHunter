@@ -1,4 +1,6 @@
+using Asce.Managers;
 using Asce.Managers.Attributes;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -14,6 +16,16 @@ namespace Asce.Game.Abilities
         [Space]
         [SerializeField] private bool _isPassive = false;
         [SerializeField, Min(0f)] private float _cooldown = 0f;
+        [SerializeField, Min(0f)] private float _useRangeRadius = float.PositiveInfinity;
+        [SerializeField, Min(0f)] private float _despawnTime = 0f;
+
+        [Space]
+        [SerializeField]
+        private ListObjects<string, CustomValue> _customValues = new((custom) =>
+        {
+            return custom.Name;
+        });
+
 
         public string Id => _id;
         public string Name => _name;
@@ -23,6 +35,21 @@ namespace Asce.Game.Abilities
         public bool IsPassive => _isPassive;
         public bool IsActive => !_isPassive;
         public float Cooldown => _cooldown;
+        public float UseRangeRadius => _useRangeRadius;
+        public float DaspawnTime => _despawnTime;
+
+        public ReadOnlyCollection<CustomValue> Customs => _customValues.List;
+        public float GetCustomValue(string name)
+        {
+            if (_customValues.TryGet(name, out CustomValue customValue))
+            {
+                return customValue.Value;
+            }
+
+            Debug.LogWarning($"Custom Value \"{name}\" not found.", this);
+            return 0f;
+        }
+
 
         private void OnValidate()
         {

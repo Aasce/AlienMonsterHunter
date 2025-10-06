@@ -50,7 +50,7 @@ MonoBehaviour:
   _despawnTime:
     _baseTime: 30
     _currentTime: 30
-  _distance: 5
+  _useRangeRadius: 6
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 192

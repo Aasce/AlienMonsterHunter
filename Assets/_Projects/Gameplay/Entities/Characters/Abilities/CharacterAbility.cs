@@ -5,15 +5,20 @@ namespace Asce.Game.Abilities
     public class CharacterAbility : Ability
     {
         [Header("Range Settings")]
-        [SerializeField, Min(0f)] protected float _distance = 10f;
+        [SerializeField, Min(0f)] protected float _useRangeRadius = 10f;
 
         [Header("Raycast Settings")]
         [SerializeField] protected LayerMask _obstacleMask;   // Layers considered as obstacles
         [SerializeField] protected float _raycastRadius = 0.1f; // Radius for circle cast
         [SerializeField] protected bool _useCircleCast = true;  // Use CircleCast instead of LineCast
 
-        public float Distance => _distance;
+        public float UseRangeRadius => _useRangeRadius;
 
+        protected override void Start()
+        {
+            base.Start();
+            _useRangeRadius = Information.UseRangeRadius;
+        }
         public virtual void SetPosition(Vector2 position)
         {
             transform.position = FindValidPosition(position);
@@ -26,7 +31,7 @@ namespace Asce.Game.Abilities
 
             Vector2 ownerPos = _owner.transform.position;
             Vector2 direction = position - ownerPos;
-            float distance = Mathf.Min(direction.magnitude, _distance);
+            float distance = Mathf.Min(direction.magnitude, _useRangeRadius);
 
             // Perform raycast or circle cast to detect obstacles
             RaycastHit2D hit;

@@ -1,5 +1,4 @@
 using Asce.Game.Entities.Machines;
-using System;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -10,10 +9,12 @@ namespace Asce.Game.Abilities
 
         public OblivionTurret_Machine Turret => _turret;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             if (Turret != null)
             {
+                Turret.Initialize();
                 Turret.OnTakeDamage += TurretHealth_OnTakeDamage;
                 Turret.OnCurrentAmmoChanged += Turret_OnCurrentAmmoChanged;
             }

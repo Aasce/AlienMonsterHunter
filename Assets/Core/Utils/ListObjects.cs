@@ -28,9 +28,14 @@ namespace Asce.Managers
 
         public TValue Get(TKey key)
         {
-            if (_listDictionary == null) this.InitializeDictionary();
-            _listDictionary.TryGetValue(key, out var value);
+            this.TryGet(key, out TValue value);
             return value;
+        }
+
+        public bool TryGet(TKey key, out TValue value)
+        {
+            if (_listDictionary == null) this.InitializeDictionary();
+            return _listDictionary.TryGetValue(key, out value);
         }
 
         private void InitializeDictionary()

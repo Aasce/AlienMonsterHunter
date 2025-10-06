@@ -15,3 +15,11 @@ MonoBehaviour:
   _maxHealth: 70
   _armor: 25
   _speed: 3
+  _customStats:
+    _list:
+    - _name: Damage
+      _value: 10
+    - _name: AttackSpeed
+      _value: 0.5
+    - _name: ViewRadius
+      _value: 7

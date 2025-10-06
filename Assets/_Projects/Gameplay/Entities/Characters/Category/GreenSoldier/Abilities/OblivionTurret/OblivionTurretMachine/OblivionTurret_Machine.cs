@@ -32,15 +32,21 @@ namespace Asce.Game.Entities.Machines
 
         public event Action<int> OnCurrentAmmoChanged;
 
+        public SingleTargetDetection TargetDetection => _targetDetection;
+
+        public float Damage => _damage;
+        public float ExplosionRadius => _explosionRadius;
+        public int MaxAmmo => _maxAmmo;
         public int CurrentAmmo
         {
             get => _currentAmmo;
-            set
+            protected set
             {
                 _currentAmmo = value;
                 OnCurrentAmmoChanged?.Invoke(_currentAmmo);
             }
         }
+        public Cooldown AttackCooldown => _attackCooldown;
 
         protected override void RefReset()
         {
@@ -52,10 +58,16 @@ namespace Asce.Game.Entities.Machines
             }
         }
 
-
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
+            _maxAmmo = (int)Information.Stats.GetCustomStat("MaxAmmo");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _targetDetection.ViewAngle = Information.Stats.GetCustomStat("ViewAngle");
+
             if (_fov != null)
             {
                 _fov.ViewRadius = _targetDetection.ViewRadius;

@@ -3,6 +3,7 @@ using Asce.Game.FOVs;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Machines
@@ -27,6 +28,10 @@ namespace Asce.Game.Entities.Machines
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
 
+        public SingleTargetDetection TargetDetection => _targetDetection;
+        public float Damage => _damage;
+        public Cooldown AttackCooldown => _attackCooldown;
+
         protected override void RefReset()
         {
             base.RefReset();
@@ -37,10 +42,12 @@ namespace Asce.Game.Entities.Machines
             }
         }
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-            if (_targetDetection == null) return;
+            base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
             if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
         }
 

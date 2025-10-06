@@ -26,7 +26,6 @@ namespace Asce.Game.Entities.Machines
         [SerializeField] private LayerMask _obstacleLayer;
 
         private Vector2 _moveDirection = Vector2.right;
-        private readonly RaycastHit2D[] _hitsCache = new RaycastHit2D[16];
 
         public Vector2 MoveDirection
         {
@@ -34,12 +33,30 @@ namespace Asce.Game.Entities.Machines
             set => _moveDirection = value.normalized;
         }
 
+        public MultiTargetDetection TargetDetection => _targetDetection;
+        public float Damage => _damage;
+        public Cooldown AttackCooldown => _attackCooldown;
+
         protected override void RefReset()
         {
             base.RefReset();
             this.LoadComponent(out _rigidbody);
-            this.LoadComponent(out _targetDetection);
+            if (this.LoadComponent(out _targetDetection))
+            {
+                _targetDetection.Origin = transform;
+                _targetDetection.ForwardReference = transform;
+            }
         }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
+        }
+
 
         protected override void Start()
         {

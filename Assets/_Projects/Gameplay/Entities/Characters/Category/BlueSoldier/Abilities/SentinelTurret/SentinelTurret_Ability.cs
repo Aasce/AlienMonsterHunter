@@ -9,10 +9,12 @@ namespace Asce.Game.Abilities
 
         public SentinelTurret_Machine Turret => _turret;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             if (Turret != null)
             {
+                Turret.Initialize();
                 Turret.OnTakeDamage += TurretHealth_OnTakeDamage;
             }
         }

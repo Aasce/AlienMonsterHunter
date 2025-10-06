@@ -291,7 +291,7 @@ MonoBehaviour:
   _weapon: {fileID: 2654079949105950531}
   _barriel: {fileID: 1695604485410475706}
   _targetDetection: {fileID: 5100781670965863683}
-  _damage: 10
+  _damage: 12
   _attackCooldown:
     _baseTime: 0.8
     _currentTime: 0.8

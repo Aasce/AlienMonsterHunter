@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6073425282970804459}
   - component: {fileID: 722613260439756451}
   m_Layer: 0
-  m_Name: Blue Soldier Drone Bullet Ability
+  m_Name: BlasterDrone Bullet Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,8 +169,8 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: 1c674ecffb7712049b86ca29252af96d, type: 2}
   _owner: {fileID: 0}
   _despawnTime:
-    _baseTime: 3
-    _currentTime: 3
+    _baseTime: 5
+    _currentTime: 5
   _rigidbody: {fileID: 722613260439756451}
   _damageDeal: 0
   _isDealing: 0

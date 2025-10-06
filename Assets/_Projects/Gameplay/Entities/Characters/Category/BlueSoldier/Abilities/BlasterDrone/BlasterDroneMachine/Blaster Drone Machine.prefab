@@ -84,7 +84,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _viewRadius: 7
-  _viewAngle: 343
+  _viewAngle: 360
   _origin: {fileID: 3144541680983810884}
   _forwardReference: {fileID: 3144541680983810884}
   _detectCooldown:
