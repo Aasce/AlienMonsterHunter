@@ -11,12 +11,15 @@ namespace Asce.Game.Abilities
         [SerializeField, SpritePreview] private Sprite _icon;
 
         [Space]
+        [SerializeField] private bool _isPassive = false;
         [SerializeField, Min(0f)] private float _cooldown = 0f;
 
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
 
+        public bool IsPassive => _isPassive;
+        public bool IsActive => !_isPassive;
         public float Cooldown => _cooldown;
     }
 

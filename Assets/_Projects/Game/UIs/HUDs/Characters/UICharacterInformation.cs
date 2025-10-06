@@ -7,11 +7,13 @@ namespace Asce.Game.UIs.HUDs
     public class UICharacterInformation : UIObject
     {
         [SerializeField] private UIResourceStatBar _healthBar;
+        [SerializeField] private UICharacterAbilities _abilities;
 
         [Space]
         [SerializeField] private Character _character;
 
         public UIResourceStatBar HealthBar => _healthBar;
+        public UICharacterAbilities Abilities => _abilities;
 
         public Character Character
         {
@@ -36,9 +38,11 @@ namespace Asce.Game.UIs.HUDs
             if (Character == null)
             {
                 HealthBar.ResourceStat = null;
+                Abilities.CharacterAbilities = null;
                 return;
             }
             HealthBar.ResourceStat = Character.Stats.Health;
+            Abilities.CharacterAbilities = Character.Abilities;
         }
 
         private void Unregister()

@@ -48,8 +48,8 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: 19b9d226f24eb0e48a6b3f13b45ede62, type: 2}
   _owner: {fileID: 0}
   _despawnTime:
-    _baseTime: 10
-    _currentTime: 10
+    _baseTime: 12
+    _currentTime: 12
   _distance: 2
   _obstacleMask:
     serializedVersion: 2

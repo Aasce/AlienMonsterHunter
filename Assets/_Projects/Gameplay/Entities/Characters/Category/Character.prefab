@@ -278,7 +278,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _owner: {fileID: 0}
-  _abilities: []
+  _abilities:
+  - _name: 
+    _cooldown:
+      _baseTime: 0
+      _currentTime: 0
+    _abilityPrefab: {fileID: 0}
+  - _name: 
+    _cooldown:
+      _baseTime: 0
+      _currentTime: 0
+    _abilityPrefab: {fileID: 0}
+  - _name: 
+    _cooldown:
+      _baseTime: 0
+      _currentTime: 0
+    _abilityPrefab: {fileID: 0}
 --- !u!1 &5867197909989179987
 GameObject:
   m_ObjectHideFlags: 0

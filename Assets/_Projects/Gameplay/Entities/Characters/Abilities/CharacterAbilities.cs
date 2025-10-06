@@ -1,6 +1,7 @@
 using Asce.Game.Abilities;
 using Asce.Managers;
 using Asce.Managers.Attributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +13,14 @@ namespace Asce.Game.Entities.Characters
 
         [Space]
         [SerializeField, Readonly] private List<AbilityContainer> _abilities = new();
+        private readonly List<AbilityContainer> _passiveAbilities = new();
+        private readonly List<AbilityContainer> _activeAbilities = new();
 
+        public event Action OnInitializeCompleted;
 
         public List<AbilityContainer> Abilities => _abilities;
+        public List<AbilityContainer> PassiveAbilities => _passiveAbilities;
+        public List<AbilityContainer> ActiveAbilities => _activeAbilities;
 
         private void Update()
         {
@@ -33,6 +39,8 @@ namespace Asce.Game.Entities.Characters
             _owner = owner;
 
             _abilities.Clear();
+            _passiveAbilities.Clear();
+            _activeAbilities.Clear();
             foreach (string abilityName in _owner.Information.AbilitiesName)
             {
                 if (string.IsNullOrEmpty(abilityName)) continue;
@@ -44,7 +52,11 @@ namespace Asce.Game.Entities.Characters
                 }
 
                 _abilities.Add(abilityContainer);
+                if (abilityContainer.AbilityPrefab.Information.IsPassive) _passiveAbilities.Add(abilityContainer);
+                else _activeAbilities.Add(abilityContainer);
             }
+
+            this.OnInitializeCompleted?.Invoke();
         }
 
         public void Use(int index, Vector2 position)

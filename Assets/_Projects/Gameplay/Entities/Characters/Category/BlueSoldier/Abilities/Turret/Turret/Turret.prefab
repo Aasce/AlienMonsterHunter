@@ -296,14 +296,14 @@ MonoBehaviour:
   _seelayer:
     serializedVersion: 2
     m_Bits: 704
-  _viewRadius: 8
+  _viewRadius: 14
   _detectCooldown:
     _baseTime: 0.2
     _currentTime: 0.2
-  _damage: 12
+  _damage: 10
   _attackCooldown:
-    _baseTime: 1
-    _currentTime: 1
+    _baseTime: 0.8
+    _currentTime: 0.8
   _bulletLineVFXName: Default Gun Bullet Line
 --- !u!58 &5190254717659117525
 CircleCollider2D:

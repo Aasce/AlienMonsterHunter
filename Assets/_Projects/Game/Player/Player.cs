@@ -48,8 +48,8 @@ namespace Asce.Game.Players
             bool isShoot = Input.GetMouseButtonDown(0);
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
-            bool isUseAbility0 = Input.GetKeyDown(KeyCode.E);
-            bool isUseAbility1 = Input.GetKeyDown(KeyCode.Q);
+            bool isUseAbility0 = Input.GetKeyDown(KeyCode.Q);
+            bool isUseAbility1 = Input.GetKeyDown(KeyCode.E);
 
             if (Character != null)
             {

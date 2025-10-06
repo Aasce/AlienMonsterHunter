@@ -60,13 +60,13 @@ MonoBehaviour:
   _seeLayer:
     serializedVersion: 2
     m_Bits: 576
-  _viewRadius: 12
+  _viewRadius: 10
   _damage: 8
   _attackCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _bulletAbilityName: Blue Soldier Drone Bullet
-  _moveCheckDistance: 1
+  _moveCheckDistance: 1.2
   _obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1123,7 +1123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: _meshResolution
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: _obstacleMask.m_Bits

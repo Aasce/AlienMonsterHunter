@@ -435,6 +435,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 4214618338705883435, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: _abilities.Array.data[0]._name
+      value: Blue Soldier - Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214618338705883435, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+      propertyPath: _abilities.Array.data[1]._name
+      value: Blue Soldier - Drone
+      objectReference: {fileID: 0}
     - target: {fileID: 6622724446036704105, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _renderers.Array.size
       value: 4
