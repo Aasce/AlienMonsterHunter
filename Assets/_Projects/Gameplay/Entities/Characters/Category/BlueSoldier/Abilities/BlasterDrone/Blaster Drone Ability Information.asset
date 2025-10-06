@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: Blaster Drone Ability Information
+  m_EditorClassIdentifier: 
+  _id: Blaster Drone
+  _name: Blaster Drone
+  _description: 'Deploy a Drone that exists for {DespawnTime} seconds. This Drone
+    flies straight forward, bouncing back on impact. Fires a barrage of bullets {AttackSpeed}
+    per seconds towards visible targets, each bullet dealing {BulletDamage} damage
+    to the first target hit.
+
+
+
+    The Drone has {Health} Health, {Armor} Armor,
+    {MoveSpeed} Speed, {ViewRadius} View Radius.
+
+    It can see through some objects.'
+  _icon: {fileID: 21300000, guid: 1aedf100e335f6d41bc4bc4441e06bb8, type: 3}
+  _isPassive: 0
+  _cooldown: 16

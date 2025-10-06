@@ -74,7 +74,7 @@ namespace Asce.Game.UIs
         {
             if (Text == null) return;
             Text.gameObject.SetActive(true);
-            Text.text = $"{ResourceStat.CurrentValue}/{ResourceStat.FinalValue}";
+            Text.text = $"{ResourceStat.CurrentValue:0}/{ResourceStat.FinalValue:0}";
         }
 
     }

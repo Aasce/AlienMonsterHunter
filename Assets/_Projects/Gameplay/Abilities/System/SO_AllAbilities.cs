@@ -10,7 +10,7 @@ namespace Asce.Game.Abilities
         [SerializeField] private ListObjects<string, Ability> _abilities = new((ability) =>
         {
             if (ability == null || ability.Information == null) return null;
-            return ability.Information.Name;
+            return ability.Information.Id;
         });
 
         public ReadOnlyCollection<Ability> Abilities => _abilities.List;
