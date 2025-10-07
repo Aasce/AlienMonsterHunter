@@ -1,3 +1,6 @@
+using Asce.Game.Entities.Characters;
+using Asce.Game.Entities.Machines;
+using Asce.Game.VFXs;
 using Asce.Managers;
 using UnityEngine;
 
@@ -16,6 +19,7 @@ namespace Asce.Game.Stats
             float finalDamage = this.CalculateDamage(damage, receiver.Armor.FinalValue);
             receiver.Health.CurrentValue -= finalDamage;
             receiver.TakeDamageCallback(finalDamage);
+            this.ShowDamageText(receiver, finalDamage);
         }
 
         public float CalculateDamage(float damage, float armor)
@@ -24,5 +28,26 @@ namespace Asce.Game.Stats
             armor = Mathf.Max(0f, armor);
             return damage * (ArmorReductionFactor / (armor + ArmorReductionFactor));
         }
+
+        private void ShowDamageText(ITakeDamageable receiver, float damage)
+        {
+            float size = Mathf.Lerp(100f, 200f, Mathf.InverseLerp(10f, 100f, damage));
+
+            PopupTextData data = new()
+            {
+                Text = damage.ToString("0"),
+                Color = receiver switch
+                {
+                    Character => Color.red,
+                    Machine => Color.yellow,
+                    MonoBehaviour => Color.white,
+                    _ => Color.white,
+                },
+                Size = size
+            };
+
+            PopupTextController.Instance.EnqueuePopupText((receiver as MonoBehaviour).transform, data);
+        }
+
     }
 }

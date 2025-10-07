@@ -1,5 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
+using Asce.Game.VFXs;
 using Asce.Managers;
 using Asce.PrepareGame.UIs;
 using UnityEngine;

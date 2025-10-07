@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: VFXs Data
   m_EditorClassIdentifier: 
   _vfxs:
+  - {fileID: 110753174408773563, guid: 02c6123dc961a9f4eab59a69e110c5d2, type: 3}
   - {fileID: 5987343377135027491, guid: 3def1fcb41fcdfe41ae2629f78c89fa0, type: 3}
   - {fileID: 3879954018649303918, guid: ac883cdc396ff4442915eef7ab962fb3, type: 3}
   - {fileID: 3879954018649303918, guid: 8b6b17318e05f3d48bb70da2174cb550, type: 3}
