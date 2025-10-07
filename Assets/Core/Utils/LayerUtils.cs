@@ -37,5 +37,15 @@ namespace Asce.Managers.Utils
             }
             return LayerMask.NameToLayer("Default");
         }
+
+        /// <summary>
+        ///     Converts a layer index (0–31) to a LayerMask.
+        /// </summary>
+        /// <param name="layer">The layer index (0–31).</param>
+        /// <returns>LayerMask representing the given layer.</returns>
+        public static LayerMask IntToLayerMask(int layer)
+        {
+            return 1 << layer;
+        }
     }
 }

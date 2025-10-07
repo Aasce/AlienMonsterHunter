@@ -14,6 +14,7 @@ namespace Asce.Game.Abilities
             base.Start();
             if (Drone != null)
             {
+                Drone.Initialize();
                 Drone.OnTakeDamage += DroneHealth_OnTakeDamage;
             }
         }

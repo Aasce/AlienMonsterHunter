@@ -74,6 +74,7 @@ namespace Asce.Game.Entities.Characters
 
             ability.SetPosition(position);
             ability.gameObject.SetActive(true);
+            ability.SpawnComplete();
             container.Cooldown.Reset();
         }
     }

@@ -78,7 +78,7 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            _fov?.DrawFieldOfView();
+            if (_fov != null) _fov.DrawFieldOfView();
         }
 
         /// <summary>

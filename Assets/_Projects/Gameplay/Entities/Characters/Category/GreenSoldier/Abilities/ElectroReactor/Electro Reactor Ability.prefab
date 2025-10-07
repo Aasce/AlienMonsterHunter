@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7716321100445219088
+--- !u!1 &1292225996522935662
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,104 +8,104 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3130911818045429400}
-  - component: {fileID: 3715971126707112031}
+  - component: {fileID: 4324856635146346893}
+  - component: {fileID: 8407780750165128917}
   m_Layer: 0
-  m_Name: Oblivion Turret Ability
+  m_Name: Electro Reactor Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3130911818045429400
+--- !u!4 &4324856635146346893
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7716321100445219088}
+  m_GameObject: {fileID: 1292225996522935662}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3004403142831828980}
+  - {fileID: 1075476712526367337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3715971126707112031
+--- !u!114 &8407780750165128917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7716321100445219088}
+  m_GameObject: {fileID: 1292225996522935662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d456debf71ab9641a62abbef75db1f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fe91d91a582c8140a53efaed2cdaf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _information: {fileID: 11400000, guid: 57fa317f73beec9419bcdca4323d4c38, type: 2}
+  _information: {fileID: 11400000, guid: 927d96d40799465479acbddc2af2b922, type: 2}
   _owner: {fileID: 0}
   _despawnTime:
-    _baseTime: 20
-    _currentTime: 20
-  _useRangeRadius: 3
+    _baseTime: 10
+    _currentTime: 10
+  _useRangeRadius: 7
   _obstacleMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   _raycastRadius: 0.1
   _useCircleCast: 0
-  _turret: {fileID: 3009801151779919401}
---- !u!1001 &8167073939658391916
+  _reactor: {fileID: 8300128195413834808}
+--- !u!1001 &9124806958970017792
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3130911818045429400}
+    m_TransformParent: {fileID: 4324856635146346893}
     m_Modifications:
-    - target: {fileID: 2472525951118835436, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 1110615622496923682, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_Name
-      value: Oblivion Turret Machine
+      value: Electro Reactor Machine
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
+    - target: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -113,20 +113,20 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7afa794360bcc894784019716ede2dca, type: 3}
---- !u!4 &3004403142831828980 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
+--- !u!4 &1075476712526367337 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6405964508170202776, guid: 7afa794360bcc894784019716ede2dca, type: 3}
-  m_PrefabInstance: {fileID: 8167073939658391916}
+  m_CorrespondingSourceObject: {fileID: 8092141467041878633, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
+  m_PrefabInstance: {fileID: 9124806958970017792}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3009801151779919401 stripped
+--- !u!114 &8300128195413834808 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6382638925899831109, guid: 7afa794360bcc894784019716ede2dca, type: 3}
-  m_PrefabInstance: {fileID: 8167073939658391916}
+  m_CorrespondingSourceObject: {fileID: 976763297962648632, guid: 8f38a6e630bb7d542a8f1488698b59b4, type: 3}
+  m_PrefabInstance: {fileID: 9124806958970017792}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccb45348b6e9aa4b91b86009dd60e4a, type: 3}
+  m_Script: {fileID: 11500000, guid: cb4eb845175a0734f96acce8b058bce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -19,6 +19,9 @@ namespace Asce.Game.Abilities
             base.Start();
             _useRangeRadius = Information.UseRangeRadius;
         }
+
+        public virtual void SpawnComplete() { }
+
         public virtual void SetPosition(Vector2 position)
         {
             transform.position = FindValidPosition(position);
