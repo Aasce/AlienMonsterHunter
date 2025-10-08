@@ -14,6 +14,7 @@ namespace Asce.Game.Entities
         [SerializeField] protected EntityStats _stats;
 
         public event Action<float> OnTakeDamage;
+        public event Action OnDead;
 
         public SO_EntityInformation Information => _information;
         public EntityView View => _view;
@@ -45,6 +46,8 @@ namespace Asce.Game.Entities
         void ITakeDamageable.TakeDamageCallback(float damage)
         {
             OnTakeDamage?.Invoke(damage);
+            if (Stats == null) return;
+            if (Stats.Health.CurrentValue <= 0f) OnDead?.Invoke();
         }
     }
 }

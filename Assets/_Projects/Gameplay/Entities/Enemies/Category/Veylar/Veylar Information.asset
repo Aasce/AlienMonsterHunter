@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cef632c8621768b4fbeb1e1b1f376e15, type: 3}
-  m_Name: Shadowfang Stats
+  m_Script: {fileID: 11500000, guid: 2b22fe92fee649243ad9e4d3b744e739, type: 3}
+  m_Name: Veylar Information
   m_EditorClassIdentifier: 
-  _maxHealth: 40
-  _armor: 10
-  _speed: 3
-  _customStats:
-    _list: []
-  _attackDamage: 20
-  _attackSpeed: 3
-  _attackRange: 12
-  _viewRange: 24
+  _name: Veylar
+  _description: 
+  _icon: {fileID: 21300000, guid: ef780579bf2653545ba125949e365ace, type: 3}
+  _stats: {fileID: 11400000, guid: 19e04fd96ab15aa40b21b026adb57193, type: 2}

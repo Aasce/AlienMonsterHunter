@@ -47,6 +47,7 @@ namespace Asce.Game.Entities.Enemies
             bullet.DamageDeal = Stats.AttackDamage.FinalValue;
             bullet.gameObject.SetActive(true);
             bullet.Fire(firePosition, direction);
+            bullet.OnActive();
         }
     }
 }

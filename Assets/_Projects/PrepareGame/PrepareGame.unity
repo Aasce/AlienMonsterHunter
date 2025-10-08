@@ -358,10 +358,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FOV Filter
       objectReference: {fileID: 0}
-    - target: {fileID: 4533917795169226307, guid: de54984a333ba5e4eb796011690f719b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9219908804051427248, guid: de54984a333ba5e4eb796011690f719b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

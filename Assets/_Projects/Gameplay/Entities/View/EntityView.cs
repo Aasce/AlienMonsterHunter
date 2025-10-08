@@ -6,9 +6,10 @@ namespace Asce.Game.Entities
 {
     public class EntityView : GameComponent
     {
+        [SerializeField] protected Transform _rootTransform;
         [SerializeField] protected List<Renderer> _renderers = new();
 
-
+        public Transform RootTransform => _rootTransform != null ? _rootTransform : transform;
         public List<Renderer> Renderers => _renderers;
 
 

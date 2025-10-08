@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cef632c8621768b4fbeb1e1b1f376e15, type: 3}
-  m_Name: Shadowfang Stats
+  m_Name: Veylar Egg Stats
   m_EditorClassIdentifier: 
-  _maxHealth: 40
+  _maxHealth: 17
   _armor: 10
-  _speed: 3
+  _speed: 0
   _customStats:
     _list: []
-  _attackDamage: 20
-  _attackSpeed: 3
-  _attackRange: 12
-  _viewRange: 24
+  _attackDamage: 0
+  _attackSpeed: 0
+  _attackRange: 0
+  _viewRange: 0

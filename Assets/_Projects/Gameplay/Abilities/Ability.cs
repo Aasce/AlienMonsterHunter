@@ -27,6 +27,8 @@ namespace Asce.Game.Abilities
 
         }
 
+        public virtual void OnActive() { }
+
         public virtual void OnDespawn()
         {
 

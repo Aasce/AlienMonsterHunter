@@ -145,6 +145,7 @@ namespace Asce.Game.Entities.Machines
             bullet.DamageDeal = _damage;
             bullet.gameObject.SetActive(true);
             bullet.Fire(transform.position, direction);
+            bullet.OnActive();
         }
 
     }

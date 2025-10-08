@@ -111,6 +111,7 @@ namespace Asce.Game.Entities.Machines
             linker.Set(this, other);
             linker.transform.position = transform.position;
             linker.gameObject.SetActive(true);
+            linker.OnActive();
         }
 
 

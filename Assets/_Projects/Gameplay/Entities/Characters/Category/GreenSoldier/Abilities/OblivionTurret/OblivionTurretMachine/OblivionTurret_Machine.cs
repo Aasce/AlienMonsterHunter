@@ -157,6 +157,7 @@ namespace Asce.Game.Entities.Machines
             bullet.ExplosionRadius = _explosionRadius;
             bullet.gameObject.SetActive(true);
             bullet.Fire(shootPos, direction);
+            bullet.OnActive();
         }
 
         #endregion

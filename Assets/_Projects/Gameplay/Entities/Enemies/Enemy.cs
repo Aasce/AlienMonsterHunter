@@ -131,6 +131,7 @@ namespace Asce.Game.Entities.Enemies
         protected virtual void ViewHandle()
         {
             if (View == null) return;
+            if (View.Animator == null) return;
             View.Animator.SetFloat("Speed", Agent.velocity.magnitude);
         }
     }

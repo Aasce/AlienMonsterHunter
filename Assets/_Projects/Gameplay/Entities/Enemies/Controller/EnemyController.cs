@@ -48,25 +48,26 @@ namespace Asce.Game.Entities.Enemies
             }
         }
 
-        public void Spawn(string name, Vector2 position)
+        public Enemy Spawn(string name, Vector2 position)
         {
-            if (string.IsNullOrEmpty(name)) return;
+            if (string.IsNullOrEmpty(name)) return null;
             if (!_pools.ContainsKey(name)) this.CreatePool(name);
-            if (!_pools.TryGetValue(name, out Pool<Enemy> pool)) return;
+            if (!_pools.TryGetValue(name, out Pool<Enemy> pool)) return null;
                         
             Enemy enemy = pool.Activate(out bool isCreated);
-            if (enemy == null) return;
+            if (enemy == null) return null;
             enemy.Agent.Warp(position);
 
             if (isCreated)
             {
-
+                enemy.Initialize();
             }
             else
             {
                 enemy.ResetStatus();
                 enemy.gameObject.SetActive(true);
             }
+            return enemy;
         }
 
         public void Despawn(Enemy enemy)
