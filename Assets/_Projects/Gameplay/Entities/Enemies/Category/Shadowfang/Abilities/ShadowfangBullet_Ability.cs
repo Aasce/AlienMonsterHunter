@@ -1,3 +1,4 @@
+using Asce.Game.Effects;
 using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
@@ -43,6 +44,11 @@ namespace Asce.Game.Abilities
             if (!target.IsTargetable) return;
             
             CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
+            EffectController.Instance.AddEffect("Toxic", target as Entity, new EffectData()
+            {
+                Duration = 5.5f,
+                Strength = 3f,
+            });
 
             this.IsDealing = true;
             this.DespawnTime.ToComplete();

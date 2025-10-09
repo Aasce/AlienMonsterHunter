@@ -827,6 +827,7 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: 05cb58dacb5e56544a337cc0a4b50a3e, type: 2}
   _view: {fileID: 7278013877516238317}
   _stats: {fileID: 3974592246808758942}
+  _effects: {fileID: 9068869752717131643}
   _agent: {fileID: 6568635142161705386}
   _targetDetection: {fileID: 5855290536935671638}
   _attackCooldown:
@@ -923,5 +924,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df5def2a15240e847a22ef6b8068c1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9068869752717131643 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 4790651642123466715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

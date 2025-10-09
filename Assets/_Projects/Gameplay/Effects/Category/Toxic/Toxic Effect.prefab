@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8681088507867958720
+--- !u!1 &1126226975046913544
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3199454030477017708}
-  - component: {fileID: 8281063324675170472}
+  - component: {fileID: 655934599668204714}
+  - component: {fileID: 4580831413785609179}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Toxic Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3199454030477017708
+--- !u!4 &655934599668204714
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8681088507867958720}
+  m_GameObject: {fileID: 1126226975046913544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,20 +32,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8281063324675170472
+--- !u!114 &4580831413785609179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8681088507867958720}
+  m_GameObject: {fileID: 1126226975046913544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 416bd93fdc744c44fa28a27ea38b5e5f, type: 3}
+  m_Script: {fileID: 11500000, guid: e2e6b2a8093d0f14b8cbad08c401090a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allCharacters: {fileID: 11400000, guid: 4156b936b137d3c4696be2ce45c3fedc, type: 2}
-  _allEnemies: {fileID: 11400000, guid: 6c760d0226e618e43bd7adf73adbfd9d, type: 2}
-  _allGuns: {fileID: 11400000, guid: acdf6f8430385e54286a7b7752183beb, type: 2}
-  _allAbilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}
-  _allEffects: {fileID: 11400000, guid: 328f8bd727c7e85499487bb3e4335871, type: 2}
+  _information: {fileID: 11400000, guid: 8ba97a9d2b60b3248a85200c32debb78, type: 2}
+  _receiver: {fileID: 0}
+  _duration:
+    _baseTime: 0
+    _currentTime: 0
+  _strength: 0
+  _damageCooldown:
+    _baseTime: 1
+    _currentTime: 1

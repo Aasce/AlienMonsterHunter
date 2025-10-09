@@ -952,6 +952,7 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: c1146a2d6d63f5242825997fe8f5abdb, type: 2}
   _view: {fileID: 4479981263036912699}
   _stats: {fileID: 7783401725456655176}
+  _effects: {fileID: 2807920473373038253}
   _agent: {fileID: 1370998854991996}
   _targetDetection: {fileID: 751696031737884288}
   _attackCooldown:
@@ -1009,6 +1010,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 3035042326583770649}
   _takeDamageVFXName: Shadowfang Blood Splatter
+--- !u!114 &2807920473373038253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1826056266009959949}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4479981263036912699 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

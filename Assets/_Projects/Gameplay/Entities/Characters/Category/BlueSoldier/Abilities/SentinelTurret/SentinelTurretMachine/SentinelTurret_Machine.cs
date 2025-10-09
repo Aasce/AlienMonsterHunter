@@ -1,4 +1,5 @@
 using Asce.Game.AIs;
+using Asce.Game.Effects;
 using Asce.Game.FOVs;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
@@ -93,6 +94,11 @@ namespace Asce.Game.Entities.Machines
                 if (hit.transform != target.transform) return;
 
                 CombatController.Instance.DamageDealing(target as ITakeDamageable, _damage);
+                EffectController.Instance.AddEffect("Slow", target as Entity, new EffectData()
+                {
+                    Duration = 3f,
+                    Strength = 0.4f,
+                });
             }
         }
 

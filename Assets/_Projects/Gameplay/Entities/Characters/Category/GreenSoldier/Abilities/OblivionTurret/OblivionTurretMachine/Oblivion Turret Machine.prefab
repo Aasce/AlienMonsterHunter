@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &292922275954714051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7703562547830952494}
+  - component: {fileID: 8195546202279261264}
+  m_Layer: 8
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7703562547830952494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292922275954714051}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6405964508170202776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8195546202279261264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292922275954714051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effects: []
+  _updateCooldown:
+    _baseTime: 0.1
+    _currentTime: 0.1
 --- !u!1 &767772280898067316
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8416b79caabba8847a2b2e74017ee9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootTransform: {fileID: 0}
   _renderers:
   - {fileID: 4443599428024938626}
   - {fileID: 4593203005513587677}
@@ -182,6 +231,7 @@ Transform:
   - {fileID: 4264407400682357884}
   - {fileID: 4254922665265440972}
   - {fileID: 1610747538031467580}
+  - {fileID: 7703562547830952494}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6382638925899831109
@@ -199,6 +249,7 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: 76dfdd9e93f7eb649bb12cd149d8b3c4, type: 2}
   _view: {fileID: 751406569404851001}
   _stats: {fileID: 2334561534734880323}
+  _effects: {fileID: 8195546202279261264}
   _fov: {fileID: 2031475166989390389}
   _fovSelf: {fileID: 6866071250102911397}
   _weapon: {fileID: 5262638166179090435}

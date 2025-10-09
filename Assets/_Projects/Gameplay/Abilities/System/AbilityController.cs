@@ -10,7 +10,6 @@ namespace Asce.Game.Abilities
     {
         private readonly Dictionary<string, Pool<Ability>> _pools = new();
 
-        [Space]
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
 
 

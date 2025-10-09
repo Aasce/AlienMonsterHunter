@@ -12,6 +12,9 @@ namespace Asce.Game.Entities
         [SerializeField] protected SO_EntityInformation _information;
         [SerializeField] protected EntityView _view;
         [SerializeField] protected EntityStats _stats;
+        [SerializeField] protected EntityEffects _effects;
+
+        protected bool _isDeath = false;
 
         public event Action<float> OnTakeDamage;
         public event Action OnDead;
@@ -19,6 +22,9 @@ namespace Asce.Game.Entities
         public SO_EntityInformation Information => _information;
         public EntityView View => _view;
         public EntityStats Stats => _stats;
+        public EntityEffects Effects => _effects;
+
+        public bool IsDeath => _isDeath;
 
         ResourceStat ITakeDamageable.Health => Stats.Health;
         Stat ITakeDamageable.Armor => Stats.Armor;
@@ -37,18 +43,27 @@ namespace Asce.Game.Entities
             if (Stats != null) Stats.Initialize(Information.Stats);
         }
 
+        public virtual void Initialize() { }
         public virtual void ResetStatus()
         {
             Stats.ResetStats();
+            _isDeath = false;
         }
 
-        public virtual void Initialize() { }
+        protected virtual void Dead()
+        {
+            if (_isDeath) return;
+            _isDeath = true;
+            Effects.Clear();
+            OnDead?.Invoke();
+        }
+
 
         void ITakeDamageable.TakeDamageCallback(float damage)
         {
             OnTakeDamage?.Invoke(damage);
             if (Stats == null) return;
-            if (Stats.Health.CurrentValue <= 0f) OnDead?.Invoke();
+            if (Stats.Health.CurrentValue <= 0f) this.Dead();
         }
     }
 }

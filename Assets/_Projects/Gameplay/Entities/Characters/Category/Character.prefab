@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8416b79caabba8847a2b2e74017ee9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootTransform: {fileID: 0}
   _renderers: []
 --- !u!1 &3029034660266258449
 GameObject:
@@ -131,6 +132,7 @@ Transform:
   - {fileID: 3297625227039664938}
   - {fileID: 6673252821967040889}
   - {fileID: 2335234930379617410}
+  - {fileID: 464169660764393316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7269911351320589851
@@ -148,6 +150,7 @@ MonoBehaviour:
   _information: {fileID: 0}
   _view: {fileID: 6622724446036704105}
   _stats: {fileID: 6912903451780248762}
+  _effects: {fileID: 2685624722300885766}
   _collider: {fileID: 3285569828326788888}
   _rigidbody: {fileID: 2125223173831006573}
   _fov: {fileID: 1775188087859206294}
@@ -233,6 +236,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 0}
   _takeDamageVFXName: 
+--- !u!1 &3642228938729854598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464169660764393316}
+  - component: {fileID: 2685624722300885766}
+  m_Layer: 8
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &464169660764393316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642228938729854598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8186422347695430131}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2685624722300885766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642228938729854598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effects: []
+  _updateCooldown:
+    _baseTime: 0.1
+    _currentTime: 0.1
 --- !u!1 &3764308907927331195
 GameObject:
   m_ObjectHideFlags: 0

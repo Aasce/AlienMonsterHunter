@@ -37,13 +37,22 @@ namespace Asce.Game.Stats
         public float RatioValue => _ratioValue;
         public float ScaleValue => _scaleValue;
 
-        public StatValue[] ArrayValues => _statValues.ToArray();
+        public virtual StatValue Get(string id)
+        {
+            return _statValues.Find((statValue) => statValue.Id == id);
+        }
 
-
-        public virtual void Add(float value, StatValueType type = StatValueType.Flat)
+        public virtual StatValue Add(float value, StatValueType type = StatValueType.Flat)
         {
             StatValue addValue = new (value, type);
             _statValues.Add(addValue);
+            this.Recalculate();
+            return addValue;
+        }
+
+        public virtual void RemoveById(string id)
+        {
+            _statValues.RemoveAll((statValue) => statValue.Id == id);
             this.Recalculate();
         }
 

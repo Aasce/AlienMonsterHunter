@@ -371,6 +371,7 @@ MonoBehaviour:
   _information: {fileID: 11400000, guid: d9e3b76c1542c69488c31f4a0595df6e, type: 2}
   _view: {fileID: 4547059529840165809}
   _stats: {fileID: 7868425259011323074}
+  _effects: {fileID: 2864796784199680295}
   _agent: {fileID: 86324163763525622}
   _targetDetection: {fileID: 817682861487012106}
   _attackCooldown:
@@ -458,6 +459,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 5025102880806509642}
   _takeDamageVFXName: Veylar Blood Splatter
+--- !u!114 &2864796784199680295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1756691702652029319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4547059529840165809 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
