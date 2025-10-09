@@ -335,6 +335,17 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
   m_PrefabInstance: {fileID: 1756691702652029319}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &817682861487012106 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1385415373530656909, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1756691702652029319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602415094709298983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac06f0df0e34744d9a888147c7d2e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1350457134413250128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -361,15 +372,7 @@ MonoBehaviour:
   _view: {fileID: 4547059529840165809}
   _stats: {fileID: 7868425259011323074}
   _agent: {fileID: 86324163763525622}
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _checkCooldown:
-    _baseTime: 2
-    _currentTime: 2
-  _seeLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _targetDetection: {fileID: 817682861487012106}
   _attackCooldown:
     _baseTime: 0
     _currentTime: 0

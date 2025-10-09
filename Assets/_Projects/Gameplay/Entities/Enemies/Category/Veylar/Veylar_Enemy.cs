@@ -93,24 +93,19 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void MoveToTaget() => this.DefaultMoveToTaget();
 
-        protected override void FindTarget()
-        {
-            this.DefaultFindTarget();
-            if (Target != null) this.MoveToTaget();
-        }
-
-
         protected override void Attack()
         {
+            ITargetable target = TargetDetection.CurrentTarget;
             float damage = Stats.AttackDamage.FinalValue;
-            CombatController.Instance.DamageDealing(Target as ITakeDamageable, damage);
+            CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
         }
 
         private void Explosion()
         {
             float radius = _explosionRadius + _currentPhase * .5f;
             float damage = _explosionDamage * _currentPhase;
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, _targetLayer);
+            LayerMask targetLayer = TargetDetection.TargetLayer;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, targetLayer);
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;

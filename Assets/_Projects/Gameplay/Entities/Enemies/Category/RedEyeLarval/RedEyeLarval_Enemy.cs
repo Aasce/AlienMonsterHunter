@@ -17,16 +17,11 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void MoveToTaget() =>  this.DefaultMoveToTaget();       
 
-        protected override void FindTarget()
-        {
-            this.DefaultFindTarget();
-            if (Target != null) this.MoveToTaget();
-        }
-
         protected override void Attack()
         {
+            ITargetable target = TargetDetection.CurrentTarget;
             float damage = Stats.AttackDamage.FinalValue;
-            CombatController.Instance.DamageDealing(Target as ITakeDamageable, damage);
+            CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
         }
     }
 }

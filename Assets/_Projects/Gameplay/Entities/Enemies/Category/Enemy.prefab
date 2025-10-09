@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6455034772851875770}
+  - component: {fileID: 1385415373530656909}
   - component: {fileID: 1824989832164351601}
   - component: {fileID: 3904092036608871157}
   - component: {fileID: 4612767881241518357}
@@ -36,6 +37,31 @@ Transform:
   - {fileID: 8360871113489588705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1385415373530656909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035240509648170656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac06f0df0e34744d9a888147c7d2e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 192
+  _viewRadius: 8
+  _viewAngle: 360
+  _origin: {fileID: 6455034772851875770}
+  _forwardReference: {fileID: 6455034772851875770}
+  _detectCooldown:
+    _baseTime: 0.15
+    _currentTime: 0.15
 --- !u!195 &1824989832164351601
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -126,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5def2a15240e847a22ef6b8068c1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootTransform: {fileID: 0}
   _renderers: []
   _animator: {fileID: 0}
 --- !u!1 &8759248493955586036

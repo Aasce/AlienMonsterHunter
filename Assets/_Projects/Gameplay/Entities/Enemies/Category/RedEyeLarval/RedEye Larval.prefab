@@ -520,16 +520,7 @@ MonoBehaviour:
   _view: {fileID: 3074325819203815600}
   _stats: {fileID: 8683527855374450627}
   _agent: {fileID: 1478019436663364855}
-  _target: {fileID: 0}
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  _checkCooldown:
-    _baseTime: 0.2
-    _currentTime: 0.2
-  _seeLayer:
-    serializedVersion: 2
-    m_Bits: 448
+  _targetDetection: {fileID: 2227218842495660555}
   _attackCooldown:
     _baseTime: 1
     _currentTime: 1
@@ -594,6 +585,17 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
   m_PrefabInstance: {fileID: 995665286645039750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2227218842495660555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1385415373530656909, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255783305889590310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac06f0df0e34744d9a888147c7d2e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3074325819203815600 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

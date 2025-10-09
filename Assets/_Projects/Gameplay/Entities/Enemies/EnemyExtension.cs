@@ -1,3 +1,4 @@
+using log4net.Util;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -7,34 +8,25 @@ namespace Asce.Game.Entities.Enemies
         public static void DefaultMoveToTaget(this Enemy enemy)
         {
             if (enemy == null) return;
-            if (enemy.Target == null) return;
+            if (enemy.TargetDetection == null) return;
 
-            enemy.Agent.SetDestination(enemy.Target.transform.position);
+            ITargetable target = enemy.TargetDetection.CurrentTarget;
+            if (target == null) return;
+
+            enemy.Agent.SetDestination(target.transform.position);
         }
 
-        public static void DefaultFindTarget(this Enemy enemy)
+        public static void RotateToTarget(this Enemy enemy)
         {
             if (enemy == null) return;
-            float viewRange = enemy.Stats.ViewRange.FinalValue;
-            Vector2 position = enemy.transform.position;
+            if (enemy.TargetDetection == null) return;
 
-            Collider2D[] characters = Physics2D.OverlapCircleAll(position, viewRange, enemy.TargetLayer);
-            if (characters.Length == 0) return;
+            ITargetable target = enemy.TargetDetection.CurrentTarget;
+            if (target == null) return;
 
-            foreach (Collider2D collder in characters)
-            {
-                Vector2 direction = (Vector2)collder.transform.position - position;
-                RaycastHit2D hit = Physics2D.Raycast(position, direction, viewRange, enemy.SeeLayer);
-                if (hit.collider == null) continue;
-                if (hit.collider.gameObject != collder.gameObject) continue;
-                
-                if (hit.transform.TryGetComponent(out ITargetable target))
-                {
-                    enemy.Target = target;
-                    break;
-                }
-            }
+            Vector2 direction = target.transform.position - enemy.transform.position;
+            float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            enemy.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
-
     }
 }

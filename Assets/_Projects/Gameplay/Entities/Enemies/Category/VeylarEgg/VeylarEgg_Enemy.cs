@@ -45,11 +45,6 @@ namespace Asce.Game.Entities.Enemies
 
         }
 
-        protected override void FindTarget()
-        {
-
-        }
-
         protected override void MoveToTaget()
         {
 

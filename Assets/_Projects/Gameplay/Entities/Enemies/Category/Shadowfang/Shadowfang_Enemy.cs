@@ -10,8 +10,12 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void MoveToTaget()
         {
+            if (TargetDetection == null) return;
+            ITargetable target = TargetDetection.CurrentTarget;
+            if (target == null) return;
+
             Vector2 currentPosition = transform.position;
-            Vector2 targetPosition = Target.transform.position;
+            Vector2 targetPosition = target.transform.position;
             Vector2 direction = targetPosition - currentPosition;
 
             float distance = direction.magnitude;
@@ -28,25 +32,19 @@ namespace Asce.Game.Entities.Enemies
             _agent.SetDestination(destination);
         }
 
-        protected override void FindTarget()
-        {
-            this.DefaultFindTarget();
-            if (Target != null) this.MoveToTaget();
-        }
-
         protected override void Attack()
         {
-            transform.up = Target.transform.position - transform.position;
+            this.RotateToTarget();
 
             ShadowfangBullet_Ability bullet = AbilityController.Instance.Spawn("Shadowfang Bullet", gameObject) as ShadowfangBullet_Ability;
             if (bullet == null) return;
 
             Vector2 firePosition = _mouth != null ? _mouth.position : transform.position;
-            Vector2 direction = (Vector2)Target.transform.position - firePosition;
+            Vector2 fireDirection = (Vector2)TargetDetection.CurrentTarget.transform.position - firePosition;
 
             bullet.DamageDeal = Stats.AttackDamage.FinalValue;
             bullet.gameObject.SetActive(true);
-            bullet.Fire(firePosition, direction);
+            bullet.Fire(firePosition, fireDirection);
             bullet.OnActive();
         }
     }

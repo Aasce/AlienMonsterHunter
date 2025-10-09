@@ -1,3 +1,4 @@
+using Asce.Game.AIs;
 using Asce.Managers.Utils;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,14 +10,7 @@ namespace Asce.Game.Entities.Enemies
     {
         [Header("Enemy")]
         [SerializeField] protected NavMeshAgent _agent;
-
-        [Header("Target Detection")]
-        [SerializeField] protected ITargetable _target;
-        [SerializeField] protected LayerMask _targetLayer;
-
-        [Space]
-        [SerializeField] protected Cooldown _checkCooldown = new(2f);
-        [SerializeField] protected LayerMask _seeLayer;
+        [SerializeField] private SingleTargetDetection _targetDetection;
 
         [Space]
         [SerializeField] protected Cooldown _attackCooldown = new();
@@ -25,17 +19,8 @@ namespace Asce.Game.Entities.Enemies
         public new EnemyStats Stats => base.Stats as EnemyStats;
 
         public NavMeshAgent Agent => _agent;
-        public Cooldown CheckCooldown => _checkCooldown;
+        public SingleTargetDetection TargetDetection => _targetDetection;
         public Cooldown AttackCooldown => _attackCooldown;
-
-        public LayerMask TargetLayer => _targetLayer;
-        public LayerMask SeeLayer => _seeLayer;
-
-        public ITargetable Target
-        {
-            get => _target;
-            set => _target = value;
-        }
 
         protected override void RefReset()
         {
@@ -48,10 +33,18 @@ namespace Asce.Game.Entities.Enemies
             base.Start();
             Agent.speed = Stats.Speed.FinalValue;
             AttackCooldown.BaseTime = Stats.AttackSpeed.FinalValue;
+            TargetDetection.Origin = transform;
+            TargetDetection.ForwardReference = transform;
+            TargetDetection.ViewRadius = Stats.ViewRange.FinalValue;
 
             Stats.Speed.OnFinalValueChanged += (oldValue, newValue) =>
             {
                 Agent.speed = newValue;
+            };
+
+            Stats.ViewRange.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                TargetDetection.ViewRadius = newValue;
             };
 
             Stats.AttackSpeed.OnFinalValueChanged += (oldValue, newValue) =>
@@ -59,16 +52,24 @@ namespace Asce.Game.Entities.Enemies
                 AttackCooldown.BaseTime = newValue;
             };
 
-            Stats.Health.OnCurrentValueChanged += (oldValue, newValue) =>
+            this.OnDead += () =>
             {
-                if (newValue <= 0f) EnemyController.Instance.Despawn(this);
+                EnemyController.Instance.Despawn(this);
             };
         }
 
 
         protected virtual void Update()
         {
-            this.FindTargetHandle();
+            if (TargetDetection != null)
+            {
+                TargetDetection.UpdateDetection();
+                if (TargetDetection.CurrentTarget != null)
+                {
+                    this.MoveToTaget();
+                }
+            }
+
             this.AttackHandle();
             this.ViewHandle();
         }
@@ -76,51 +77,23 @@ namespace Asce.Game.Entities.Enemies
         public override void ResetStatus()
         {
             base.ResetStatus();
-            CheckCooldown.Reset();
             AttackCooldown.Reset();
 
             if (View != null) View.ResetStatus();
         }
 
         protected abstract void MoveToTaget();
-        protected abstract void FindTarget();
         protected abstract void Attack();
 
-        protected virtual void FindTargetHandle()
-        {
-            if (Agent == null) return;
-
-            CheckCooldown.Update(Time.deltaTime);
-            if (CheckCooldown.IsComplete)
-            {
-                if (Target != null)
-                {
-                    float viewRange = Stats.ViewRange.FinalValue;
-                    Vector2 direction = Target.transform.position - transform.position;
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewRange, _seeLayer);
-                    if (hit.collider == null || hit.transform != Target.transform)
-                    {
-                        Target = null;
-                    }
-                    else
-                    {
-                        this.MoveToTaget();
-                    }
-                }
-                else
-                {
-                    this.FindTarget();
-                }
-                CheckCooldown.Reset();
-            }
-        }
         protected virtual void AttackHandle()
         {
             AttackCooldown.Update(Time.deltaTime);
-            if (AttackCooldown.IsComplete && Target != null)
+            if (AttackCooldown.IsComplete)
             {
+                ITargetable target = TargetDetection.CurrentTarget;
+                if (target == null) return;
                 float attackRange = Stats.AttackRange.FinalValue;
-                if (Vector2.Distance(transform.position, Target.transform.position) <= attackRange)
+                if (Vector2.Distance(transform.position, target.transform.position) <= attackRange)
                 {
                     this.Attack();
                     AttackCooldown.Reset();
