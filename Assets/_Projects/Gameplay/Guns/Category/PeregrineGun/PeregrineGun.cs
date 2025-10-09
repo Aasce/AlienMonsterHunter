@@ -1,4 +1,4 @@
-using Asce.Game.Entities.Enemies;
+using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using UnityEngine;
@@ -8,6 +8,8 @@ namespace Asce.Game.Guns
     public class PeregrineGun : Gun
     {
         [SerializeField] private float _distance = 100f;
+        [SerializeField] private float _damageLosePerHit = 0.9f;
+        private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[32];
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
@@ -17,26 +19,29 @@ namespace Asce.Game.Guns
             CurrentAmmo--;
 
             // Get all hits along the ray
-            RaycastHit2D[] hits = Physics2D.RaycastAll(BarrelPosition, direction, _distance, _hitLayer);
-            if (hits.Length == 0)
+            int count = Physics2D.RaycastNonAlloc(BarrelPosition, direction, _cacheHits, _distance, _hitLayer);
+            if (count == 0)
             {
-                // No hit, spawn VFX till max distance
                 SpawnVFX(BarrelPosition, BarrelPosition + direction.normalized * _distance);
                 return;
             }
 
+            float currentDamage = Damage;
             Vector2 endPoint = BarrelPosition + direction.normalized * _distance;
-
-            foreach (var hit in hits)
+            for(int i = 0; i < count; i++)
             {
-                // Check if this collider is an Enemy
-                if (hit.transform.TryGetComponent(out Enemy enemy))
+                RaycastHit2D hit = _cacheHits[i];
+                if (hit.transform.TryGetComponent(out ITargetable target))
                 {
-                    CombatController.Instance.DamageDealing(enemy, Damage);
+                    if (target.IsTargetable)
+                    {
+                        CombatController.Instance.DamageDealing(target as ITakeDamageable, currentDamage);
+                        currentDamage *= _damageLosePerHit;
+                    }
                     continue; // Continue to next hit (piercing)
                 }
 
-                // If not an Enemy, stop here
+                // If not an Target, stop here
                 endPoint = hit.point;
                 break;
             }
@@ -53,6 +58,8 @@ namespace Asce.Game.Guns
             line.LineRenderer.positionCount = 2;
             line.LineRenderer.SetPosition(0, startPoint);
             line.LineRenderer.SetPosition(1, endPoint);
+            line.LineRenderer.startWidth = .5f;
+            line.LineRenderer.endWidth = .5f;
         }
     }
 }

@@ -1,4 +1,4 @@
-using Asce.Game.Entities.Enemies;
+using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using UnityEngine;
@@ -10,6 +10,7 @@ namespace Asce.Game.Guns
         [SerializeField] private float _distance = 20f;
         [SerializeField] private int _bulletPerShoot = 4;
         [SerializeField, Range(0f, 90f)] private float _spreadAngle = 15f; // total cone angle
+        private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[8];
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
@@ -17,11 +18,7 @@ namespace Asce.Game.Guns
         protected override void Shooting(Vector2 direction)
         {
             CurrentAmmo--;
-
-            // Normalize the base direction
             direction.Normalize();
-
-
             // If only 1 bullet, fire straight
             if (_bulletPerShoot <= 1)
             {
@@ -29,36 +26,45 @@ namespace Asce.Game.Guns
                 return;
             }
 
-            // Calculate half of spread to distribute evenly around the main direction
             float halfSpread = _spreadAngle * 0.5f;
-
-            // Fire multiple bullets
             for (int i = 0; i < _bulletPerShoot; i++)
             {
-                // t in range [0,1]
                 float t = _bulletPerShoot == 1 ? 0.5f : (float)i / (_bulletPerShoot - 1);
                 float angleOffset = Mathf.Lerp(-halfSpread, halfSpread, t);
-
-                // Rotate direction by offset
-                Vector2 spreadDir = Quaternion.Euler(0, 0, angleOffset) * direction;
-
-                ShootSingle(spreadDir);
+                Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction;
+                this.ShootSingle(spreadDirection);
             }
         }
 
         private void ShootSingle(Vector2 direction)
         {
-            RaycastHit2D hit = Physics2D.Raycast(BarrelPosition, direction, _distance, _hitLayer);
+            // Get all hits along the ray
+            int count = Physics2D.RaycastNonAlloc(BarrelPosition, direction, _cacheHits, _distance, _hitLayer);
+            if (count == 0)
+            {
+                SpawnVFX(BarrelPosition, BarrelPosition + direction.normalized * _distance);
+                return;
+            }
 
-            // Spawn VFX for this bullet
-            SpawnVFX(
-                BarrelPosition,
-                hit.collider != null ? hit.point : BarrelPosition + direction * _distance
-            );
+            Vector2 endPoint = BarrelPosition + direction.normalized * _distance;
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit2D hit = _cacheHits[i];
+                if (!hit.transform.TryGetComponent(out ITargetable target))
+                {
+                    endPoint = hit.point; // If not an Target, stop here
+                    break;
+                }
+                if (target.IsTargetable)
+                {
+                    CombatController.Instance.DamageDealing(target as ITakeDamageable, Damage);
+                    endPoint = hit.point;
+                    break;
+                }
+            }
 
-            if (hit.collider == null) return;
-            if (!hit.transform.TryGetComponent(out Enemy enemy)) return;
-            CombatController.Instance.DamageDealing(enemy, Damage);
+            // Spawn the bullet trail from gun barrel to end point
+            SpawnVFX(BarrelPosition, endPoint);
         }
 
         private void SpawnVFX(Vector2 startPoint, Vector2 endPoint)

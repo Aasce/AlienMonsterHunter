@@ -1,3 +1,4 @@
+using Asce.Game.Entities;
 using Asce.Game.Entities.Machines;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
@@ -85,9 +86,10 @@ namespace Asce.Game.Abilities
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider == null) continue;
-                if (!hit.collider.TryGetComponent(out ITakeDamageable target)) continue;
+                if (!hit.collider.TryGetComponent(out ITargetable target)) continue;
+                if (!target.IsTargetable) continue;
 
-                CombatController.Instance.DamageDealing(target, DamageDeal);
+                CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
             }
         }
 

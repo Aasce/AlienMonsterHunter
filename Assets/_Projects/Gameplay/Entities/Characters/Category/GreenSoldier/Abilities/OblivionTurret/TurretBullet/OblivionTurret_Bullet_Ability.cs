@@ -1,3 +1,4 @@
+using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
@@ -54,10 +55,9 @@ namespace Asce.Game.Abilities
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
-                if (collider.TryGetComponent(out ITakeDamageable victim))
-                {
-                    CombatController.Instance.DamageDealing(victim, DamageDeal);
-                }
+                if (!collision.TryGetComponent(out ITargetable target)) continue;
+                if (!target.IsTargetable) continue;
+                CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
             }
 
             this.SpawnVFX();

@@ -111,6 +111,7 @@ namespace Asce.Game.Entities.Enemies
                 if (!collider.enabled) continue;
                 if (collider.transform == null) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
+                if (!target.IsTargetable) continue;
 
                 CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
             }

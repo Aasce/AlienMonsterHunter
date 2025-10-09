@@ -35,6 +35,7 @@ namespace Asce.Game.AIs
             {
                 if (collider == null) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
+                if (!target.IsTargetable) continue;
                 if (!IsInViewAngle(target.transform.position)) continue;
                 if (!HasLineOfSight(target.transform)) continue;
 

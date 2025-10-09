@@ -172,7 +172,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _information: {fileID: 11400000, guid: 5b9d252a4241dc344bb72255543919d6, type: 2}
   _barrel: {fileID: 5765542848989150052}
-  _damage: 10
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 704
+  _damage: 14
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
@@ -182,10 +185,7 @@ MonoBehaviour:
   _reloadCooldown:
     _baseTime: 1.5
     _currentTime: 0
-  _distance: 100
-  _hitLayer:
-    serializedVersion: 2
-    m_Bits: 704
+  _distance: 20
   _bulletLineVFXName: Default Gun Bullet Line
 --- !u!60 &1477441870722536907
 PolygonCollider2D:

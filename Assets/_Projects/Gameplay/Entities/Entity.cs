@@ -22,6 +22,7 @@ namespace Asce.Game.Entities
 
         ResourceStat ITakeDamageable.Health => Stats.Health;
         Stat ITakeDamageable.Armor => Stats.Armor;
+        bool ITargetable.IsTargetable => true;
 
         protected override void RefReset()
         {

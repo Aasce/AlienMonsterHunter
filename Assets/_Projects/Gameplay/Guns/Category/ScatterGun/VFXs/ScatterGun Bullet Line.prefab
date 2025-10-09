@@ -89,28 +89,37 @@ LineRenderer:
       - serializedVersion: 3
         time: 0
         value: 0.4
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.20000002
+        outSlope: 0.20000002
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.6
+        inSlope: 0.20000002
+        outSlope: 0.20000002
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5, g: 0.5, b: 0.5, a: 0.023292419}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 0.6, g: 0.41426033, b: 0.24, a: 0.023292419}
+      key1: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 16384
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -126,7 +135,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
@@ -150,7 +159,7 @@ GameObject:
   - component: {fileID: 7713071723103945668}
   - component: {fileID: 3655543663594814725}
   m_Layer: 0
-  m_Name: Default Gun Bullet Line
+  m_Name: ScatterGun Bullet Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f04fe548fc4cc24b80d1848c55bfaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Default Gun Bullet Line
+  _name: ScatterGun Bullet Line
   _despawnCooldown:
-    _baseTime: 0.06
-    _currentTime: 0.06
+    _baseTime: 0.08
+    _currentTime: 0.08
   _lineRenderer: {fileID: 708683180478392124}

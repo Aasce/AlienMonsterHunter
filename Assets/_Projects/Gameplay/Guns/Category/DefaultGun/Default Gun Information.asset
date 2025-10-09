@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: afea298293b40f04794206e64debc435, type: 3}
   _damage: 10
-  _shootSpeed: 0.5
-  _magazineSize: 10
-  _startAmmo: 50
+  _shootSpeed: 0.4
+  _magazineSize: 12
+  _startAmmo: 60
   _reloadTime: 1.5

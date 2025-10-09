@@ -1,4 +1,4 @@
-using Asce.Game.Entities.Enemies;
+using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using UnityEngine;
@@ -8,6 +8,7 @@ namespace Asce.Game.Guns
     public class DefaultGun : Gun
     {
         [SerializeField] private float _distance = 20f;
+        private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[16];
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
@@ -16,12 +17,33 @@ namespace Asce.Game.Guns
         {
             CurrentAmmo--;
 
-            RaycastHit2D hit = Physics2D.Raycast(BarrelPosition, direction, _distance, _hitLayer);
-            this.SpawnVFX(BarrelPosition, hit.collider != null ? hit.point : BarrelPosition + direction.normalized * _distance);
-            if (hit.collider == null) return;
-            if (!hit.transform.TryGetComponent(out Enemy enemy)) return;
-            
-            CombatController.Instance.DamageDealing(enemy, Damage);
+            // Get all hits along the ray
+            int count = Physics2D.RaycastNonAlloc(BarrelPosition, direction, _cacheHits, _distance, _hitLayer);
+            if (count == 0)
+            {
+                SpawnVFX(BarrelPosition, BarrelPosition + direction.normalized * _distance);
+                return;
+            }
+
+            Vector2 endPoint = BarrelPosition + direction.normalized * _distance;
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit2D hit = _cacheHits[i];
+                if (!hit.transform.TryGetComponent(out ITargetable target))
+                {
+                    endPoint = hit.point; // If not an Target, stop here
+                    break;
+                }
+                if (target.IsTargetable)
+                {
+                    CombatController.Instance.DamageDealing(target as ITakeDamageable, Damage);
+                    endPoint = hit.point;
+                    break;
+                }
+            }
+
+            // Spawn the bullet trail from gun barrel to end point
+            SpawnVFX(BarrelPosition, endPoint);
         }
 
         private void SpawnVFX(Vector2 startPoint, Vector2 endPoint)
