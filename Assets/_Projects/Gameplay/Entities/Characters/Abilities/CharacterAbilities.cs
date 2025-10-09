@@ -59,6 +59,15 @@ namespace Asce.Game.Entities.Characters
             this.OnInitializeCompleted?.Invoke();
         }
 
+        public void ResetStatus()
+        {
+            foreach (AbilityContainer ability in _abilities)
+            {
+                if (ability == null) continue;
+                ability.Cooldown.ToComplete();
+            }
+        }
+
         public void Use(int index, Vector2 position)
         {
             if (_abilities.Count == 0) return;

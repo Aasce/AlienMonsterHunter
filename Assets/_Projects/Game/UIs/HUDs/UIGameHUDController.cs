@@ -1,16 +1,14 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
-using Asce.Managers.UIs;
+using Asce.Managers;
 using Asce.Managers.Utils;
 using UnityEngine;
 
 namespace Asce.Game.UIs.HUDs
 {
     [RequireComponent(typeof(Canvas))]
-    public class UIGameHUDController : UIObject
+    public class UIGameHUDController : UIHUDController
     {
-        [SerializeField] private Canvas _canvas;
-
         [Space]
         [SerializeField] UICharacterInformation _characterInformation;
         [SerializeField] UIGunInformation _gunInformation;
@@ -18,7 +16,6 @@ namespace Asce.Game.UIs.HUDs
         [Space]
         [SerializeField] private Character _character;
 
-        public Canvas Canvas => _canvas;
         public UICharacterInformation CharacterInformation => _characterInformation;
         public UIGunInformation GunInformation => _gunInformation;
 
@@ -37,7 +34,6 @@ namespace Asce.Game.UIs.HUDs
         protected override void RefReset()
         {
             base.RefReset();
-            this.LoadComponent(out _canvas);
             this.LoadComponent(out _characterInformation);
             this.LoadComponent(out _gunInformation);
         }
@@ -60,9 +56,9 @@ namespace Asce.Game.UIs.HUDs
         }
 
 
-        private void Player_OnCharacterChanged(Character character)
+        private void Player_OnCharacterChanged(ValueChangedEventArgs<Character> args)
         {
-            Character = character;
+            Character = args.NewValue;
         }
     }
 }

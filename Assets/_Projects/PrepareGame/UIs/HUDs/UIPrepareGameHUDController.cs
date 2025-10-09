@@ -1,4 +1,5 @@
 using Asce.Game.UIs;
+using Asce.Game.UIs.HUDs;
 using Asce.Managers.UIs;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -7,16 +8,12 @@ using UnityEngine.UI;
 namespace Asce.PrepareGame.UIs
 {
     [RequireComponent(typeof(Canvas))]
-    public class UIPrepareGameHUDController : UIObject
+    public class UIPrepareGameHUDController : UIHUDController
     {
-        [SerializeField] private Canvas _canvas;
-
         [Space]
         [SerializeField] private Button _playbutton;
         [SerializeField] private UITabs _tabs;
         [SerializeField] private UIPicked _picked;
-
-        public Canvas Canvas => _canvas;
 
         public Button PlayButton => _playbutton;
         public UITabs Tabs => _tabs;
@@ -25,7 +22,6 @@ namespace Asce.PrepareGame.UIs
         protected override void RefReset()
         {
             base.RefReset();
-            this.LoadComponent(out _canvas);
             this.LoadComponent(out _picked);
         }
 

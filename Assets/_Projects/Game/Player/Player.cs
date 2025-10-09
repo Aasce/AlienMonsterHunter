@@ -13,7 +13,7 @@ namespace Asce.Game.Players
         [Header("Runtime")]
         [SerializeField] private Character _character;
 
-        public event Action<Character> OnCharacterChanged;
+        public event Action<ValueChangedEventArgs<Character>> OnCharacterChanged;
 
         public Character Character
         {
@@ -21,8 +21,9 @@ namespace Asce.Game.Players
             set
             {
                 if (_character == value) return;
+                Character oldCharacter = _character;
                 _character = value;
-                OnCharacterChanged?.Invoke(_character);
+                OnCharacterChanged?.Invoke(new (oldCharacter, _character));
             }
         }
 
@@ -37,6 +38,21 @@ namespace Asce.Game.Players
             }
         }
 
+        public void ReviveCharacter(bool isReviveAtSpawnPoint = false)
+        {
+            if (Character == null) return;
+            Character.ResetStatus();
+
+            if (isReviveAtSpawnPoint)
+            {
+                Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
+                Character.transform.position = spawnPoint;
+                CameraController.Instance.SetToTarget();
+            }
+
+            Character.gameObject.SetActive(true);
+        }
+
         private void Update()
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
@@ -45,13 +61,13 @@ namespace Asce.Game.Players
 
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            bool isShoot = Input.GetMouseButtonDown(0);
+            bool isShoot = Input.GetMouseButton(0);
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
-            bool isUseAbility0 = Input.GetKeyDown(KeyCode.Q);
-            bool isUseAbility1 = Input.GetKeyDown(KeyCode.E);
+            bool isUseAbility0 = Input.GetKey(KeyCode.Q);
+            bool isUseAbility1 = Input.GetKey(KeyCode.E);
 
-            if (Character != null)
+            if (Character != null && Character.gameObject.activeInHierarchy)
             {
                 Character.Move(moveDirection);
                 Character.LookAt(worldMousePosition);

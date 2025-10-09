@@ -58,6 +58,13 @@ namespace Asce.Game.Entities.Characters
             this.LoadComponent(out _fov);
         }
 
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            if (Gun != null) Gun.ResetStatus();
+            if (Abilities != null) Abilities.ResetStatus();
+        }
+
         protected override void Start()
         {
             base.Start();

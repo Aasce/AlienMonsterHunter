@@ -80,6 +80,18 @@ namespace Asce.Game.Guns
             ReloadCooldown.ToComplete(); // set as complete at start
         }
 
+        public virtual void ResetStatus()
+        {
+            Damage = Information.Damage;
+            ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
+
+            MagazineSize = Information.MagazineSize;
+            RemainingAmmo = Information.StartAmmo;
+            CurrentAmmo = MagazineSize;
+            ReloadCooldown.SetBaseTime(Information.ReloadTime);
+            ReloadCooldown.ToComplete(); // set as complete at start
+        }
+
         protected virtual void Update()
         {
             ShootCooldown.Update(Time.deltaTime);
