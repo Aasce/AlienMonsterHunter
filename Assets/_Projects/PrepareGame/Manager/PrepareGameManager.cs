@@ -17,7 +17,7 @@ namespace Asce.PrepareGame
 
             Shared.SetOrAdd("character", $"{PickController.Instance.CharacterPrefab.Information.Name}");
             Shared.SetOrAdd("gun", $"{PickController.Instance.GunPrefab.Information.Name}");
-            SceneLoader.Instance.Load(_mainGameSceneName);
+            SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
     }

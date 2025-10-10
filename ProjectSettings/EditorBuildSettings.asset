@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Projects/Loading/Loading.unity
     guid: 187a79c04d811b4419b389fd54b7d248
   - enabled: 1
+    path: Assets/_Projects/Menu/Menu.unity
+    guid: 17ed71c67ac153643b53fdd9ef86f73a
+  - enabled: 1
     path: Assets/_Projects/PrepareGame/PrepareGame.unity
     guid: a7452956bd8fe5547a258a556be52377
   - enabled: 1
