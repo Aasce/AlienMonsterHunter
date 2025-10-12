@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9150458811000532577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53663642121372832}
+  - component: {fileID: -2529734045113283420}
+  m_Layer: 0
+  m_Name: Horizon Breaker Ability
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &53663642121372832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150458811000532577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4650080755741037266}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2529734045113283420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150458811000532577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce793f11fad96344b901b3e5a790c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _information: {fileID: 11400000, guid: b476780309b7993429cd5382ba47e537, type: 2}
+  _owner: {fileID: 0}
+  _despawnTime:
+    _baseTime: 10
+    _currentTime: 10
+  _useRangeRadius: 2
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 192
+  _raycastRadius: 0.1
+  _useCircleCast: 0
+  _machine: {fileID: 6874445694996013798}
+--- !u!1001 &2109678939637577668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 53663642121372832}
+    m_Modifications:
+    - target: {fileID: 349428707320021393, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_Name
+      value: Horizon Breaker Machine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+--- !u!4 &4650080755741037266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+  m_PrefabInstance: {fileID: 2109678939637577668}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6874445694996013798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4765365027191067938, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+  m_PrefabInstance: {fileID: 2109678939637577668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bafe84448b197b409886630f88e3750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

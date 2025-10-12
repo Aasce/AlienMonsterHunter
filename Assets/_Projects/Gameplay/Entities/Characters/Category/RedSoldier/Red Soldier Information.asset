@@ -16,4 +16,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: 3bb55c4c51c852248ac0428597699183, type: 3}
   _stats: {fileID: 11400000, guid: 66df5d1f08ef31547b835c07684d9a1a, type: 2}
-  _abilityNames: []
+  _abilityNames:
+  - Horizon Breaker
+  - 
+  - 
