@@ -12,6 +12,12 @@ namespace Asce.Game.UIs.Panels
         
         public event Action OnReviveClicked;
 
+        protected override void Reset()
+        {
+            base.Reset();
+            _name = "Death";
+        }
+
         private void Start()
         {
             if (_reviveButton != null) _reviveButton.onClick.AddListener(ReviveButton_OnClick);

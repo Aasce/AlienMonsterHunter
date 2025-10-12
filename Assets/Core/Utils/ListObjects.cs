@@ -38,6 +38,17 @@ namespace Asce.Managers
             return _listDictionary.TryGetValue(key, out value);
         }
 
+        public void Load(TValue[] list)
+        {
+            _list.Clear();
+            foreach (TValue value in list)
+            {
+                if (value == null) continue;
+                _list.Add(value);
+            }
+            this.InitializeDictionary();
+        }
+
         private void InitializeDictionary()
         {
             if (_getKeyFunc == null)

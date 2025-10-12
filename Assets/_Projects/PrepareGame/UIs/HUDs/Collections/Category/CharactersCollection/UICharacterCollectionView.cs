@@ -11,8 +11,8 @@ namespace Asce.PrepareGame.UIs.Collections
         public override void ItemClick(UICollectionItem<Character> uiItem)
         {
             base.ItemClick(uiItem);
-            if (UIPrepareGameController.Instance.HUD.Picked.CharacterSlot == null) return; 
-            UIPrepareGameController.Instance.HUD.Picked.CharacterSlot.Set(uiItem.Item);
+            if (UIPrepareGameController.Instance.HUDController.Picked.CharacterSlot == null) return; 
+            UIPrepareGameController.Instance.HUDController.Picked.CharacterSlot.Set(uiItem.Item);
         }
 
     }

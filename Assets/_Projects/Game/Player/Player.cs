@@ -1,8 +1,9 @@
-using Asce.Game.Managers;
 using Asce.Game.Entities.Characters;
+using Asce.Game.Managers;
 using Asce.Managers;
-using UnityEngine;
+using Asce.Managers.UIs;
 using System;
+using UnityEngine;
 
 namespace Asce.Game.Players
 {
@@ -62,6 +63,11 @@ namespace Asce.Game.Players
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             bool isShoot = Input.GetMouseButton(0);
+            if (isShoot)
+            {
+                bool isPointerOverUI = UIManager.Instance.IsPointerOverScreenUI();
+                if (isPointerOverUI) isShoot = false;
+            }
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
             bool isUseAbility0 = Input.GetKey(KeyCode.Q);

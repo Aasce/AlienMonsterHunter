@@ -46,7 +46,7 @@ namespace Asce.PrepareGame.UIs
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            UIPrepareGameController.Instance.HUD.Tabs.ShowTabByTabView(_collection.RectTransform);
+            UIPrepareGameController.Instance.HUDController.Tabs.ShowTabByTabView(_collection.RectTransform);
         }
 
         protected virtual void ShowContent(bool isShow)

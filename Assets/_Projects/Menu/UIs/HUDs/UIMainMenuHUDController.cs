@@ -1,14 +1,12 @@
-using Asce.Managers.UIs;
-using System;
+using Asce.Game.UIs.HUDs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs
+namespace Asce.Menu.UIs.HUDs
 {
-    public class UIMainMenuHUDController : UIObject
+    public class UIMainMenuHUDController : UIHUDController
     {
         [SerializeField] private Button _playButton;
-
 
         private void Start()
         {

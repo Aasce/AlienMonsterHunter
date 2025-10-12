@@ -40,5 +40,13 @@ namespace Asce.Game.Managers
             if (AllEffects == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Effects is not assigned", this);
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Asce.PrepareGame
     public class PrepareGameManager : MonoBehaviourSingleton<PrepareGameManager>
     {
         [SerializeField] private string _mainGameSceneName;
+        [SerializeField] private string _mainMenuSceneName;
 
 
         public void PlayGame()
@@ -20,5 +21,9 @@ namespace Asce.PrepareGame
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
+        public void BackToMainMenu()
+        {
+            SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
+        }
     }
 }

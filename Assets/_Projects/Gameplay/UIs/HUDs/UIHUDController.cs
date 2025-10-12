@@ -1,3 +1,4 @@
+using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine;
 namespace Asce.Game.UIs.HUDs
 {
     [RequireComponent(typeof(Canvas))]
-    public abstract class UIHUDController : UIObject
+    public abstract class UIHUDController : UIObject, ICanvasController
     {
-        [SerializeField] protected Canvas _canvas;
+        [SerializeField, Readonly] protected Canvas _canvas;
+
         public Canvas Canvas => _canvas;
 
         protected override void RefReset()

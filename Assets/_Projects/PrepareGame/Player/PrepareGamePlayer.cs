@@ -1,8 +1,7 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
-using Asce.Game.VFXs;
 using Asce.Managers;
-using Asce.PrepareGame.UIs;
+using Asce.Managers.UIs;
 using UnityEngine;
 
 namespace Asce.PrepareGame.Players
@@ -34,7 +33,7 @@ namespace Asce.PrepareGame.Players
             bool isShoot = Input.GetMouseButtonDown(0);
             if (isShoot)
             {
-                bool isPointerOverUI = UIPrepareGameController.Instance.IsPointerOverScreenUI();
+                bool isPointerOverUI = UIManager.Instance.IsPointerOverScreenUI();
                 if (isPointerOverUI) isShoot = false;
             }
             bool isReload = Input.GetKeyDown(KeyCode.R);

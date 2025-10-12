@@ -12,11 +12,19 @@ namespace Asce.Game
 {
     public class MainGameManager : MonoBehaviourSingleton<MainGameManager>
     {
+        [SerializeField] private string _mainMenuSceneName;
+
         private void Start()
         {
             this.InitializeController();
             this.CreateCharacterForPlayer();
             this.AssignUI();
+        }
+
+
+        public void BackToMainMenu()
+        {
+            SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
 
         private void InitializeController()
@@ -64,7 +72,7 @@ namespace Asce.Game
         private void Character_OnDead()
         {
             Player.Instance.Character.gameObject.SetActive(false);
-            UIDeathPanel deathPanel = UIGameController.Instance.PanelController.GetPanel<UIDeathPanel>();
+            UIDeathPanel deathPanel = UIGameController.Instance.PanelController.GetPanelByName("Death") as UIDeathPanel;
             if (deathPanel == null) return;
 
             deathPanel.OnReviveClicked -= DeathPanel_OnReviveClicked;

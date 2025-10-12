@@ -11,8 +11,8 @@ namespace Asce.PrepareGame.UIs.Collections
         public override void ItemClick(UICollectionItem<Gun> uiItem)
         {
             base.ItemClick(uiItem);
-            if (UIPrepareGameController.Instance.HUD.Picked.GunSlot == null) return;
-            UIPrepareGameController.Instance.HUD.Picked.GunSlot.Set(uiItem.Item);
+            if (UIPrepareGameController.Instance.HUDController.Picked.GunSlot == null) return;
+            UIPrepareGameController.Instance.HUDController.Picked.GunSlot.Set(uiItem.Item);
         }
 
     }

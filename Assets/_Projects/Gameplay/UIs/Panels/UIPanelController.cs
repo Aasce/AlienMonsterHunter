@@ -1,62 +1,69 @@
 using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
-using System.Collections.Generic;
+using Asce.Managers.Utils;
+using Asce.Managers;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.UIs.Panels
 {
-    public class UIPanelController : UIObject
+    public class UIPanelController : UIObject, ICanvasController
     {
-        [SerializeField, Readonly] private List<UIPanel> _panels = new();
-        private ReadOnlyCollection<UIPanel> _readonlyPanels;
-        private Dictionary<System.Type, UIPanel> _panelDictionary;
+        [SerializeField, Readonly] private Canvas _canvas;
+        [SerializeField, Readonly] private ListObjects<string, UIPanel> _panels = new((panel) =>
+        {
+            if (panel == null) return null;
+            return panel.Name;
+        });
 
-        public ReadOnlyCollection<UIPanel> Panels => _readonlyPanels ??= _panels.AsReadOnly();
+        [Space]
+        [SerializeField] private bool _isHideOnStart = true;
+
+        public Canvas Canvas => _canvas;
+
+        public ReadOnlyCollection<UIPanel> Panels => _panels.List;
+        public UIPanel GetPanelByName(string name) => _panels.Get(name);
 
 
         protected override void RefReset()
         {
             base.RefReset();
 
-            _panels.Clear();
-            UIPanel[] panels = this.GetComponentsInChildren<UIPanel>(true);
-            if (panels == null || panels.Length == 0) return;
-            foreach (UIPanel panel in panels)
-            {
-                if (panel == null) continue;
-                _panels.Add(panel);
-            }
+            this.LoadComponent(out _canvas);
+            this.LoadPanels();
+        }
+
+        protected virtual void Start()
+        {
+            if (_isHideOnStart) this.HideAll();
         }
 
 
         public T GetPanel<T>() where T : UIPanel
         {
-            if (_panelDictionary == null) this.InitDictionary();
-            if (_panelDictionary.TryGetValue(typeof(T), out UIPanel panel))
+            foreach (UIPanel panel in Panels)
             {
-                return panel as T;
+                if (panel == null) continue;
+                if (panel.GetType() == typeof(T)) return panel as T;
             }
+
             return null;
         }
 
         public void HideAll()
         {
-            foreach (UIPanel panel in _panels)
+            foreach (UIPanel panel in Panels)
             {
-                if (panel != null) panel.Hide();
+                if (panel == null) continue; 
+                panel.Hide();
             }
         }
 
-        private void InitDictionary()
+        private void LoadPanels()
         {
-            _panelDictionary = new Dictionary<System.Type, UIPanel>();
-            foreach (UIPanel panel in _panels)
-            {
-                System.Type type = panel.GetType();
-                if (_panelDictionary.ContainsKey(type)) continue;
-                _panelDictionary.Add(type, panel);
-            }
+            UIPanel[] panels = this.GetComponentsInChildren<UIPanel>(true);
+            if (panels == null || panels.Length == 0) return;
+            _panels.Load(panels);
         }
     }
 }
