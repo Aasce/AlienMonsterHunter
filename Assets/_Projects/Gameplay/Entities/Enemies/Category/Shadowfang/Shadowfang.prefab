@@ -905,8 +905,11 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 3035042326583770649}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 3651779634959012725}
+    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 7162019434357919257}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 996348799599658602}
@@ -996,6 +999,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.2}
   m_Size: {x: 1.25, y: 1.5}
   m_Direction: 0
+--- !u!114 &7162019434357919257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660312851770388653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c286846bbd3bb7a48be62113bee06ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 3035042326583770649}
+  _patrolRadius: 4
+  _waitTimeRange: {x: 8, y: 16}
+  _waitCooldown:
+    _baseTime: 0
+    _currentTime: 0
+  _isWaiting: 0
 --- !u!114 &996348799599658602
 MonoBehaviour:
   m_ObjectHideFlags: 0

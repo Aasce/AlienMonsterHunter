@@ -6,7 +6,7 @@ using UnityEngine.AI;
 namespace Asce.Game.Entities.Enemies
 {
     [RequireComponent(typeof (NavMeshAgent))]
-    public abstract class Enemy : Entity
+    public abstract class Enemy : Entity, IHasAgent
     {
         [Header("Enemy")]
         [SerializeField] protected NavMeshAgent _agent;
