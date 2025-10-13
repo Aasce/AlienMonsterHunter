@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360620890679374444}
   - component: {fileID: 535362759350050759}
+  - component: {fileID: 2718873333233966772}
   m_Layer: 7
   m_Name: Container Orange
   m_TagString: Untagged
@@ -79,6 +80,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.0497093, y: 7.7594156}
   m_EdgeRadius: 0
+--- !u!114 &2718873333233966772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036075067249932708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6193378929190584722
 GameObject:
   m_ObjectHideFlags: 0

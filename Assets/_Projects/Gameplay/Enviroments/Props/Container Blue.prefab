@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5194718182706144706}
   - component: {fileID: 2175971479003820011}
+  - component: {fileID: 8942258567827065357}
   m_Layer: 7
   m_Name: Container Blue
   m_TagString: Untagged
@@ -79,6 +80,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.0497093, y: 7.7594156}
   m_EdgeRadius: 0
+--- !u!114 &8942258567827065357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473313330356310671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8450922947446081210
 GameObject:
   m_ObjectHideFlags: 0

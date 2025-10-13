@@ -35,6 +35,7 @@ namespace Asce.Game.Entities
             base.RefReset();
             this.LoadComponent(out _stats);
             this.LoadComponent(out _view);
+            this.LoadComponent(out _effects);
         }
 
         protected virtual void Start()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9087734335696098932}
   - component: {fileID: 3122579534383500741}
+  - component: {fileID: 3748644992580113366}
   m_Layer: 7
   m_Name: Tires 2
   m_TagString: Untagged
@@ -69,6 +70,22 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.2037139
+--- !u!114 &3748644992580113366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852177709180087230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6283778269774373231
 GameObject:
   m_ObjectHideFlags: 0
