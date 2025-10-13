@@ -3,26 +3,25 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class ElectroReactor_Ability : CharacterAbility
+    public class ElectroReactor_Ability : CharacterAbility, IControlMachineAbility
     {
-        [SerializeField] private ElectroReactor_Machine _reactor;
+        [SerializeField] private ElectroReactor_Machine _machine;
 
-        public ElectroReactor_Machine Reactor => _reactor;
+        public ElectroReactor_Machine Machine => _machine;
+        Machine IControlMachineAbility.Machine => _machine;
+
 
         protected override void Start()
         {
             base.Start();
-            if (Reactor != null)
-            {
-                Reactor.Initialize();
-                Reactor.OnTakeDamage += TurretHealth_OnTakeDamage;
-            }
+            Machine.Initialize();
+            Machine.OnDead+= Machine_OnDead;
         }
 
         public override void OnSpawn()
         {
             base.OnSpawn();
-            if (Reactor != null) Reactor.ResetStatus();
+            Machine.ResetStatus();
         }
 
         public override void SetPosition(Vector2 position)
@@ -30,9 +29,9 @@ namespace Asce.Game.Abilities
             base.SetPosition(position);
         }
 
-        private void TurretHealth_OnTakeDamage(float damage)
+        private void Machine_OnDead()
         {
-            if (Reactor.Stats.Health.CurrentValue <= 0f) this.DespawnTime.ToComplete();
+            this.DespawnTime.ToComplete();
         }
     }
 }

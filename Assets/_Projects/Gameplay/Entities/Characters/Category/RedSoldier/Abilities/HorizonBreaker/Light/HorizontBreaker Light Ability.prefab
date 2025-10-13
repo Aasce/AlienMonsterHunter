@@ -215,7 +215,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
@@ -336,8 +336,8 @@ MonoBehaviour:
     m_Bits: 512
   _damage: 10
   _dealDamageCooldown:
-    _baseTime: 0.1
-    _currentTime: 0.1
+    _baseTime: 0.15
+    _currentTime: 0.15
   _width: 2
   _distance: 15
   _direction: {x: 0, y: 0}

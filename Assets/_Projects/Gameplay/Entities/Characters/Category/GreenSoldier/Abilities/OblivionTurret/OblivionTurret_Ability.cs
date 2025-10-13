@@ -3,30 +3,25 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class OblivionTurret_Ability : CharacterAbility
+    public class OblivionTurret_Ability : CharacterAbility, IControlMachineAbility
     {
-        [SerializeField] private OblivionTurret_Machine _turret;
+        [SerializeField] private OblivionTurret_Machine _machine;
 
-        public OblivionTurret_Machine Turret => _turret;
+        public OblivionTurret_Machine Machine => _machine;
+        Machine IControlMachineAbility.Machine => _machine;
 
         protected override void Start()
         {
             base.Start();
-            if (Turret != null)
-            {
-                Turret.Initialize();
-                Turret.OnTakeDamage += TurretHealth_OnTakeDamage;
-                Turret.OnCurrentAmmoChanged += Turret_OnCurrentAmmoChanged;
-            }
+            
+            Machine.Initialize();
+            Machine.OnDead += Machine_OnDead;
         }
 
         public override void OnSpawn()
         {
             base.OnSpawn();
-            if (Turret != null)
-            {
-                Turret.ResetStatus();
-            }
+            Machine.ResetStatus();
         }
 
         public override void SetPosition(Vector2 position)
@@ -35,21 +30,12 @@ namespace Asce.Game.Abilities
             if (_owner == null) return;
 
             Vector2 direction = position - (Vector2)_owner.transform.position;
-            Turret.Rotate(direction);
+            Machine.Rotate(direction);
         }
 
-        private void TurretHealth_OnTakeDamage(float damage)
+        private void Machine_OnDead()
         {
-            if (Turret.Stats.Health.CurrentValue <= 0f) this.DespawnTime.ToComplete();
+            this.DespawnTime.ToComplete();
         }
-
-        private void Turret_OnCurrentAmmoChanged(int newValue)
-        {
-            if (newValue <= 0)
-            {
-                this.DespawnTime.CurrentTime = Mathf.Min(this.DespawnTime.CurrentTime, 5f);
-            }
-        }
-
     }
 }

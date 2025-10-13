@@ -176,7 +176,6 @@ MonoBehaviour:
     _baseTime: 1
     _currentTime: 1
   _maxLinkDistance: 20
-  _linkWidth: 0.5
   _checkMachineCooldown:
     _baseTime: 0.25
     _currentTime: 0.25
@@ -366,7 +365,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b7f3e75bd3df2fa42875e805b0cc5178, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

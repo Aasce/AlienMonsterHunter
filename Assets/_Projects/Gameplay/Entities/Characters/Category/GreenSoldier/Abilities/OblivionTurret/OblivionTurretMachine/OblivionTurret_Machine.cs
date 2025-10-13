@@ -23,8 +23,6 @@ namespace Asce.Game.Entities.Machines
         [SerializeField] private SingleTargetDetection _targetDetection;
 
         [Header("Attack Settings")]
-        [SerializeField] private float _damage = 10f;
-        [SerializeField, Min(0f)] private float _explosionRadius = 2f;
         [SerializeField, Min(0)] private int _maxAmmo = 2;
         [SerializeField, Min(0)] private int _currentAmmo = 2;
         [SerializeField] private Cooldown _attackCooldown = new(1f);
@@ -34,8 +32,6 @@ namespace Asce.Game.Entities.Machines
 
         public SingleTargetDetection TargetDetection => _targetDetection;
 
-        public float Damage => _damage;
-        public float ExplosionRadius => _explosionRadius;
         public int MaxAmmo => _maxAmmo;
         public int CurrentAmmo
         {
@@ -61,50 +57,45 @@ namespace Asce.Game.Entities.Machines
         public override void Initialize()
         {
             base.Initialize();
-            _damage = Information.Stats.GetCustomStat("Damage");
-            _explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             _maxAmmo = (int)Information.Stats.GetCustomStat("MaxAmmo");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
-            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
-            _targetDetection.ViewAngle = Information.Stats.GetCustomStat("ViewAngle");
+            TargetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            TargetDetection.ViewAngle = Information.Stats.GetCustomStat("ViewAngle");
 
-            if (_fov != null)
-            {
-                _fov.ViewRadius = _targetDetection.ViewRadius;
-                _fov.ViewAngle = _targetDetection.ViewAngle;
-            }
+            _fov.ViewRadius = TargetDetection.ViewRadius;
+            _fov.ViewAngle = TargetDetection.ViewAngle;
+        }
+
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            TargetDetection.ResetTarget();
+            CurrentAmmo = _maxAmmo;
+            _attackCooldown.SetCurrentByRatio(0.5f);
         }
 
         private void Update()
         {
-            _targetDetection.UpdateDetection();
+            TargetDetection.UpdateDetection();
             RotateTowardsTarget();
             HandleAttack();
         }
 
         private void LateUpdate()
         {
-            if (_fov != null) _fov.DrawFieldOfView();
-            if (_fovSelf != null) _fovSelf.DrawFieldOfView();
-        }
-
-        public override void ResetStatus()
-        {
-            base.ResetStatus();
-            CurrentAmmo = _maxAmmo;
-            _attackCooldown.SetCurrentByRatio(0.5f);
-            _targetDetection.ResetTarget();
+            _fov.DrawFieldOfView();
+            _fovSelf.DrawFieldOfView();
         }
 
         #region Rotation
 
         private void RotateTowardsTarget()
         {
-            var target = _targetDetection.CurrentTarget;
-            if (target == null) return;
+            if (!TargetDetection.HasTarget) return;
+            ITargetable target = TargetDetection.CurrentTarget;
 
             Vector2 direction = target.transform.position - transform.position;
-            Rotate(direction);
+            this.Rotate(direction);
         }
 
         /// <summary>
@@ -113,12 +104,8 @@ namespace Asce.Game.Entities.Machines
         public void Rotate(Vector2 direction)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-
-            if (_weapon != null)
-                _weapon.rotation = Quaternion.Euler(0f, 0f, angle);
-
-            if (_fov != null)
-                _fov.transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
+            _weapon.rotation = Quaternion.Euler(0f, 0f, angle);
+            _fov.transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
         }
 
         #endregion
@@ -130,31 +117,28 @@ namespace Asce.Game.Entities.Machines
             _attackCooldown.Update(Time.deltaTime);
             if (!_attackCooldown.IsComplete) return;
 
-            var target = _targetDetection.CurrentTarget;
-            if (target == null || CurrentAmmo <= 0) return;
+            if (!TargetDetection.HasTarget || CurrentAmmo <= 0) return;
+            ITargetable target = TargetDetection.CurrentTarget;
 
             _attackCooldown.Reset();
 
-            FireRocket(_barrelL, target);
-            FireRocket(_barrelR, target);
+            this.FireRocket(_barrelL, target);
+            this.FireRocket(_barrelR, target);
 
             CurrentAmmo--;
         }
 
         private void FireRocket(Transform barrel, ITargetable target)
         {
-            if (target == null) return;
-
             OblivionTurret_Bullet_Ability bullet =
                 AbilityController.Instance.Spawn(_bulletAbilityName, gameObject) as OblivionTurret_Bullet_Ability;
-
             if (bullet == null) return;
 
             Vector2 shootPos = barrel != null ? barrel.position : transform.position;
             Vector2 direction = target.transform.position - transform.position;
 
-            bullet.DamageDeal = _damage;
-            bullet.ExplosionRadius = _explosionRadius;
+            bullet.DamageDeal = Information.Stats.GetCustomStat("Damage");
+            bullet.ExplosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             bullet.gameObject.SetActive(true);
             bullet.Fire(shootPos, direction);
             bullet.OnActive();

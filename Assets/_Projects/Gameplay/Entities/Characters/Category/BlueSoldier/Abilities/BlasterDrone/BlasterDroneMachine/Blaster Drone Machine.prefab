@@ -58,15 +58,11 @@ MonoBehaviour:
   _fov: {fileID: 7604176345537921249}
   _rigidbody: {fileID: 6830494334369510381}
   _targetDetection: {fileID: 3524016193520982330}
-  _damage: 10
   _attackCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _bulletAbilityName: Blaster Drone Bullet
   _moveCheckDistance: 1.2
-  _obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &3524016193520982330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +228,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 52
+  m_SortingOrder: 62
   m_Sprite: {fileID: 21300000, guid: e3e0d9624af532c44809753024d0d5b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -386,7 +382,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 52
+  m_SortingOrder: 62
   m_Sprite: {fileID: 21300000, guid: 1d4e8c86210f3e24f8c28130ba270548, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -473,7 +469,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 60
   m_Sprite: {fileID: 21300000, guid: 1aedf100e335f6d41bc4bc4441e06bb8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -727,7 +723,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 52
+  m_SortingOrder: 62
   m_Sprite: {fileID: 21300000, guid: c47b1ab8aad9f954985194347fdbf06e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -902,7 +898,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 52
+  m_SortingOrder: 62
   m_Sprite: {fileID: 21300000, guid: 07b0dcd88387130499d8e882aae7cdea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

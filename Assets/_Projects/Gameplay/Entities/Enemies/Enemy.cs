@@ -61,15 +61,12 @@ namespace Asce.Game.Entities.Enemies
 
         protected virtual void Update()
         {
-            if (TargetDetection != null)
+            TargetDetection.UpdateDetection();
+            if (TargetDetection.CurrentTarget != null)
             {
-                TargetDetection.UpdateDetection();
-                if (TargetDetection.CurrentTarget != null)
-                {
-                    this.MoveToTaget();
-                }
+                this.MoveToTaget();
             }
-
+            
             this.AttackHandle();
             this.ViewHandle();
         }
@@ -79,7 +76,8 @@ namespace Asce.Game.Entities.Enemies
             base.ResetStatus();
             AttackCooldown.Reset();
 
-            if (View != null) View.ResetStatus();
+            View.ResetStatus();
+            TargetDetection.ResetTarget();
         }
 
         protected abstract void MoveToTaget();
@@ -103,8 +101,6 @@ namespace Asce.Game.Entities.Enemies
 
         protected virtual void ViewHandle()
         {
-            if (View == null) return;
-            if (View.Animator == null) return;
             View.Animator.SetFloat("Speed", Agent.velocity.magnitude);
         }
     }

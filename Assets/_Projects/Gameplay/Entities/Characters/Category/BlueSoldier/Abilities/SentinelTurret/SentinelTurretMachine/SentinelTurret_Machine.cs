@@ -52,6 +52,12 @@ namespace Asce.Game.Entities.Machines
             if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
         }
 
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            TargetDetection.ResetTarget();
+        }
+
         private void Update()
         {
             _targetDetection.UpdateDetection();

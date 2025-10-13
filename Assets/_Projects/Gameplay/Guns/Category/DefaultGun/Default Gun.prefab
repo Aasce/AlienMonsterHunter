@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 13
   m_Sprite: {fileID: 21300000, guid: afea298293b40f04794206e64debc435, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -149,9 +149,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 381989227653380984}
-    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1477441870722536907}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
 --- !u!1 &1314846359681334500 stripped
 GameObject:
@@ -187,71 +184,6 @@ MonoBehaviour:
     _currentTime: 0
   _distance: 20
   _bulletLineVFXName: Default Gun Bullet Line
---- !u!60 &1477441870722536907
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314846359681334500}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.71, y: 1.94}
-    newSize: {x: 1.72, y: 0.940625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.15110949, y: -0.024538662}
-      - {x: 0.15088528, y: 0.17007473}
-      - {x: 0.056845345, y: 0.2885527}
-      - {x: 0.058615964, y: 0.9654613}
-      - {x: -0.26507467, y: 0.9677307}
-      - {x: -0.25812328, y: 0.30119514}
-      - {x: -0.35794488, y: 0.17850661}
-      - {x: -0.35789207, y: -0.16435234}
-      - {x: -0.32575017, y: -0.21947946}
-      - {x: -0.32465905, y: -0.84418035}
-      - {x: -0.26465902, y: -0.97433436}
-      - {x: 0.043360263, y: -0.9740495}
-      - {x: 0.111453146, y: -0.8156404}
-      - {x: 0.11171079, y: -0.5973633}
-      - {x: 0.30368492, y: -0.5929419}
-      - {x: 0.3615016, y: -0.5226297}
-      - {x: 0.36327448, y: -0.13044596}
-      - {x: 0.29372808, y: -0.033690646}
-  m_UseDelaunayMesh: 0
 --- !u!4 &5137634337035036143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

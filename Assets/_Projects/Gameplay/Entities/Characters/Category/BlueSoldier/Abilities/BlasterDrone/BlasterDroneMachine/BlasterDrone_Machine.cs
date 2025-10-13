@@ -1,7 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
-using Asce.Managers;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +16,11 @@ namespace Asce.Game.Entities.Machines
         [SerializeField] private MultiTargetDetection _targetDetection;
 
         [Header("Attack")]
-        [SerializeField] private float _damage = 10f;
         [SerializeField] private Cooldown _attackCooldown = new(1f);
         [SerializeField] private string _bulletAbilityName = "Blue Soldier Drone Bullet";
 
         [Header("Movement")]
         [SerializeField] private float _moveCheckDistance = 0.5f;
-        [SerializeField] private LayerMask _obstacleLayer;
 
         private Vector2 _moveDirection = Vector2.right;
 
@@ -34,7 +31,6 @@ namespace Asce.Game.Entities.Machines
         }
 
         public MultiTargetDetection TargetDetection => _targetDetection;
-        public float Damage => _damage;
         public Cooldown AttackCooldown => _attackCooldown;
 
         protected override void RefReset()
@@ -51,23 +47,20 @@ namespace Asce.Game.Entities.Machines
         public override void Initialize()
         {
             base.Initialize();
-            _damage = Information.Stats.GetCustomStat("Damage");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
-            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
-            if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
+            TargetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = TargetDetection.ViewRadius;
         }
 
-
-        protected override void Start()
+        public override void ResetStatus()
         {
-            base.Start();
-
-            if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
+            base.ResetStatus();
+            TargetDetection.ResetTarget();
         }
 
         private void Update()
         {
-            _targetDetection.UpdateDetection();
+            TargetDetection.UpdateDetection();
             this.AttackVisibleTargets();
         }
 
@@ -78,7 +71,7 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            if (_fov != null) _fov.DrawFieldOfView();
+            _fov.DrawFieldOfView();
         }
 
         /// <summary>
@@ -102,14 +95,13 @@ namespace Asce.Game.Entities.Machines
             }
 
             // Check for wall collision ahead
-            RaycastHit2D hit = Physics2D.Raycast(currentPosition, _moveDirection, _moveCheckDistance, _obstacleLayer);
+            RaycastHit2D hit = Physics2D.Raycast(currentPosition, _moveDirection, _moveCheckDistance, TargetDetection.ObstacleLayer);
             if (hit.collider != null)
             {
-                // Reflect movement direction based on the wall normal
                 _moveDirection = Vector2.Reflect(_moveDirection, hit.normal).normalized;
 
                 // Add slight randomization to avoid infinite bouncing
-                float randomZ = UnityEngine.Random.Range(-10f, 10f);
+                float randomZ = Random.Range(-10f, 10f);
                 _moveDirection = Quaternion.Euler(0f, 0f, randomZ) * _moveDirection;
             }
         }
@@ -121,19 +113,18 @@ namespace Asce.Game.Entities.Machines
         {
             _attackCooldown.Update(Time.deltaTime);
             if (!_attackCooldown.IsComplete) return;
-            _attackCooldown.Reset();
 
-            if (_targetDetection == null) return;
+            if (!TargetDetection.HasTarget) return;
+            IReadOnlyList<ITargetable> targets = TargetDetection.VisibleTargets;
 
-            IReadOnlyList<ITargetable> targets = _targetDetection.VisibleTargets;
-            if (targets.Count == 0) return;
-
-            foreach (var target in targets)
+            foreach (ITargetable target in targets)
             {
                 if (target == null) continue;
                 Vector2 direction = target.transform.position - transform.position;
                 this.FireBullet(direction);
             }
+
+            _attackCooldown.Reset();
         }
 
         private void FireBullet(Vector2 direction)
@@ -142,7 +133,7 @@ namespace Asce.Game.Entities.Machines
                 AbilityController.Instance.Spawn(_bulletAbilityName, gameObject) as BlasterDrone_Bullet_Ability;
             if (bullet == null) return;
 
-            bullet.DamageDeal = _damage;
+            bullet.DamageDeal = Information.Stats.GetCustomStat("Damage");
             bullet.gameObject.SetActive(true);
             bullet.Fire(transform.position, direction);
             bullet.OnActive();

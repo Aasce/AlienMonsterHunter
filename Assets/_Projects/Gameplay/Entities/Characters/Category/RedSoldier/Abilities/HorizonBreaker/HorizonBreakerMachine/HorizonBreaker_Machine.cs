@@ -1,6 +1,5 @@
 using Asce.Game.Abilities;
 using Asce.Game.FOVs;
-using Asce.Game.Stats;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -56,8 +55,7 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            if (_selfFOV != null)
-                _selfFOV.DrawFieldOfView();
+            _selfFOV.DrawFieldOfView();
         }
 
 

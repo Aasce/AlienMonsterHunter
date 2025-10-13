@@ -4,7 +4,6 @@ using Asce.Game.FOVs;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,6 @@ namespace Asce.Game.Entities.Machines
 
         [Header("Link Settings")]
         [SerializeField, Min(0f)] private float _maxLinkDistance;
-        [SerializeField, Min(0f)] private float _linkWidth;
         [SerializeField] private Cooldown _checkMachineCooldown = new(.25f);
         private readonly HashSet<Transform> _linkedMachines = new();
 
@@ -51,6 +49,7 @@ namespace Asce.Game.Entities.Machines
         public override void ResetStatus()
         {
             base.ResetStatus();
+            TargetDetection.ResetTarget();
             _linkedMachines.Clear();
         }
 
@@ -60,10 +59,9 @@ namespace Asce.Game.Entities.Machines
             _damage = Information.Stats.GetCustomStat("Damage");
             _shockRadius = Information.Stats.GetCustomStat("ShockRadius");
             _maxLinkDistance = Information.Stats.GetCustomStat("MaxLinkDistance");
-            _linkWidth = Information.Stats.GetCustomStat("LinkWidth");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
             _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
-            if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
 
         private void Update()
@@ -84,7 +82,7 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            if (_fov != null) _fov.DrawFieldOfView();
+            _fov.DrawFieldOfView();
         }
 
         public void Linking()
@@ -93,8 +91,8 @@ namespace Asce.Game.Entities.Machines
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
-                if (_linkedMachines.Contains(collider.transform)) continue;
                 if (collider.transform == transform) continue;
+                if (_linkedMachines.Contains(collider.transform)) continue;
                 if (!collider.TryGetComponent(out Machine other)) continue;
                 this.SpawnLink(other);
                 _linkedMachines.Add(other.transform);
@@ -105,8 +103,8 @@ namespace Asce.Game.Entities.Machines
         {
             ElectroReactor_Linker_Ability linker = AbilityController.Instance.Spawn(_linkAbilityName, gameObject) as ElectroReactor_Linker_Ability;
             if (linker == null) return;
-            linker.DamageDeal = Damage;
-            linker.LinkWidth = _linkWidth;
+            linker.DamageDeal = Information.Stats.GetCustomStat("LinkDamage");
+            linker.LinkWidth = Information.Stats.GetCustomStat("LinkWidth");
             linker.MaxLinkDistance = MaxLinkDistance;
             linker.Set(this, other);
             linker.transform.position = transform.position;
@@ -122,19 +120,18 @@ namespace Asce.Game.Entities.Machines
         {
             _attackCooldown.Update(Time.deltaTime);
             if (!_attackCooldown.IsComplete) return;
-            _attackCooldown.Reset();
-
-            if (_targetDetection == null) return;
 
             IReadOnlyList<ITargetable> targets = _targetDetection.VisibleTargets;
             if (targets.Count == 0) return;
 
-            foreach (var target in targets)
+            foreach (ITargetable target in targets)
             {
                 if (target == null) continue;
                 this.Attack(target);
                 this.SpawnLightningVFX(target.transform.position);
             }
+
+            _attackCooldown.Reset();
         }
 
 
@@ -152,8 +149,8 @@ namespace Asce.Game.Entities.Machines
             vfx.LineRenderer.positionCount = 2;
             vfx.LineRenderer.SetPosition(0, transform.position);
             vfx.LineRenderer.SetPosition(1, endPoint);
-            vfx.LineRenderer.startWidth = _linkWidth * 1.5f;
-            vfx.LineRenderer.endWidth = _linkWidth * 0.75f;
+            vfx.LineRenderer.startWidth = 1.5f;
+            vfx.LineRenderer.endWidth = 0.75f;
         }
 
 #if UNITY_EDITOR

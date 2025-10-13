@@ -3,30 +3,27 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class BlasterDrone_Ability : CharacterAbility
+    public class BlasterDrone_Ability : CharacterAbility, IControlMachineAbility
     {
-        [SerializeField] private BlasterDrone_Machine _drone;
+        [SerializeField] private BlasterDrone_Machine _machine;
 
-        public BlasterDrone_Machine Drone => _drone;
+        public BlasterDrone_Machine Machine => _machine;
+        Machine IControlMachineAbility.Machine => _machine;
 
         protected override void Start()
         {
             base.Start();
-            if (Drone != null)
-            {
-                Drone.Initialize();
-                Drone.OnTakeDamage += DroneHealth_OnTakeDamage;
-            }
+            
+            Machine.Initialize();
+            Machine.OnDead += Machine_OnDead;
         }
 
         public override void OnSpawn()
         {
             base.OnSpawn();
-            if (Drone != null)
-            {
-                Drone.ResetStatus();
-                Drone.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
-            }
+            
+            Machine.ResetStatus();
+            Machine.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
         }
 
         public override void SetPosition(Vector2 position)
@@ -35,12 +32,12 @@ namespace Asce.Game.Abilities
             if (_owner == null) return;
 
             Vector2 direction = position - (Vector2)_owner.transform.position;
-            Drone.MoveDirection = direction;
+            Machine.MoveDirection = direction;
         }
 
-        private void DroneHealth_OnTakeDamage(float damage)
+        private void Machine_OnDead()
         {
-            if (Drone.Stats.Health.CurrentValue <= 0f) this.DespawnTime.ToComplete();
+            this.DespawnTime.ToComplete();
         }
     }
 }

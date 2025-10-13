@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: RedEye Larval Stats
   m_EditorClassIdentifier: 
   _maxHealth: 20
-  _armor: 0
+  _armor: 10
   _speed: 6
+  _customStats:
+    _list: []
   _attackDamage: 5
-  _attackSpeed: 2
+  _attackSpeed: 1
   _attackRange: 1.5
   _viewRange: 18

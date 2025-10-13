@@ -57,6 +57,7 @@ namespace Asce.Game.AIs
 
         public Vector2 OriginPosition => _origin != null ? _origin.position : transform.position;
         public Vector2 ForwardDirection => _forwardReference != null ? _forwardReference.up : transform.up;
+        public abstract bool HasTarget { get; } 
 
         public virtual void UpdateDetection()
         {

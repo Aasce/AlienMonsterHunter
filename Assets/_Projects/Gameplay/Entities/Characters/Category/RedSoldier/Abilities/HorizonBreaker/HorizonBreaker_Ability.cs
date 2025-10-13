@@ -3,27 +3,25 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class HorizonBreaker_Ability : CharacterAbility
+    public class HorizonBreaker_Ability : CharacterAbility, IControlMachineAbility
     {
         [SerializeField] private HorizonBreaker_Machine _machine;
 
         public HorizonBreaker_Machine Machine => _machine;
+        Machine IControlMachineAbility.Machine => _machine;
 
 
         protected override void Start()
         {
             base.Start();
-            if (Machine != null)
-            {
-                Machine.Initialize();
-                Machine.OnDead += MachineHealth_OnDead;
-            }
+            Machine.Initialize();
+            Machine.OnDead += MachineHealth_OnDead;
         }
 
         public override void OnSpawn()
         {
             base.OnSpawn();
-            if (Machine != null) Machine.ResetStatus();
+            Machine.ResetStatus();
         }
 
         public override void SetPosition(Vector2 position)

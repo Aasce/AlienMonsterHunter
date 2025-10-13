@@ -25,6 +25,8 @@ MonoBehaviour:
       _value: 20
     - _name: LinkWidth
       _value: 0.75
+    - _name: LinkDamage
+      _value: 2
     - _name: AttackSpeed
       _value: 0.4
     - _name: ViewRadius

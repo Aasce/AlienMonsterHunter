@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 192
   _raycastRadius: 0.1
   _useCircleCast: 0
-  _turret: {fileID: 3009801151779919401}
+  _machine: {fileID: 3009801151779919401}
 --- !u!1001 &8167073939658391916
 PrefabInstance:
   m_ObjectHideFlags: 0

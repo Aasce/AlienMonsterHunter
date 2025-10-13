@@ -14,6 +14,7 @@ namespace Asce.Game.AIs
 
         public event Action<ITargetable> OnTargetChanged;
 
+        public override bool HasTarget => CurrentTarget != null && CurrentTarget.IsTargetable;
         public ITargetable CurrentTarget
         {
             get => _currentTarget;

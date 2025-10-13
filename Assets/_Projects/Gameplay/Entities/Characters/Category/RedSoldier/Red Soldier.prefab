@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5138677205302101753}
   - component: {fileID: 9192211083062409334}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HandR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 2311352cfef21ef43bacd603a36ad23d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6162378050032221236}
   - component: {fileID: 3833225761782957700}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HandL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 4024602cede033d43b61234ed0aa8060, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -174,37 +174,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &5800389825684715295
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4369150922685760225}
-  m_Layer: 0
-  m_Name: Weapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4369150922685760225
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5800389825684715295}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2554151281100757433}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6106001734649626202
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8217669198717048039}
   - component: {fileID: 7799181273046542008}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +249,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 16
   m_Sprite: {fileID: 21300000, guid: aa4b44d05041c534cb6a1fc4accabfbd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -301,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2554151281100757433}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RedSoldierLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +290,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4369150922685760225}
   - {fileID: 6162378050032221236}
   - {fileID: 5138677205302101753}
   - {fileID: 8217669198717048039}
@@ -338,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3151043221309851252}
   - component: {fileID: 3325363988379835165}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +371,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 21
   m_Sprite: {fileID: 21300000, guid: 3bb55c4c51c852248ac0428597699183, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -462,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _weaponSlot
       value: 
-      objectReference: {fileID: 4369150922685760225}
+      objectReference: {fileID: 4701006785987877705}
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _information
       value: 
@@ -515,6 +483,11 @@ PrefabInstance:
       addedObject: {fileID: 2554151281100757433}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+--- !u!4 &4701006785987877705 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6193936041271012591, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
+  m_PrefabInstance: {fileID: 1497478491102295974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5441143646133516738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6866528806364630628, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}

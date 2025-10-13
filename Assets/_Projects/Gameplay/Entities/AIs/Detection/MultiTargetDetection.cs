@@ -17,6 +17,7 @@ namespace Asce.Game.AIs
         [SerializeField] private List<ITargetable> _visibleTargets = new();
         private ReadOnlyCollection<ITargetable> _targetsReadonly;
 
+        public override bool HasTarget => VisibleTargets.Count > 0;
         public ReadOnlyCollection<ITargetable> VisibleTargets => _targetsReadonly ??= _visibleTargets.AsReadOnly();
 
         /// <summary> Updates the list of visible targets. </summary>

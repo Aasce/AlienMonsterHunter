@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 192
   _raycastRadius: 0.2
   _useCircleCast: 1
-  _drone: {fileID: 6055788391772088213}
+  _machine: {fileID: 6055788391772088213}
 --- !u!1001 &6857563520974715022
 PrefabInstance:
   m_ObjectHideFlags: 0

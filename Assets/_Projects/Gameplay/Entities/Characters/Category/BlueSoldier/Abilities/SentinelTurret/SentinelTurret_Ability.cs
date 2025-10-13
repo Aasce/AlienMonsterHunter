@@ -3,31 +3,29 @@ using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class SentinelTurret_Ability : CharacterAbility
+    public class SentinelTurret_Ability : CharacterAbility, IControlMachineAbility
     {
-        [SerializeField] private SentinelTurret_Machine _turret;
+        [SerializeField] private SentinelTurret_Machine _machine;
 
-        public SentinelTurret_Machine Turret => _turret;
+        public SentinelTurret_Machine Machine => _machine;
+        Machine IControlMachineAbility.Machine => _machine;
 
         protected override void Start()
         {
             base.Start();
-            if (Turret != null)
-            {
-                Turret.Initialize();
-                Turret.OnTakeDamage += TurretHealth_OnTakeDamage;
-            }
+            Machine.Initialize();
+            Machine.OnDead += Machine_OnDead;
         }
 
         public override void OnSpawn()
         {
             base.OnSpawn();
-            if (Turret != null) Turret.ResetStatus();
+            if (Machine != null) Machine.ResetStatus();
         }
 
-        private void TurretHealth_OnTakeDamage(float damage)
+        private void Machine_OnDead()
         {
-            if (Turret.Stats.Health.CurrentValue <= 0f) this.DespawnTime.ToComplete();
+            this.DespawnTime.ToComplete();
         }
     }
 }
