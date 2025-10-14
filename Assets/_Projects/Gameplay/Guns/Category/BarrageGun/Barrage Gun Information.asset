@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2ab59f8fcaa3074b81f3f6b71890e16, type: 3}
-  m_Name: Scatter Gun Information
+  m_Name: Barrage Gun Information
   m_EditorClassIdentifier: 
-  _name: Scatter
+  _name: Barrage Gun
   _description: 
-  _icon: {fileID: 21300000, guid: f4586049ddf7d2c4fb329b0cde1f2e01, type: 3}
-  _damage: 9
-  _shootSpeed: 0.75
-  _magazineSize: 8
-  _startAmmo: 40
-  _reloadTime: 1
-  _minSpreadDistance: 6
-  _maxSpreadDistance: 20
-  _maxBulletSpreadAngle: 2
-  _minBulletSpreadAngle: 0
+  _icon: {fileID: 21300000, guid: f435f21de80ba9c4d9a06ea26777de5f, type: 3}
+  _damage: 8
+  _shootSpeed: 0.25
+  _magazineSize: 55
+  _startAmmo: 275
+  _reloadTime: 3
+  _minSpreadDistance: 5
+  _maxSpreadDistance: 16
+  _maxBulletSpreadAngle: 6
+  _minBulletSpreadAngle: 2
