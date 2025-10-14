@@ -37,6 +37,20 @@ namespace Asce.Managers
             }
         }
 
+        public static bool HasInstance
+        {
+            get
+            {
+                // If instance is not yet set, try to find it in the scene
+                if (_instance == null)
+                {
+                    _instance = FindAnyObjectByType<T>();
+                }
+                return _instance != null;
+            }
+        }
+
+
         /// <summary>
         ///     Ensures that only one instance of <typeparamref name="T"/> is assigned.
         ///     Destroys duplicate instances if they exist.

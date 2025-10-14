@@ -36,10 +36,14 @@ namespace Asce.Game.Entities.Characters
             {
                 if (_gun == value) return;
                 _gun = value;
-                if (_gun != null && _weaponSlot != null)
+                if (_gun != null)
                 {
-                    _gun.transform.SetParent(_weaponSlot);
-                    _gun.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+                    _gun.Owner = this;
+                    if (_weaponSlot != null)
+                    {
+                        _gun.transform.SetParent(_weaponSlot);
+                        _gun.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+                    }
                 }
                 OnGunChanged?.Invoke(_gun);
             }
@@ -102,11 +106,18 @@ namespace Asce.Game.Entities.Characters
             _lookPosition = lookPosition;
         }
 
-        public void Shoot()
+        public void Fire()
         {
             if (Gun == null) return;
             Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
-            Gun.Shoot(lookDirection);
+            Gun.Fire(lookDirection);
+        }
+
+        public void AltFire()
+        {
+            if (Gun == null) return;
+            Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
+            Gun.AltFire(lookDirection);
         }
 
         public void Reload()

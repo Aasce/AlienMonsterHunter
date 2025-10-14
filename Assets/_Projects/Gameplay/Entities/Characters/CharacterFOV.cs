@@ -1,24 +1,21 @@
 using Asce.Managers;
 using UnityEngine;
-using System.Collections.Generic;
 using Asce.Game.FOVs;
 
 namespace Asce.Game.Entities
 {
     public class CharacterFOV : GameComponent
     {
-        [SerializeField] private List<FieldOfView> _fovs = new();
+        [SerializeField] private FieldOfView _fov;
+        [SerializeField] private FieldOfView _fovSelf;
 
-        public List<FieldOfView> FOVs => _fovs;
-
+        public FieldOfView Fov => _fov;
+        public FieldOfView FovSelf => _fovSelf;
 
         private void LateUpdate()
         {
-            foreach (var fov in _fovs)
-            {
-                if (fov == null) continue;
-                fov.DrawFieldOfView();
-            }
+            Fov.DrawFieldOfView();
+            FovSelf.DrawFieldOfView();
         }
     }
 }

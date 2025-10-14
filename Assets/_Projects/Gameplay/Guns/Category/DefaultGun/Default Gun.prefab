@@ -87,6 +87,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7698160055575721340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1499524758284748486}
+  - component: {fileID: 7330807665932599717}
+  m_Layer: 0
+  m_Name: Scope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1499524758284748486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698160055575721340}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1394021093079169213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7330807665932599717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698160055575721340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48124ad91338bb4fb496f9534517d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 381989227653380984}
+  _isScope: 0
+  _spreadDistance: {x: 8, y: 20}
+  _spreadAngle: {x: 0, y: 2}
+  _addCameraSize: 2
+  _multiViewRadius: 1.2
+  _multiViewAngle: 0.6
 --- !u!1001 &5734358826137668681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,6 +193,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1499524758284748486}
     - targetCorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9119269995354451847}
@@ -172,6 +226,7 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 704
+  _owner: {fileID: 0}
   _damage: 14
   _shootCooldown:
     _baseTime: 0.5
@@ -182,8 +237,18 @@ MonoBehaviour:
   _reloadCooldown:
     _baseTime: 1.5
     _currentTime: 0
+  _minSpreadDistance: 3
+  _maxSpreadDistance: 10
+  _maxBulletSpreadAngle: 5
+  _minBulletSpreadAngle: 0
   _distance: 20
+  _scope: {fileID: 7330807665932599717}
   _bulletLineVFXName: Default Gun Bullet Line
+--- !u!4 &1394021093079169213 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 5734358826137668681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5137634337035036143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

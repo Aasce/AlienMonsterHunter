@@ -11,8 +11,27 @@ namespace Asce.Game.Guns
         [SerializeField] private float _damageLosePerHit = 0.9f;
         private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[32];
 
+        [Header("Peregrine Gun")]
+        [SerializeField] private GunScope _scope;
+
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
+
+        public GunScope Scope
+        {
+            get => _scope; 
+            set
+            {
+                _scope = value;
+                if (_scope != null) _scope.Gun = this;
+            }
+        }
+
+        public override void AltFire(Vector2 direction)
+        {
+            base.AltFire(direction);
+            _scope.Toggle();
+        }
 
         protected override void Shooting(Vector2 direction)
         {

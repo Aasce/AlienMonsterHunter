@@ -20,3 +20,7 @@ MonoBehaviour:
   _magazineSize: 5
   _startAmmo: 25
   _reloadTime: 3.5
+  _minSpreadDistance: 2
+  _maxSpreadDistance: 5
+  _maxBulletSpreadAngle: 15
+  _minBulletSpreadAngle: 3

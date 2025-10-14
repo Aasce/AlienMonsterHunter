@@ -30,11 +30,18 @@ namespace Asce.PrepareGame.Players
 
             Vector2 worldMousePosition = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
             
-            bool isShoot = Input.GetMouseButtonDown(0);
-            if (isShoot)
+            bool isFire = Input.GetMouseButton(0);
+            if (isFire)
             {
                 bool isPointerOverUI = UIManager.Instance.IsPointerOverScreenUI();
-                if (isPointerOverUI) isShoot = false;
+                if (isPointerOverUI) isFire = false;
+            }
+
+            bool isAltFire = Input.GetMouseButtonDown(1);
+            if (isAltFire)
+            {
+                bool isPointerOverUI = UIManager.Instance.IsPointerOverScreenUI();
+                if (isPointerOverUI) isAltFire = false;
             }
             bool isReload = Input.GetKeyDown(KeyCode.R);
             bool isUseAbility0 = Input.GetKeyDown(KeyCode.Q);
@@ -45,7 +52,8 @@ namespace Asce.PrepareGame.Players
                 Character.Move(moveDirection);
                 Character.LookAt(worldMousePosition);
                 if (isReload) Character.Reload();
-                if (isShoot) Character.Shoot();
+                if (isFire) Character.Fire();
+                if (isAltFire) Character.AltFire();
                 if (isUseAbility0) Character.UseAbility(0, worldMousePosition);
                 if (isUseAbility1) Character.UseAbility(1, worldMousePosition);
             }

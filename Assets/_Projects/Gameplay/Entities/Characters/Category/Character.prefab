@@ -92,9 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575ac9db0d75dae4ba4da73ffdafc11f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fovs:
-  - {fileID: 2569858083784214097}
-  - {fileID: 2775525696506837856}
+  _fov: {fileID: 2775525696506837856}
+  _fovSelf: {fileID: 2569858083784214097}
 --- !u!1 &3537394437345610671
 GameObject:
   m_ObjectHideFlags: 0
