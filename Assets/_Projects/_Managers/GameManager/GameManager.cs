@@ -3,6 +3,7 @@ using Asce.Game.Effects;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
+using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -15,12 +16,14 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllEnemies _allEnemies;
         [SerializeField] private SO_AllGuns _allGuns;
         [SerializeField] private SO_AllAbilities _allAbilities;
+        [SerializeField] private SO_AllSupports _allSupports;
         [SerializeField] private SO_AllEffects _allEffects;
 
         public SO_AllCharacters AllCharacters => _allCharacters;
         public SO_AllEnemies AllEnemies => _allEnemies;
         public SO_AllGuns AllGuns => _allGuns;
         public SO_AllAbilities AllAbilities => _allAbilities;
+        public SO_AllSupports AllSupports => _allSupports;
         public SO_AllEffects AllEffects => _allEffects;
 
         private void OnValidate()
@@ -36,6 +39,9 @@ namespace Asce.Game.Managers
 
             if (AllAbilities == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Abilities is not assigned", this);
+
+            if (_allSupports == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Supports is not assigned", this);
 
             if (AllEffects == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Effects is not assigned", this);

@@ -22,6 +22,14 @@ namespace Asce.Game.Stats
             this.ShowDamageText(receiver, finalDamage);
         }
 
+        public void Healing(ITakeDamageable receiver, float healAmount)
+        {
+            if (receiver == null || healAmount <= 0f) return;
+            receiver.Health.CurrentValue += healAmount;
+            this.ShowHealText(receiver, healAmount);
+        }
+
+
         public float CalculateDamage(float damage, float armor)
         {
             if (damage <= 0f) return 0f;
@@ -43,6 +51,20 @@ namespace Asce.Game.Stats
                     MonoBehaviour => Color.white,
                     _ => Color.white,
                 },
+                Size = size
+            };
+
+            PopupTextController.Instance.EnqueuePopupText((receiver as MonoBehaviour).transform, data);
+        }
+
+        private void ShowHealText(ITakeDamageable receiver, float healAmount)
+        {
+            float size = Mathf.Lerp(100f, 200f, Mathf.InverseLerp(10f, 100f, healAmount));
+
+            PopupTextData data = new()
+            {
+                Text = healAmount.ToString("0"),
+                Color = Color.green,
                 Size = size
             };
 

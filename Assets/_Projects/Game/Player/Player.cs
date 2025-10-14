@@ -1,8 +1,10 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
+using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.UIs;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Players
@@ -11,8 +13,18 @@ namespace Asce.Game.Players
     {
         [SerializeField] private Transform _spawnPoint;
 
+        [Header("Settings")]
+        [SerializeField] private List<KeyCode> _callSupportKeys = new()
+        {
+            KeyCode.Alpha1,
+            KeyCode.Alpha2,
+            KeyCode.Alpha3,
+        };
+
         [Header("Runtime")]
         [SerializeField] private Character _character;
+        [SerializeField] private SupportCaller _supportCaller;
+        [SerializeField] private List<string> _supports = new();
 
         public event Action<ValueChangedEventArgs<Character>> OnCharacterChanged;
 
@@ -28,6 +40,9 @@ namespace Asce.Game.Players
             }
         }
 
+        public SupportCaller SupportCaller => _supportCaller;
+        public List<string> Supports => _supports;
+
         public void Initialize()
         {
             if (Character != null)
@@ -36,6 +51,13 @@ namespace Asce.Game.Players
                 Character.transform.position = spawnPoint;
                 CameraController.Instance.Target = Character.transform;
                 CameraController.Instance.SetToTarget();
+            }
+
+            if (SupportCaller != null)
+            {
+                SupportCaller.Initialize(Supports);
+                Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
+                SupportCaller.SpawnPoint = spawnPoint;
             }
         }
 
@@ -79,6 +101,15 @@ namespace Asce.Game.Players
             bool isReload = Input.GetKeyDown(KeyCode.R);
             bool isUseAbility0 = Input.GetKey(KeyCode.Q);
             bool isUseAbility1 = Input.GetKey(KeyCode.E);
+
+            for (int i = 0; i < _callSupportKeys.Count; i++)
+            {
+                KeyCode key = _callSupportKeys[i];
+                if (Input.GetKeyDown(key))
+                {
+                    _supportCaller.Call(i, worldMousePosition);
+                }
+            }
 
             if (Character != null && Character.gameObject.activeInHierarchy)
             {
