@@ -2,6 +2,7 @@ using Asce.Game.Effects;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.Entities
@@ -9,8 +10,10 @@ namespace Asce.Game.Entities
     public class EntityEffects : GameComponent
     {
         [SerializeField] private List<Effect> _effects = new();
-
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
+        private ReadOnlyCollection<Effect> _effectsReadonly;
+
+        public ReadOnlyCollection<Effect> Effects => _effectsReadonly ??= _effects.AsReadOnly();
 
         private void Update()
         {
@@ -27,6 +30,15 @@ namespace Asce.Game.Entities
             }
         }
 
+        public Effect Get(string name)
+        {
+            foreach (Effect effect in _effects)
+            {
+                if (effect.Information.Name == name) return effect;
+            }
+            return null;
+        }
+
         public void Add(Effect effect)
         {
             if (effect == null) return;
@@ -36,6 +48,15 @@ namespace Asce.Game.Entities
         public bool Remove(Effect effect) 
         {
             return _effects.Remove(effect);
+        }
+
+        public bool Contains(string name)
+        {
+            foreach (Effect effect in _effects)
+            {
+                if (effect.Information.Name == name) return true;
+            }
+            return false;
         }
 
         public void Clear()

@@ -64,6 +64,62 @@ namespace Asce.Managers.Utils
             Debug.DrawLine(v11, v10, color, duration);
             Debug.DrawLine(v10, v00, color, duration);
         }
+
+        /// <summary>
+        ///     Draws a rectangle in the scene view using Debug.DrawLine.
+        /// </summary>
+        /// <param name="rect">The rectangle to draw.</param>
+        /// <param name="color">The color of the rectangle lines.</param>
+        /// <param name="duration">How long the lines should remain visible (in seconds).</param>
+        public static void DrawRect(Rect rect, Color color, float duration = 0f)
+        {
+            Vector3 topLeft = new Vector3(rect.xMin, rect.yMax, 0f);
+            Vector3 topRight = new Vector3(rect.xMax, rect.yMax, 0f);
+            Vector3 bottomLeft = new Vector3(rect.xMin, rect.yMin, 0f);
+            Vector3 bottomRight = new Vector3(rect.xMax, rect.yMin, 0f);
+
+            Debug.DrawLine(topLeft, topRight, color, duration);
+            Debug.DrawLine(topRight, bottomRight, color, duration);
+            Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+            Debug.DrawLine(bottomLeft, topLeft, color, duration);
+        }
+
+        /// <summary>
+        ///     Draws a rectangle centered at a position with a given size.
+        /// </summary>
+        /// <param name="center">Center of the rectangle.</param>
+        /// <param name="size">Width and height of the rectangle.</param>
+        /// <param name="color">Color of the lines.</param>
+        /// <param name="duration">Duration for which the lines will be visible.</param>
+        public static void DrawRect(Vector2 center, Vector2 size, Color color, float duration = 0f)
+        {
+            Rect rect = new Rect(center - size * 0.5f, size);
+            DrawRect(rect, color, duration);
+        }
+
+        /// <summary>
+        ///     Draws a circle using Debug.DrawLine.
+        /// </summary>
+        /// <param name="center">The center of the circle.</param>
+        /// <param name="radius">The radius of the circle.</param>
+        /// <param name="color">The color of the circle line.</param>
+        /// <param name="duration">How long the lines should remain visible (in seconds).</param>
+        /// <param name="segmentCount">Number of line segments used to approximate the circle (default 16).</param>
+        public static void DrawCircle(Vector2 center, float radius, Color color, float duration = 0f, int segmentCount = 16)
+        {
+            if (segmentCount < 4) segmentCount = 4;
+
+            float angleStep = 360f / segmentCount;
+            Vector3 previousPoint = center + new Vector2(Mathf.Cos(0f), Mathf.Sin(0f)) * radius;
+
+            for (int i = 1; i <= segmentCount; i++)
+            {
+                float angle = angleStep * i * Mathf.Deg2Rad;
+                Vector3 nextPoint = center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                Debug.DrawLine(previousPoint, nextPoint, color, duration);
+                previousPoint = nextPoint;
+            }
+        }
     }
 
 }

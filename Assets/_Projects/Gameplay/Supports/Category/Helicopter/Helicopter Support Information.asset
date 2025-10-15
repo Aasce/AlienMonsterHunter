@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33db6c94ad2e9e54ba8df51612fa1dfb, type: 3}
-  m_Name: Ambulance Support Information
+  m_Name: Helicopter Support Information
   m_EditorClassIdentifier: 
-  _id: Ambulance
-  _name: Ambulance
+  _id: Helicopter
+  _name: Helicopter
   _description: 
-  _icon: {fileID: 21300000, guid: 0bcb20c5caba30d4d928bbc990d45a47, type: 3}
-  _cooldown: 30
-  _cooldownOnRecall: 10
+  _icon: {fileID: 21300000, guid: a5103566a6c401f4198f7908c73918c7, type: 3}
+  _cooldown: 5
+  _cooldownOnRecall: 5
