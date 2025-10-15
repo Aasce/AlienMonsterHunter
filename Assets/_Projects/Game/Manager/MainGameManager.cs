@@ -5,7 +5,7 @@ using Asce.Game.Players;
 using Asce.Game.UIs;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game
@@ -17,10 +17,9 @@ namespace Asce.Game
         private void Start()
         {
             this.InitializeController();
-            this.CreateCharacterForPlayer();
+            this.LoadPlayer();
             this.AssignUI();
         }
-
 
         public void BackToMainMenu()
         {
@@ -30,6 +29,13 @@ namespace Asce.Game
         private void InitializeController()
         {
             UIGameController.Instance.PanelController.HideAll();
+        }
+
+        private void LoadPlayer()
+        {
+            this.CreateCharacterForPlayer();
+            this.CreateSupportForPlayer();
+            Player.Instance.Initialize();
         }
 
         private void CreateCharacterForPlayer()
@@ -50,7 +56,14 @@ namespace Asce.Game
             }
 
             Player.Instance.Character = characterInstance;
-            Player.Instance.Initialize();
+        }
+
+        private void CreateSupportForPlayer()
+        {
+            Player.Instance.Supports.Clear();
+            List<string> supportNames = Shared.Get<List<string>>("supports");
+            if (supportNames == null) return;
+            Player.Instance.Supports.AddRange(supportNames);
         }
 
         private void AssignUI()

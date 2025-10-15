@@ -1,6 +1,7 @@
 using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.PrepareGame.Picks;
+using System.Linq;
 using UnityEngine;
 
 namespace Asce.PrepareGame
@@ -18,6 +19,12 @@ namespace Asce.PrepareGame
 
             Shared.SetOrAdd("character", $"{PickController.Instance.CharacterPrefab.Information.Name}");
             Shared.SetOrAdd("gun", $"{PickController.Instance.GunPrefab.Information.Name}");
+            Shared.SetOrAdd("supports", PickController.Instance.SupportPrefabs
+                .Where(s => s != null && s.Information != null)
+                .Select(s => s.Information.Name)
+                .ToList()
+            );
+
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 

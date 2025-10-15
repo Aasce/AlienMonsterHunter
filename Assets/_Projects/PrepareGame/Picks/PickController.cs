@@ -1,8 +1,10 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
+using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.PrepareGame.Players;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.PrepareGame.Picks
@@ -12,15 +14,18 @@ namespace Asce.PrepareGame.Picks
         [Header("Picked Prefabs")]
         [SerializeField] private Character _characterPrefab;
         [SerializeField] private Gun _gunPrefab;
+        [SerializeField] private List<Support> _supportPrefabs = new();
 
         private Character _characterInstance;
         private Gun _gunInstance;
 
         public event Action<Character> OnPickCharacter;
         public event Action<Gun> OnPickGun;
+        public event Action<int, Support> OnPickSupport;
 
         public Character CharacterPrefab => _characterPrefab;
         public Gun GunPrefab => _gunPrefab;
+        public List<Support> SupportPrefabs => _supportPrefabs;
 
         public Character CharacterInstance => _characterInstance;
         public Gun GunInstance => _gunInstance;
@@ -41,6 +46,20 @@ namespace Asce.PrepareGame.Picks
             _gunPrefab = prefab;
             this.RegisterGun();
             this.OnPickGun?.Invoke(GunInstance);
+        }
+
+        public void PickSupport(int index, Support support)
+        {
+            if (index < 0) return;
+            if (index >= _supportPrefabs.Count)
+            {
+                // Extend the list until it can contain the desired index
+                while (_supportPrefabs.Count <= index)
+                    _supportPrefabs.Add(null);
+            }
+
+            _supportPrefabs[index] = support;
+            OnPickSupport?.Invoke(index, support);
         }
 
         private void RegisterCharacter()
