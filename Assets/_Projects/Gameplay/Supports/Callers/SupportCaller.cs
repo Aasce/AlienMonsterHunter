@@ -9,16 +9,12 @@ namespace Asce.Game.Supports
     public class SupportCaller : GameComponent
     {
         [SerializeField, Readonly] private List<SupportContainer> _supports = new();
-        [SerializeField] private Vector2 _spawnPoint = Vector2.zero;
+        [SerializeField] private Transform _spawnPoint;
 
         public event Action OnInitializeCompleted;
 
 
-        public Vector2 SpawnPoint
-        {
-            get => _spawnPoint;
-            set => _spawnPoint = value;
-        }
+        public Vector2 SpawnPoint => _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
 
         private void Update()
         {

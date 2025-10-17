@@ -106,7 +106,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,6 +211,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9093752812891934648}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1483516111886835936}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4381345279645715725}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
 --- !u!1 &3646822461094141155 stripped
 GameObject:
@@ -233,7 +239,7 @@ MonoBehaviour:
   _barrel: {fileID: 8115498435649559395}
   _hitLayer:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 576
   _owner: {fileID: 0}
   _damage: 10
   _shootCooldown:
@@ -253,6 +259,35 @@ MonoBehaviour:
   _damageLosePerHit: 0.9
   _scope: {fileID: 6212127389268486996}
   _bulletLineVFXName: Peregrine Gun Bullet Line
+--- !u!114 &1483516111886835936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646822461094141155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8421e2c90810434892bfbc163673a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 9093752812891934648}
+  _gunFiredVFXName: Peregrine Gun Muzzle Flash
+  _muzzleFlashVFX: {fileID: 0}
+--- !u!114 &4381345279645715725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646822461094141155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0758aab109ddb544be542bef6c81867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 9093752812891934648}
+  _gunHitVFXName: Peregrine Gun Bullet Hit
 --- !u!4 &3745823586037356730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,6 +157,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 958485172976315479}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2456159739219276791}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1517581311486455413}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
 --- !u!1 &3865930439211298558 stripped
 GameObject:
@@ -199,6 +205,35 @@ MonoBehaviour:
   _bulletPerShoot: 6
   _spreadAngle: 18
   _bulletLineVFXName: ScatterGun Bullet Line
+--- !u!114 &-2456159739219276791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865930439211298558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8421e2c90810434892bfbc163673a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 958485172976315479}
+  _gunFiredVFXName: Muzzle Flash
+  _muzzleFlashVFX: {fileID: 0}
+--- !u!114 &-1517581311486455413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865930439211298558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0758aab109ddb544be542bef6c81867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 958485172976315479}
+  _gunHitVFXName: Bullet Hit
 --- !u!4 &6977559861980100597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

@@ -36,9 +36,11 @@ namespace Asce.Game.Guns
         public event Action<float> OnCurrentAmmoChanged;
         public event Action OnStartReload;
         public event Action OnFinishReload;
+        public event Action<Vector2> OnFired;
+        public event Action<Vector2, Vector2> OnHit;
 
         public SO_GunInformation Information => _information;
-        public Vector2 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
+        public virtual Vector2 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
         public Entity Owner
         {
             get => _owner;
@@ -156,6 +158,7 @@ namespace Asce.Game.Guns
                 direction = ApplyBulletSpread(direction);
 
                 this.Shooting(direction);
+                this.OnFired?.Invoke(direction);
                 ShootCooldown.Reset();
             }
         }
@@ -218,6 +221,11 @@ namespace Asce.Game.Guns
                 RemainingAmmo = 0;
             }
             OnFinishReload?.Invoke();
+        }
+
+        protected virtual void Hit(Vector2 position, Vector2 direction)
+        {
+            OnHit?.Invoke(position, direction);
         }
 
 

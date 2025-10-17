@@ -2,7 +2,6 @@ using Asce.Game.FOVs;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +10,6 @@ namespace Asce.Game.Entities.Machines
     public class Ambulance_Machine : Machine, IHasAgent
     {
         [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private FieldOfView _fov;
         [SerializeField] private FieldOfView _fovSelf;
 
         [Space]
@@ -53,7 +51,6 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            _fov.DrawFieldOfView();
             _fovSelf.DrawFieldOfView();
         }
 

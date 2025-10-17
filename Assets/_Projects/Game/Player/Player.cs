@@ -56,8 +56,6 @@ namespace Asce.Game.Players
             if (SupportCaller != null)
             {
                 SupportCaller.Initialize(Supports);
-                Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
-                SupportCaller.SpawnPoint = spawnPoint;
             }
         }
 

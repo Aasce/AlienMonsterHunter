@@ -1,14 +1,16 @@
 using Asce.Game.VFXs;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities
 {
+    [RequireComponent(typeof(Entity))]
     public class EntityVFX_TakeDamage : GameComponent
     {
-        [SerializeField] private Entity _entity;
+        [SerializeField, Readonly] private Entity _entity;
 
         [Space]
         [SerializeField] private string _takeDamageVFXName = string.Empty;

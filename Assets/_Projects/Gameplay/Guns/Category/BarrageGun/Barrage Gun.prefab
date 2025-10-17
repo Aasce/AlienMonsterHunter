@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 13
   m_Sprite: {fileID: 21300000, guid: f435f21de80ba9c4d9a06ea26777de5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -225,6 +225,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4331446303938667604}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2021636914967882583}
+    - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4438035113168320722}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
 --- !u!4 &1492280563017377727 stripped
 Transform:
@@ -280,6 +286,35 @@ MonoBehaviour:
   _fireAccelerationRate: 0.05
   _maxFireSpeed: 0.11
   _bulletLineVFXName: Barrage Gun Bullet Line
+--- !u!114 &2021636914967882583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572440456543413222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8421e2c90810434892bfbc163673a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 4331446303938667604}
+  _gunFiredVFXName: Muzzle Flash
+  _muzzleFlashVFX: {fileID: 0}
+--- !u!114 &4438035113168320722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572440456543413222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0758aab109ddb544be542bef6c81867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 4331446303938667604}
+  _gunHitVFXName: Bullet Hit
 --- !u!4 &4657180211164412653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

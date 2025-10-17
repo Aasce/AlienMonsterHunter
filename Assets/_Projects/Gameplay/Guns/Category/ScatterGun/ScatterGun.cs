@@ -42,7 +42,9 @@ namespace Asce.Game.Guns
             int count = Physics2D.RaycastNonAlloc(BarrelPosition, direction, _cacheHits, _distance, _hitLayer);
             if (count == 0)
             {
-                SpawnVFX(BarrelPosition, BarrelPosition + direction.normalized * _distance);
+                Vector2 hitNothingPosition = BarrelPosition + direction.normalized * _distance;
+                this.SpawnVFX(BarrelPosition, hitNothingPosition);
+                this.Hit(hitNothingPosition, direction);
                 return;
             }
 
@@ -65,6 +67,7 @@ namespace Asce.Game.Guns
 
             // Spawn the bullet trail from gun barrel to end point
             SpawnVFX(BarrelPosition, endPoint);
+            this.Hit(endPoint, direction);
         }
 
         private void SpawnVFX(Vector2 startPoint, Vector2 endPoint)

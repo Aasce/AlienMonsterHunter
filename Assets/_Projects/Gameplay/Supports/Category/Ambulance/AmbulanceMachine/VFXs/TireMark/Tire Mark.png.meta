@@ -1,0 +1,1027 @@
+fileFormatVersion: 2
+guid: eb46183efc06d1e4b9ba0672352d3b85
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8121532453418879540
+    second: Tire Mark_0
+  - first:
+      213: -7708054970902560681
+    second: Tire Mark_1
+  - first:
+      213: -1985235492427610534
+    second: Tire Mark_2
+  - first:
+      213: -1382919968634861274
+    second: Tire Mark_3
+  - first:
+      213: 3818780817767589624
+    second: Tire Mark_4
+  - first:
+      213: 6663765393690115520
+    second: Tire Mark_5
+  - first:
+      213: 7541524411433654002
+    second: Tire Mark_6
+  - first:
+      213: -6480380742849666415
+    second: Tire Mark_7
+  - first:
+      213: 857123352614587744
+    second: Tire Mark_8
+  - first:
+      213: -3220981792833888024
+    second: Tire Mark_9
+  - first:
+      213: -1695047953438224299
+    second: Tire Mark_10
+  - first:
+      213: -8862333726012921628
+    second: Tire Mark_11
+  - first:
+      213: -8173427896223191342
+    second: Tire Mark_12
+  - first:
+      213: 5205066454032165957
+    second: Tire Mark_13
+  - first:
+      213: 3802447473236271743
+    second: Tire Mark_14
+  - first:
+      213: 6407207884498839226
+    second: Tire Mark_15
+  - first:
+      213: -7988563820917520647
+    second: Tire Mark_16
+  - first:
+      213: -2674711359537717695
+    second: Tire Mark_17
+  - first:
+      213: 5668537578394073755
+    second: Tire Mark_18
+  - first:
+      213: -1373772626373950232
+    second: Tire Mark_19
+  - first:
+      213: -321106162089370244
+    second: Tire Mark_20
+  - first:
+      213: -5979650430360492859
+    second: Tire Mark_21
+  - first:
+      213: -3437770110694921084
+    second: Tire Mark_22
+  - first:
+      213: -284564086694810121
+    second: Tire Mark_23
+  - first:
+      213: 5406630238456047928
+    second: Tire Mark_24
+  - first:
+      213: 3621965170141067905
+    second: Tire Mark_25
+  - first:
+      213: -4477861829494925872
+    second: Tire Mark_26
+  - first:
+      213: -5605334050504711448
+    second: Tire Mark_27
+  - first:
+      213: 8799013292811477414
+    second: Tire Mark_28
+  - first:
+      213: -1397588572255264001
+    second: Tire Mark_29
+  - first:
+      213: -768030879691369486
+    second: Tire Mark_30
+  - first:
+      213: -3510334075154410710
+    second: Tire Mark_31
+  - first:
+      213: 1608192572624681198
+    second: Tire Mark_32
+  - first:
+      213: 4585461312819069452
+    second: Tire Mark_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tire Mark_0
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 547
+        width: 78
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43ac6d59cba75b070800000000000000
+      internalID: 8121532453418879540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_1
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 486
+        width: 62
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7504b2ec7dc770590800000000000000
+      internalID: -7708054970902560681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_2
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 558
+        width: 61
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a56ca5e76d60374e0800000000000000
+      internalID: -1985235492427610534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_3
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 502
+        width: 63
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62989b49d91eecce0800000000000000
+      internalID: -1382919968634861274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_4
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 574
+        width: 42
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f6ec16cbe80ff430800000000000000
+      internalID: 3818780817767589624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_5
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 517
+        width: 82
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cdb075c1537a7c50800000000000000
+      internalID: 6663765393690115520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_6
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 397
+        width: 79
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f69078de70e8a860800000000000000
+      internalID: 7541524411433654002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 476
+        width: 79
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 192e9258c001116a0800000000000000
+      internalID: -6480380742849666415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_8
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 411
+        width: 64
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06dc841e52d15eb00800000000000000
+      internalID: 857123352614587744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_9
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 430
+        width: 62
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0a22aff16cc43d0800000000000000
+      internalID: -3220981792833888024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_10
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 444
+        width: 81
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550df0afddaf978e0800000000000000
+      internalID: -1695047953438224299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_11
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 312
+        width: 79
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e8290c4e6aa20580800000000000000
+      internalID: -8862333726012921628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_12
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 325
+        width: 63
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de295012a6229e80800000000000000
+      internalID: -8173427896223191342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_13
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 343
+        width: 63
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ca3e0cc5c1c3840800000000000000
+      internalID: 5205066454032165957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_14
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 257
+        width: 63
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f726457a4d105c430800000000000000
+      internalID: 3802447473236271743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_15
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 273
+        width: 82
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6a2a5cf99fae850800000000000000
+      internalID: 6407207884498839226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_16
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 360
+        width: 80
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f68ca4b78be22190800000000000000
+      internalID: -7988563820917520647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_17
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 139
+        width: 79
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e5d02903481ead0800000000000000
+      internalID: -2674711359537717695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_18
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 225
+        width: 78
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9ab124f4e0baae40800000000000000
+      internalID: 5668537578394073755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_19
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 238
+        width: 63
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e443da23116fece0800000000000000
+      internalID: -1373772626373950232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_20
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 152
+        width: 63
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7d597995a33b8bf0800000000000000
+      internalID: -321106162089370244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_21
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 171
+        width: 65
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4e9597d93040da0800000000000000
+      internalID: -5979650430360492859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_22
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 187
+        width: 82
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ce2946c469a40d0800000000000000
+      internalID: -3437770110694921084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_23
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 62
+        width: 80
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fde8b888760d0cf0800000000000000
+      internalID: -284564086694810121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_24
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 71
+        width: 64
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839ee0b6e85380b40800000000000000
+      internalID: 5406630238456047928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_25
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 85
+        width: 64
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a781bd12ec34230800000000000000
+      internalID: 3621965170141067905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_26
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 22
+        width: 63
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d59cab04607bd1c0800000000000000
+      internalID: -4477861829494925872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_27
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 101
+        width: 84
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2e340216ad532b0800000000000000
+      internalID: -5605334050504711448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_28
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 32
+        width: 83
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a1e7fb78ff5c1a70800000000000000
+      internalID: 8799013292811477414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_29
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 81
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff264982994ca9ce0800000000000000
+      internalID: -1397588572255264001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_30
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 35
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f3177febf76755f0800000000000000
+      internalID: -768030879691369486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_31
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 4
+        width: 62
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a23d877d1c9c84fc0800000000000000
+      internalID: -3510334075154410710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_32
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 0
+        width: 62
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee837bdcf92715610800000000000000
+      internalID: 1608192572624681198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tire Mark_33
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 81
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0280e9e4c4d2af30800000000000000
+      internalID: 4585461312819069452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tire Mark_0: 8121532453418879540
+      Tire Mark_1: -7708054970902560681
+      Tire Mark_10: -1695047953438224299
+      Tire Mark_11: -8862333726012921628
+      Tire Mark_12: -8173427896223191342
+      Tire Mark_13: 5205066454032165957
+      Tire Mark_14: 3802447473236271743
+      Tire Mark_15: 6407207884498839226
+      Tire Mark_16: -7988563820917520647
+      Tire Mark_17: -2674711359537717695
+      Tire Mark_18: 5668537578394073755
+      Tire Mark_19: -1373772626373950232
+      Tire Mark_2: -1985235492427610534
+      Tire Mark_20: -321106162089370244
+      Tire Mark_21: -5979650430360492859
+      Tire Mark_22: -3437770110694921084
+      Tire Mark_23: -284564086694810121
+      Tire Mark_24: 5406630238456047928
+      Tire Mark_25: 3621965170141067905
+      Tire Mark_26: -4477861829494925872
+      Tire Mark_27: -5605334050504711448
+      Tire Mark_28: 8799013292811477414
+      Tire Mark_29: -1397588572255264001
+      Tire Mark_3: -1382919968634861274
+      Tire Mark_30: -768030879691369486
+      Tire Mark_31: -3510334075154410710
+      Tire Mark_32: 1608192572624681198
+      Tire Mark_33: 4585461312819069452
+      Tire Mark_4: 3818780817767589624
+      Tire Mark_5: 6663765393690115520
+      Tire Mark_6: 7541524411433654002
+      Tire Mark_7: -6480380742849666415
+      Tire Mark_8: 857123352614587744
+      Tire Mark_9: -3220981792833888024
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

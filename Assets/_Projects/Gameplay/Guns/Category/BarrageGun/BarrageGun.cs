@@ -25,13 +25,12 @@ namespace Asce.Game.Guns
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
 
-        public new Vector2 BarrelPosition
+        public override Vector2 BarrelPosition
         {
             get
             {
                 if (_barrels.Count <= 0) return base.BarrelPosition;
                 Transform barrel = _barrels[_barrelIndex];
-                _barrelIndex = (_barrelIndex + 1) % _barrels.Count;
                 return barrel != null ? (Vector2)barrel.position : base.BarrelPosition;
             }
         }
@@ -53,13 +52,17 @@ namespace Asce.Game.Guns
             float newShootSpeed = ShootCooldown.BaseTime * (1f - _fireAccelerationRate);
             newShootSpeed = Mathf.Max(newShootSpeed, _maxFireSpeed);
             ShootCooldown.SetBaseTime(newShootSpeed);
+
+            _barrelIndex = (_barrelIndex + 1) % _barrels.Count;
             Vector2 barrelPosition = BarrelPosition;
 
             // Get all hits along the ray
             int count = Physics2D.RaycastNonAlloc(barrelPosition, direction, _cacheHits, _distance, _hitLayer);
             if (count == 0)
             {
-                SpawnVFX(barrelPosition, barrelPosition + direction.normalized * _distance);
+                Vector2 hitNothingPosition = barrelPosition + direction.normalized * _distance;
+                this.SpawnVFX(barrelPosition, hitNothingPosition);
+                this.Hit(hitNothingPosition, direction);
                 return;
             }
 
@@ -82,6 +85,7 @@ namespace Asce.Game.Guns
 
             // Spawn the bullet trail from gun barrel to end point
             SpawnVFX(barrelPosition, endPoint);
+            this.Hit(endPoint, direction);
         }
 
         private void SpawnVFX(Vector2 startPoint, Vector2 endPoint)

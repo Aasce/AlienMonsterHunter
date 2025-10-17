@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b9d9707ab1af54387de4c252512c83, type: 3}
   m_Name: Helicopter Machine Stats
   m_EditorClassIdentifier: 
-  _maxHealth: 120
-  _armor: 50
-  _speed: 12
+  _maxHealth: 300
+  _armor: 100
+  _speed: 14
   _customStats:
     _list: []

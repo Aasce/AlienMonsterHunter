@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_AnchorMax.x
@@ -86,11 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -352.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -148,9 +148,9 @@ MonoBehaviour:
   _pool:
     _prefab: {fileID: 6600477482342415964, guid: 7f01415e43aa79a4bb9b6603170f6c49, type: 3}
     _activities: []
-    _isSetActive: 1
+    _isSetActive: 0
     _parent: {fileID: 6179856997630210299}
-    _worldPositionStays: 1
+    _worldPositionStays: 0
 --- !u!224 &2866979258449671601 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4557811642188417552, guid: 1b81f40d46b281e49b7089c60f40f571, type: 3}

@@ -18,4 +18,4 @@ MonoBehaviour:
   _customValues:
     _list:
     - _name: IgniteInterval
-      _value: 0.25
+      _value: 1
