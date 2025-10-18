@@ -12,12 +12,14 @@ namespace Asce.Game.UIs.HUDs
         [Space]
         [SerializeField] UICharacterInformation _characterInformation;
         [SerializeField] UIGunInformation _gunInformation;
+        [SerializeField] UISupportsInformation _supportsInformation;
 
         [Space]
         [SerializeField] private Character _character;
 
         public UICharacterInformation CharacterInformation => _characterInformation;
         public UIGunInformation GunInformation => _gunInformation;
+        public UISupportsInformation SupportsInformation => _supportsInformation;
 
         public Character Character
         {
@@ -40,8 +42,12 @@ namespace Asce.Game.UIs.HUDs
 
         private void Start()
         {
+            CharacterInformation.Abilities.SetUseKeys(Player.Instance.UseAbilityKeys);
             Character = Player.Instance.Character;
             Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
+
+            SupportsInformation.SetCallKeys(Player.Instance.CallSupportKeys);
+            SupportsInformation.Caller = Player.Instance.SupportCaller;
         }
 
         private void Register()

@@ -2,6 +2,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.Supports
@@ -9,11 +10,12 @@ namespace Asce.Game.Supports
     public class SupportCaller : GameComponent
     {
         [SerializeField, Readonly] private List<SupportContainer> _supports = new();
+        private ReadOnlyCollection<SupportContainer> _supportsReadonly;
         [SerializeField] private Transform _spawnPoint;
 
         public event Action OnInitializeCompleted;
 
-
+        public ReadOnlyCollection<SupportContainer> Supports => _supportsReadonly ??= _supports.AsReadOnly();
         public Vector2 SpawnPoint => _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
 
         private void Update()

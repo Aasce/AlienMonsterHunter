@@ -16,9 +16,15 @@ namespace Asce.Game.Players
         [Header("Settings")]
         [SerializeField] private List<KeyCode> _callSupportKeys = new()
         {
-            KeyCode.Alpha1,
-            KeyCode.Alpha2,
-            KeyCode.Alpha3,
+            KeyCode.Z,
+            KeyCode.X,
+        };
+
+        [SerializeField] private List<KeyCode> _useAbilityKeys = new()
+        {
+            KeyCode.Q,
+            KeyCode.E,
+            KeyCode.C,
         };
 
         [Header("Runtime")]
@@ -27,6 +33,9 @@ namespace Asce.Game.Players
         [SerializeField] private List<string> _supports = new();
 
         public event Action<ValueChangedEventArgs<Character>> OnCharacterChanged;
+
+        public List<KeyCode> CallSupportKeys => _callSupportKeys;
+        public List<KeyCode> UseAbilityKeys => _useAbilityKeys;
 
         public Character Character
         {
@@ -97,8 +106,6 @@ namespace Asce.Game.Players
             }
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
-            bool isUseAbility0 = Input.GetKey(KeyCode.Q);
-            bool isUseAbility1 = Input.GetKey(KeyCode.E);
 
             for (int i = 0; i < _callSupportKeys.Count; i++)
             {
@@ -123,8 +130,15 @@ namespace Asce.Game.Players
                     CameraController.Instance.Offset = lookDirection.normalized * offsetLenght;
                 }
                 else CameraController.Instance.Offset = Vector2.zero;
-                if (isUseAbility0) Character.UseAbility(0, worldMousePosition);
-                if (isUseAbility1) Character.UseAbility(1, worldMousePosition);
+
+                for(int i = 0; i < _useAbilityKeys.Count; i++)
+                {
+                    KeyCode key = _useAbilityKeys[i];
+                    if (Input.GetKeyDown(key))
+                    {
+                        Character.UseAbility(i, worldMousePosition);
+                    }
+                }
             }
         }
     }
