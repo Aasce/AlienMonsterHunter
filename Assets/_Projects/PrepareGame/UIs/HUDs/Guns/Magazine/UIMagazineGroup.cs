@@ -12,9 +12,10 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _fireRateText;
 
         [Space]
-        [SerializeField] private TextMeshProUGUI _accurracyMinText;
-        [SerializeField] private TextMeshProUGUI _accurracyMaxText;
-        [SerializeField] private TextMeshProUGUI _maxSpreadText;
+        [SerializeField] private TextMeshProUGUI _minSpreadDistanceText;
+        [SerializeField] private TextMeshProUGUI _maxSpreadDistanceText;
+        [SerializeField] private TextMeshProUGUI _minSpreadAngleText;
+        [SerializeField] private TextMeshProUGUI _maxSpreadAngleText;
 
         [Space]
         [SerializeField] private TextMeshProUGUI _magazineSizeText;
@@ -30,9 +31,10 @@ namespace Asce.PrepareGame.UIs
                 this.SetText(_penetrationText, $"NaN");
                 this.SetText(_fireRateText, $"NaN");
 
-                this.SetText(_accurracyMinText, $"Min: NaN");
-                this.SetText(_accurracyMaxText, $"Max: NaN");
-                this.SetText(_maxSpreadText, $"NaN");
+                this.SetText(_minSpreadDistanceText, $"NaN");
+                this.SetText(_maxSpreadDistanceText, $"NaN");
+                this.SetText(_minSpreadAngleText, $"NaN");
+                this.SetText(_maxSpreadAngleText, $"NaN");
 
                 this.SetText(_magazineSizeText, $"NaN");
                 this.SetText(_startAmmoText, $"NaN");
@@ -42,15 +44,16 @@ namespace Asce.PrepareGame.UIs
             {
                 this.SetText(_damageText, $"{gunInformation.Damage}");
                 this.SetText(_penetrationText, $"{0}");
-                this.SetText(_fireRateText, $"{1f / gunInformation.ShootSpeed}/s");
+                this.SetText(_fireRateText, $"{1f / gunInformation.ShootSpeed:#.#}/s");
 
-                this.SetText(_accurracyMinText, $"Min: {0}");
-                this.SetText(_accurracyMaxText, $"Max: {0}");
-                this.SetText(_maxSpreadText, $"{0} deg");
+                this.SetText(_minSpreadDistanceText, $"{gunInformation.MinSpreadDistance:#.#}");
+                this.SetText(_maxSpreadDistanceText, $"{gunInformation.MaxSpreadDistance:#.#}");
+                this.SetText(_minSpreadAngleText, $"{gunInformation.MinBulletSpreadAngle:#.#} deg");
+                this.SetText(_maxSpreadAngleText, $"{gunInformation.MaxBulletSpreadAngle:#.#} deg");
 
-                this.SetText(_magazineSizeText, $"{gunInformation.MagazineSize}");
-                this.SetText(_startAmmoText, $"{gunInformation.StartAmmo}");
-                this.SetText(_reloadTimeText, $"{gunInformation.ReloadTime}s");
+                this.SetText(_magazineSizeText, $"{gunInformation.MagazineSize:#.#}");
+                this.SetText(_startAmmoText, $"{gunInformation.StartAmmo:#.#}");
+                this.SetText(_reloadTimeText, $"{gunInformation.ReloadTime:#.#}s");
             }
         }
 

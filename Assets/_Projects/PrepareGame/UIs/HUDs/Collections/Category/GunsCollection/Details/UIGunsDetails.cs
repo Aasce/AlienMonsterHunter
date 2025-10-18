@@ -13,6 +13,8 @@ namespace Asce.PrepareGame.UIs
 
         [Space]
         [SerializeField] private Button _buyButton;
+
+        [SerializeField] private RectTransform _purchasedContent;
         [SerializeField] private TextMeshProUGUI _level;
 
         [SerializeField] private UIMagazineGroup _magazineGroup;
@@ -54,15 +56,15 @@ namespace Asce.PrepareGame.UIs
             if (isBought)
             {
                 if (_buyButton != null) _buyButton.gameObject.SetActive(false);
-                if (_level != null)
+                if (_purchasedContent != null)
                 {
-                    _level.gameObject.SetActive(true);
-                    _level.text = $"lv. NaN";
+                    _purchasedContent.gameObject.SetActive(true);
+                    if (_level != null) _level.text = $"lv. NaN";
                 }
             }
             else
             {
-                if (_level != null) _level.gameObject.SetActive(false);
+                if (_purchasedContent != null) _purchasedContent.gameObject.SetActive(false);
                 if (_buyButton != null)
                 {
                     _buyButton.gameObject.SetActive(true);

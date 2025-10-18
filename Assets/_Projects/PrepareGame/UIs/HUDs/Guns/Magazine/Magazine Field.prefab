@@ -171,34 +171,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1856221772311168098, guid: 298bc418c6f336b4bafa388c0d83e664, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4278836653859731690}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298bc418c6f336b4bafa388c0d83e664, type: 3}
---- !u!1 &2530705219815389668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1856221772311168098, guid: 298bc418c6f336b4bafa388c0d83e664, type: 3}
-  m_PrefabInstance: {fileID: 4241336568606276998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-4278836653859731690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530705219815389668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8004acc0413a1aa4782905b65ecbfa8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageText: {fileID: 0}
-  _penetrationText: {fileID: 0}
-  _fireRateText: {fileID: 0}
-  _accurracyMinText: {fileID: 0}
-  _accurracyMaxText: {fileID: 0}
-  _maxSpreadText: {fileID: 0}
-  _magazineSizeText: {fileID: 0}
-  _startAmmoText: {fileID: 0}
-  _reloadTimeText: {fileID: 0}
