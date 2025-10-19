@@ -60,6 +60,7 @@ namespace Asce.Game.Players
                 Character.transform.position = spawnPoint;
                 CameraController.Instance.Target = Character.transform;
                 CameraController.Instance.SetToTarget();
+                Character.Initialize();
             }
 
             if (SupportCaller != null)

@@ -9,6 +9,7 @@ namespace Asce.Game.Guns
         [SerializeField] private string _name = string.Empty;
         [SerializeField, TextArea(3, 10)] private string _description = string.Empty;
         [SerializeField, SpritePreview] private Sprite _icon;
+        [SerializeField] private GunType _type = GunType.Pistol;
 
         [Header("Shoot")]
         [SerializeField, Min(0f)] private float _damage = 10f;
@@ -35,6 +36,7 @@ namespace Asce.Game.Guns
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
+        public GunType Type => _type;
 
         public float Damage => _damage;
         public float ShootSpeed => _shootSpeed;

@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Aerial Vanguard
   _name: Aerial Vanguard
-  _description: 
+  _description: "Deploys a Vanguard that lasts for {DespawnTime} seconds. It flies
+    toward the owner's line of sight and, upon detecting enemies, automatically engages
+    while maintaining a safe distance.\r\n\r\nWhen attacking, it fires projectiles
+    toward its target, dealing {Damage} damage to all enemies hit along the projectile's
+    path.\r\n\r\nThe Vanguard has {Health} Health, {Armor} Armor, {ViewRadius} View
+    Radius, and {Speed} Speed.\r"
   _icon: {fileID: 21300000, guid: f743911edf37546418a6223df0bac6af, type: 3}
   _isPassive: 0
   _cooldown: 8

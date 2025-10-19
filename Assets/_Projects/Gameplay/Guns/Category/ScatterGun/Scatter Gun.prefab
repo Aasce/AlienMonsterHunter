@@ -202,8 +202,8 @@ MonoBehaviour:
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
   _distance: 10
-  _bulletPerShoot: 6
-  _spreadAngle: 18
+  _bulletPerShoot: 7
+  _spreadAngle: 20
   _bulletLineVFXName: ScatterGun Bullet Line
 --- !u!114 &-2456159739219276791
 MonoBehaviour:

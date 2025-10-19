@@ -15,7 +15,9 @@ MonoBehaviour:
   _name: Red Soldier
   _description: 
   _icon: {fileID: 21300000, guid: 3bb55c4c51c852248ac0428597699183, type: 3}
-  _stats: {fileID: 11400000, guid: 66df5d1f08ef31547b835c07684d9a1a, type: 2}
+  _stats: {fileID: 11400000, guid: 2d11b12f4e7d4b14f812fb533df3384e, type: 2}
+  _role: 1
+  _difficulty: 3
   _abilityNames:
   - Horizon Breaker
   - Aerial Vanguard

@@ -16,6 +16,8 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: 3fe6e57bfd2a66b4293c9a00726f0734, type: 3}
   _stats: {fileID: 11400000, guid: 2ffc93dc868ac2a41a7f73c9e7a07c0b, type: 2}
+  _role: 2
+  _difficulty: 3
   _abilityNames:
   - Sentinel Turret
   - Blaster Drone

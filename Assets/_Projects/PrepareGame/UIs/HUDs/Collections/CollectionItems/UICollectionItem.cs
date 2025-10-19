@@ -1,3 +1,4 @@
+using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,8 +7,13 @@ namespace Asce.PrepareGame.UIs.Collections
 {
     public abstract class UICollectionItem<T> : UIObject, IPointerClickHandler
     {
-        [SerializeField] private UICollectionView<T> _collection;
-        [SerializeField] private T _item;
+        [SerializeField, Readonly] private UICollectionView<T> _collection;
+        [SerializeField, Readonly] private T _item;
+
+        [Header("References")]
+        [SerializeField] protected RectTransform _content;
+        [SerializeField] protected RectTransform _nothingContent;
+
 
         public UICollectionView<T> Collection
         {
@@ -19,6 +25,11 @@ namespace Asce.PrepareGame.UIs.Collections
         {
             get => _item;
             set => _item = value;
+        }
+
+        protected virtual void Start()
+        {
+
         }
 
         public void Set(T item)
@@ -36,5 +47,10 @@ namespace Asce.PrepareGame.UIs.Collections
             }
         }
 
+        protected virtual void IsShowContent(bool isShow)
+        {
+            _content.gameObject.SetActive(isShow);
+            _nothingContent.gameObject.SetActive(!isShow);
+        }
     }
 }

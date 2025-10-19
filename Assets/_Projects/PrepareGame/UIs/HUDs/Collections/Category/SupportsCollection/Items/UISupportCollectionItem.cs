@@ -15,15 +15,14 @@ namespace Asce.PrepareGame.UIs.Collections
         {
             if (support == null || support.Information == null)
             {
-                if (_icon != null) _icon.sprite = null;
-                if (_nameText != null) _nameText.text = "Unknown";
-                if (_levelText != null) _levelText.text = "lv. NaN";
+                this.IsShowContent(false);
                 return;
             }
 
-            if (_icon != null) _icon.sprite = support.Information.Icon;
-            if (_nameText != null) _nameText.text = support.Information.Name;
-            if (_levelText != null) _levelText.text = "lv. NaN";
+            this.IsShowContent(true);
+            _icon.sprite = support.Information.Icon;
+            _nameText.text = support.Information.Name;
+            _levelText.text = "lv. NaN";
         }
     }
 }

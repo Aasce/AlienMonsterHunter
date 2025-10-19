@@ -24,8 +24,8 @@ namespace Asce.Game.Guns
 
 
         private float _cacheCameraOrthographicSize = 0;
-        private float _cacheCharacterFovAngle = 0;
-        private float _cacheCharacterFovDistance = 0;
+        private string _cacheCharacterFovAngle;
+        private string _cacheCharacterFovDistance;
 
         public Gun Gun 
         {
@@ -56,11 +56,8 @@ namespace Asce.Game.Guns
             }
             if (Gun.Owner is Character character)
             {
-                _cacheCharacterFovDistance = character.Fov.Fov.ViewRadius;
-                character.Fov.Fov.ViewRadius *= _multiViewRadius;
-
-                _cacheCharacterFovAngle = character.Fov.Fov.ViewAngle;
-                character.Fov.Fov.ViewAngle *= _multiViewAngle;
+                _cacheCharacterFovDistance = character.Stats.ViewRadius.Add(_multiViewRadius, Stats.StatValueType.Scale).Id;
+                _cacheCharacterFovAngle = character.Stats.ViewAngle.Add(_multiViewAngle, Stats.StatValueType.Scale).Id;
             }
         }
 
@@ -80,8 +77,8 @@ namespace Asce.Game.Guns
             }
             if (Gun.Owner is Character character)
             {
-                character.Fov.Fov.ViewRadius = _cacheCharacterFovDistance;
-                character.Fov.Fov.ViewAngle = _cacheCharacterFovAngle;
+                character.Stats.ViewRadius.RemoveById(_cacheCharacterFovDistance);
+                character.Stats.ViewAngle.RemoveById(_cacheCharacterFovAngle);
             }
         }
 

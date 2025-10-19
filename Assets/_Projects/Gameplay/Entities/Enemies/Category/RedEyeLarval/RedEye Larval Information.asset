@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Red Eye Larval
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: dd4dd43fe203ab145b23552fa0571eb4, type: 3}
   _stats: {fileID: 11400000, guid: 8d28fdd2599cf8244bbc85b12cb4ec80, type: 2}

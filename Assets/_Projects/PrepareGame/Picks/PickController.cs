@@ -101,6 +101,7 @@ namespace Asce.PrepareGame.Picks
             }
 
             // Assign new character
+            newCharacter.Initialize();
             _characterInstance = newCharacter;
             PrepareGamePlayer.Instance.Character = newCharacter;
 

@@ -1,5 +1,4 @@
 using Asce.Game.Entities.Characters;
-using log4net.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +10,8 @@ namespace Asce.PrepareGame.UIs
         [Header("Information")]
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private TextMeshProUGUI _roleText;
+        [SerializeField] private Slider _difficultySlider;
 
         [Header("Joined")]
         [SerializeField] private RectTransform _inviteContent;
@@ -41,10 +42,12 @@ namespace Asce.PrepareGame.UIs
             if (Item.Information == null) return;
 
             this.SetInviteContent();
-            if (_icon != null) _icon.sprite = Item.Information.Icon;
-            if (_nameText != null) _nameText.text = Item.Information.Name;
-            if (_statGroup != null) _statGroup.Set(Item.Information.Stats);
-            if (_abilities != null) _abilities.Set(Item.Information.AbilitiesName);
+            _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
+            _roleText.text = Item.Information.Role.ToString();
+            _difficultySlider.value = Item.Information.Difficulty;
+            _statGroup.Set(Item.Information.Stats);
+            _abilities.Set(Item.Information.AbilitiesName);
         }
 
         private void Unregister()
@@ -59,22 +62,16 @@ namespace Asce.PrepareGame.UIs
         private void SetInviteContent()
         {
             bool isJoined = false;
+            _joinedContent.gameObject.SetActive(isJoined);
+            _inviteContent.gameObject.SetActive(!isJoined);
+
             if (isJoined)
             {
-                if (_inviteContent != null) _inviteContent.gameObject.SetActive(false);
-                if (_joinedContent != null)
-                {
-                    _joinedContent.gameObject.SetActive(true);
-                    if (_levelProgess != null) _levelProgess.Set(Item);
-                }
+                _levelProgess.Set(Item);
             }
             else
             {
-                if (_joinedContent != null) _joinedContent.gameObject.SetActive(false);
-                if (_inviteContent != null)
-                {
-                    _inviteContent.gameObject.SetActive(true);
-                }
+
             }
         }
     }

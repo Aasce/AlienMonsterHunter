@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Helicopter
   _name: Helicopter
-  _description: 
+  _description: 'Summons a Helicopter that flies in a straight path from the base
+    toward the target location.
+
+    As it moves, it drops a trail of fire along
+    its flight path. All enemies standing within the burning area are inflicted with
+    flames, taking {Damage} damage every {DamageInterval} seconds.
+
+
+    The Helicopter
+    has {Health} Health, {Armor} Armor, {ViewRadius} View Radius, and {Speed} Speed.
+
+    The
+    Fire Area lasts for {DespawnTime} seconds.'
   _icon: {fileID: 21300000, guid: a5103566a6c401f4198f7908c73918c7, type: 3}
   _cooldown: 15
   _cooldownOnRecall: 15

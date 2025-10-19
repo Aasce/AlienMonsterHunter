@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,50 +13,59 @@ namespace Asce.PrepareGame.UIs.Collections
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
+        [Header("Purchase")]
+        [SerializeField] private RectTransform _purchasedContent;
         [SerializeField] private TextMeshProUGUI _purchasedText;
+
+        [Space]
+        [SerializeField] private RectTransform _buyContent;
         [SerializeField] private TextMeshProUGUI _priceText;
         [SerializeField] private Button _buyButton;
+
+        public bool IsPurchased => false;
+
+        protected override void Start()
+        {
+            base.Start();
+            _buyButton.onClick.AddListener(BuyButton_OnClick);
+        }
 
         protected override void InternalSet(Gun gun)
         {
             if (gun == null || gun.Information == null)
             {
-                if (_icon != null) _icon.sprite = null;
-                if (_nameText != null) _nameText.text = "Unknown";
+                this.IsShowContent(false);
                 return;
             }
 
-            if (_icon != null) _icon.sprite = gun.Information.Icon;
-            if (_nameText != null) _nameText.text = gun.Information.Name;
+            this.IsShowContent(true);
+            _icon.sprite = gun.Information.Icon;
+            _nameText.text = gun.Information.Name;
             this.SetBuyButton();
         }
 
         private void SetBuyButton()
         {
-            bool isBought = false;
-            if (isBought)
+            bool isPurchased = this.IsPurchased;
+            _purchasedContent.gameObject.SetActive(isPurchased);
+            _levelText.gameObject.SetActive(isPurchased);
+            _buyContent.gameObject.SetActive(!isPurchased);
+
+            if (isPurchased)
             {
-                if (_buyButton != null) _buyButton.gameObject.SetActive(false);
-                if (_priceText != null) _priceText.gameObject.SetActive(false);
-                if (_levelText != null)
-                {
-                    _levelText.gameObject.SetActive(true);
-                    _levelText.text = $"lv. NaN";
-                }
+                _levelText.text = $"lv. {100}";
             }
             else
             {
-                if (_levelText != null) _levelText.gameObject.SetActive(false);
-                if (_buyButton != null)
-                {
-                    _buyButton.gameObject.SetActive(true);
-                }
-                if (_priceText != null)
-                {
-                    _priceText.gameObject.SetActive(true);
-                    _priceText.text = $"${1000}";
-                }
+                _priceText.text = $"${1000}";
             }
+        }
+
+        private void BuyButton_OnClick()
+        {
+            if (this.IsPurchased) return;
+
+
         }
 
     }

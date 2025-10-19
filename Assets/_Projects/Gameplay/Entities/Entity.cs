@@ -1,5 +1,6 @@
 using Asce.Game.Stats;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace Asce.Game.Entities
     {
         [Header("Entity")]
         [SerializeField] protected SO_EntityInformation _information;
-        [SerializeField] protected EntityView _view;
-        [SerializeField] protected EntityStats _stats;
-        [SerializeField] protected EntityEffects _effects;
+        [SerializeField, Readonly] protected EntityView _view;
+        [SerializeField, Readonly] protected EntityStats _stats;
+        [SerializeField, Readonly] protected EntityEffects _effects;
 
         protected bool _isDeath = false;
 
@@ -33,8 +34,8 @@ namespace Asce.Game.Entities
         protected override void RefReset()
         {
             base.RefReset();
-            this.LoadComponent(out _stats);
             this.LoadComponent(out _view);
+            this.LoadComponent(out _stats);
             this.LoadComponent(out _effects);
         }
 

@@ -1,4 +1,5 @@
 using Asce.Game.AIs;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,11 +10,11 @@ namespace Asce.Game.Entities.Enemies
     public abstract class Enemy : Entity, IHasAgent
     {
         [Header("Enemy")]
-        [SerializeField] protected NavMeshAgent _agent;
-        [SerializeField] private SingleTargetDetection _targetDetection;
+        [SerializeField, Readonly] protected NavMeshAgent _agent;
+        [SerializeField, Readonly] private SingleTargetDetection _targetDetection;
 
-        [Space]
-        [SerializeField] protected Cooldown _attackCooldown = new();
+        [Header("Realtime")]
+        [SerializeField, Readonly] protected Cooldown _attackCooldown = new();
 
         public new EnemyView View => base.View as EnemyView;
         public new EnemyStats Stats => base.Stats as EnemyStats;
@@ -28,9 +29,9 @@ namespace Asce.Game.Entities.Enemies
             this.LoadComponent(out _agent);
         }
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
             Agent.speed = Stats.Speed.FinalValue;
             AttackCooldown.BaseTime = Stats.AttackSpeed.FinalValue;
             TargetDetection.Origin = transform;

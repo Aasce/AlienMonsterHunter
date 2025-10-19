@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Horizon Breaker
   _name: Horizon Breaker
-  _description: 
+  _description: 'Deploys a forward-facing Turret that lasts for {DespawnTime} seconds.
+
+    After
+    a {RechargeTime}-second charge-up, it fires a continuous energy beam for the
+    remainder of its duration, dealing {Damage} damage every {DamageInterval} seconds
+    to all enemies caught in the beam.
+
+
+    The Turret has {Health} Health, {Armor}
+    Armor, and a {ViewRadius} View Radius. It cannot move or rotate.'
   _icon: {fileID: 21300000, guid: 8ecb881f23cc17c4b9c2f7bc9ff24ac2, type: 3}
   _isPassive: 0
   _cooldown: 10

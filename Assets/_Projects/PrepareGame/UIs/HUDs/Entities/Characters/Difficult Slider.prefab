@@ -125,12 +125,28 @@ PrefabInstance:
       value: 27.5
       objectReference: {fileID: 0}
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_text
+      value: 'Difficult:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692279403700348258, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036731751453012825, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

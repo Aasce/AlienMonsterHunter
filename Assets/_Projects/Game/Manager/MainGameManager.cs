@@ -51,7 +51,6 @@ namespace Asce.Game
             Character characterInstance = Instantiate(characterPrefab);
             if (characterInstance != null)
             {
-                gunInstance.Initialize();
                 characterInstance.Gun = gunInstance;
             }
 

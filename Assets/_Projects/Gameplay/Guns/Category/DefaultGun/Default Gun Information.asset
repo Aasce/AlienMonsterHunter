@@ -15,8 +15,9 @@ MonoBehaviour:
   _name: Default Gun
   _description: 
   _icon: {fileID: 21300000, guid: afea298293b40f04794206e64debc435, type: 3}
+  _type: 2
   _damage: 12
-  _shootSpeed: 0.4
+  _shootSpeed: 0.25
   _magazineSize: 18
   _startAmmo: 90
   _reloadTime: 1.5

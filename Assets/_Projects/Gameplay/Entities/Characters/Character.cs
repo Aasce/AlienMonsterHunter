@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
@@ -9,22 +10,24 @@ namespace Asce.Game.Entities.Characters
     public class Character : Entity
     {
         [Header("Character")]
-        [SerializeField] private CircleCollider2D _collider;
-        [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private CharacterFOV _fov;
-        [SerializeField] private CharacterAbilities _abilities;
-        [SerializeField] private Gun _gun;
+        [SerializeField, Readonly] private CircleCollider2D _collider;
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
+        [SerializeField, Readonly] private CharacterFOV _fov;
+        [SerializeField, Readonly] private CharacterAbilities _abilities;
+        [SerializeField, Readonly] private Gun _gun;
 
         [Space]
         [SerializeField] private Transform _weaponSlot;
 
-        [Space]
-        [SerializeField] private Vector2 _moveDirection = Vector2.zero;
-        [SerializeField] private Vector2 _lookPosition = Vector2.zero;
+        [Header("Realtime")]
+        [SerializeField, Readonly] private Vector2 _moveDirection = Vector2.zero;
+        [SerializeField, Readonly] private Vector2 _lookPosition = Vector2.zero;
 
         public event Action<Gun> OnGunChanged;
 
         public new SO_CharacterInformation Information => base.Information as SO_CharacterInformation;
+        public new CharacterStats Stats => base.Stats as CharacterStats;
+
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
@@ -65,21 +68,38 @@ namespace Asce.Game.Entities.Characters
         public override void ResetStatus()
         {
             base.ResetStatus();
+            Abilities.ResetStatus();
             if (Gun != null) Gun.ResetStatus();
-            if (Abilities != null) Abilities.ResetStatus();
         }
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
+            Abilities.Initialize(this);
             if (Gun != null) Gun.Initialize();
-            if (Abilities != null) Abilities.Initialize(this);
+
+            Fov.FovSelf.ViewRadius = Stats.SelfViewRadius.FinalValue;
+            Fov.Fov.ViewRadius = Stats.ViewRadius.FinalValue;
+            Fov.Fov.ViewAngle = Stats.ViewAngle.FinalValue;
+
+            Stats.SelfViewRadius.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                Fov.FovSelf.ViewRadius = newValue;
+            };
+
+            Stats.ViewRadius.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                Fov.Fov.ViewRadius = newValue;
+            };
+
+            Stats.ViewAngle.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                Fov.Fov.ViewAngle = newValue;
+            };
         }
 
         private void FixedUpdate()
         {
-            if (Rigidbody == null) return;
-
             // Moving
             float speed = 5f;
             Vector2 deltaPosition = _moveDirection.normalized * speed * Time.fixedDeltaTime;

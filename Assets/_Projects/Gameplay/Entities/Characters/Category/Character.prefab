@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _information: {fileID: 0}
   _view: {fileID: 6622724446036704105}
-  _stats: {fileID: 6912903451780248762}
+  _stats: {fileID: 6446334129876337184}
   _effects: {fileID: 2685624722300885766}
   _collider: {fileID: 3285569828326788888}
   _rigidbody: {fileID: 2125223173831006573}
@@ -354,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6673252821967040889}
-  - component: {fileID: 6912903451780248762}
+  - component: {fileID: 6446334129876337184}
   m_Layer: 8
   m_Name: Stats
   m_TagString: Untagged
@@ -377,7 +377,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8186422347695430131}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6912903451780248762
+--- !u!114 &6446334129876337184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5867197909989179987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cf8dc0cdf5b890428605d70f34b93a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 92f577c74fcd2de4796fe0baa25607e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health:
@@ -405,6 +405,13 @@ MonoBehaviour:
     _ratioValue: 0
     _scaleValue: 0
   _speed:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _selfViewRadius:
     _statValues: []
     _finalValue: 0
     _baseValue: 0
