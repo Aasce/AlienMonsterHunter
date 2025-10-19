@@ -30,13 +30,15 @@ namespace Asce.Game.UIs
 
         private void Start()
         {
-            if (_button != null) _button.onClick.AddListener(() =>
-            {
-                if (_panelController == null) return;
-                UISettingsPanel settingsPanel = _panelController.GetPanelByName(_panelName) as UISettingsPanel;
-                if (settingsPanel == null) return;
-                settingsPanel.Toggle();
-            });
+            _button.onClick.AddListener(Button_OnClick);
+        }
+
+        private void Button_OnClick()
+        {
+            if (_panelController == null) return;
+            UIPanel panel = _panelController.GetPanelByName(_panelName);
+            if (panel == null) return;
+            panel.Toggle();
         }
     }
 }
