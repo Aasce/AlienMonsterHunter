@@ -17,12 +17,14 @@ namespace Asce.Game
         private void Start()
         {
             this.InitializeController();
+            this.LoadGame();
             this.LoadPlayer();
             this.AssignUI();
         }
 
         public void BackToMainMenu()
         {
+            MainGameSaveLoadController.Instance.SaveCurrentGame();
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
 
@@ -30,6 +32,12 @@ namespace Asce.Game
         {
             UIGameController.Instance.PanelController.HideAll();
         }
+
+        private void LoadGame()
+        {
+            MainGameSaveLoadController.Instance.LoadCurrentGame();
+        }
+
 
         private void LoadPlayer()
         {
@@ -40,6 +48,8 @@ namespace Asce.Game
 
         private void CreateCharacterForPlayer()
         {
+            if (Player.Instance.Character != null) return;
+
             string characterName = Shared.Get<string>("character");
             string gunName = Shared.Get<string>("gun");
 
@@ -55,6 +65,8 @@ namespace Asce.Game
             }
 
             Player.Instance.Character = characterInstance;
+            Player.Instance.Character.transform.position = Player.Instance.SpawnPoint;
+            Player.Instance.InitializeCharacter();
         }
 
         private void CreateSupportForPlayer()
@@ -63,6 +75,7 @@ namespace Asce.Game
             List<string> supportNames = Shared.Get<List<string>>("supports");
             if (supportNames == null) return;
             Player.Instance.Supports.AddRange(supportNames);
+            Player.Instance.InitializeSupportCaller();
         }
 
         private void AssignUI()

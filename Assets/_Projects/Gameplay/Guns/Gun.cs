@@ -1,4 +1,5 @@
 using Asce.Game.Entities;
+using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -7,8 +8,12 @@ using UnityEngine;
 
 namespace Asce.Game.Guns
 {
-    public abstract class Gun : GameComponent
+    public abstract class Gun : GameComponent, IIdentifiable, ISaveable<GunSaveData>, ILoadable<GunSaveData>
     {
+        public const string PREFIX_ID = "gun";
+
+        [SerializeField, Readonly] protected string _id;
+
         [Header("Setup")]
         [SerializeField] protected SO_GunInformation _information;
         [SerializeField] protected Transform _barrel;
@@ -39,6 +44,7 @@ namespace Asce.Game.Guns
         public event Action<Vector2> OnFired;
         public event Action<Vector2, Vector2> OnHit;
 
+        public string Id => _id;
         public SO_GunInformation Information => _information;
         public virtual Vector2 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
         public Entity Owner
@@ -99,16 +105,20 @@ namespace Asce.Game.Guns
             set => _minBulletSpreadAngle = value;
         }
 
-
-
         public Cooldown ShootCooldown => _shootCooldown;
         public Cooldown ReloadCooldown => _reloadCooldown;
 
         public bool IsReloading => !_reloadCooldown.IsComplete;
+        string IIdentifiable.Id
+        {
+            get => Id;
+            set => _id = value;
+        }
 
         public virtual void Initialize()
         {
-            if (Information == null) return;
+            if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
+
             Damage = Information.Damage;
             ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
 
@@ -226,6 +236,26 @@ namespace Asce.Game.Guns
         protected virtual void Hit(Vector2 position, Vector2 direction)
         {
             OnHit?.Invoke(position, direction);
+        }
+
+        GunSaveData ISaveable<GunSaveData>.Save()
+        {
+            GunSaveData saveData = new()
+            {
+                id = Id,
+                name = Information.Name,
+                currentAmmo = CurrentAmmo,
+                remainingAmmo = RemainingAmmo,
+            };
+            return saveData;
+        }
+
+        void ILoadable<GunSaveData>.Load(GunSaveData data)
+        {
+            if (data == null) return;
+            _id = data.id;
+            CurrentAmmo = data.currentAmmo;
+            RemainingAmmo = data.remainingAmmo;
         }
 
 

@@ -1,4 +1,5 @@
 using Asce.Game.AIs;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.AI;
 namespace Asce.Game.Entities.Enemies
 {
     [RequireComponent(typeof (NavMeshAgent))]
-    public abstract class Enemy : Entity, IHasAgent
+    public abstract class Enemy : Entity, IHasAgent, ISaveable<EnemySaveData>, ILoadable<EnemySaveData>
     {
         [Header("Enemy")]
         [SerializeField, Readonly] protected NavMeshAgent _agent;
@@ -103,6 +104,23 @@ namespace Asce.Game.Entities.Enemies
         protected virtual void ViewHandle()
         {
             View.Animator.SetFloat("Speed", Agent.velocity.magnitude);
+        }
+
+
+        EnemySaveData ISaveable<EnemySaveData>.Save()
+        {
+            EntitySaveData baseData = ((ISaveable<EntitySaveData>)this).Save();
+            EnemySaveData saveData = new();
+            saveData.CopyFrom(baseData);
+            saveData.attackCooldownRemaining = AttackCooldown.CurrentTime;
+            return saveData;
+        }
+
+        void ILoadable<EnemySaveData>.Load(EnemySaveData data)
+        {
+            ((ILoadable<EntitySaveData>)this).Load(data);
+            Agent.Warp(data.position);
+            AttackCooldown.CurrentTime = data.attackCooldownRemaining;
         }
     }
 }

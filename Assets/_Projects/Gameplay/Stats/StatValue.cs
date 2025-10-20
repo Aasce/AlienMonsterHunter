@@ -1,11 +1,14 @@
+using Asce.Managers;
 using System;
 using UnityEngine;
 
 namespace Asce.Game.Stats
 {
     [System.Serializable]
-    public struct StatValue
+    public struct StatValue : IIdentifiable
     {
+        public const string PREFIX_ID = "stat";
+
         [SerializeField] private string _id;
         [SerializeField] private float _value;
         [SerializeField] private StatValueType _type;
@@ -13,13 +16,16 @@ namespace Asce.Game.Stats
         public readonly string Id => _id;
         public readonly float Value => _value;
         public readonly StatValueType Type => _type;
-
-        // -------- Constructors --------
+        string IIdentifiable.Id 
+        { 
+            readonly get => Id; 
+            set => _id = value; 
+        }
 
         /// <summary> Create new stat with unique ID. </summary>
         public StatValue(float value, StatValueType type = StatValueType.Flat)
         {
-            _id = StatIdGenerator.NewId();
+            _id = IdGenerator.NewId(PREFIX_ID);
             _value = value;
             _type = type;
         }
@@ -27,7 +33,7 @@ namespace Asce.Game.Stats
         /// <summary> Create stat with predefined ID </summary>
         public StatValue(string id, float value, StatValueType type = StatValueType.Flat)
         {
-            _id = string.IsNullOrEmpty(id) ? StatIdGenerator.NewId() : id;
+            _id = string.IsNullOrEmpty(id) ? IdGenerator.NewId(PREFIX_ID) : id;
             _value = value;
             _type = type;
         }
@@ -35,16 +41,6 @@ namespace Asce.Game.Stats
         public override readonly string ToString()
         {
             return $"StatValue(Id={_id}, Value={_value}, Type={_type})";
-        }
-    }
-
-    /// <summary> Centralized ID generator for all StatValues.  </summary>
-    public static class StatIdGenerator
-    {
-        /// <summary>  Generate globally unique, JSON-safe ID. </summary>
-        public static string NewId()
-        {
-            return $"stat_{Guid.NewGuid():N}";
         }
     }
 }

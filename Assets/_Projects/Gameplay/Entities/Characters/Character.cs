@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace Asce.Game.Entities.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))] 
-    public class Character : Entity
+    public class Character : Entity, ISaveable<CharacterSaveData>, ILoadable<CharacterSaveData>
     {
         [Header("Character")]
         [SerializeField, Readonly] private CircleCollider2D _collider;
@@ -150,6 +151,33 @@ namespace Asce.Game.Entities.Characters
         {
             if (Abilities == null) return;
             Abilities.Use(index, position);
+        }
+
+
+
+        CharacterSaveData ISaveable<CharacterSaveData>.Save()
+        {
+            EntitySaveData baseData = ((ISaveable<EntitySaveData>)this).Save();
+            CharacterSaveData saveData = new();
+            saveData.CopyFrom(baseData);
+
+            if (Gun is ISaveable<GunSaveData> gunSaveable)
+            {
+                saveData.gun = gunSaveable.Save();
+            }
+
+            return saveData;
+        }
+
+        void ILoadable<CharacterSaveData>.Load(CharacterSaveData data)
+        {
+            if (data == null) return;
+            ((ILoadable<EntitySaveData>)this).Load(data);
+
+            if (Gun is ILoadable<GunSaveData> gunLoadable)
+            {
+                gunLoadable.Load(data.gun);
+            }
         }
     }
 }

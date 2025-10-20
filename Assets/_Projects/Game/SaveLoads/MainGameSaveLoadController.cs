@@ -1,0 +1,97 @@
+using Asce.Game.Entities;
+using Asce.Game.Entities.Characters;
+using Asce.Game.Entities.Enemies;
+using Asce.Game.Guns;
+using Asce.Game.Managers;
+using Asce.Game.Players;
+using Asce.Game.SaveLoads;
+using Asce.Managers;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Asce.Game
+{
+    public class MainGameSaveLoadController : MonoBehaviourSingleton<MainGameSaveLoadController>
+    {
+        public void SaveCurrentGame()
+        {
+            this.SaveEnemies();
+            this.SaveCharacter();
+        }
+
+        public void LoadCurrentGame()
+        {
+            this.LoadEnemies();
+            this.LoadCharacter();
+        }
+
+        public void SaveEnemies()
+        {
+            AllEntitiesSaveData<EnemySaveData> allData = new();
+            List<Enemy> enemies = EnemyController.Instance.GetAllEnemies();
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy is ISaveable<EnemySaveData> saveable)
+                    allData.entities.Add(saveable.Save());
+            }
+
+            SaveLoadManager.Instance.Save("CurrentGameEnemies", allData);
+        }
+
+        private void SaveCharacter()
+        {
+            CharacterSaveData characterData = (Player.Instance.Character as ISaveable<CharacterSaveData>).Save();
+            SaveLoadManager.Instance.Save("CurrentGameCharacter", characterData);
+        }
+
+
+        private void LoadEnemies()
+        {
+            AllEntitiesSaveData<EnemySaveData> allData = SaveLoadManager.Instance.Load<AllEntitiesSaveData<EnemySaveData>>("CurrentGameEnemies");
+            if (allData == null) return;
+            Debug.Log("Load");
+            foreach (EnemySaveData data in allData.entities)
+            {
+                Enemy enemy = EnemyController.Instance.Spawn(data.name, data.position);
+                if (enemy is ILoadable<EnemySaveData> loadable)
+                {
+                    loadable.Load(data);
+                }
+            }
+        }
+
+        private void LoadCharacter()
+        {
+            CharacterSaveData characterData = SaveLoadManager.Instance.Load<CharacterSaveData>("CurrentGameCharacter");
+            if (characterData == null) return;
+            Gun gun = CreateGunFromData(characterData.gun);
+
+            Character characterPrefab = GameManager.Instance.AllCharacters.Get(characterData.name);
+            Character characterInstance = Instantiate(characterPrefab);
+            if (characterInstance != null)
+            {
+                characterInstance.Gun = gun;
+            }
+
+            Player.Instance.Character = characterInstance;
+            Player.Instance.InitializeCharacter();
+
+            (characterInstance as ILoadable<CharacterSaveData>).Load(characterData);
+        }
+
+        private Gun CreateGunFromData(GunSaveData gunData)
+        {
+            if (gunData == null)
+            {
+                Debug.LogError("Gun data is null");
+                return null;
+            }
+
+            Gun gunPrefab = GameManager.Instance.AllGuns.Get(gunData.name);
+            Gun gunInstance = Instantiate(gunPrefab);
+            gunInstance.name = gunPrefab.name;
+            return gunInstance;
+        }
+    }
+}

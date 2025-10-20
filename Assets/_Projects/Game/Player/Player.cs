@@ -52,21 +52,23 @@ namespace Asce.Game.Players
         public SupportCaller SupportCaller => _supportCaller;
         public List<string> Supports => _supports;
 
+        public Vector2 SpawnPoint => _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
+
         public void Initialize()
         {
             if (Character != null)
             {
-                Vector2 spawnPoint = _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
-                Character.transform.position = spawnPoint;
                 CameraController.Instance.Target = Character.transform;
                 CameraController.Instance.SetToTarget();
+            }
+        }
+        public void InitializeCharacter() 
+        {
                 Character.Initialize();
-            }
-
-            if (SupportCaller != null)
-            {
-                SupportCaller.Initialize(Supports);
-            }
+        }
+        public void InitializeSupportCaller()
+        {
+            SupportCaller.Initialize(Supports);
         }
 
         public void ReviveCharacter(bool isReviveAtSpawnPoint = false)

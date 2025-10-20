@@ -1,11 +1,11 @@
+using Asce.Game.SaveLoads;
 using System;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Asce.Game.Stats
 {
     [Serializable]
-    public class ResourceStat : Stat 
+    public class ResourceStat : Stat, ISaveable<ResourceStatSaveData>, ILoadable<ResourceStatSaveData>
     {
         [Header("Resource Stat")]
         [SerializeField] private float _currentValue = 0;
@@ -34,6 +34,23 @@ namespace Asce.Game.Stats
                 _currentValue = Mathf.Clamp(value, 0, FinalValue);
                 OnCurrentValueChanged?.Invoke(oldValue, _currentValue);
             }
+        }
+
+
+        ResourceStatSaveData ISaveable<ResourceStatSaveData>.Save()
+        {
+            StatSaveData baseData = ((ISaveable<StatSaveData>) this).Save();
+            ResourceStatSaveData data = new();
+            data.CopyFrom(baseData);
+            data.currentValue = CurrentValue;
+            return data;
+        }
+
+        void ILoadable<ResourceStatSaveData>.Load(ResourceStatSaveData data)
+        {
+            if (data == null) return;
+            ((ILoadable<StatSaveData>)this).Load(data);
+            CurrentValue = data.currentValue;
         }
     }
 }

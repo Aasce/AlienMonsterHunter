@@ -22,6 +22,11 @@ namespace Asce.Game.Entities.Enemies
 
         public override void Initialize(SO_EntityStats baseStats)
         {
+            _stats.Add(new StatContainer(nameof(AttackDamage), AttackDamage));
+            _stats.Add(new StatContainer(nameof(AttackSpeed), AttackSpeed));
+            _stats.Add(new StatContainer(nameof(AttackRange), AttackRange));
+            _stats.Add(new StatContainer(nameof(ViewRange), ViewRange));
+
             base.Initialize(baseStats);
             if (baseStats is not SO_EnemyStats enemyStats) return;
 
@@ -37,14 +42,14 @@ namespace Asce.Game.Entities.Enemies
             base.ResetStats();
         }
 
-        protected override void ClearStats()
+        protected override void ClearStats(bool isClearBase = false)
         {
-            base.ClearStats();
-            AttackDamage.Clear();
-            AttackSpeed.Clear();
-            AttackRange.Clear();
+            base.ClearStats(isClearBase);
+            AttackDamage.Clear(isClearBase);
+            AttackSpeed.Clear(isClearBase);
+            AttackRange.Clear(isClearBase);
 
-            ViewRange.Clear();
+            ViewRange.Clear(isClearBase);
         }
     }
 }

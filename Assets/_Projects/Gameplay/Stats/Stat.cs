@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace Asce.Game.Stats
 {
     [System.Serializable]
-    public class Stat
+    public class Stat : ISaveable<StatSaveData>, ILoadable<StatSaveData>
     {
         [SerializeField] protected List<StatValue> _statValues = new();
 
@@ -96,5 +97,19 @@ namespace Asce.Game.Stats
             FinalValue = ((_baseValue + _flatValue) * _ratioValue) * _scaleValue;
         }
 
+        StatSaveData ISaveable<StatSaveData>.Save()
+        {
+            StatSaveData data = new();
+            data.values.AddRange(_statValues);
+            return data;
+        }
+
+        void ILoadable<StatSaveData>.Load(StatSaveData data)
+        {
+            if (data == null) return;
+            _statValues.Clear();
+            _statValues.AddRange(data.values);
+            this.Recalculate();
+        }
     }
 }

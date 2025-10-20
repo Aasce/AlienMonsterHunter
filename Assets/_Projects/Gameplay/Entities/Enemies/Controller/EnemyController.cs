@@ -48,6 +48,17 @@ namespace Asce.Game.Entities.Enemies
             }
         }
 
+        public List<Enemy> GetAllEnemies()
+        {
+            List<Enemy> enemies = new();
+            var pools = _pools.Values;
+            foreach (var pool in pools)
+            {
+                enemies.AddRange(pool.Activities);
+            }
+            return enemies;
+        }
+
         public Enemy Spawn(string name, Vector2 position)
         {
             if (string.IsNullOrEmpty(name)) return null;
