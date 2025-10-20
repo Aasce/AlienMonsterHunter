@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.IO;
 using UnityEngine;
 
@@ -6,25 +7,24 @@ namespace Asce.Managers.SaveLoads
     public static class SaveLoadSystem
     {
         /// <summary>
-        ///     Save object to JSON file at given path.
+        ///     Save object to JSON file at given path using Newtonsoft.Json.
         /// </summary>
         public static void Save<T>(T target, string path)
         {
             try
             {
-                // Combine with persistentDataPath
                 string fullPath = Path.Combine(Application.persistentDataPath, path);
-
-                // Ensure directory exists
                 string directory = Path.GetDirectoryName(fullPath);
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
 
-                // Serialize to JSON
-                string json = JsonUtility.ToJson(target, true);
-                File.WriteAllText(fullPath, json); // Write file (overwrite if exists)
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                string json = JsonConvert.SerializeObject(target, JsonSettings.FieldOnly);
+                File.WriteAllText(fullPath, json);
+
+#if UNITY_EDITOR
+                Debug.Log($"[SaveLoadSystem] Saved: {fullPath}");
+#endif
             }
             catch (System.Exception ex)
             {
@@ -33,7 +33,7 @@ namespace Asce.Managers.SaveLoads
         }
 
         /// <summary>
-        ///     Load object from JSON file at given path.
+        ///     Load object from JSON file at given path using Newtonsoft.Json.
         /// </summary>
         public static T Load<T>(string path)
         {
@@ -41,10 +41,9 @@ namespace Asce.Managers.SaveLoads
             {
                 string fullPath = Path.Combine(Application.persistentDataPath, path);
                 if (!File.Exists(fullPath)) return default;
-                
-                // Read JSON text
+
                 string json = File.ReadAllText(fullPath);
-                return JsonUtility.FromJson<T>(json); // Deserialize
+                return JsonConvert.DeserializeObject<T>(json, JsonSettings.FieldOnly);
             }
             catch (System.Exception ex)
             {
@@ -61,7 +60,13 @@ namespace Asce.Managers.SaveLoads
             try
             {
                 string fullPath = Path.Combine(Application.persistentDataPath, path);
-                if (File.Exists(fullPath)) File.WriteAllText(fullPath, "{}");
+                if (File.Exists(fullPath))
+                {
+                    File.WriteAllText(fullPath, "{}");
+#if UNITY_EDITOR
+                    Debug.Log($"[SaveLoadSystem] Cleared: {fullPath}");
+#endif
+                }
             }
             catch (System.Exception ex)
             {
@@ -77,7 +82,13 @@ namespace Asce.Managers.SaveLoads
             try
             {
                 string fullPath = Path.Combine(Application.persistentDataPath, path);
-                if (File.Exists(fullPath)) File.Delete(fullPath);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+#if UNITY_EDITOR
+                    Debug.Log($"[SaveLoadSystem] Deleted: {fullPath}");
+#endif
+                }
             }
             catch (System.Exception ex)
             {

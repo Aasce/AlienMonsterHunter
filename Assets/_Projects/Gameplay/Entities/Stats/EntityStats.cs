@@ -51,20 +51,14 @@ namespace Asce.Game.Entities
             StatsSaveData statsData = new();
             foreach(StatContainer container in _stats)
             {
-                if (container.Stat is ResourceStat resourceStat)
+                if (container.Stat is ISaveable<ResourceStatSaveData> resourceSaveable)
                 {
-                    if (resourceStat is ISaveable<ResourceStatSaveData> resourceSaveable)
-                    {
-                        ResourceStatSaveData resData = resourceSaveable.Save();
-                        statsData.resourceStats.Add(new(container.Name, resData));
-                    }
+                    ResourceStatSaveData resData = resourceSaveable.Save();
+                    statsData.stats.Add(new(container.Name, resData));
                 }
-                else
+                else if (container.Stat is ISaveable<StatSaveData> saveable)
                 {
-                    if (container.Stat is ISaveable<StatSaveData> saveable)
-                    {
-                        statsData.stats.Add(new(container.Name, saveable.Save()));
-                    }
+                    statsData.stats.Add(new(container.Name, saveable.Save()));
                 }
             }
             return statsData;
@@ -77,17 +71,13 @@ namespace Asce.Game.Entities
             foreach (StatContainerSaveData statData in data.stats)
             {
                 StatContainer container = _stats.Find((c) => c.Name == statData.Name);
-                if (container.Stat is ILoadable<StatSaveData> loadable)
+                if (container.Stat is ILoadable<ResourceStatSaveData> resLoadable)
+                {
+                    resLoadable.Load(statData.Stat as ResourceStatSaveData);
+                }
+                else if (container.Stat is ILoadable<StatSaveData> loadable)
                 {
                     loadable.Load(statData.Stat);
-                }
-            }
-            foreach (ResourceStatContainerSaveData resData in data.resourceStats)
-            {
-                StatContainer container = _stats.Find((c) => c.Name == resData.Name);
-                if (container.Stat is ILoadable<ResourceStatSaveData> loadable)
-                {
-                    loadable.Load(resData.Stat);
                 }
             }
         }

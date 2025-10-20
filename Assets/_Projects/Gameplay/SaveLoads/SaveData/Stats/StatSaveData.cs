@@ -7,7 +7,7 @@ namespace Asce.Game.SaveLoads
     [System.Serializable]
     public class StatSaveData : SaveData
     {
-        public List<StatValue> values = new();
+        public List<StatValueSaveData> values = new();
 
         public override void CopyFrom(SaveData other)
         {

@@ -100,7 +100,10 @@ namespace Asce.Game.Stats
         StatSaveData ISaveable<StatSaveData>.Save()
         {
             StatSaveData data = new();
-            data.values.AddRange(_statValues);
+            foreach (StatValue statValue in _statValues)
+            {
+                data.values.Add((statValue as ISaveable<StatValueSaveData>).Save());
+            }
             return data;
         }
 
@@ -108,7 +111,11 @@ namespace Asce.Game.Stats
         {
             if (data == null) return;
             _statValues.Clear();
-            _statValues.AddRange(data.values);
+            foreach (StatValueSaveData saveData in data.values)
+            {
+                StatValue statValue = StatValue.Create(saveData);
+                _statValues.Add(statValue);
+            }
             this.Recalculate();
         }
     }

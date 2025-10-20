@@ -7,7 +7,7 @@ namespace Asce.Game.SaveLoads
     public class StatsSaveData : SaveData
     {
         public List<StatContainerSaveData> stats = new();
-        public List<ResourceStatContainerSaveData> resourceStats = new();
+        //public List<ResourceStatContainerSaveData> resourceStats = new();
 
         public override void CopyFrom(SaveData other)
         {
@@ -17,8 +17,8 @@ namespace Asce.Game.SaveLoads
                 stats.Clear();
                 stats.AddRange(statData.stats);
 
-                resourceStats.Clear();
-                resourceStats.AddRange(statData.resourceStats);
+                //resourceStats.Clear();
+                //resourceStats.AddRange(statData.resourceStats);
             }
         }
     }

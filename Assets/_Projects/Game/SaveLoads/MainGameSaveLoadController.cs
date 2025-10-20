@@ -50,7 +50,6 @@ namespace Asce.Game
         {
             AllEntitiesSaveData<EnemySaveData> allData = SaveLoadManager.Instance.Load<AllEntitiesSaveData<EnemySaveData>>("CurrentGameEnemies");
             if (allData == null) return;
-            Debug.Log("Load");
             foreach (EnemySaveData data in allData.entities)
             {
                 Enemy enemy = EnemyController.Instance.Spawn(data.name, data.position);

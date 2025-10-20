@@ -17,11 +17,11 @@ namespace Asce.Game.Entities.Characters
 
         public override void Initialize(SO_EntityStats baseStats)
         {
+            base.Initialize(baseStats);
             _stats.Add(new StatContainer(nameof(SelfViewRadius), SelfViewRadius));
             _stats.Add(new StatContainer(nameof(ViewRadius), ViewRadius));
             _stats.Add(new StatContainer(nameof(ViewAngle), ViewAngle));
 
-            base.Initialize(baseStats);
             if (baseStats is not SO_CharacterStats enemyStats) return;
 
             SelfViewRadius.Add(enemyStats.SelfViewRadius, StatValueType.Base);

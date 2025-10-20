@@ -22,12 +22,12 @@ namespace Asce.Game.Entities.Enemies
 
         public override void Initialize(SO_EntityStats baseStats)
         {
+            base.Initialize(baseStats);
             _stats.Add(new StatContainer(nameof(AttackDamage), AttackDamage));
             _stats.Add(new StatContainer(nameof(AttackSpeed), AttackSpeed));
             _stats.Add(new StatContainer(nameof(AttackRange), AttackRange));
             _stats.Add(new StatContainer(nameof(ViewRange), ViewRange));
 
-            base.Initialize(baseStats);
             if (baseStats is not SO_EnemyStats enemyStats) return;
 
             AttackDamage.Add(enemyStats.AttackDamage, StatValueType.Base);

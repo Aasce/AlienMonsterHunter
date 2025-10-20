@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using Asce.Managers;
 using System;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace Asce.Game.Stats
 {
     [System.Serializable]
-    public struct StatValue : IIdentifiable
+    public struct StatValue : IIdentifiable, ISaveable<StatValueSaveData>
     {
         public const string PREFIX_ID = "stat";
 
@@ -41,6 +42,29 @@ namespace Asce.Game.Stats
         public override readonly string ToString()
         {
             return $"StatValue(Id={_id}, Value={_value}, Type={_type})";
+        }
+
+        StatValueSaveData ISaveable<StatValueSaveData>.Save()
+        {
+            return new StatValueSaveData()
+            {
+                id = _id,
+                value = _value,
+                type = _type
+            };
+        }
+
+        public static StatValue Create(StatValueSaveData data)
+        {
+            if (data == null) return default;
+            StatValue statValue = new StatValue()
+            {
+                _id = data.id,
+                _value = data.value,
+                _type = data.type
+            };
+
+            return statValue;
         }
     }
 }
