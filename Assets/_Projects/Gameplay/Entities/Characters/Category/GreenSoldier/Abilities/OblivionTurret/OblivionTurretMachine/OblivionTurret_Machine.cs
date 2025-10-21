@@ -1,6 +1,7 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
@@ -145,5 +146,19 @@ namespace Asce.Game.Entities.Machines
         }
 
         #endregion
+
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("CurrentAmmo", _currentAmmo);
+            data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _currentAmmo = data.GetCustom<int>("CurrentAmmo");
+            _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+        }
     }
 }

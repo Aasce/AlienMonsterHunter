@@ -28,30 +28,30 @@ namespace Asce.Game.Abilities
             }
         }
 
+        public List<Ability> GetAllAbilities()
+        {
+            List<Ability> abilities = new();
+            var pools = _pools.Values;
+            foreach (Pool<Ability> pool in pools)
+            {
+                if (pool == null) continue;
+                abilities.AddRange(pool.Activities);
+            }
+            return abilities;
+        }
+
         public Ability Spawn(string name, GameObject owner)
         {
             if (string.IsNullOrEmpty(name)) return null;
+            if (!_pools.ContainsKey(name)) this.CreatePool(name);
+            if (!_pools.TryGetValue(name, out Pool<Ability> pool)) return null;
 
-            Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(name);
-            if (abilityPrefab == null) return null;
-
-            if (!_pools.ContainsKey(name))
-            {
-                Pool<Ability> newPool = new()
-                {
-                    Prefab = abilityPrefab,
-                    Parent = this.transform,
-                    IsSetActive = false,
-                };
-                _pools.Add(name, newPool);
-            }
-
-            Pool<Ability> pool = _pools[name];
             Ability ability = pool.Activate(out bool isCreated);
             if (ability == null) return null;
+            if (isCreated) ability.Initialize();
+            else ability.ResetStatus();
 
             ability.Owner = owner;
-            ability.DespawnTime.Reset();
             ability.OnSpawn();
             return ability;
         }
@@ -71,5 +71,21 @@ namespace Asce.Game.Abilities
             return false;
         }
 
+        private void CreatePool(string name)
+        {
+            Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(name);
+            if (abilityPrefab == null) return;
+
+            GameObject poolParent = new GameObject($"{name} Pool");
+            poolParent.transform.SetParent(this.transform);
+
+            Pool<Ability> pool = new()
+            {
+                Prefab = abilityPrefab,
+                Parent = poolParent.transform,
+                IsSetActive = false
+            };
+            _pools[name] = pool;
+        }
     }
 }

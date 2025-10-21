@@ -166,6 +166,11 @@ namespace Asce.Game.Entities.Characters
                 saveData.gun = gunSaveable.Save();
             }
 
+            if (Abilities is ISaveable<CharacterAbilitiesSaveData> abilitiesSaveable)
+            {
+                saveData.abilities = abilitiesSaveable.Save();
+            }
+
             return saveData;
         }
 
@@ -177,6 +182,11 @@ namespace Asce.Game.Entities.Characters
             if (Gun is ILoadable<GunSaveData> gunLoadable)
             {
                 gunLoadable.Load(data.gun);
+            }
+
+            if (Abilities is ILoadable<CharacterAbilitiesSaveData> abilitiesLoadable)
+            {
+                abilitiesLoadable.Load(data.abilities);
             }
         }
     }

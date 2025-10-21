@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -73,6 +74,20 @@ namespace Asce.Game.Entities.Machines
             light.Distance = Information.Stats.GetCustomStat("Distance");
             light.gameObject.SetActive(true);
             light.OnActive();
+        }
+
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("AttackCooldown", _rechargeCooldown.CurrentTime);
+            data.SetCustom("Fired", _fired);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _rechargeCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _fired = data.GetCustom<bool>("Fired");
         }
 
 #if UNITY_EDITOR

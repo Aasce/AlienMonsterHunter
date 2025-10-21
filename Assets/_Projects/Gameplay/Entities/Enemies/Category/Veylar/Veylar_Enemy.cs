@@ -1,4 +1,5 @@
 using Asce.Game.Abilities;
+using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
@@ -17,11 +18,6 @@ namespace Asce.Game.Entities.Enemies
         [SerializeField] private Cooldown _maturationCooldown = new(5f);
         [SerializeField] private Vector2 _sizeRange = Vector2.one;
 
-        [Header("Explosion")]
-        [SerializeField, Min(0f)] private float _explosionDamage = 0f;
-        [SerializeField, Min(0f)] private float _explosionRadius = 0f;
-        [SerializeField] private string _explosionVFXName = string.Empty;
-
         [Header("Phase")]
         [SerializeField] private int _maxPhase = 3;
         [SerializeField] private int _currentPhase = 0;
@@ -30,6 +26,9 @@ namespace Asce.Game.Entities.Enemies
         [SerializeField] private int _layOnDeadAtPhase = 2;
         [SerializeField] private bool _layable = true;
         [SerializeField] private Cooldown _layCooldown = new(5f);
+
+        [Header("VFXs")]
+        [SerializeField] private string _explosionVFXName = string.Empty;
 
         public bool Layable
         {
@@ -53,8 +52,6 @@ namespace Asce.Game.Entities.Enemies
         public override void Initialize()
         {
             base.Initialize();
-            _explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
-            _explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
         }
 
         public override void ResetStatus()
@@ -102,8 +99,11 @@ namespace Asce.Game.Entities.Enemies
 
         private void Explosion()
         {
-            float radius = _explosionRadius + _currentPhase * .5f;
-            float damage = _explosionDamage * _currentPhase;
+            float explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
+            float explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
+            float radius = explosionRadius + _currentPhase * .5f;
+            float damage = explosionDamage * _currentPhase;
+
             LayerMask targetLayer = TargetDetection.TargetLayer;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, targetLayer);
             foreach (Collider2D collider in colliders)
@@ -160,6 +160,23 @@ namespace Asce.Game.Entities.Enemies
             int eggCount = (int)Information.Stats.GetCustomStat("EggCount");
             eggCount += (_currentPhase - _layOnDeadAtPhase);
             this.SpawnEggs(eggCount);
+        }
+
+        protected override void OnBeforeSave(EnemySaveData data)
+        {
+            data.SetCustom("CurrentPhase", _currentPhase);
+            data.SetCustom("Layable", _layable);
+            data.SetCustom("MaturationCooldown", _maturationCooldown.CurrentTime);
+            data.SetCustom("LayCooldown", _layCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(EnemySaveData data)
+        {
+            _currentPhase = data.GetCustom("CurrentPhase", 1);
+            _layable = data.GetCustom("Layable", false);
+            _maturationCooldown.CurrentTime = data.GetCustom("MaturationCooldown", 0f);
+            _layCooldown.CurrentTime = data.GetCustom("LayCooldown", 0f);
+            this.SetSize();
         }
     }
 }

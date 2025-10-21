@@ -1,4 +1,4 @@
-using Asce.Game.Entities;
+using Asce.Game.Abilities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
@@ -18,12 +18,14 @@ namespace Asce.Game
         {
             this.SaveEnemies();
             this.SaveCharacter();
+            this.SaveAbilities();
         }
 
         public void LoadCurrentGame()
         {
             this.LoadEnemies();
             this.LoadCharacter();
+            this.LoadAbilities();
         }
 
         public void SaveEnemies()
@@ -43,6 +45,19 @@ namespace Asce.Game
         {
             CharacterSaveData characterData = (Player.Instance.Character as ISaveable<CharacterSaveData>).Save();
             SaveLoadManager.Instance.Save("CurrentGameCharacter", characterData);
+        }
+
+        private void SaveAbilities()
+        {
+            AllAbilitiesSaveData<AbilitySaveData> allData = new();
+            List<Ability> abilities = AbilityController.Instance.GetAllAbilities();
+            foreach (Ability ability in abilities)
+            {
+                if (ability is ISaveable<AbilitySaveData> saveable)
+                    allData.abilities.Add(saveable.Save());
+            }
+
+            SaveLoadManager.Instance.Save("CurrentGameAbilities", allData);
         }
 
 
@@ -77,6 +92,23 @@ namespace Asce.Game
             Player.Instance.InitializeCharacter();
 
             (characterInstance as ILoadable<CharacterSaveData>).Load(characterData);
+        }
+
+        private void LoadAbilities()
+        {
+            AllAbilitiesSaveData<AbilitySaveData> allData = SaveLoadManager.Instance.Load<AllAbilitiesSaveData<AbilitySaveData>>("CurrentGameAbilities");
+            if (allData == null) return;
+            foreach (AbilitySaveData data in allData.abilities)
+            {
+                Ability ability = AbilityController.Instance.Spawn(data.name, null);
+                if (ability == null) continue;
+                if (ability is ILoadable<AbilitySaveData> loadable)
+                {
+                    loadable.Load(data);
+                }
+                ability.gameObject.SetActive(true);
+                ability.OnActive();
+            }
         }
 
         private Gun CreateGunFromData(GunSaveData gunData)

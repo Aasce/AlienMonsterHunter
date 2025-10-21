@@ -74,5 +74,25 @@ namespace Asce.Managers.Utils
             return result;
         }
 
+
+        public static GameObject FindGameObjectById(string id)
+        {
+            IIdentifiable identifiable = ComponentUtils.FindAllComponentsInScene<IIdentifiable>().Find((iden) => iden.Id == id);
+            if (identifiable != null && identifiable is Component comp)
+            {
+                return comp.gameObject;
+            }
+            return null;
+        }
+
+        public static string GetId(this GameObject gameObject)
+        {
+            if (gameObject == null) return string.Empty;
+            if (gameObject.TryGetComponent(out IIdentifiable identifiable))
+            {
+                return identifiable.Id;
+            }
+            return string.Empty;
+        }
     }
 }

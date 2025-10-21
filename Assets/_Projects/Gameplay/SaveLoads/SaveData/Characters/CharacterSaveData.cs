@@ -6,14 +6,18 @@ namespace Asce.Game.SaveLoads
     public class CharacterSaveData : EntitySaveData
     {
         public GunSaveData gun;
+        public CharacterAbilitiesSaveData abilities;
 
         public override void CopyFrom(SaveData other)
         {
             base.CopyFrom(other);
             if (other is CharacterSaveData characterData)
             {
-                gun = new GunSaveData();
+                gun = new ();
                 gun.CopyFrom(characterData.gun);
+
+                abilities = new ();
+                abilities.CopyFrom(characterData.abilities);
             }
         }
     }

@@ -113,6 +113,7 @@ namespace Asce.Game.Entities.Enemies
             EnemySaveData saveData = new();
             saveData.CopyFrom(baseData);
             saveData.attackCooldownRemaining = AttackCooldown.CurrentTime;
+            OnBeforeSave(saveData);
             return saveData;
         }
 
@@ -121,6 +122,10 @@ namespace Asce.Game.Entities.Enemies
             ((ILoadable<EntitySaveData>)this).Load(data);
             Agent.Warp(data.position);
             AttackCooldown.CurrentTime = data.attackCooldownRemaining;
+            OnAfterLoad(data);
         }
+
+        protected virtual void OnBeforeSave(EnemySaveData data) { }
+        protected virtual void OnAfterLoad(EnemySaveData data) { }
     }
 }

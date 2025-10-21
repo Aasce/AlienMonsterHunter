@@ -18,3 +18,5 @@ MonoBehaviour:
       _path: current/character.json
     - _name: CurrentGameEnemies
       _path: current/enemies.json
+    - _name: CurrentGameAbilities
+      _path: current/abilities.json

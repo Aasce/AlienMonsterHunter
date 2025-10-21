@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]

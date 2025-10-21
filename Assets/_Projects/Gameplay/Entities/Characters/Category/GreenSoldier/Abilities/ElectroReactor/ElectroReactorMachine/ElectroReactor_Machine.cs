@@ -1,6 +1,7 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
@@ -151,6 +152,18 @@ namespace Asce.Game.Entities.Machines
             vfx.LineRenderer.SetPosition(1, endPoint);
             vfx.LineRenderer.startWidth = 1.5f;
             vfx.LineRenderer.endWidth = 0.75f;
+        }
+
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
         }
 
 #if UNITY_EDITOR

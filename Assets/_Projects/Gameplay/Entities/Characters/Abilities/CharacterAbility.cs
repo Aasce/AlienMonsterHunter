@@ -14,9 +14,9 @@ namespace Asce.Game.Abilities
 
         public float UseRangeRadius => _useRangeRadius;
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
             _useRangeRadius = Information.UseRangeRadius;
         }
 

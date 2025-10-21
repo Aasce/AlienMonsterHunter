@@ -1,6 +1,7 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,6 @@ namespace Asce.Game.Entities.Machines
 
         [Header("Movement")]
         [SerializeField] private float _moveCheckDistance = 0.5f;
-
         private Vector2 _moveDirection = Vector2.right;
 
         public Vector2 MoveDirection
@@ -139,5 +139,18 @@ namespace Asce.Game.Entities.Machines
             bullet.OnActive();
         }
 
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("MoveDirection", _moveDirection);
+            data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _moveDirection = data.GetCustom<Vector2>("MoveDirection");
+            _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+        }
     }
 }

@@ -1,4 +1,5 @@
 using Asce.Game.Abilities;
+using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using System;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Asce.Game.Entities.Characters
 {
-    public class CharacterAbilities : GameComponent
+    public class CharacterAbilities : GameComponent, ISaveable<CharacterAbilitiesSaveData>, ILoadable<CharacterAbilitiesSaveData>
     {
         [SerializeField, Readonly] private Character _owner;
 
@@ -85,6 +86,35 @@ namespace Asce.Game.Entities.Characters
             ability.gameObject.SetActive(true);
             ability.OnActive();
             container.Cooldown.Reset();
+        }
+
+        CharacterAbilitiesSaveData ISaveable<CharacterAbilitiesSaveData>.Save()
+        {
+            CharacterAbilitiesSaveData abilitiesData = new();
+            foreach (AbilityContainer ability in _abilities)
+            {
+                AbilityContainerSaveData abilityData = (ability as ISaveable<AbilityContainerSaveData>).Save();
+                abilitiesData.abilityContainers.Add(abilityData);
+            }
+            return abilitiesData;
+        }
+
+        void ILoadable<CharacterAbilitiesSaveData>.Load(CharacterAbilitiesSaveData data)
+        {
+            if (data == null) return;
+
+            _abilities.Clear();
+            _passiveAbilities.Clear();
+            _activeAbilities.Clear();
+            foreach (AbilityContainerSaveData abilityData in data.abilityContainers)
+            {
+                AbilityContainer abilityContainer = new();
+                (abilityContainer as ILoadable<AbilityContainerSaveData>).Load(abilityData);
+
+                _abilities.Add(abilityContainer);
+                if (abilityContainer.AbilityPrefab.Information.IsPassive) _passiveAbilities.Add(abilityContainer);
+                else _activeAbilities.Add(abilityContainer);
+            }
         }
     }
 }

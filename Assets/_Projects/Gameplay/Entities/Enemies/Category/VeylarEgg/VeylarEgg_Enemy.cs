@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
 using System;
 using System.Collections;
@@ -57,7 +58,6 @@ namespace Asce.Game.Entities.Enemies
                 View.Animator.SetTrigger("Hatch");
             }
 
-
             yield return new WaitForSeconds(0.5f);
             Veylar_Enemy veylar = EnemyController.Instance.Spawn(_veylarEnemyName, transform.position) as Veylar_Enemy;
             if (veylar == null) yield break;
@@ -67,5 +67,14 @@ namespace Asce.Game.Entities.Enemies
             EnemyController.Instance.Despawn(this);
         }
 
+        protected override void OnBeforeSave(EnemySaveData data)
+        {
+            data.SetCustom("HatchCooldown", _hatchCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(EnemySaveData data)
+        {
+            _hatchCooldown.CurrentTime = data.GetCustom("HatchCooldown", 0f);
+        }
     }
 }

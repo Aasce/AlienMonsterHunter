@@ -1,5 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Machines;
+using Asce.Game.SaveLoads;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -12,18 +13,23 @@ namespace Asce.Game.Abilities
         Machine IControlMachineAbility.Machine => _machine;
 
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
             Machine.Initialize();
             Machine.OnDead += MachineHealth_OnDead;
         }
 
-        public override void OnSpawn()
+        public override void ResetStatus()
         {
-            base.OnSpawn();
-            Machine.Owner = Owner.GetComponent<Character>();
+            base.ResetStatus();
             Machine.ResetStatus();
+        }
+
+        public override void OnActive()
+        {
+            base.OnActive();
+            Machine.Owner = Owner.GetComponent<Character>();
         }
 
         public override void SetPosition(Vector2 position)
@@ -34,6 +40,20 @@ namespace Asce.Game.Abilities
         private void MachineHealth_OnDead()
         {
             this.DespawnTime.ToComplete();
+        }
+
+        protected override void OnBeforeSave(AbilitySaveData data)
+        {
+            base.OnBeforeSave(data);
+            MachineSaveData machineData = ((ISaveable<MachineSaveData>)Machine).Save();
+            data.SetCustom("Machine", machineData);
+        }
+
+        protected override void OnAfterLoad(AbilitySaveData data)
+        {
+            base.OnAfterLoad(data);
+            MachineSaveData machineData = data.GetCustom<MachineSaveData>("Machine");
+            ((ILoadable<MachineSaveData>)Machine).Load(machineData);
         }
     }
 }

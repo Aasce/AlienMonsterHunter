@@ -1,4 +1,6 @@
 using Asce.Game.Entities;
+using Asce.Game.Entities.Machines;
+using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -30,11 +32,7 @@ namespace Asce.Game.Abilities
         public float Width
         {
             get => _width;
-            set
-            {
-                _width = value;
-                this.SetLineWidth();
-            }
+            set => _width = value;
         }
 
         public float Distance
@@ -54,14 +52,14 @@ namespace Asce.Game.Abilities
             base.OnActive();
             Vector2 endPosition = (Vector2)transform.position + _direction.normalized * _distance;
             this.SetLine(startPosition: transform.position, _direction.normalized);
+            this.SetLineWidth();
             this.Fire();
         }
 
         private void Update()
         {
-            if (Owner == null) this.DespawnTime.ToComplete();
-            if (!Owner.activeInHierarchy) this.DespawnTime.ToComplete();
-            else this.DespawnTime.Reset();
+            if (Owner != null && Owner.activeInHierarchy) this.DespawnTime.Reset(); 
+            else if (this.DespawnTime.CurrentTime > 1f) this.DespawnTime.CurrentTime = 0.1f;
 
             _dealDamageCooldown.Update(Time.deltaTime);
             if (_dealDamageCooldown.IsComplete)
@@ -124,5 +122,23 @@ namespace Asce.Game.Abilities
             }
         }
 
+        protected override void OnBeforeSave(AbilitySaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("DamageCooldown", _dealDamageCooldown.CurrentTime);
+            data.SetCustom("Direction", _direction);
+            data.SetCustom("Distance", _distance);
+            data.SetCustom("Width", _width);
+        }
+
+        protected override void OnAfterLoad(AbilitySaveData data)
+        {
+            base.OnAfterLoad(data);
+            _dealDamageCooldown.CurrentTime = data.GetCustom<float>("DamageCooldown");
+            _direction = data.GetCustom<Vector2>("Direction");
+            _distance = data.GetCustom<float>("Distance");
+            _width = data.GetCustom<float>("Width");
+            this.SetLineWidth();
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace Asce.Game.Players
         }
         public void InitializeCharacter() 
         {
-                Character.Initialize();
+            Character.Initialize();
         }
         public void InitializeSupportCaller()
         {

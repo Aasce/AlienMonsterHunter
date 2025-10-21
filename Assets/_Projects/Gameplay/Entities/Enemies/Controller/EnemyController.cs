@@ -40,7 +40,10 @@ namespace Asce.Game.Entities.Enemies
                     if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, _samplePositionMaxDistance, NavMesh.AllAreas))
                     {
                         Debug.DrawLine(candidate, hit.position, Color.red, 10f);
-                        this.Spawn(name, hit.position);
+                        Enemy enemy = this.Spawn(name, hit.position);
+                        if (enemy == null) break;
+                        enemy.gameObject.SetActive(true);
+
                         break;
                     }
                 }
@@ -69,15 +72,9 @@ namespace Asce.Game.Entities.Enemies
             if (enemy == null) return null;
             enemy.Agent.Warp(position);
 
-            if (isCreated)
-            {
-                enemy.Initialize();
-            }
-            else
-            {
-                enemy.ResetStatus();
-                enemy.gameObject.SetActive(true);
-            }
+            if (isCreated) enemy.Initialize();
+            else enemy.ResetStatus();
+            
             return enemy;
         }
 
