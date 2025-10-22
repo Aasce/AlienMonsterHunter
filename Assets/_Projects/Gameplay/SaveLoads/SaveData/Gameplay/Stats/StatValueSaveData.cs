@@ -1,0 +1,24 @@
+using Asce.Game.Stats;
+using UnityEngine;
+
+namespace Asce.Game.SaveLoads
+{
+    [System.Serializable]
+    public class StatValueSaveData : SaveData
+    {
+        public string id;
+        public float value;
+        public StatValueType type;
+
+        public override void CopyFrom(SaveData other)
+        {
+            base.CopyFrom(other);
+            if (other is StatValueSaveData otherStatValue)
+            {
+                id = otherStatValue.id;
+                value = otherStatValue.value;
+                type = otherStatValue.type;
+            }
+        }
+    }
+}
