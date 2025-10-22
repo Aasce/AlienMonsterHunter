@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ed3a731a5bb58408d2400354f1aea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 0}
   _view: {fileID: 6622724446036704105}
   _stats: {fileID: 6446334129876337184}
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entity: {fileID: 7269911351320589851}
   _effects: []
   _updateCooldown:
     _baseTime: 0.1
@@ -330,17 +332,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _owner: {fileID: 0}
   _abilities:
-  - _name: 
+  - _id: ability_container_d93368c6897945d89a97c6132715afb4
+    _name: 
     _cooldown:
       _baseTime: 0
       _currentTime: 0
     _abilityPrefab: {fileID: 0}
-  - _name: 
+  - _id: ability_container_cd32a35d21124f529d01d9b79459533f
+    _name: 
     _cooldown:
       _baseTime: 0
       _currentTime: 0
     _abilityPrefab: {fileID: 0}
-  - _name: 
+  - _id: ability_container_3af1dd81fca748c8809ced9f6703e851
+    _name: 
     _cooldown:
       _baseTime: 0
       _currentTime: 0
@@ -389,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f577c74fcd2de4796fe0baa25607e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stats: []
   _health:
     _statValues: []
     _finalValue: 0
@@ -412,6 +418,20 @@ MonoBehaviour:
     _ratioValue: 0
     _scaleValue: 0
   _selfViewRadius:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _viewRadius:
+    _statValues: []
+    _finalValue: 0
+    _baseValue: 0
+    _flatValue: 0
+    _ratioValue: 0
+    _scaleValue: 0
+  _viewAngle:
     _statValues: []
     _finalValue: 0
     _baseValue: 0

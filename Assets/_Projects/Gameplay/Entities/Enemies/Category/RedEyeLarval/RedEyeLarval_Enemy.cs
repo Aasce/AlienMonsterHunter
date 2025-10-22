@@ -5,9 +5,9 @@ namespace Asce.Game.Entities.Enemies
 {
     public class RedEyeLarval_Enemy : Enemy
     {
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
             Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.9f;
             Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
             {

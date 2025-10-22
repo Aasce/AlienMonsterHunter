@@ -12,6 +12,7 @@ namespace Asce.Game.SaveLoads
         public float rotation;
 
         public StatsSaveData stats;
+        public EffectsSaveData effects;
 
         public override void CopyFrom(SaveData other)
         {
@@ -25,6 +26,9 @@ namespace Asce.Game.SaveLoads
 
                 stats = new StatsSaveData();
                 stats.CopyFrom(entityData.stats);
+
+                effects = new EffectsSaveData();
+                effects.CopyFrom(entityData.effects);
             }
                 
         }

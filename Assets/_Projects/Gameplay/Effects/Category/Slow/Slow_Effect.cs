@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using UnityEngine;
 
 namespace Asce.Game.Effects
@@ -13,6 +14,20 @@ namespace Asce.Game.Effects
         public override void Unpply()
         {
             Receiver.Stats.Speed.RemoveById(_statId);
+        }
+
+
+        protected override void OnBeforeSave(EffectSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("SpeedStatId", _statId);
+        }
+
+        protected override void OnAfterLoad(EffectSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _statId = data.GetCustom<string>("SpeedStatId");
         }
     }
 }

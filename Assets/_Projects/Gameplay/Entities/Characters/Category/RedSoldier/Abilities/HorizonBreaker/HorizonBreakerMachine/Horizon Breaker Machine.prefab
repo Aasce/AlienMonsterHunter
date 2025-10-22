@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bafe84448b197b409886630f88e3750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 7427617b9b3c1044aad5d3b406b5670d, type: 2}
   _view: {fileID: 6008315605082136993}
   _stats: {fileID: 4269514612420927632}
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entity: {fileID: 4765365027191067938}
   _effects: []
   _updateCooldown:
     _baseTime: 0.1
@@ -423,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf8dc0cdf5b890428605d70f34b93a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stats: []
   _health:
     _statValues: []
     _finalValue: 0

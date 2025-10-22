@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: 5025102880806509642}
     - target: {fileID: 4612767881241518357, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -368,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34f3ff049816c544aaac16473d52f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: d9e3b76c1542c69488c31f4a0595df6e, type: 2}
   _view: {fileID: 4547059529840165809}
   _stats: {fileID: 7868425259011323074}

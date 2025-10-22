@@ -46,10 +46,11 @@ namespace Asce.Game.Entities
             base.RefReset();
             this.LoadComponent(out _view);
             this.LoadComponent(out _stats);
-            this.LoadComponent(out _effects);
+            if (this.LoadComponent(out _effects))
+            {
+                _effects.Entity = this;
+            }
         }
-
-        protected virtual void Start() { }
 
         public virtual void Initialize()
         {
@@ -94,6 +95,12 @@ namespace Asce.Game.Entities
             {
                 saveData.stats = statsSaveable.Save();
             }
+
+            if (Effects is ISaveable<EffectsSaveData> effectSaveable)
+            {
+                saveData.effects = effectSaveable.Save();
+            }
+
             return saveData;
         }
 
@@ -107,6 +114,11 @@ namespace Asce.Game.Entities
             if (Stats is ILoadable<StatsSaveData> statsLoadable)
             {
                 statsLoadable.Load(data.stats);
+            }
+
+            if (Effects is ILoadable<EffectsSaveData> effectLoadable)
+            {
+                effectLoadable.Load(data.effects);
             }
         }
     }

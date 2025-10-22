@@ -1,19 +1,37 @@
 using Asce.Game.Effects;
+using Asce.Game.SaveLoads;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Asce.Game.Entities
 {
-    public class EntityEffects : GameComponent
+    public class EntityEffects : GameComponent, ISaveable<EffectsSaveData>, ILoadable<EffectsSaveData>
     {
+        [SerializeField, Readonly] private Entity _entity;
+
+        [Space]
         [SerializeField] private List<Effect> _effects = new();
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
         private ReadOnlyCollection<Effect> _effectsReadonly;
 
+        public Entity Entity
+        {
+            get => _entity;
+            set => _entity = value;
+        }
         public ReadOnlyCollection<Effect> Effects => _effectsReadonly ??= _effects.AsReadOnly();
+
+
+        protected override void RefReset()
+        {
+            base.RefReset();
+            this.LoadComponent(out _entity);
+        }
 
         private void Update()
         {
@@ -66,6 +84,36 @@ namespace Asce.Game.Entities
                 Effect effect = _effects[i];
                 if (effect == null) continue;
                 EffectController.Instance.RemoveEffect(effect);
+            }
+        }
+
+        EffectsSaveData ISaveable<EffectsSaveData>.Save()
+        {
+            EffectsSaveData data = new ();
+            foreach (Effect effect in _effects)
+            {
+                EffectSaveData effectData = (effect as ISaveable<EffectSaveData>).Save();
+                data.effects.Add(effectData);
+            }
+            return data;
+        }
+
+        void ILoadable<EffectsSaveData>.Load(EffectsSaveData data)
+        {
+            if (data ==  null) return;
+            this.Clear();
+            foreach (EffectSaveData effectData in data.effects)
+            {
+                Effect effect = EffectController.Instance.CreateEffect(effectData.name, new EffectData()
+                {
+                    Duration = effectData.baseDuration,
+                    Strength = effectData.strength,
+                });
+
+                effect.Receiver = Entity;
+                this.Add(effect);
+                (effect as ILoadable<EffectSaveData>).Load(effectData);
+                effect.gameObject.SetActive(true);
             }
         }
     }

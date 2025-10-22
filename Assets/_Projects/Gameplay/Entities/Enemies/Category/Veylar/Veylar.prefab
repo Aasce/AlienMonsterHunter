@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: '_renderers.Array.data[6]'
       value: 
       objectReference: {fileID: 501437752807148611}
+    - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: 8727078275380452219}
     - target: {fileID: 6455034772851875770, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -827,6 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba21054b49dfdc48b663bb6efc87c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 05cb58dacb5e56544a337cc0a4b50a3e, type: 2}
   _view: {fileID: 7278013877516238317}
   _stats: {fileID: 3974592246808758942}
@@ -842,9 +847,6 @@ MonoBehaviour:
     _baseTime: 7
     _currentTime: 0
   _sizeRange: {x: 0.3, y: 1.1}
-  _explosionDamage: 0
-  _explosionRadius: 0
-  _explosionVFXName: Veylar Explosion Splatter
   _maxPhase: 5
   _currentPhase: 0
   _layOnDeadAtPhase: 3
@@ -852,6 +854,7 @@ MonoBehaviour:
   _layCooldown:
     _baseTime: 23
     _currentTime: 23
+  _explosionVFXName: Veylar Explosion Splatter
 --- !u!58 &3902003007277446763
 CircleCollider2D:
   m_ObjectHideFlags: 0

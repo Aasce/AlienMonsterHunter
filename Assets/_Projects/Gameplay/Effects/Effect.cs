@@ -1,18 +1,24 @@
 using Asce.Game.Entities;
+using Asce.Game.SaveLoads;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Effects
 {
-    public abstract class Effect : GameComponent
+    public abstract class Effect : GameComponent, IIdentifiable, ISaveable<EffectSaveData>, ILoadable<EffectSaveData>
     {
+        public const string PREFIX_ID = "effect";
+        [SerializeField, Readonly] private string _id = string.Empty;
+        
+        [Space]
         [SerializeField] protected SO_EffectInformation _information;
         [SerializeField] protected Entity _receiver;
         [SerializeField] protected Cooldown _duration = new();
         [SerializeField] protected float _strength;
 
-
+        public string Id => _id;
         public SO_EffectInformation Information => _information;
 
         public Entity Receiver
@@ -26,9 +32,17 @@ namespace Asce.Game.Effects
             get => _strength;
             set => _strength = value;
         }
+        string IIdentifiable.Id
+        {
+            get => Id;
+            set => _id = value;
+        }
 
+        public virtual void Initialize() 
+        {
+            if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
+        }
         public virtual void ResetStatus() { }
-        public virtual void Initialize() { }
 
         public abstract void Apply();
         public abstract void Unpply();
@@ -38,5 +52,34 @@ namespace Asce.Game.Effects
             Duration.SetBaseTime(data.Duration);
             Strength = data.Strength;
         }
+
+        EffectSaveData ISaveable<EffectSaveData>.Save()
+        {
+            EffectSaveData effectData = new()
+            {
+                id = _id,
+                name = Information.Name,
+                baseDuration = Duration.BaseTime,
+                duration = Duration.CurrentTime,
+                strength = Strength,
+            };
+
+            this.OnBeforeSave(effectData);
+            return effectData;
+        }
+
+        void ILoadable<EffectSaveData>.Load(EffectSaveData data)
+        {
+            if (data == null) return;
+            _id = data.id;
+            Duration.BaseTime = data.baseDuration;
+            Duration.CurrentTime = data.duration;
+            _strength = data.strength;
+
+            this.OnAfterLoad(data);
+        }
+
+        protected virtual void OnBeforeSave(EffectSaveData data) { }
+        protected virtual void OnAfterLoad(EffectSaveData data) { }
     }
 }

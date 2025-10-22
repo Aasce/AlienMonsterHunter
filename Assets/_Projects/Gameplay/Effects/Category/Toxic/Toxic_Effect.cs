@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -33,7 +34,20 @@ namespace Asce.Game.Effects
 
         public override void Unpply()
         {
-			
+
+        }
+
+        protected override void OnBeforeSave(EffectSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("DamageCooldown", _damageCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(EffectSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _damageCooldown.CurrentTime = data.GetCustom<float>("DamageCooldown");
         }
     }
 }

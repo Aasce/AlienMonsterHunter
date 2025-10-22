@@ -11,29 +11,31 @@ namespace Asce.Game.Effects
     {
         private readonly Dictionary<string, Pool<Effect>> _pools = new();
 
-        public Effect AddEffect(string effectName, Entity entity, EffectData data)
+        public Effect CreateEffect(string effectName, EffectData data)
         {
             if (string.IsNullOrEmpty(effectName)) return null;
-            if (entity == null) return null;
-            if (entity.IsDeath) return null;
-            if (entity.Effects == null) return null;
 
             Pool<Effect> pool = this.GetPool(effectName);
             if (pool == null) return null;
 
             Effect effect = pool.Activate(out bool isCreated);
             if (effect == null) return null;
-            if (isCreated)
-            {
-                effect.Initialize();
-            }
-            else
-            {
-                effect.ResetStatus();
-            }
+            if (isCreated) effect.Initialize();
+            else effect.ResetStatus();
+
+            effect.SetData(data);
+            return effect;
+        }
+
+        public Effect AddEffect(string effectName, Entity entity, EffectData data)
+        {
+            if (entity == null) return null;
+            if (entity.IsDeath) return null;
+            if (entity.Effects == null) return null;
+
+            Effect effect = this.CreateEffect(effectName, data);
 
             effect.Receiver = entity;
-            effect.SetData(data);
             entity.Effects.Add(effect);
             effect.gameObject.SetActive(true);
             effect.Apply();
@@ -74,10 +76,13 @@ namespace Asce.Game.Effects
 
             if (!_pools.ContainsKey(name))
             {
+                GameObject poolGameObject = new($"{name} Pool");
+                poolGameObject.transform.SetParent(transform);
+
                 Pool<Effect> newPool = new()
                 {
                     Prefab = effectPrefab,
-                    Parent = this.transform,
+                    Parent = poolGameObject.transform,
                     IsSetActive = false,
                 };
                 _pools.Add(name, newPool);

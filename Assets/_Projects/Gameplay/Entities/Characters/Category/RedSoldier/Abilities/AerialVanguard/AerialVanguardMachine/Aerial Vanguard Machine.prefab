@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd06f9d74d866d4bad14674e580473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entity: {fileID: 7526930220019443700}
   _effects: []
   _updateCooldown:
     _baseTime: 0.1
@@ -412,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf8dc0cdf5b890428605d70f34b93a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stats: []
   _health:
     _statValues: []
     _finalValue: 0
@@ -5801,6 +5803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61c0d0302421e5478ccabc7fee5874d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: f5d305eee91f32649b22debbe93aaa72, type: 2}
   _view: {fileID: 444768422439075968}
   _stats: {fileID: 6719532889584443013}
@@ -5813,8 +5816,9 @@ MonoBehaviour:
   - {fileID: 2216727643614689037}
   - {fileID: 6297208651666911770}
   _orbitRadius: 1
-  _targetOrbitDistance: 5
   _maxFollowDistance: 20
+  _targetOrbitDistance: 5
+  _damage: 10
   _attackCooldown:
     _baseTime: 0.5
     _currentTime: 0.5

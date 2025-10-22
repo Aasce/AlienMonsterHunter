@@ -442,6 +442,10 @@ PrefabInstance:
       propertyPath: '_renderers.Array.data[3]'
       value: 
       objectReference: {fileID: 9057285064657497837}
+    - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: 4219010634262668761}
     - target: {fileID: 6455034772851875770, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.3
@@ -519,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6a32a400bc35e42899ce7d7db3072a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: aca5d9186163f384e821022e401064a2, type: 2}
   _view: {fileID: 3074325819203815600}
   _stats: {fileID: 8683527855374450627}

@@ -1,0 +1,27 @@
+using UnityEngine;
+
+namespace Asce.Game.SaveLoads
+{
+    [System.Serializable]
+    public class EffectSaveData : SaveData
+    {
+        public string id;
+        public string name;
+        public float strength;
+        public float baseDuration;
+        public float duration;
+
+        public override void CopyFrom(SaveData other)
+        {
+            base.CopyFrom(other);
+            if (other is EffectSaveData effectData)
+            {
+                id = effectData.id;
+                name = effectData.name;
+                strength = effectData.strength;
+                baseDuration = effectData.baseDuration;
+                duration = effectData.duration;
+            }
+        }
+    }
+}

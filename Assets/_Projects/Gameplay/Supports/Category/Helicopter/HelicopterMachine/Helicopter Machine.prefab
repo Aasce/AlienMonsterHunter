@@ -181,12 +181,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822342348043398769}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5078581095775501585}
+  m_Father: {fileID: 3718745807468907469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2479476610264106643
 GameObject:
@@ -816,6 +816,7 @@ Transform:
   - {fileID: 2105268151935209270}
   - {fileID: 2776124687640231473}
   - {fileID: 5094316689846217683}
+  - {fileID: 3779224993442553391}
   m_Father: {fileID: 3398663113121881451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &511622406487539260
@@ -923,6 +924,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3611289459917158496, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: -4556532504688633257}
     - target: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -969,9 +974,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: 1
       addedObject: {fileID: 7031036199867336622}
-    - targetCorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3779224993442553391}
     - targetCorrespondingSourceObject: {fileID: 2328935080028939639, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3718745807468907469}
@@ -1003,6 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4a92725e5db8f4aad54780208ad866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 5f167ff1086334b449e666c5dd2b405f, type: 2}
   _view: {fileID: 4084625896549110642}
   _stats: {fileID: 2730351043411619832}

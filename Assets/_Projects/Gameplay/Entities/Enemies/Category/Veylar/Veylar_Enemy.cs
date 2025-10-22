@@ -36,9 +36,9 @@ namespace Asce.Game.Entities.Enemies
             set => _layable = value;
         }
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
             Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.8f;
             Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
             {
@@ -47,11 +47,6 @@ namespace Asce.Game.Entities.Enemies
 
             OnDead += Veylar_OnDead;
             _maturationCooldown.ToComplete();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
         }
 
         public override void ResetStatus()
