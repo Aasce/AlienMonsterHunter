@@ -1,3 +1,4 @@
+using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using System;
@@ -7,16 +8,27 @@ using UnityEngine;
 
 namespace Asce.Game.Supports
 {
-    public class SupportCaller : GameComponent
+    public class SupportCaller : GameComponent, IIdentifiable, ISaveable<SupportCallerSaveData>, ILoadable<SupportCallerSaveData>
     {
+        public const string PREFIX_ID = "support_caller";
+        [SerializeField, Readonly] private string _id = string.Empty;
+
+        [Space]
         [SerializeField, Readonly] private List<SupportContainer> _supports = new();
         private ReadOnlyCollection<SupportContainer> _supportsReadonly;
         [SerializeField] private Transform _spawnPoint;
 
         public event Action OnInitializeCompleted;
 
+        public string Id => _id;
         public ReadOnlyCollection<SupportContainer> Supports => _supportsReadonly ??= _supports.AsReadOnly();
         public Vector2 SpawnPoint => _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
+
+        string IIdentifiable.Id 
+        {
+            get => this.Id; 
+            set => _id = value; 
+        }
 
         private void Update()
         {
@@ -30,6 +42,7 @@ namespace Asce.Game.Supports
 
         public void Initialize(List<string> _supportIds)
         {
+            if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
             if (_supportIds == null) return;
             _supports.Clear();
             foreach (string id in _supportIds)
@@ -76,6 +89,34 @@ namespace Asce.Game.Supports
                 container.CurrentSupport = spawnSupport;
 
                 container.Cooldown.SetBaseTime(container.Information.Cooldown);
+            }
+        }
+
+        SupportCallerSaveData ISaveable<SupportCallerSaveData>.Save()
+        {
+            SupportCallerSaveData supportCallerData = new()
+            {
+                id = this._id
+            };
+            foreach (SupportContainer container in _supports)
+            {
+                SupportContainerSaveData containerData = (container as ISaveable<SupportContainerSaveData>).Save();
+                supportCallerData.supports.Add(containerData);
+            }
+            return supportCallerData;
+        }
+
+        void ILoadable<SupportCallerSaveData>.Load(SupportCallerSaveData data)
+        {
+            if (data == null) return;
+            _id = data.id;
+
+            _supports.Clear();
+            foreach (SupportContainerSaveData containerData in data.supports)
+            {
+                SupportContainer container = new();
+                (container as ILoadable<SupportContainerSaveData>).Load(containerData);
+                _supports.Add(container);
             }
         }
     }

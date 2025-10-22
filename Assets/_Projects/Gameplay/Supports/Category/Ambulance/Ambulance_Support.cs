@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.Entities.Machines;
+using Asce.Game.SaveLoads;
 using UnityEngine;
 
 namespace Asce.Game.Supports
@@ -11,20 +12,18 @@ namespace Asce.Game.Supports
         public Ambulance_Machine Machine => _machine;
         Machine IControlMachineAbility.Machine => _machine;
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
 
             Machine.Initialize();
             Machine.OnDead += Machine_OnDead;
         }
 
-        public override void OnSpawn()
+        public override void ResetStatus()
         {
-            base.OnSpawn();
-
+            base.ResetStatus();
             Machine.ResetStatus();
-            Machine.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
         }
 
         public override void OnActive()
@@ -40,9 +39,30 @@ namespace Asce.Game.Supports
             Machine.Agent.SetDestination(CallPosition);
         }
 
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            Machine.Agent.SetDestination(CallPosition);
+        }
+
         private void Machine_OnDead()
         {
             SupportController.Instance.Despawn(this);
+        }
+
+        protected override void OnBeforeSave(SupportSaveData data)
+        {
+            base.OnBeforeSave(data);
+            MachineSaveData machineData = (Machine as ISaveable<MachineSaveData>).Save();
+            data.SetCustom("Machine", machineData);
+        }
+
+        protected override void OnAfterLoad(SupportSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            MachineSaveData machineData = data.GetCustom<MachineSaveData>("Machine");
+            ((ILoadable<MachineSaveData>)Machine).Load(machineData);
         }
     }
 }

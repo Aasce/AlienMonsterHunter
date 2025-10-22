@@ -48,7 +48,7 @@ namespace Asce.Game
 
         private void CreateCharacterForPlayer()
         {
-            if (Player.Instance.Character != null) return;
+            if (MainGameSaveLoadController.Instance.IsLoaded("Character")) return;
 
             string characterName = Shared.Get<string>("character");
             string gunName = Shared.Get<string>("gun");
@@ -71,6 +71,8 @@ namespace Asce.Game
 
         private void CreateSupportForPlayer()
         {
+            if (MainGameSaveLoadController.Instance.IsLoaded("SupportCaller")) return;
+
             Player.Instance.Supports.Clear();
             List<string> supportNames = Shared.Get<List<string>>("supports");
             if (supportNames == null) return;

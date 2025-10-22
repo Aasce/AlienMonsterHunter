@@ -20,3 +20,7 @@ MonoBehaviour:
       _path: current/enemies.json
     - _name: CurrentGameAbilities
       _path: current/abilities.json
+    - _name: CurrentGameSupports
+      _path: current/supports.json
+    - _name: CurrentGameSupportCaller
+      _path: current/support_caller.json

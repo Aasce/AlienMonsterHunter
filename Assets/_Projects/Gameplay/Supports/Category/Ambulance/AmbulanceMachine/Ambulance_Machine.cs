@@ -1,4 +1,5 @@
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
@@ -46,6 +47,10 @@ namespace Asce.Game.Entities.Machines
                 _healCooldown.Reset();
                 this.Healing();
             }
+
+            float angle = Mathf.Atan2(Agent.velocity.y, Agent.velocity.x) * Mathf.Rad2Deg - 90f;
+            float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, angle, Time.deltaTime * 10f);
+            transform.rotation = Quaternion.Euler(0f, 0f, smoothAngle);
         }
 
 
@@ -72,6 +77,20 @@ namespace Asce.Game.Entities.Machines
         private void SpawnHealVFX(Vector2 position)
         {
             VFXController.Instance.Spawn(_healVFXName, position);
+        }
+
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("HealCooldown", _healCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            Agent.Warp(data.position);
+            _healCooldown.CurrentTime = data.GetCustom<float>("HealCooldown");
         }
     }
 }

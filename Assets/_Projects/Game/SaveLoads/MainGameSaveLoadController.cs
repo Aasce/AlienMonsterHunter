@@ -5,7 +5,9 @@ using Asce.Game.Guns;
 using Asce.Game.Managers;
 using Asce.Game.Players;
 using Asce.Game.SaveLoads;
+using Asce.Game.Supports;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +16,15 @@ namespace Asce.Game
 {
     public class MainGameSaveLoadController : MonoBehaviourSingleton<MainGameSaveLoadController>
     {
+        private readonly Dictionary<string, bool> _isLoadeds = new();
+
         public void SaveCurrentGame()
         {
             this.SaveEnemies();
             this.SaveCharacter();
             this.SaveAbilities();
+            this.SaveSupports();
+            this.SaveSupportCaller();
         }
 
         public void LoadCurrentGame()
@@ -26,7 +32,15 @@ namespace Asce.Game
             this.LoadEnemies();
             this.LoadCharacter();
             this.LoadAbilities();
+            this.LoadSupports();
+            this.LoadSupportCaller();
         }
+
+        public bool IsLoaded(string key)
+        {
+            return _isLoadeds.ContainsKey(key) && _isLoadeds[key];
+        }
+
 
         public void SaveEnemies()
         {
@@ -60,6 +74,27 @@ namespace Asce.Game
             SaveLoadManager.Instance.Save("CurrentGameAbilities", allData);
         }
 
+        private void SaveSupports()
+        {
+            AllSupportsSaveData allData = new();
+            List<Support> supports = SupportController.Instance.GetAllSupports();
+            foreach (Support support in supports)
+            {
+                if (support is ISaveable<SupportSaveData> saveable)
+                    allData.supports.Add(saveable.Save());
+            }
+
+            SaveLoadManager.Instance.Save("CurrentGameSupports", allData);
+
+        }
+
+        private void SaveSupportCaller()
+        {
+            SupportCallerSaveData supportCallerData = (Player.Instance.SupportCaller as ISaveable<SupportCallerSaveData>).Save();
+            SaveLoadManager.Instance.Save("CurrentGameSupportCaller", supportCallerData);
+        }
+
+
 
         private void LoadEnemies()
         {
@@ -73,6 +108,7 @@ namespace Asce.Game
                     loadable.Load(data);
                 }
             }
+            _isLoadeds["Enemies"] = true;
         }
 
         private void LoadCharacter()
@@ -92,6 +128,7 @@ namespace Asce.Game
             Player.Instance.InitializeCharacter();
 
             (characterInstance as ILoadable<CharacterSaveData>).Load(characterData);
+            _isLoadeds["Character"] = true;
         }
 
         private void LoadAbilities()
@@ -109,7 +146,39 @@ namespace Asce.Game
                 ability.gameObject.SetActive(true);
                 ability.OnActive();
             }
+            _isLoadeds["Abilities"] = true;
         }
+
+        private void LoadSupports()
+        {
+            AllSupportsSaveData allData = SaveLoadManager.Instance.Load<AllSupportsSaveData>("CurrentGameSupports");
+            if (allData == null) return;
+            foreach (SupportSaveData data in allData.supports)
+            {
+                Support support = SupportController.Instance.Spawn(data.nameId);
+                if (support == null) continue;
+                if (support is ILoadable<SupportSaveData> loadable)
+                {
+                    loadable.Load(data);
+                }
+
+                support.gameObject.SetActive(true);
+                support.OnLoad();
+            }
+            _isLoadeds["Supports"] = true;
+        }
+
+        private void LoadSupportCaller()
+        {
+            SupportCallerSaveData supportCallerData = SaveLoadManager.Instance.Load<SupportCallerSaveData>("CurrentGameSupportCaller");
+            if (supportCallerData == null) return;
+
+            Player.Instance.InitializeSupportCaller();
+            (Player.Instance.SupportCaller as ILoadable<SupportCallerSaveData>).Load(supportCallerData);
+
+            _isLoadeds["SupportCaller"] = true;
+        }
+
 
         private Gun CreateGunFromData(GunSaveData gunData)
         {

@@ -10,6 +10,18 @@ namespace Asce.Game.Supports
     {
         private readonly Dictionary<string, Pool<Support>> _pools = new();
 
+
+        public List<Support> GetAllSupports()
+        {
+            List<Support> supports = new();
+            var pools = _pools.Values;
+            foreach (Pool<Support> pool in pools)
+            {
+                supports.AddRange(pool.Activities);
+            }
+            return supports;
+        }
+
         public Support Spawn(string id)
         {
             if (string.IsNullOrEmpty(id)) return null;
@@ -18,14 +30,10 @@ namespace Asce.Game.Supports
 
             Support support = pool.Activate(out bool isCreated);
             if (support == null) return null;
-            if (isCreated)
-            {
-                support.Initialize();
-            }
-            else
-            {
-                support.OnSpawn();
-            }
+            if (isCreated) support.Initialize();
+            else support.ResetStatus();
+
+            support.OnSpawn();
             return support;
         }
 

@@ -10,7 +10,7 @@ namespace Asce.Game.Abilities
     [System.Serializable]
     public class AbilityContainer : IIdentifiable, ISaveable<AbilityContainerSaveData>, ILoadable<AbilityContainerSaveData>
     {
-        public const string PREFIX_ID = "ability";
+        public const string PREFIX_ID = "ability_container";
 
         [SerializeField, Readonly] private string _id;
         [SerializeField] private string _name;
@@ -20,46 +20,51 @@ namespace Asce.Game.Abilities
         [SerializeField] private Ability _abilityPrefab;
 
         public string Id => _id;
+
         public string Name
         {
             get => _name;
-            set
+            protected set
             {
                 if (_name == value) return;
-                if (GameManager.Instance == null)
-                {
-                    _name = value;
-                    _abilityPrefab = null;
-                    return;
-                }
-
-                Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(value);
-                if (abilityPrefab == null)
-                {
-                    _name = value;
-                    _abilityPrefab = null;
-                    return;
-                }
-
                 _name = value;
-                _abilityPrefab = abilityPrefab;
+                this.UpdateAbilityReference();
             }
         }
+
         public Cooldown Cooldown => _cooldown;
         public Ability AbilityPrefab => _abilityPrefab;
-
         public bool IsValid => _abilityPrefab != null;
-        string IIdentifiable.Id 
-        { 
-            get => Id; 
-            set => _id = value; 
+
+        string IIdentifiable.Id
+        {
+            get => Id;
+            set => _id = value;
         }
 
         public AbilityContainer() : this(string.Empty) { }
+
         public AbilityContainer(string name)
         {
             _id = IdGenerator.NewId(PREFIX_ID);
-            Name = name;
+            _name = name;
+            this.UpdateAbilityReference();
+        }
+
+        /// <summary>
+        /// Updates ability name and prefab reference based on the given name.<br/>
+        /// If GameManager or the ability is missing, prefab will be set to null.
+        /// </summary>
+        private void UpdateAbilityReference()
+        {
+            if (!GameManager.HasInstance)
+            {
+                _abilityPrefab = null;
+                return;
+            }
+
+            Ability abilityPrefab = GameManager.Instance.AllAbilities.Get(_name);
+            _abilityPrefab = abilityPrefab;
             if (_abilityPrefab != null)
             {
                 _cooldown.BaseTime = _abilityPrefab.Information.Cooldown;
@@ -72,7 +77,7 @@ namespace Asce.Game.Abilities
             return new AbilityContainerSaveData()
             {
                 id = _id,
-                name = this.Name,
+                name = _name,
                 cooldown = _cooldown.CurrentTime,
             };
         }
@@ -81,7 +86,8 @@ namespace Asce.Game.Abilities
         {
             if (data == null) return;
             _id = data.id;
-            this.Name = data.name;
+            _name = data.name;
+            this.UpdateAbilityReference();
             _cooldown.CurrentTime = data.cooldown;
         }
     }

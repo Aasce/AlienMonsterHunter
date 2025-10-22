@@ -36,6 +36,14 @@ namespace Asce.Managers
             }
         }
 
+        public static bool HasInstance
+        {
+            get
+            {
+                return _instance != null;
+            }
+        }
+
         /// <summary>
         ///     Assigns the singleton instance and prevents it from being destroyed on scene load.
         ///     Destroys duplicates if found.

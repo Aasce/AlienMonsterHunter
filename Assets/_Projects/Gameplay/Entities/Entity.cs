@@ -60,6 +60,7 @@ namespace Asce.Game.Entities
         public virtual void ResetStatus()
         {
             Stats.ResetStats();
+            Effects.Clear();
             _isDeath = false;
         }
 

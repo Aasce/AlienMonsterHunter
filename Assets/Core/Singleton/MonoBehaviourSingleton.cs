@@ -41,11 +41,6 @@ namespace Asce.Managers
         {
             get
             {
-                // If instance is not yet set, try to find it in the scene
-                if (_instance == null)
-                {
-                    _instance = FindAnyObjectByType<T>();
-                }
                 return _instance != null;
             }
         }

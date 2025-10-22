@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.FOVs;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -69,5 +70,19 @@ namespace Asce.Game.Entities.Machines
             _fovSelf.DrawFieldOfView();
         }
 
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("Direction", _direction);
+            data.SetCustom("FireCooldown", _fireCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _direction = data.GetCustom<Vector2>("Direction");
+            _fireCooldown.CurrentTime = data.GetCustom<float>("FireCooldown");
+        }
     }
 }

@@ -85,6 +85,12 @@ namespace Asce.Managers.Utils
             return null;
         }
 
+        public static T FindComponentById<T>(string id) where T : class, IIdentifiable
+        {
+            T identifiable = ComponentUtils.FindAllComponentsInScene<T>().Find((iden) => iden.Id == id);
+            return identifiable;
+        }
+
         public static string GetId(this GameObject gameObject)
         {
             if (gameObject == null) return string.Empty;

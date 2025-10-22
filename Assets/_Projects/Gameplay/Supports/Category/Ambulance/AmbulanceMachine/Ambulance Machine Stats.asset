@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 120
   _armor: 50
-  _speed: 4
+  _speed: 5
   _customStats:
     _list:
     - _name: HealAmount
