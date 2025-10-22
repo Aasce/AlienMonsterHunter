@@ -11,6 +11,10 @@ namespace Asce.PrepareGame
         [SerializeField] private string _mainGameSceneName;
         [SerializeField] private string _mainMenuSceneName;
 
+        private void Start()
+        {
+            Shared.SetOrAdd("NewGame", true);
+        }
 
         public void PlayGame()
         {

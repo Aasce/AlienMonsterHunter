@@ -12,11 +12,13 @@ namespace Asce.Menu
 
         public void PlayGame()
         {
+            Shared.SetOrAdd("NewGame", false);
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
         public void PlayNewGame()
         {
+            Shared.SetOrAdd("NewGame", true);
             SceneLoader.Instance.Load(_prepareGameSceneName, delay: 0.5f);
         }
     }

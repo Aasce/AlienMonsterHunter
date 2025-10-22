@@ -5,6 +5,7 @@ using Asce.Game.Players;
 using Asce.Game.UIs;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,18 +14,55 @@ namespace Asce.Game
     public class MainGameManager : MonoBehaviourSingleton<MainGameManager>
     {
         [SerializeField] private string _mainMenuSceneName;
+        [SerializeField] private MainGameState _gameState = MainGameState.None;
+
+        public event Action<ValueChangedEventArgs<MainGameState>> OnGameStateChanged;
+
+        public MainGameState GameState
+        {
+            get => _gameState;
+            set
+            {
+                if (_gameState == value) return;
+                MainGameState oldValue = _gameState;
+                _gameState = value;
+                OnGameStateChanged?.Invoke(new ValueChangedEventArgs<MainGameState>(oldValue, _gameState));
+            }
+        }
+
+        public bool IsPlaying => GameState == MainGameState.Playing || GameState == MainGameState.Pausing;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameState = MainGameState.Initialize;
+        }
 
         private void Start()
         {
             this.InitializeController();
-            this.LoadGame();
-            this.LoadPlayer();
+
+            bool isNewGame = Shared.Get<bool>("NewGame");
+            if (isNewGame)
+            {
+                this.CreateCharacterForPlayer();
+                this.CreateSupportForPlayer();
+            }
+            else
+            {
+                GameState = MainGameState.Loading;
+                this.LoadCurrentGame();
+            }
+            Player.Instance.Initialize();
             this.AssignUI();
+
+            GameState = MainGameState.Playing;
         }
 
         public void BackToMainMenu()
         {
             MainGameSaveLoadController.Instance.SaveCurrentGame();
+            GameState = MainGameState.Exiting; 
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
 
@@ -33,23 +71,13 @@ namespace Asce.Game
             UIGameController.Instance.PanelController.HideAll();
         }
 
-        private void LoadGame()
+        private void LoadCurrentGame()
         {
             MainGameSaveLoadController.Instance.LoadCurrentGame();
         }
 
-
-        private void LoadPlayer()
-        {
-            this.CreateCharacterForPlayer();
-            this.CreateSupportForPlayer();
-            Player.Instance.Initialize();
-        }
-
         private void CreateCharacterForPlayer()
         {
-            if (MainGameSaveLoadController.Instance.IsLoaded("Character")) return;
-
             string characterName = Shared.Get<string>("character");
             string gunName = Shared.Get<string>("gun");
 
@@ -71,8 +99,6 @@ namespace Asce.Game
 
         private void CreateSupportForPlayer()
         {
-            if (MainGameSaveLoadController.Instance.IsLoaded("SupportCaller")) return;
-
             Player.Instance.Supports.Clear();
             List<string> supportNames = Shared.Get<List<string>>("supports");
             if (supportNames == null) return;
@@ -98,6 +124,7 @@ namespace Asce.Game
 
         private void Character_OnDead()
         {
+            GameState = MainGameState.Failed;
             Player.Instance.Character.gameObject.SetActive(false);
             UIDeathPanel deathPanel = UIGameController.Instance.PanelController.GetPanelByName("Death") as UIDeathPanel;
             if (deathPanel == null) return;
@@ -110,6 +137,7 @@ namespace Asce.Game
         private void DeathPanel_OnReviveClicked()
         {
             Player.Instance.ReviveCharacter(isReviveAtSpawnPoint: true);
+            GameState = MainGameState.Playing;
         }
     }
 }

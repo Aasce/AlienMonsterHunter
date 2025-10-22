@@ -7,7 +7,6 @@ using Asce.Game.Players;
 using Asce.Game.SaveLoads;
 using Asce.Game.Supports;
 using Asce.Managers;
-using Asce.Managers.Attributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +19,7 @@ namespace Asce.Game
 
         public void SaveCurrentGame()
         {
+            this.SaveGameConfig();
             this.SaveEnemies();
             this.SaveCharacter();
             this.SaveAbilities();
@@ -29,6 +29,7 @@ namespace Asce.Game
 
         public void LoadCurrentGame()
         {
+            this.LoadGameConfig();
             this.LoadEnemies();
             this.LoadCharacter();
             this.LoadAbilities();
@@ -41,6 +42,13 @@ namespace Asce.Game
             return _isLoadeds.ContainsKey(key) && _isLoadeds[key];
         }
 
+        public void SaveGameConfig()
+        {
+            CurrentGameConfigData configData = new CurrentGameConfigData();
+            configData.hasSave = MainGameManager.Instance.IsPlaying;
+            configData.playTime = Time.time;
+            SaveLoadManager.Instance.Save("CurrentGameConfig", configData);
+        }
 
         public void SaveEnemies()
         {
@@ -94,7 +102,13 @@ namespace Asce.Game
             SaveLoadManager.Instance.Save("CurrentGameSupportCaller", supportCallerData);
         }
 
+        private void LoadGameConfig()
+        {
+            CurrentGameConfigData configData = SaveLoadManager.Instance.Load<CurrentGameConfigData>("CurrentGameConfig");
+            if (configData == null) return;
 
+            _isLoadeds["GameConfig"] = true;
+        }
 
         private void LoadEnemies()
         {

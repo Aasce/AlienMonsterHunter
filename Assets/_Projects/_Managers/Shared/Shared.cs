@@ -20,16 +20,10 @@ namespace Asce.Managers
 
             if (!Data.TryGetValue(key, out object value))
             {
-                Debug.LogWarning($"[Shared-Get] Key {key} is not exist");
                 return default;
             }
 
-            if (value is not T tValue)
-            {
-                Debug.LogWarning($"[Shared-Get] Value of Key {key} is not type of {nameof(T)}");
-                return default;
-            }
-
+            if (value is not T tValue) return default;
             return tValue;
         }
 
@@ -40,11 +34,9 @@ namespace Asce.Managers
                 Debug.LogWarning($"[Shared-Add] Key is null or empty");
                 return;
             }
-            if (Data.ContainsKey(key))
-            {
-                Debug.LogWarning($"[Shared-Add] Key {key} is exists");
-                return;
-            }
+
+            if (Data.ContainsKey(key)) return;
+            
 
             _data.Add(key, value);
         }
@@ -57,12 +49,7 @@ namespace Asce.Managers
                 return;
             }
 
-            if (!Data.ContainsKey(key))
-            {
-                Debug.LogWarning($"[Shared-Remove] Key {key} is not exists");
-                return;
-            }
-
+            if (!Data.ContainsKey(key)) return;
             _data.Remove(key);
         }
 
@@ -74,12 +61,7 @@ namespace Asce.Managers
                 return;
             }
 
-            if (!Data.ContainsKey(key))
-            {
-                Debug.LogWarning($"[Shared-Set] Key {key} is not exists");
-                return;
-            }
-
+            if (!Data.ContainsKey(key))  return;
             Data[key] = value;
         }
 
