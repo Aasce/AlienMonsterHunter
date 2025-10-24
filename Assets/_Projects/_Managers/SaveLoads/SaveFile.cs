@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
     [System.Serializable]
     public class SaveFile

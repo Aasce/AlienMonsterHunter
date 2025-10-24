@@ -26,3 +26,5 @@ MonoBehaviour:
       _path: current/supports.json
     - _name: CurrentGameSupportCaller
       _path: current/support_caller.json
+    - _name: PrepareGameLastPick
+      _path: prepare/last_pick.json

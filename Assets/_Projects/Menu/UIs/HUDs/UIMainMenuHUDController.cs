@@ -1,7 +1,7 @@
-using Asce.Game.SaveLoads;
 using Asce.Game.UIs.HUDs;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
+using Asce.SaveLoads;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,8 +19,8 @@ namespace Asce.Menu.UIs.HUDs
 
         private void PlayButton_OnClick()
         {
-            CurrentGameConfigData gameConfigData = SaveLoadManager.Instance.Load<CurrentGameConfigData>("CurrentGameConfig");
-            if (gameConfigData == null || !gameConfigData.hasSave)
+            SaveLoadCurrentGameController currentGameController = SaveLoadManager.Instance.GetController("Current Game") as SaveLoadCurrentGameController;
+            if (currentGameController == null || !currentGameController.HasSaveCurrentGame()) 
             {
                 MenuManager.Instance.PlayNewGame();
                 return;

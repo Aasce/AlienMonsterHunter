@@ -1,5 +1,6 @@
 using Asce.Game.Managers;
 using Asce.Managers;
+using Asce.SaveLoads;
 using UnityEngine;
 
 namespace Asce.Menu
@@ -18,6 +19,8 @@ namespace Asce.Menu
 
         public void PlayNewGame()
         {
+            SaveLoadCurrentGameController currentGameController = SaveLoadManager.Instance.GetController("Current Game") as SaveLoadCurrentGameController;
+            if (currentGameController != null) currentGameController.ClearCurrentGame();
             Shared.SetOrAdd("NewGame", true);
             SceneLoader.Instance.Load(_prepareGameSceneName, delay: 0.5f);
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
     public class CurrentGameConfigData : SaveData
     {

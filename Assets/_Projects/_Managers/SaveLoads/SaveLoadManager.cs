@@ -2,13 +2,15 @@ using Asce.Managers;
 using Asce.Managers.SaveLoads;
 using UnityEngine;
 
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
     public class SaveLoadManager : DontDestroyOnLoadSingleton<SaveLoadManager>
     {
         [SerializeField] private SO_AllSaveFiles _allSaveFiles;
+        [SerializeField] private SO_AllSaveControllers _allSaveControllers;
 
 		public SO_AllSaveFiles AllSaveFiles => _allSaveFiles;
+        public SaveLoadController GetController(string name) => _allSaveControllers.Get(name);
 
         /// <summary> Save an object to the specified save file. </summary>
         public void Save<T>(string saveName, T data)

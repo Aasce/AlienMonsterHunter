@@ -1,11 +1,16 @@
 using Asce.Managers.UIs;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
     public class UIPicked : UIObject
     {
+        [SerializeField] private Button _loadLastPickButton;
+
+        [Space]
         [SerializeField] private UICharacterPickedSlot _characterSlot;
         [SerializeField] private UIGunPickedSlot _gunSlot;
         [SerializeField] private List<UISupportPickedSlot> _supportSlots;
@@ -18,21 +23,7 @@ namespace Asce.PrepareGame.UIs
         private void Start()
         {
             this.Initialize();
-
-            bool hasSaveFile = false;
-            if (hasSaveFile)
-            {
-
-            }
-            else
-            {
-                this.CharacterSlot.Set(null);
-                this.GunSlot.Set(null);
-                foreach (UISupportPickedSlot supportSlot in this.SupportSlots)
-                {
-                    supportSlot.Set(null);
-                }
-            }
+            _loadLastPickButton.onClick.AddListener(LoadLastPickButton_OnClick);
         }
 
         private void Initialize()
@@ -42,6 +33,20 @@ namespace Asce.PrepareGame.UIs
                 UISupportPickedSlot slot = SupportSlots[i];
                 slot.SlotIndex = i;
             }
+
+            this.CharacterSlot.Initialize();
+            this.GunSlot.Initialize();
+            foreach (UISupportPickedSlot supportSlot in this.SupportSlots)
+            {
+                supportSlot.Initialize();
+            }
         }
+
+
+        private void LoadLastPickButton_OnClick()
+        {
+            PrepareGameSaveLoadController.Instance.LoadLastPick();
+        }
+
     }
 }

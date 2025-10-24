@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
     [System.Serializable]
     public class SaveData

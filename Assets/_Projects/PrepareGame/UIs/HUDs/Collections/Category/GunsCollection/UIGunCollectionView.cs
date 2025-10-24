@@ -1,5 +1,6 @@
 using Asce.Game.Guns;
 using Asce.Game.Managers;
+using Asce.PrepareGame.Picks;
 using System.Collections.Generic;
 
 namespace Asce.PrepareGame.UIs.Collections
@@ -11,8 +12,9 @@ namespace Asce.PrepareGame.UIs.Collections
         public override void ItemClick(UICollectionItem<Gun> uiItem)
         {
             base.ItemClick(uiItem);
-            if (UIPrepareGameController.Instance.HUDController.Picked.GunSlot == null) return;
-            UIPrepareGameController.Instance.HUDController.Picked.GunSlot.Set(uiItem.Item);
+            PickController.Instance.PickGun(uiItem.Item);
+            //if (UIPrepareGameController.Instance.HUDController.Picked.GunSlot == null) return;
+            //UIPrepareGameController.Instance.HUDController.Picked.GunSlot.Set(uiItem.Item);
         }
 
     }

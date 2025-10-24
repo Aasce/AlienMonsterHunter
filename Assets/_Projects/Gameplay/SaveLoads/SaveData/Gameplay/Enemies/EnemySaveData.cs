@@ -1,3 +1,5 @@
+using Asce.SaveLoads;
+
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]

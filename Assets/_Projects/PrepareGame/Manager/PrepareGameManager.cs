@@ -29,11 +29,13 @@ namespace Asce.PrepareGame
                 .ToList()
             );
 
+            PrepareGameSaveLoadController.Instance.SaveLastPick();
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
         public void BackToMainMenu()
         {
+            PrepareGameSaveLoadController.Instance.SaveLastPick();
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
     }

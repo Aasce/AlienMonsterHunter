@@ -1,5 +1,6 @@
 using Asce.Game.Managers;
 using Asce.Game.Supports;
+using Asce.PrepareGame.Picks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,19 +13,34 @@ namespace Asce.PrepareGame.UIs.Collections
         public override void ItemClick(UICollectionItem<Support> uiItem)
         {
             base.ItemClick(uiItem);
-            List<UISupportPickedSlot> slots = UIPrepareGameController.Instance.HUDController.Picked.SupportSlots;
-            int index = slots.FindIndex((uiSlot) => uiSlot.Item == uiItem.Item);
+            int index = PickController.Instance.SupportPrefabs.FindIndex((support) => support == uiItem.Item);
             if (index >= 0) return;
-            foreach (UISupportPickedSlot slot in slots) 
+            for (int i = 0; i < PickController.Instance.MaxSupport; i++)
             {
-                if (slot.Item == null)
+                if (i >= PickController.Instance.SupportPrefabs.Count)
                 {
-                    slot.Set(uiItem.Item);
+                    PickController.Instance.PickSupport(i, uiItem.Item);
+                    return;
+                }
+
+                if (PickController.Instance.SupportPrefabs[i] == null)
+                {
+                    PickController.Instance.PickSupport(i, uiItem.Item);
                     return;
                 }
             }
 
-
+            //List<UISupportPickedSlot> slots = UIPrepareGameController.Instance.HUDController.Picked.SupportSlots;
+            //slots.FindIndex((uiSlot) => uiSlot.Item == uiItem.Item);
+            
+            //foreach (UISupportPickedSlot slot in slots) 
+            //{
+            //    if (slot.Item == null)
+            //    {
+            //        slot.Set(uiItem.Item);
+            //        return;
+            //    }
+            //}
         }
     }
 }

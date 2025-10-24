@@ -1,4 +1,4 @@
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
 	public interface ILoadable<T>
 	{

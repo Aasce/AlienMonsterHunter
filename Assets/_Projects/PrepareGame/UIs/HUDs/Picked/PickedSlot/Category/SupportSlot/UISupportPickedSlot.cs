@@ -24,9 +24,19 @@ namespace Asce.PrepareGame.UIs
             set => _slotIndex = value;
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            if (SlotIndex < PickController.Instance.SupportPrefabs.Count)
+            {
+                this.Set(PickController.Instance.SupportPrefabs[SlotIndex]);
+            }
+            PickController.Instance.OnPickSupport += PickController_OnPickSupport;
+        }
+
         protected override void InternalSet(Support item)
         {
-            PickController.Instance.PickSupport(_slotIndex, item);
             if (item == null || item.Information == null)
             {
                 this.ShowContent(false);
@@ -39,9 +49,22 @@ namespace Asce.PrepareGame.UIs
             if (_levelText != null) _levelText.text = $"lv.NaN";
         }
 
+        protected override void DiscardButton_OnClick()
+        {
+            base.DiscardButton_OnClick();
+            PickController.Instance.PickSupport(SlotIndex, null);
+        }
+
         public override void OnPointerClick(PointerEventData eventData)
         {
             base.OnPointerClick(eventData);
         }
+
+        private void PickController_OnPickSupport(int index, Support support)
+        {
+            if (SlotIndex != index) return;
+            this.Set(support);
+        }
+
     }
 }

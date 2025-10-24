@@ -1,7 +1,7 @@
 using Asce.Managers;
 using UnityEngine;
 
-namespace Asce.Game.SaveLoads
+namespace Asce.SaveLoads
 {
     [CreateAssetMenu(menuName = "Asce/SaveLoads/All Save Files", fileName = "All Save Files")]
     public class SO_AllSaveFiles : ScriptableObject

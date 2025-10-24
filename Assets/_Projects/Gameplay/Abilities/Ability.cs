@@ -2,6 +2,7 @@ using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
+using Asce.SaveLoads;
 using UnityEngine;
 
 namespace Asce.Game.Abilities

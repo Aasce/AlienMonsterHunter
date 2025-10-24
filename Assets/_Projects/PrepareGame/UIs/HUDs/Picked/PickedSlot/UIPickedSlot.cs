@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public abstract class UIPickedSlot<T> : UIObject, IPointerClickHandler
+    public abstract class UIPickedSlot<T> : UIObject, IPointerClickHandler where T : UnityEngine.Object
     {
         [SerializeField] protected T _item;
 
@@ -26,27 +26,25 @@ namespace Asce.PrepareGame.UIs
         public Button DiscardButton => _discardButton;
 
 
-        protected virtual void Start()
+        public virtual void Initialize()
         {
             if (DiscardButton != null) DiscardButton.onClick.AddListener(DiscardButton_OnClick);
         }
 
         public virtual void Set(T item)
         {
-            this.InternalSet(item);
             Item = item;
+            this.InternalSet(item);
         }
 
         protected abstract void InternalSet(T item);
 
-        protected virtual void DiscardButton_OnClick()
-        {
-            this.Set(default);
-        }
+        protected virtual void DiscardButton_OnClick() { }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             UIPrepareGameController.Instance.HUDController.Tabs.ShowTabByTabView(_collection.RectTransform);
+            if (Item != null) _collection.ShowDetails(Item);
         }
 
         protected virtual void ShowContent(bool isShow)

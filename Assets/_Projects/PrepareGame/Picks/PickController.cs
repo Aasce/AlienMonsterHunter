@@ -1,20 +1,26 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
+using Asce.Game.Managers;
 using Asce.Game.Supports;
 using Asce.Managers;
+using Asce.Managers.Utils;
 using Asce.PrepareGame.Players;
+using Asce.PrepareGame.SaveLoads;
+using Asce.SaveLoads;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.PrepareGame.Picks
 {
-    public class PickController : MonoBehaviourSingleton<PickController>
+    public class PickController : MonoBehaviourSingleton<PickController>, ISaveable<LastPickSaveData>, ILoadable<LastPickSaveData>
     {
+        [SerializeField] private int _maxSupport = 2;
+
         [Header("Picked Prefabs")]
         [SerializeField] private Character _characterPrefab;
         [SerializeField] private Gun _gunPrefab;
-        [SerializeField] private List<Support> _supportPrefabs = new();
+        [SerializeField] private List<Support> _supportPrefabs = new(2);
 
         private Character _characterInstance;
         private Gun _gunInstance;
@@ -23,12 +29,23 @@ namespace Asce.PrepareGame.Picks
         public event Action<Gun> OnPickGun;
         public event Action<int, Support> OnPickSupport;
 
+        public int MaxSupport => _maxSupport;
         public Character CharacterPrefab => _characterPrefab;
         public Gun GunPrefab => _gunPrefab;
         public List<Support> SupportPrefabs => _supportPrefabs;
 
         public Character CharacterInstance => _characterInstance;
         public Gun GunInstance => _gunInstance;
+
+        private void Start()
+        {
+            this.PickCharacter(null);
+            this.PickGun(null);
+            for (int i  = 0; i < _maxSupport; i++) 
+            {
+                this.PickSupport(i, null);
+            }
+        }
 
         public void PickCharacter(Character prefab)
         {
@@ -51,14 +68,7 @@ namespace Asce.PrepareGame.Picks
         public void PickSupport(int index, Support support)
         {
             if (index < 0) return;
-            if (index >= _supportPrefabs.Count)
-            {
-                // Extend the list until it can contain the desired index
-                while (_supportPrefabs.Count <= index)
-                    _supportPrefabs.Add(null);
-            }
-
-            _supportPrefabs[index] = support;
+            _supportPrefabs.InsertOrExpandAt(index, support);
             OnPickSupport?.Invoke(index, support);
         }
 
@@ -154,5 +164,40 @@ namespace Asce.PrepareGame.Picks
             Destroy(_gunInstance.gameObject);
             _gunInstance = null;
         }
+
+        LastPickSaveData ISaveable<LastPickSaveData>.Save()
+        {
+            LastPickSaveData lastPickData = new();
+            lastPickData.characterName = CharacterPrefab != null ? CharacterPrefab.Information.Name : string.Empty;
+            lastPickData.gunName = GunPrefab != null ? GunPrefab.Information.Name : string.Empty;
+            for (int i = 0; i < _supportPrefabs.Count; i++)
+            {
+                Support support = _supportPrefabs[i];
+                if (support == null) continue;
+                lastPickData.supportIds.InsertOrExpandAt(i, support.Information.Id);
+            }
+
+            return lastPickData;
+        }
+
+        void ILoadable<LastPickSaveData>.Load(LastPickSaveData data)
+        {
+            if (data == null) return;
+
+            Character character = GameManager.Instance.AllCharacters.Get(data.characterName);
+            this.PickCharacter(character);
+
+            Gun gun = GameManager.Instance.AllGuns.Get(data.gunName);
+            this.PickGun(gun);
+
+            for (int i = 0; i < data.supportIds.Count; i++)
+            {
+                string supportId = data.supportIds[i];
+                Support support = GameManager.Instance.AllSupports.Get(supportId);
+                if (support == null) continue;
+                this.PickSupport(i, support);
+            }
+        }
+
     }
 }

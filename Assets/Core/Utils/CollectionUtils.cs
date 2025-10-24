@@ -154,5 +154,31 @@ namespace Asce.Managers.Utils
             if (dict == null || dict.Count == 0) return default;
             return dict.FirstOrDefault(pair => EqualityComparer<TValue>.Default.Equals(pair.Value, value)).Key;
         }
+        /// <summary>
+        ///     Adds or replaces an element at the given index in the list.
+        ///     <br/>If the index is greater than or equal to the current count, 
+        ///     the list is extended with default values until the index, 
+        ///     then the element is added.
+        /// </summary>
+        public static void InsertOrExpandAt<T>(this IList<T> list, int index, T element, T addDefault = default)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index), "Index cannot be negative.");
+            if (index < list.Count)
+            { 
+                list[index] = element; // Overwrite existing element
+                return;
+            }
+
+            // Extend list if index is out of current range
+            int itemsToAdd = index - list.Count;
+            for (int i = 0; i < itemsToAdd; i++)
+            {
+                list.Add(addDefault);
+            }
+
+            // Add the final element
+            list.Add(element);
+        }
+
     }
 }
