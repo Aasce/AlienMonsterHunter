@@ -16,6 +16,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: 997c05df25cc8e7418e5c506d9fea611, type: 3}
   _stats: {fileID: 11400000, guid: e9be82cda7ecd7149b2b6a27346a47b8, type: 2}
+  _leveling: {fileID: 11400000, guid: ee81313a1d285134d8bd1a28ef3cfec0, type: 2}
   _role: 3
   _difficulty: 6
   _abilityNames:

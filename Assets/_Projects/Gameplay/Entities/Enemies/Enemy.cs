@@ -18,6 +18,8 @@ namespace Asce.Game.Entities.Enemies
         [Header("Realtime")]
         [SerializeField, Readonly] protected Cooldown _attackCooldown = new();
 
+        public new SO_EnemyInformation Information => base.Information as SO_EnemyInformation;
+        public new EnemyLeveling Leveling => base.Leveling as EnemyLeveling;
         public new EnemyView View => base.View as EnemyView;
         public new EnemyStats Stats => base.Stats as EnemyStats;
 

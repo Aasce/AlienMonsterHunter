@@ -16,10 +16,10 @@ namespace Asce.Game.Entities.Machines
     public class AerialVanguard_Machine : Machine
     {
         [Header("References")]
+        [SerializeField, Readonly] private Character _owner;
         [SerializeField] private FieldOfView _fov;
         [SerializeField] private SingleTargetDetection _targetDetection;
         [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Character _owner;
 
         [Space]
         [SerializeField] private List<Transform> _barrels = new();

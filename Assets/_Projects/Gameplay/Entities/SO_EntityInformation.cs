@@ -1,3 +1,4 @@
+using Asce.Game.Levelings;
 using Asce.Managers.Attributes;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ namespace Asce.Game.Entities
 
         [Space]
         [SerializeField] protected SO_EntityStats _stats;
+        [SerializeField] protected SO_EntityLeveling _leveling;
 
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
 
         public SO_EntityStats Stats => _stats;
+        public SO_EntityLeveling Leveling => _leveling;
     }
 }

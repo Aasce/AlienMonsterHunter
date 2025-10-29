@@ -1,3 +1,4 @@
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Managers;
@@ -16,6 +17,7 @@ namespace Asce.Game.Entities
         [Header("Entity")]
         [SerializeField, Readonly] protected string _id;
         [SerializeField] protected SO_EntityInformation _information;
+        [SerializeField, Readonly] protected EntityLeveling _leveling;
         [SerializeField, Readonly] protected EntityView _view;
         [SerializeField, Readonly] protected EntityStats _stats;
         [SerializeField, Readonly] protected EntityEffects _effects;
@@ -27,6 +29,7 @@ namespace Asce.Game.Entities
 
         public string Id => _id;
         public SO_EntityInformation Information => _information;
+        public EntityLeveling Leveling => _leveling;
         public EntityView View => _view;
         public EntityStats Stats => _stats;
         public EntityEffects Effects => _effects;
@@ -45,6 +48,7 @@ namespace Asce.Game.Entities
         protected override void RefReset()
         {
             base.RefReset();
+            this.LoadComponent(out _leveling);
             this.LoadComponent(out _view);
             this.LoadComponent(out _stats);
             if (this.LoadComponent(out _effects))
@@ -55,9 +59,12 @@ namespace Asce.Game.Entities
 
         public virtual void Initialize()
         {
-            Stats.Initialize(Information.Stats);
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
+            Stats.Initialize(Information.Stats);
+            Leveling.Initialize(Information.Leveling);
+            Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
+
 
         public virtual void ResetStatus()
         {
@@ -74,6 +81,27 @@ namespace Asce.Game.Entities
             OnDead?.Invoke();
         }
 
+
+        protected virtual void Leveling_OnLevelUp(int newLevel)
+        {
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Health", out LevelModification healthModification))
+            {
+                Stats.Health.Add(healthModification.Value, healthModification.Type.ToStatType());
+            }
+
+            if (modificationGroup.TryGetModification("Armor", out LevelModification armorModification))
+            {
+                Stats.Armor.Add(armorModification.Value, armorModification.Type.ToStatType());
+            }
+
+            if (modificationGroup.TryGetModification("Speed", out LevelModification speedModification))
+            {
+                Stats.Speed.Add(speedModification.Value, speedModification.Type.ToStatType());
+            }
+        }
 
         void ITakeDamageable.TakeDamageCallback(float damage)
         {

@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -29,6 +30,7 @@ namespace Asce.Game.Entities.Characters
 
         public new SO_CharacterInformation Information => base.Information as SO_CharacterInformation;
         public new CharacterStats Stats => base.Stats as CharacterStats;
+        public new CharacterLeveling Leveling => base.Leveling as CharacterLeveling;
 
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
@@ -62,6 +64,7 @@ namespace Asce.Game.Entities.Characters
         protected override void RefReset()
         {
             base.RefReset();
+            this.LoadComponent(out _abilities);
             this.LoadComponent(out _collider);
             this.LoadComponent(out _rigidbody);
             this.LoadComponent(out _fov);
@@ -100,10 +103,32 @@ namespace Asce.Game.Entities.Characters
             };
         }
 
+        protected override void Leveling_OnLevelUp(int newLevel)
+        {
+            base.Leveling_OnLevelUp(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("SelfViewRadius", out LevelModification selfViewRadiusModification))
+            {
+                Stats.SelfViewRadius.Add(selfViewRadiusModification.Value, selfViewRadiusModification.Type.ToStatType());
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                Stats.ViewRadius.Add(viewRadiusModification.Value, viewRadiusModification.Type.ToStatType());
+            }
+
+            if (modificationGroup.TryGetModification("ViewAngle", out LevelModification viewAngleModification))
+            {
+                Stats.ViewAngle.Add(viewAngleModification.Value, viewAngleModification.Type.ToStatType());
+            }
+        }
+
         private void FixedUpdate()
         {
             // Moving
-            float speed = 5f;
+            float speed = Stats.Speed.FinalValue;
             Vector2 deltaPosition = _moveDirection.normalized * speed * Time.fixedDeltaTime;
             Rigidbody.MovePosition(Rigidbody.position + deltaPosition);
 

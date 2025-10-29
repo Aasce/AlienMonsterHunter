@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4650080755741037266}
+  - {fileID: 2291607804955897902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2529734045113283420
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce793f11fad96344b901b3e5a790c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: b476780309b7993429cd5382ba47e537, type: 2}
   _owner: {fileID: 0}
   _despawnTime:
@@ -56,8 +57,8 @@ MonoBehaviour:
     m_Bits: 192
   _raycastRadius: 0.1
   _useCircleCast: 0
-  _machine: {fileID: 6874445694996013798}
---- !u!1001 &2109678939637577668
+  _machine: {fileID: 789514803403641968}
+--- !u!1001 &4206966490550018169
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -65,64 +66,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 53663642121372832}
     m_Modifications:
-    - target: {fileID: 349428707320021393, guid: 18f229cc857150546a64283237efbcb9, type: 3}
-      propertyPath: m_Name
-      value: Horizon Breaker Machine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
+    - target: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667180354923091374, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
+      propertyPath: m_Name
+      value: Horizon Breaker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 18f229cc857150546a64283237efbcb9, type: 3}
---- !u!4 &4650080755741037266 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6759747039114519830, guid: 18f229cc857150546a64283237efbcb9, type: 3}
-  m_PrefabInstance: {fileID: 2109678939637577668}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6874445694996013798 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
+--- !u!114 &789514803403641968 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4765365027191067938, guid: 18f229cc857150546a64283237efbcb9, type: 3}
-  m_PrefabInstance: {fileID: 2109678939637577668}
+  m_CorrespondingSourceObject: {fileID: 3501212517604914185, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
+  m_PrefabInstance: {fileID: 4206966490550018169}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -130,3 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bafe84448b197b409886630f88e3750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2291607804955897902 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2715468900448604247, guid: d06090894240fa7458a5c0d9dc7d9fd5, type: 3}
+  m_PrefabInstance: {fileID: 4206966490550018169}
+  m_PrefabAsset: {fileID: 0}

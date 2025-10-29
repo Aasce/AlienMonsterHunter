@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _armor: 25
-  _speed: 4
+  _speed: 5
   _customStats:
     _list: []
   _selfViewRadius: 2

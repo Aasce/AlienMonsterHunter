@@ -6,6 +6,8 @@ namespace Asce.Game.Entities.Machines
 {
     public class Machine : Entity, ISaveable<MachineSaveData>, ILoadable<MachineSaveData>
     {
+        public new SO_MachineInformation Information => base.Information as SO_MachineInformation;
+
         public MachineSaveData Save()
         {
             EntitySaveData baseData = ((ISaveable<EntitySaveData>)this).Save();

@@ -1,10 +1,11 @@
+using Asce.Game.Levelings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Characters
 {
-    [CreateAssetMenu(menuName = "Asce/Entities/Character Information", fileName = "Entity Information")]
+    [CreateAssetMenu(menuName = "Asce/Entities/Character Information", fileName = "Character Information")]
     public class SO_CharacterInformation : SO_EntityInformation
     {
         [Header("Character")]
@@ -14,6 +15,8 @@ namespace Asce.Game.Entities.Characters
         [Space]
         [SerializeField] private List<string> _abilityNames = new();
         private ReadOnlyCollection<string> _abilityNamesReadonly;
+
+        public new SO_CharacterLeveling Leveling => base.Leveling as SO_CharacterLeveling;
 
         public CharacterRoleType Role => _role;
         public int Difficulty => _difficulty;

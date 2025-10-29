@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd96672db07df5b428591908797a9a45, type: 3}
+  m_Name: Electro Reactor Information
+  m_EditorClassIdentifier: 
+  _name: Electro Reactor
+  _description: 
+  _icon: {fileID: 21300000, guid: b7f3e75bd3df2fa42875e805b0cc5178, type: 3}
+  _stats: {fileID: 11400000, guid: 3eb58b63f4ff0544db006f3f8cb86deb, type: 2}
+  _leveling: {fileID: 11400000, guid: d3304a4b93609cd41bb89b4b63f039bd, type: 2}

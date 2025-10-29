@@ -5,15 +5,12 @@ using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Asce.Game.Entities.Machines
 {
     public class SentinelTurret_Machine : Machine
     {
-
         [Header("Detection")]
         [SerializeField] private FieldOfView _fov;
 
@@ -51,7 +48,7 @@ namespace Asce.Game.Entities.Machines
             _damage = Information.Stats.GetCustomStat("Damage");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
             _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
-            if (_fov != null) _fov.ViewRadius = _targetDetection.ViewRadius;
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
 
         public override void ResetStatus()
@@ -69,10 +66,7 @@ namespace Asce.Game.Entities.Machines
 
         private void LateUpdate()
         {
-            if (_fov != null)
-            {
-                _fov.DrawFieldOfView();
-            }
+            _fov.DrawFieldOfView();
         }
 
 
@@ -86,11 +80,8 @@ namespace Asce.Game.Entities.Machines
                 if (target == null) return;
                 Vector2 direction = target.transform.position - transform.position;
 
-                if (_weapon != null)
-                {
-                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-                    _weapon.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-                }
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+                _weapon.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
                 float viewRadius = _targetDetection.ViewRadius;
                 LayerMask seeLayer = _targetDetection.SeeLayer;

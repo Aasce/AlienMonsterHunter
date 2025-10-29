@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1913264736900530404}
+  - {fileID: 3684495475218412325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2403843511891131328
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2e9194d219ce74084c928c8da4723c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 7c05e686700f5b9409a8d882fe7b8ff6, type: 2}
   _owner: {fileID: 0}
   _despawnTime:
@@ -56,8 +57,8 @@ MonoBehaviour:
     m_Bits: 64
   _raycastRadius: 0
   _useCircleCast: 0
-  _machine: {fileID: 2300753080432958730}
---- !u!1001 &8617899138131884798
+  _machine: {fileID: 88359375137174915}
+--- !u!1001 &4032710952584483806
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -65,64 +66,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9023501462577815353}
     m_Modifications:
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8511387066117458969, guid: 13701859596e377469018429a3d54156, type: 3}
+    - target: {fileID: 7042657291493844226, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
       propertyPath: m_Name
-      value: Aerial Vanguard Machine
+      value: Aerial Vanguard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 13701859596e377469018429a3d54156, type: 3}
---- !u!4 &1913264736900530404 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7860370966185130522, guid: 13701859596e377469018429a3d54156, type: 3}
-  m_PrefabInstance: {fileID: 8617899138131884798}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2300753080432958730 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
+--- !u!114 &88359375137174915 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7526930220019443700, guid: 13701859596e377469018429a3d54156, type: 3}
-  m_PrefabInstance: {fileID: 8617899138131884798}
+  m_CorrespondingSourceObject: {fileID: 3949370299782293085, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
+  m_PrefabInstance: {fileID: 4032710952584483806}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -130,3 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61c0d0302421e5478ccabc7fee5874d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3684495475218412325 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 348716863536849147, guid: 0f1aaea6147d38d41a56a64400c107c0, type: 3}
+  m_PrefabInstance: {fileID: 4032710952584483806}
+  m_PrefabAsset: {fileID: 0}
