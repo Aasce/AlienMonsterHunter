@@ -14,6 +14,7 @@ namespace Asce.Game.Combats
 
         [Space]
         [SerializeField] private float _finalDamage = 0f;
+        [SerializeField] private bool _isKill = false;
 
         public ISendDamageable Sender
         {
@@ -49,6 +50,12 @@ namespace Asce.Game.Combats
         {
             get => _finalDamage;
             set => _finalDamage = value;
+        }
+
+        public bool IsKill
+        {
+            get => _isKill;
+            set => _isKill = value;
         }
 
         public DamageContainer() { }

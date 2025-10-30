@@ -153,7 +153,7 @@ namespace Asce.Game.Entities.Enemies
             vfx.SetSize(radius);
         }
 
-        private void Veylar_OnDead()
+        private void Veylar_OnDead(Combats.DamageContainer container)
         {
             this.Explosion();
             

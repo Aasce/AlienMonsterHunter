@@ -29,7 +29,8 @@ namespace Asce.Game.Entities
         public event Action<DamageContainer> OnAfterTakeDamage;
         public event Action<DamageContainer> OnBeforeSendDamage;
         public event Action<DamageContainer> OnAfterSendDamage;
-        public event Action OnDead;
+        public event Action<DamageContainer> OnDead;
+        public event Action<DamageContainer> OnKill;
 
         public string Id => _id;
         public SO_EntityInformation Information => _information;
@@ -45,6 +46,7 @@ namespace Asce.Game.Entities
             get => Id;
             set => _id = value;
         }
+
         ResourceStat ITakeDamageable.Health => Stats.Health;
         Stat ITakeDamageable.Armor => Stats.Armor;
         bool ITargetable.IsTargetable => true;
@@ -69,22 +71,12 @@ namespace Asce.Game.Entities
             Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
 
-
         public virtual void ResetStatus()
         {
             Stats.ResetStats();
             Effects.Clear();
             _isDeath = false;
         }
-
-        protected virtual void Dead()
-        {
-            if (_isDeath) return;
-            _isDeath = true;
-            Effects.Clear();
-            OnDead?.Invoke();
-        }
-
 
         protected virtual void Leveling_OnLevelUp(int newLevel)
         {
@@ -107,17 +99,6 @@ namespace Asce.Game.Entities
             }
         }
 
-        void ITakeDamageable.BeforeTakeDamageCallback(DamageContainer container)
-        {
-            OnBeforeTakeDamage?.Invoke(container);
-        }
-
-        void ITakeDamageable.AfterTakeDamageCallback(DamageContainer container)
-        {
-            OnAfterTakeDamage?.Invoke(container);
-            if (Stats.Health.CurrentValue <= 0f) this.Dead();
-        }
-
         void ISendDamageable.BeforeSendDamageCallback(DamageContainer container)
         {
             OnBeforeSendDamage?.Invoke(container);
@@ -126,6 +107,28 @@ namespace Asce.Game.Entities
         void ISendDamageable.AfterSendDamageCallback(DamageContainer container)
         {
             OnAfterSendDamage?.Invoke(container);
+        }
+        void ISendDamageable.KillCallback(DamageContainer container)
+        {
+            OnKill?.Invoke(container);
+        }
+
+        void ITakeDamageable.BeforeTakeDamageCallback(DamageContainer container)
+        {
+            OnBeforeTakeDamage?.Invoke(container);
+        }
+
+        void ITakeDamageable.AfterTakeDamageCallback(DamageContainer container)
+        {
+            OnAfterTakeDamage?.Invoke(container);
+        }
+
+        void ITakeDamageable.DeadCallback(DamageContainer container)
+        {
+            if (_isDeath) return;
+            _isDeath = true;
+            Effects.Clear();
+            OnDead?.Invoke(container);
         }
 
         EntitySaveData ISaveable<EntitySaveData>.Save()

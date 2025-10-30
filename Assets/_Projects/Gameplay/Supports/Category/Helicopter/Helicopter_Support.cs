@@ -75,7 +75,7 @@ namespace Asce.Game.Supports
             }
         }
 
-        private void Machine_OnDead()
+        private void Machine_OnDead(Combats.DamageContainer container)
         {
             SupportController.Instance.Despawn(this);
         }

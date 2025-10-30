@@ -122,7 +122,7 @@ namespace Asce.Game
             }
         }
 
-        private void Character_OnDead()
+        private void Character_OnDead(Combats.DamageContainer container)
         {
             GameState = MainGameState.Failed;
             Player.Instance.Character.gameObject.SetActive(false);

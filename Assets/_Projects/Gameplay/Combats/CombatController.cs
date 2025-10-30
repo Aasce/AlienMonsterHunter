@@ -23,9 +23,19 @@ namespace Asce.Game.Combats
             float finalDamage = this.CalculateDamage(container.Damage, finalArmor);
             container.FinalDamage = finalDamage;
             container.Receiver.Health.CurrentValue -= finalDamage;
+            if (container.Receiver.Health.CurrentValue <= 0f)
+            {
+                container.IsKill = true;
+            }
+            else container.IsKill = false;
 
             container.Receiver.AfterTakeDamageCallback(container);
             container.Sender.AfterSendDamageCallback(container);
+            if (container.IsKill) 
+            {
+                container.Receiver.DeadCallback(container);
+                container.Sender.KillCallback(container);
+            }
             this.ShowDamageText(container.Receiver, finalDamage);
         }
 

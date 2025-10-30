@@ -35,7 +35,7 @@ namespace Asce.Game.Abilities
             Machine.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
-        private void MachineHealth_OnDead()
+        private void MachineHealth_OnDead(Combats.DamageContainer container)
         {
             this.DespawnTime.ToComplete();
         }

@@ -6,8 +6,11 @@ namespace Asce.Game.Combats
     {
         public event Action<DamageContainer> OnBeforeSendDamage;
         public event Action<DamageContainer> OnAfterSendDamage;
+        public event Action<DamageContainer> OnKill;
 
-        public void BeforeSendDamageCallback(DamageContainer damage);
-        public void AfterSendDamageCallback(DamageContainer damage);
+
+        public void BeforeSendDamageCallback(DamageContainer container);
+        public void AfterSendDamageCallback(DamageContainer container);
+        public void KillCallback(DamageContainer container);
     }
 }

@@ -38,7 +38,7 @@ namespace Asce.Game.Abilities
             Machine.Agent.Warp(FindValidPosition(position));
         }
 
-        private void MachineHealth_OnDead()
+        private void MachineHealth_OnDead(Combats.DamageContainer container)
         {
             this.DespawnTime.ToComplete();
         }

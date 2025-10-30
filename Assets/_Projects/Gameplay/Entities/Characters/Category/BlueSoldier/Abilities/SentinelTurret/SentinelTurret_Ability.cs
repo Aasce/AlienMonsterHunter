@@ -25,7 +25,7 @@ namespace Asce.Game.Abilities
             Machine.ResetStatus();
         }
 
-        private void Machine_OnDead()
+        private void Machine_OnDead(Combats.DamageContainer container)
         {
             this.DespawnTime.ToComplete();
         }

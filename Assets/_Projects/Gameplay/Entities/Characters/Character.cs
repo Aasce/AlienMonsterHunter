@@ -180,7 +180,6 @@ namespace Asce.Game.Entities.Characters
         }
 
 
-
         CharacterSaveData ISaveable<CharacterSaveData>.Save()
         {
             EntitySaveData baseData = ((ISaveable<EntitySaveData>)this).Save();

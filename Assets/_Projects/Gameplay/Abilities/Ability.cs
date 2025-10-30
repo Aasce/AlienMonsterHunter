@@ -18,7 +18,7 @@ namespace Asce.Game.Abilities
 
         public string Id => _id;
         public SO_AbilityInformation Information => _information;
-        public GameObject Owner
+        public virtual GameObject Owner
         {
             get => _owner;
             set => _owner = value;

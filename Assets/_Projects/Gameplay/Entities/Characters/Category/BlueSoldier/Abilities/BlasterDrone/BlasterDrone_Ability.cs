@@ -40,7 +40,7 @@ namespace Asce.Game.Abilities
             Machine.MoveDirection = direction;
         }
 
-        private void Machine_OnDead()
+        private void Machine_OnDead(Combats.DamageContainer container)
         {
             this.DespawnTime.ToComplete();
         }

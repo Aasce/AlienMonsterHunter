@@ -57,7 +57,7 @@ namespace Asce.Game.Entities.Enemies
                 AttackCooldown.BaseTime = newValue;
             };
 
-            this.OnDead += () =>
+            this.OnDead += (Combats.DamageContainer container) =>
             {
                 EnemyController.Instance.Despawn(this);
             };

@@ -46,7 +46,7 @@ namespace Asce.Game.Supports
             Machine.Agent.SetDestination(CallPosition);
         }
 
-        private void Machine_OnDead()
+        private void Machine_OnDead(Combats.DamageContainer container)
         {
             SupportController.Instance.Despawn(this);
         }
