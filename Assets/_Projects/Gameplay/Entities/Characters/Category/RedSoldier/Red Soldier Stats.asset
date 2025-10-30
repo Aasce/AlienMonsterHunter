@@ -17,6 +17,6 @@ MonoBehaviour:
   _speed: 4.5
   _customStats:
     _list: []
-  _selfViewRadius: 1.75
-  _viewRadius: 15
-  _viewAngle: 50
+  _selfViewRadius: 1.5
+  _viewRadius: 12
+  _viewAngle: 60

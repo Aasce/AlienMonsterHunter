@@ -18,5 +18,5 @@ MonoBehaviour:
   _customStats:
     _list: []
   _selfViewRadius: 2
-  _viewRadius: 12
+  _viewRadius: 11
   _viewAngle: 70

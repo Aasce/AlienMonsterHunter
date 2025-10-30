@@ -854,6 +854,14 @@ PrefabInstance:
       propertyPath: '_renderers.Array.data[7]'
       value: 
       objectReference: {fileID: 1185015417070905391}
+    - target: {fileID: 4566655827590722312, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: 3035042326583770649}
+    - target: {fileID: 4566655827590722312, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _expAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _entity
       value: 

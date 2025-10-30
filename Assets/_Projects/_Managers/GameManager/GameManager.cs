@@ -3,6 +3,7 @@ using Asce.Game.Effects;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
+using Asce.Game.Interactions;
 using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.Utils;
@@ -18,6 +19,7 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllAbilities _allAbilities;
         [SerializeField] private SO_AllSupports _allSupports;
         [SerializeField] private SO_AllEffects _allEffects;
+        [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
 
         public SO_AllCharacters AllCharacters => _allCharacters;
         public SO_AllEnemies AllEnemies => _allEnemies;
@@ -25,6 +27,7 @@ namespace Asce.Game.Managers
         public SO_AllAbilities AllAbilities => _allAbilities;
         public SO_AllSupports AllSupports => _allSupports;
         public SO_AllEffects AllEffects => _allEffects;
+        public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
 
         private void OnValidate()
         {
@@ -45,6 +48,10 @@ namespace Asce.Game.Managers
 
             if (AllEffects == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Effects is not assigned", this);
+
+            if (AllInteractiveObjects == null)
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Interactive Objects is not assigned", this);
+
         }
 
         public void QuitGame()
