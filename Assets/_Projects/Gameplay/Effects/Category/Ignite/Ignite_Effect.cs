@@ -1,7 +1,9 @@
+using Asce.Game.Combats;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Asce.Game.Effects
 {
@@ -25,7 +27,10 @@ namespace Asce.Game.Effects
 			if (_igniteCooldown.IsComplete) 
 			{
 				_igniteCooldown.Reset();
-				CombatController.Instance.DamageDealing(Receiver, Strength);
+                CombatController.Instance.DamageDealing(new DamageContainer(Sender, Receiver)
+                {
+                    Damage = Strength
+                });
 			}
 		}
 

@@ -70,7 +70,7 @@ namespace Asce.Game.Abilities
                 }
                 else
                 {
-                    EffectController.Instance.AddEffect("Helicopter Ignite", entity, new EffectData()
+                    EffectController.Instance.AddEffect("Helicopter Ignite", Owner.GetComponent<Entity>(), entity, new EffectData()
                     {
                         Strength = _igniteDamage,
                         Duration = 10f

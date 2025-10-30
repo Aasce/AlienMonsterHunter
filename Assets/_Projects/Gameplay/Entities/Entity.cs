@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace Asce.Game.Entities
 {
-    public class Entity : GameComponent, IIdentifiable, ITakeDamageable, ITargetable, ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
+    public class Entity : GameComponent, IIdentifiable, ITakeDamageable, ISendDamageable, ITargetable, ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
     {
         public const string PREFIX_ID = "entity";
 
@@ -24,7 +25,10 @@ namespace Asce.Game.Entities
 
         protected bool _isDeath = false;
 
-        public event Action<float> OnTakeDamage;
+        public event Action<DamageContainer> OnBeforeTakeDamage;
+        public event Action<DamageContainer> OnAfterTakeDamage;
+        public event Action<DamageContainer> OnBeforeSendDamage;
+        public event Action<DamageContainer> OnAfterSendDamage;
         public event Action OnDead;
 
         public string Id => _id;
@@ -103,11 +107,25 @@ namespace Asce.Game.Entities
             }
         }
 
-        void ITakeDamageable.TakeDamageCallback(float damage)
+        void ITakeDamageable.BeforeTakeDamageCallback(DamageContainer container)
         {
-            OnTakeDamage?.Invoke(damage);
-            if (Stats == null) return;
+            OnBeforeTakeDamage?.Invoke(container);
+        }
+
+        void ITakeDamageable.AfterTakeDamageCallback(DamageContainer container)
+        {
+            OnAfterTakeDamage?.Invoke(container);
             if (Stats.Health.CurrentValue <= 0f) this.Dead();
+        }
+
+        void ISendDamageable.BeforeSendDamageCallback(DamageContainer container)
+        {
+            OnBeforeSendDamage?.Invoke(container);
+        }
+
+        void ISendDamageable.AfterSendDamageCallback(DamageContainer container)
+        {
+            OnAfterSendDamage?.Invoke(container);
         }
 
         EntitySaveData ISaveable<EntitySaveData>.Save()
@@ -150,5 +168,6 @@ namespace Asce.Game.Entities
                 effectLoadable.Load(data.effects);
             }
         }
+
     }
 }

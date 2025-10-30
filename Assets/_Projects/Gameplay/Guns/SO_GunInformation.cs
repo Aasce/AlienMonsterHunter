@@ -13,6 +13,7 @@ namespace Asce.Game.Guns
 
         [Header("Shoot")]
         [SerializeField, Min(0f)] private float _damage = 10f;
+        [SerializeField, Min(0f)] private float _penetration = 0f;
         [SerializeField, Min(0f)] private float _shootSpeed = 0.5f;
 
         [Header("Magazine")]
@@ -39,6 +40,7 @@ namespace Asce.Game.Guns
         public GunType Type => _type;
 
         public float Damage => _damage;
+        public float Penetration => _penetration;
         public float ShootSpeed => _shootSpeed;
 
         public int MagazineSize => _magazineSize;

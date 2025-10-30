@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
+using Asce.Game.Combats;
 using Asce.Game.FOVs;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
@@ -138,7 +139,10 @@ namespace Asce.Game.Entities.Machines
 
         private void Attack(ITargetable target)
         {
-            CombatController.Instance.DamageDealing(target as ITakeDamageable, Damage);
+            CombatController.Instance.DamageDealing(new DamageContainer(this, target as ITakeDamageable)
+            {
+                Damage = Damage
+            });
         }
 
         private void SpawnLightningVFX(Vector2 endPoint)

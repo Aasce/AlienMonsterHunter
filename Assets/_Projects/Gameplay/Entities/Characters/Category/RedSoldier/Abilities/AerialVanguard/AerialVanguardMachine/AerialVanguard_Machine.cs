@@ -1,4 +1,5 @@
 using Asce.Game.AIs;
+using Asce.Game.Combats;
 using Asce.Game.Entities.Characters;
 using Asce.Game.FOVs;
 using Asce.Game.SaveLoads;
@@ -235,7 +236,10 @@ namespace Asce.Game.Entities.Machines
                 {
                     if (target.IsTargetable)
                     {
-                        CombatController.Instance.DamageDealing(target as ITakeDamageable, currentDamage);
+                        CombatController.Instance.DamageDealing(new DamageContainer(this, target as ITakeDamageable)
+                        {
+                            Damage = currentDamage
+                        });
                     }
                     continue; // Continue to next hit (piercing)
                 }

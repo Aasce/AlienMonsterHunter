@@ -119,6 +119,8 @@ namespace Asce.Game.Players
                 }
             }
 
+            bool isPressU = Input.GetKeyDown(KeyCode.U);
+
             if (Character != null && Character.gameObject.activeInHierarchy)
             {
                 Character.Move(moveDirection);
@@ -141,6 +143,12 @@ namespace Asce.Game.Players
                     {
                         Character.UseAbility(i, worldMousePosition);
                     }
+                }
+
+                if (isPressU)
+                {
+                    Character.Leveling.AddExp(998);
+                    Debug.Log($"Character Add Exp({Character.Leveling.CurrentExp}/{Character.Leveling.ExpToLevelUp()}) - Level {Character.Leveling.CurrentLevel}");
                 }
             }
         }

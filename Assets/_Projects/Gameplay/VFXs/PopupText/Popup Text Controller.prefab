@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b6a0c9f71f06f4d9d19879ae17133d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _popupTextColor: {fileID: 11400000, guid: b2f54db4caefa7b489483b5dc55619b8, type: 2}
   _popupTextVFXName: Popup Text
   _offset: {x: 0, y: -0.5}
   _updateCooldown:

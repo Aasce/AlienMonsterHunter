@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Asce.Game.Entities.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))] 
-    public class Character : Entity, ISaveable<CharacterSaveData>, ILoadable<CharacterSaveData>
+    public class Character : Entity, IUsableGun, ISaveable<CharacterSaveData>, ILoadable<CharacterSaveData>
     {
         [Header("Character")]
         [SerializeField, Readonly] private CircleCollider2D _collider;

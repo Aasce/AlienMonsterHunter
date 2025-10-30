@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.FOVs;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;

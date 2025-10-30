@@ -1,9 +1,11 @@
+using Asce.Game.Entities;
 using Asce.Game.Managers;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Supports

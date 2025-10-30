@@ -16,7 +16,9 @@ MonoBehaviour:
   _armor: 10
   _speed: 6
   _customStats:
-    _list: []
+    _list:
+    - _name: AttackPenetration
+      _value: 10
   _attackDamage: 5
   _attackSpeed: 1
   _attackRange: 1.5

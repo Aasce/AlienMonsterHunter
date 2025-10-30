@@ -43,17 +43,17 @@ namespace Asce.PrepareGame.UIs
             else
             {
                 this.SetText(_damageText, $"{gunInformation.Damage}");
-                this.SetText(_penetrationText, $"{0}");
-                this.SetText(_fireRateText, $"{1f / gunInformation.ShootSpeed:#.#}/s");
+                this.SetText(_penetrationText, $"{gunInformation.Penetration}");
+                this.SetText(_fireRateText, $"{1f / gunInformation.ShootSpeed:0.#}/s");
 
-                this.SetText(_minSpreadDistanceText, $"{gunInformation.MinSpreadDistance:#.#}");
-                this.SetText(_maxSpreadDistanceText, $"{gunInformation.MaxSpreadDistance:#.#}");
-                this.SetText(_minSpreadAngleText, $"{gunInformation.MinBulletSpreadAngle:#.#} deg");
-                this.SetText(_maxSpreadAngleText, $"{gunInformation.MaxBulletSpreadAngle:#.#} deg");
+                this.SetText(_minSpreadDistanceText, $"{gunInformation.MinSpreadDistance:0.#}m");
+                this.SetText(_maxSpreadDistanceText, $"{gunInformation.MaxSpreadDistance:0.#}m");
+                this.SetText(_minSpreadAngleText, $"{gunInformation.MinBulletSpreadAngle:0.#} deg");
+                this.SetText(_maxSpreadAngleText, $"{gunInformation.MaxBulletSpreadAngle:0.#} deg");
 
-                this.SetText(_magazineSizeText, $"{gunInformation.MagazineSize:#.#}");
-                this.SetText(_startAmmoText, $"{gunInformation.StartAmmo:#.#}");
-                this.SetText(_reloadTimeText, $"{gunInformation.ReloadTime:#.#}s");
+                this.SetText(_magazineSizeText, $"{gunInformation.MagazineSize:0.#}");
+                this.SetText(_startAmmoText, $"{gunInformation.StartAmmo:0.#}");
+                this.SetText(_reloadTimeText, $"{gunInformation.ReloadTime:0.#}s");
             }
         }
 

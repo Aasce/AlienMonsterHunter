@@ -4,6 +4,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Effects
@@ -15,6 +16,7 @@ namespace Asce.Game.Effects
         
         [Space]
         [SerializeField] protected SO_EffectInformation _information;
+        [SerializeField] protected Entity _sender;
         [SerializeField] protected Entity _receiver;
         [SerializeField] protected Cooldown _duration = new();
         [SerializeField] protected float _strength;
@@ -22,6 +24,11 @@ namespace Asce.Game.Effects
         public string Id => _id;
         public SO_EffectInformation Information => _information;
 
+        public Entity Sender
+        {
+            get => _sender;
+            set => _sender = value;
+        }
         public Entity Receiver
         {
             get => _receiver;
@@ -60,6 +67,7 @@ namespace Asce.Game.Effects
             {
                 id = _id,
                 name = Information.Name,
+                senderId = Sender.Id,
                 baseDuration = Duration.BaseTime,
                 duration = Duration.CurrentTime,
                 strength = Strength,
@@ -76,8 +84,15 @@ namespace Asce.Game.Effects
             Duration.BaseTime = data.baseDuration;
             Duration.CurrentTime = data.duration;
             _strength = data.strength;
+            StartCoroutine(LoadSender(data));
 
             this.OnAfterLoad(data);
+
+            IEnumerator LoadSender(EffectSaveData data)
+            {
+                yield return null;
+                _sender = ComponentUtils.FindComponentById<Entity>(data.senderId);
+            }
         }
 
         protected virtual void OnBeforeSave(EffectSaveData data) { }

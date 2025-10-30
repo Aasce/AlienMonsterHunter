@@ -1,4 +1,5 @@
 using Asce.Game.Abilities;
+using Asce.Game.Combats;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
@@ -89,7 +90,10 @@ namespace Asce.Game.Entities.Enemies
         {
             ITargetable target = TargetDetection.CurrentTarget;
             float damage = Stats.AttackDamage.FinalValue;
-            CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
+            CombatController.Instance.DamageDealing(new DamageContainer(this, target as ITakeDamageable)
+            {
+                Damage = damage
+            });
         }
 
         private void Explosion()
@@ -97,7 +101,7 @@ namespace Asce.Game.Entities.Enemies
             float explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
             float explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             float radius = explosionRadius + _currentPhase * .5f;
-            float damage = explosionDamage * _currentPhase;
+            float finalExplosionDamage = explosionDamage * _currentPhase;
 
             LayerMask targetLayer = TargetDetection.TargetLayer;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, targetLayer);
@@ -108,7 +112,10 @@ namespace Asce.Game.Entities.Enemies
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
-                CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
+                CombatController.Instance.DamageDealing(new DamageContainer(this, target as ITakeDamageable)
+                {
+                    Damage = finalExplosionDamage
+                });
             }
 
             this.SpawnExplosionVFX(radius);

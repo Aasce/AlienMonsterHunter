@@ -19,10 +19,11 @@ namespace Asce.Game.Guns
         [SerializeField] protected SO_GunInformation _information;
         [SerializeField] protected Transform _barrel;
         [SerializeField] protected LayerMask _hitLayer;
-        [SerializeField] protected Entity _owner;
+        [SerializeField] protected IUsableGun _owner;
 
         [Header("Stats")]
         [SerializeField, Readonly] protected float _damage = 10f;
+        [SerializeField, Readonly] protected float _penetration = 0f;
         [SerializeField] protected Cooldown _shootCooldown = new(0.5f);
 
         [Header("Magazine")]
@@ -48,7 +49,7 @@ namespace Asce.Game.Guns
         public string Id => _id;
         public SO_GunInformation Information => _information;
         public virtual Vector2 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
-        public Entity Owner
+        public IUsableGun Owner
         {
             get => _owner;
             set => _owner = value;
@@ -57,6 +58,11 @@ namespace Asce.Game.Guns
         {
             get => _damage;
             protected set => _damage = value;
+        }
+        public float Penetration
+        {
+            get => _penetration;
+            set => _penetration = value;
         }
         public int MagazineSize
         {
@@ -121,6 +127,7 @@ namespace Asce.Game.Guns
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
 
             Damage = Information.Damage;
+            Penetration = Information.Penetration;
             ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
 
             MagazineSize = Information.MagazineSize;
@@ -138,6 +145,7 @@ namespace Asce.Game.Guns
         public virtual void ResetStatus()
         {
             Damage = Information.Damage;
+            Penetration = Information.Penetration;
             ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
 
             MagazineSize = Information.MagazineSize;

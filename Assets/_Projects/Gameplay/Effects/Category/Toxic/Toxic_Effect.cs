@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Managers.Utils;
@@ -28,7 +29,10 @@ namespace Asce.Game.Effects
 				float currentHealth = Receiver.Stats.Health.CurrentValue;
 				if (currentHealth <= 1f) return;
 				float maxDamage = (currentHealth > Strength) ? Strength : currentHealth - 1f;
-				CombatController.Instance.DamageDealing(Receiver, maxDamage);
+				CombatController.Instance.DamageDealing(new DamageContainer(Sender, Receiver)
+				{
+					Damage = maxDamage
+                });
 			}
 		}
 

@@ -1,5 +1,5 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -42,8 +42,11 @@ namespace Asce.Game.Abilities
             if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _layer)) return;
             if (!collision.TryGetComponent(out ITargetable target)) return;
             if (!target.IsTargetable) return;
-            CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
-            
+
+            CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
+            {
+                Damage = DamageDeal
+            });
             this.IsDealing = true;
             this.DespawnTime.ToComplete();
         }

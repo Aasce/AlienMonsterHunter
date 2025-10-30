@@ -1,5 +1,5 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
 using System;
@@ -57,7 +57,10 @@ namespace Asce.Game.Abilities
                 if (!collider.enabled) continue;
                 if (!collision.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
-                CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
+                CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
+                {
+                    Damage = DamageDeal
+                });
             }
 
             this.SpawnVFX();

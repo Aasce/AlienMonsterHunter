@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38047d9ca65224d418bda1bef47a3619, type: 3}
+  m_Name: Popup Text Color
+  m_EditorClassIdentifier: 
+  _characterTakeDamageColor: {r: 1, g: 0.4660377, b: 0.4660377, a: 1}
+  _machineTakeDamageColor: {r: 1, g: 0.9557256, b: 0.4584905, a: 1}
+  _enemyTakeDamageColor: {r: 0.8909314, g: 0.7764706, b: 1, a: 1}
+  _healColor: {r: 0.4509434, g: 1, b: 0.4509434, a: 1}

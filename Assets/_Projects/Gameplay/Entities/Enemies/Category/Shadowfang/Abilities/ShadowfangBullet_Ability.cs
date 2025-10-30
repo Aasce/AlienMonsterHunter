@@ -1,6 +1,6 @@
+using Asce.Game.Combats;
 using Asce.Game.Effects;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -42,9 +42,12 @@ namespace Asce.Game.Abilities
             if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _layer)) return;
             if (!collision.TryGetComponent(out ITargetable target)) return;
             if (!target.IsTargetable) return;
-            
-            CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
-            EffectController.Instance.AddEffect("Toxic", target as Entity, new EffectData()
+
+            CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
+            {
+                Damage = DamageDeal
+            });
+            EffectController.Instance.AddEffect("Toxic", Owner.GetComponent<Entity>(), target as Entity, new EffectData()
             {
                 Duration = 5.5f,
                 Strength = 3f,

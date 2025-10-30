@@ -49,7 +49,7 @@ namespace Asce.Game.Guns
             Gun.MaxBulletSpreadAngle = _spreadAngle.x;
             Gun.MinBulletSpreadAngle = _spreadAngle.y;
 
-            if (Gun.Owner.IsControlByPlayer())
+            if ((Gun.Owner as Entity).IsControlByPlayer())
             {
                 _cacheCameraOrthographicSize = CameraController.Instance.MainCamera.orthographicSize;
                 CameraController.Instance.MainCamera.orthographicSize += _addCameraSize;
@@ -71,7 +71,7 @@ namespace Asce.Game.Guns
             Gun.MaxBulletSpreadAngle = Gun.Information.MaxBulletSpreadAngle;
             Gun.MinBulletSpreadAngle = Gun.Information.MinBulletSpreadAngle;
 
-            if (Gun.Owner.IsControlByPlayer())
+            if ((Gun.Owner as Entity).IsControlByPlayer())
             {
                 CameraController.Instance.MainCamera.orthographicSize = _cacheCameraOrthographicSize;
             }

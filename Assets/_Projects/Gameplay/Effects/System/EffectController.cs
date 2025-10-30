@@ -27,16 +27,17 @@ namespace Asce.Game.Effects
             return effect;
         }
 
-        public Effect AddEffect(string effectName, Entity entity, EffectData data)
+        public Effect AddEffect(string effectName, Entity sender, Entity receiver, EffectData data)
         {
-            if (entity == null) return null;
-            if (entity.IsDeath) return null;
-            if (entity.Effects == null) return null;
+            if (receiver == null) return null;
+            if (receiver.IsDeath) return null;
+            if (receiver.Effects == null) return null;
 
             Effect effect = this.CreateEffect(effectName, data);
 
-            effect.Receiver = entity;
-            entity.Effects.Add(effect);
+            effect.Sender = sender;
+            effect.Receiver = receiver;
+            receiver.Effects.Add(effect);
             effect.gameObject.SetActive(true);
             effect.Apply();
             return effect;

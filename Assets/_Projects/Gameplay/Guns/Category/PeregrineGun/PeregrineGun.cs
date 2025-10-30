@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
@@ -56,7 +57,11 @@ namespace Asce.Game.Guns
                 {
                     if (target.IsTargetable)
                     {
-                        CombatController.Instance.DamageDealing(target as ITakeDamageable, currentDamage);
+                        CombatController.Instance.DamageDealing(new DamageContainer(Owner as ISendDamageable, target as ITakeDamageable)
+                        {
+                            Damage = currentDamage,
+                            Penetration = Penetration,
+                        });
                         currentDamage *= _damageLosePerHit;
                         this.Hit(hit.point, direction);
                     }

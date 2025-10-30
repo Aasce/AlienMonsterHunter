@@ -24,10 +24,10 @@ namespace Asce.Game.Entities
         private void Start()
         {
             if (_entity == null) return;
-            _entity.OnTakeDamage += Entity_OnTakeDamage;
+            _entity.OnAfterTakeDamage += Entity_OnTakeDamage;
         }
 
-        private void Entity_OnTakeDamage(float damage)
+        private void Entity_OnTakeDamage(Combats.DamageContainer container)
         {
             VFXController.Instance.Spawn(_takeDamageVFXName, _entity.transform.position);
         }

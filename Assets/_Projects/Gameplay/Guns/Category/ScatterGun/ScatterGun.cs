@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
@@ -59,7 +60,11 @@ namespace Asce.Game.Guns
                 }
                 if (target.IsTargetable)
                 {
-                    CombatController.Instance.DamageDealing(target as ITakeDamageable, Damage);
+                    CombatController.Instance.DamageDealing(new DamageContainer(Owner as ISendDamageable, target as ITakeDamageable)
+                    {
+                        Damage = Damage,
+                        Penetration = Penetration,
+                    });
                     endPoint = hit.point;
                     break;
                 }

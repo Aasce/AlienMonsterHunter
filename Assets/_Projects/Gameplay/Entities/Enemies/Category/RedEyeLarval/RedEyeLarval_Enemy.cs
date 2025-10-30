@@ -1,4 +1,4 @@
-using Asce.Game.Stats;
+using Asce.Game.Combats;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -21,7 +21,12 @@ namespace Asce.Game.Entities.Enemies
         {
             ITargetable target = TargetDetection.CurrentTarget;
             float damage = Stats.AttackDamage.FinalValue;
-            CombatController.Instance.DamageDealing(target as ITakeDamageable, damage);
+            float penetration = Information.Stats.GetCustomStat("Attack Penetration");
+            CombatController.Instance.DamageDealing(new DamageContainer(this, target as ITakeDamageable)
+            {
+                Damage = damage,
+                Penetration = penetration,
+            });
         }
     }
 }

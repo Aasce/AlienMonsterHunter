@@ -8,6 +8,7 @@ namespace Asce.Game.SaveLoads
     {
         public string id;
         public string name;
+        public string senderId;
         public float strength;
         public float baseDuration;
         public float duration;
@@ -20,6 +21,7 @@ namespace Asce.Game.SaveLoads
                 id = effectData.id;
                 name = effectData.name;
                 strength = effectData.strength;
+                senderId = effectData.senderId;
                 baseDuration = effectData.baseDuration;
                 duration = effectData.duration;
             }

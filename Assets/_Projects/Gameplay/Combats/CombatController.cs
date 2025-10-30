@@ -1,10 +1,8 @@
-using Asce.Game.Entities.Characters;
-using Asce.Game.Entities.Machines;
 using Asce.Game.VFXs;
 using Asce.Managers;
 using UnityEngine;
 
-namespace Asce.Game.Stats
+namespace Asce.Game.Combats
 {
     public class CombatController : MonoBehaviourSingleton<CombatController>
     {
@@ -12,14 +10,23 @@ namespace Asce.Game.Stats
 
         public float ArmorReductionFactor => _armorReductionFactor;
 
-
-        public void DamageDealing(ITakeDamageable receiver, float damage)
+        public void DamageDealing(DamageContainer container)
         {
-            if (receiver == null || damage <= 0f) return;
-            float finalDamage = this.CalculateDamage(damage, receiver.Armor.FinalValue);
-            receiver.Health.CurrentValue -= finalDamage;
-            receiver.TakeDamageCallback(finalDamage);
-            this.ShowDamageText(receiver, finalDamage);
+            if (container == null) return;
+            if (container.Sender == null) return;
+            if (container.Receiver == null) return;
+
+            container.Sender.BeforeSendDamageCallback(container);
+            container.Receiver.BeforeTakeDamageCallback(container);
+
+            float finalArmor = this.CalculateArmor(container.Receiver.Armor.FinalValue, container.Penetration);
+            float finalDamage = this.CalculateDamage(container.Damage, finalArmor);
+            container.FinalDamage = finalDamage;
+            container.Receiver.Health.CurrentValue -= finalDamage;
+
+            container.Receiver.AfterTakeDamageCallback(container);
+            container.Sender.AfterSendDamageCallback(container);
+            this.ShowDamageText(container.Receiver, finalDamage);
         }
 
         public void Healing(ITakeDamageable receiver, float healAmount)
@@ -29,7 +36,11 @@ namespace Asce.Game.Stats
             this.ShowHealText(receiver, healAmount);
         }
 
-
+        public float CalculateArmor(float armor, float penetration)
+        {
+            if (penetration <= 0f) return armor;
+            return Mathf.Max(0, armor - penetration);
+        }
         public float CalculateDamage(float damage, float armor)
         {
             if (damage <= 0f) return 0f;
@@ -44,13 +55,7 @@ namespace Asce.Game.Stats
             PopupTextData data = new()
             {
                 Text = damage.ToString("0"),
-                Color = receiver switch
-                {
-                    Character => Color.red,
-                    Machine => Color.yellow,
-                    MonoBehaviour => Color.white,
-                    _ => Color.white,
-                },
+                Color = receiver.GetDamageColor(),
                 Size = size
             };
 
@@ -64,7 +69,7 @@ namespace Asce.Game.Stats
             PopupTextData data = new()
             {
                 Text = healAmount.ToString("0"),
-                Color = Color.green,
+                Color = PopupTextController.Instance.PopupTextColor.HealColor,
                 Size = size
             };
 

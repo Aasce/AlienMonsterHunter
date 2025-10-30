@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Entities.Machines;
 using Asce.Game.Stats;
@@ -89,7 +90,10 @@ namespace Asce.Game.Abilities
                 if (!hit.collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
-                CombatController.Instance.DamageDealing(target as ITakeDamageable, DamageDeal);
+                CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
+                {
+                    Damage = DamageDeal
+                });
             }
         }
 

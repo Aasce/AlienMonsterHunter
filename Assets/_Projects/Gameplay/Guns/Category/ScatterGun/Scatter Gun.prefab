@@ -181,13 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f20fd5143c813459dac484c471332b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: add44704d0b4b67408f06ae9d273e34b, type: 2}
   _barrel: {fileID: 8618372501598169470}
   _hitLayer:
     serializedVersion: 2
     m_Bits: 704
-  _owner: {fileID: 0}
   _damage: 3
+  _penetration: 0
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
@@ -201,9 +202,9 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
-  _distance: 10
+  _distance: 9
   _bulletPerShoot: 7
-  _spreadAngle: 20
+  _spreadAngle: 25
   _bulletLineVFXName: ScatterGun Bullet Line
 --- !u!114 &-2456159739219276791
 MonoBehaviour:

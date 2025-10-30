@@ -10,6 +10,9 @@ namespace Asce.Game.VFXs
     /// </summary>
     public class PopupTextController : MonoBehaviourSingleton<PopupTextController>
     {
+        [Header("Configs")]
+        [SerializeField] private SO_PopupTextColor _popupTextColor;
+
         [Header("VFX Settings")]
         [SerializeField] private string _popupTextVFXName = string.Empty;
         [SerializeField] private Vector2 _offset = Vector2.up * 1.0f;
@@ -21,6 +24,8 @@ namespace Asce.Game.VFXs
         private readonly Dictionary<Transform, Queue<PopupTextData>> _popupQueues = new();
         private readonly Dictionary<Transform, float> _nextPopupTime = new();
         private readonly List<Transform> _toRemove = new();
+
+        public SO_PopupTextColor PopupTextColor => _popupTextColor;
 
         private void Update()
         {
