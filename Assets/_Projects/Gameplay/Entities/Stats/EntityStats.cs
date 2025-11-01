@@ -29,9 +29,9 @@ namespace Asce.Game.Entities
             _stats.Add(new StatContainer(nameof(Speed), Speed));
 
             if (baseStats == null) return;
-            Health.Add(baseStats.MaxHealth, StatValueType.Base);
-            Armor.Add(baseStats.Armor, StatValueType.Base);
-            Speed.Add(baseStats.Speed, StatValueType.Base);
+            Health.Add(baseStats.MaxHealth, StatValueType.Flat, StatSourceType.Base);
+            Armor.Add(baseStats.Armor, StatValueType.Flat, StatSourceType.Base);
+            Speed.Add(baseStats.Speed, StatValueType.Flat, StatSourceType.Base);
         }
 
         public virtual void ResetStats()
@@ -40,11 +40,20 @@ namespace Asce.Game.Entities
             Health.ToFull();
         }
 
-        protected virtual void ClearStats(bool isClearBase = false)
+        protected virtual void ClearStats(Stats.StatSourceType sourceType = StatSourceType.Default)
         {
-            Health.Clear(isClearBase);
-            Armor.Clear(isClearBase);
-            Speed.Clear(isClearBase);
+            Health.Clear(sourceType);
+            Armor.Clear(sourceType);
+            Speed.Clear(sourceType);
+        }
+
+        protected virtual void ClearAllStats()
+        {
+            foreach(StatContainer container in _stats)
+            {
+                if (container.Stat == null) continue;
+                container.Stat.ClearAll();
+            }
         }
 
         StatsSaveData ISaveable<StatsSaveData>.Save()
@@ -68,7 +77,7 @@ namespace Asce.Game.Entities
         void ILoadable<StatsSaveData>.Load(StatsSaveData data)
         {
             if (data == null) return;
-            ClearStats(isClearBase: true);
+            this.ClearAllStats();
             foreach (StatContainerSaveData statData in data.stats)
             {
                 StatContainer container = _stats.Find((c) => c.Name == statData.Name);

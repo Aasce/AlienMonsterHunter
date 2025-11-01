@@ -12,6 +12,7 @@ namespace Asce.Game.SaveLoads
         public Vector2 position;
         public float rotation;
 
+        public LevelingSaveData leveling;
         public StatsSaveData stats;
         public EffectsSaveData effects;
 
@@ -24,6 +25,9 @@ namespace Asce.Game.SaveLoads
                 name = entityData.name;
                 position = entityData.position;
                 rotation = entityData.rotation;
+
+                leveling = new LevelingSaveData();
+                leveling.CopyFrom(entityData.leveling);
 
                 stats = new StatsSaveData();
                 stats.CopyFrom(entityData.stats);

@@ -1,6 +1,7 @@
 using Asce.Game.Guns;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Game.Stats;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
@@ -103,25 +104,33 @@ namespace Asce.Game.Entities.Characters
             };
         }
 
-        protected override void Leveling_OnLevelUp(int newLevel)
+        protected override void Leveling_OnLevelSetted(int newLevel)
         {
-            base.Leveling_OnLevelUp(newLevel);
+            Stats.SelfViewRadius.Clear(StatSourceType.Levelup);
+            Stats.ViewRadius.Clear(StatSourceType.Levelup);
+            Stats.ViewAngle.Clear(StatSourceType.Levelup);
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
             LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
             if (modificationGroup == null) return;
 
             if (modificationGroup.TryGetModification("SelfViewRadius", out LevelModification selfViewRadiusModification))
             {
-                Stats.SelfViewRadius.Add(selfViewRadiusModification.Value, selfViewRadiusModification.Type.ToStatType());
+                Stats.SelfViewRadius.Add(selfViewRadiusModification.Value, selfViewRadiusModification.Type.ToStatType(), StatSourceType.Levelup);
             }
 
             if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
             {
-                Stats.ViewRadius.Add(viewRadiusModification.Value, viewRadiusModification.Type.ToStatType());
+                Stats.ViewRadius.Add(viewRadiusModification.Value, viewRadiusModification.Type.ToStatType(), StatSourceType.Levelup);
             }
 
             if (modificationGroup.TryGetModification("ViewAngle", out LevelModification viewAngleModification))
             {
-                Stats.ViewAngle.Add(viewAngleModification.Value, viewAngleModification.Type.ToStatType());
+                Stats.ViewAngle.Add(viewAngleModification.Value, viewAngleModification.Type.ToStatType(), StatSourceType.Levelup);
             }
         }
 

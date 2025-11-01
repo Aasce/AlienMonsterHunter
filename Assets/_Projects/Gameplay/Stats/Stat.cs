@@ -15,10 +15,10 @@ namespace Asce.Game.Stats
         [SerializeField] protected float _finalValue;
 
         [Header("Cache Values")]
-        [SerializeField] protected float _baseValue;
         [SerializeField] protected float _flatValue;
         [SerializeField] protected float _ratioValue;
         [SerializeField] protected float _scaleValue;
+        [SerializeField] protected float _setValue;
 
         public event Action<float, float> OnFinalValueChanged;
 
@@ -34,19 +34,19 @@ namespace Asce.Game.Stats
             }
         }
 
-        public float BaseValue => _baseValue;
         public float FlatValue => _flatValue;
         public float RatioValue => _ratioValue;
         public float ScaleValue => _scaleValue;
+        public float SetValue => _setValue;
 
         public virtual StatValue Get(string id)
         {
             return _statValues.Find((statValue) => statValue.Id == id);
         }
 
-        public virtual StatValue Add(float value, StatValueType type = StatValueType.Flat)
+        public virtual StatValue Add(float value, StatValueType type = StatValueType.Flat, StatSourceType sourceType = StatSourceType.Default)
         {
-            StatValue addValue = new (value, type);
+            StatValue addValue = new (value, type, sourceType);
             _statValues.Add(addValue);
             this.Recalculate();
             return addValue;
@@ -58,29 +58,29 @@ namespace Asce.Game.Stats
             this.Recalculate();
         }
 
-        public virtual void Clear(bool isClearBase = false)
+        public virtual void Clear(StatSourceType sourceType = StatSourceType.Default)
         {
-            if (isClearBase) _statValues.Clear();
-            else _statValues.RemoveAll(value => value.Type != StatValueType.Base);
-
+            _statValues.RemoveAll(value => value.SourceType == sourceType);
+            this.Recalculate();
+        }
+        public virtual void ClearAll()
+        {
+            _statValues.Clear();
             this.Recalculate();
         }
 
         public void Recalculate()
         {
-            _baseValue = 0f;
             _flatValue = 0f;
             _ratioValue = 1f;
             _scaleValue = 1f;
+            _setValue = 0f;
+            bool isSet = false;
 
             foreach (StatValue statValue in _statValues)
             {
                 switch (statValue.Type)
                 {
-                    case StatValueType.Base:
-                        _baseValue += statValue.Value;
-                        break;
-
                     case StatValueType.Flat:
                         _flatValue += statValue.Value;
                         break;
@@ -92,10 +92,15 @@ namespace Asce.Game.Stats
                     case StatValueType.Scale:
                         _scaleValue *= statValue.Value;
                         break;
+
+                    case StatValueType.Set:
+                        _setValue = statValue.Value;
+                        isSet = true;
+                        break;
                 }
             }
 
-            FinalValue = ((_baseValue + _flatValue) * _ratioValue) * _scaleValue;
+            FinalValue = isSet ? _setValue : (_flatValue * _ratioValue) * _scaleValue;
         }
 
         StatSaveData ISaveable<StatSaveData>.Save()

@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Veylar Egg Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 6
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 2
+      _type: 0
+    - _targetKey: HatchCooldown
+      _deltaValue: -0.4
+      _type: 0

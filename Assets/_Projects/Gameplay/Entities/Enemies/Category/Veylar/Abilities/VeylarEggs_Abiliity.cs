@@ -1,6 +1,4 @@
-using Asce.Game.Entities;
 using Asce.Game.Entities.Enemies;
-using Asce.Game.Stats;
 using System.Collections;
 using UnityEngine;
 
@@ -13,7 +11,6 @@ namespace Asce.Game.Abilities
         [Space]
         [SerializeField, Min(0)] private int _eggCount = 3;
         [SerializeField, Min(0)] private float _eggForce = 300f;
-        [SerializeField, Min(0)] private float _hatchTime = 5f;
 
 
         public int EggCount
@@ -38,8 +35,8 @@ namespace Asce.Game.Abilities
                 if (egg == null) continue;
 
                 Vector2 forceDirection = Random.insideUnitCircle.normalized;
+                egg.gameObject.SetActive(true);
                 egg.Rigidbody.AddForce(forceDirection * _eggForce, ForceMode2D.Impulse);
-                egg.HatchCooldown.SetBaseTime(Random.Range(_hatchTime * 0.75f, _hatchTime * 1.25f));
                 yield return new WaitForSeconds(0.1f);
             }
         }

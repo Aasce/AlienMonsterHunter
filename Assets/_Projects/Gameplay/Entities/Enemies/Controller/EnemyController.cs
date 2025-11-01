@@ -19,6 +19,7 @@ namespace Asce.Game.Entities.Enemies
         [SerializeField] private Vector2 _spawnAreaY = new(-25f, 25f);
         [SerializeField] private int _maxAttempts = 10;
         [SerializeField] private float _samplePositionMaxDistance = 0.5f;
+        [SerializeField] private Vector2Int _levelRange = new(0, 11);
 
         public List<string> Enemies => _enemyNames;
 
@@ -42,6 +43,7 @@ namespace Asce.Game.Entities.Enemies
                         Debug.DrawLine(candidate, hit.position, Color.red, 10f);
                         Enemy enemy = this.Spawn(name, hit.position);
                         if (enemy == null) break;
+                        enemy.Leveling.SetLevel(Random.Range(_levelRange.x, _levelRange.y));
                         enemy.gameObject.SetActive(true);
 
                         break;

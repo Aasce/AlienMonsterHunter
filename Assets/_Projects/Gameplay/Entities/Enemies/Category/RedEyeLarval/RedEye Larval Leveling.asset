@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: RedEye Larval Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 5
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 3
+      _type: 0
+    - _targetKey: Speed
+      _deltaValue: 0.2
+      _type: 0
+    - _targetKey: AttackDamage
+      _deltaValue: 1
+      _type: 0
+    - _targetKey: AttackSpeed
+      _deltaValue: -0.05
+      _type: 0

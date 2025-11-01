@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]
-    public class CharacterAbilitiesSaveData : EntitySaveData
+    public class CharacterAbilitiesSaveData : SaveData
     {
         public List<AbilityContainerSaveData> abilityContainers = new();
 

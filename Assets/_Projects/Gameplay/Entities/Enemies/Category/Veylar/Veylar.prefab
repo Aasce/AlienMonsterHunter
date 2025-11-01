@@ -740,7 +740,7 @@ PrefabInstance:
       objectReference: {fileID: 8727078275380452219}
     - target: {fileID: 4566655827590722312, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _expAmount
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _entity
@@ -855,9 +855,10 @@ MonoBehaviour:
   _maturationCooldown:
     _baseTime: 7
     _currentTime: 0
-  _sizeRange: {x: 0.3, y: 1.1}
+  _sizeRange: {x: 0.3, y: 1.2}
   _maxPhase: 5
   _currentPhase: 0
+  _explosionDamage: 0
   _layOnDeadAtPhase: 3
   _layable: 1
   _layCooldown:

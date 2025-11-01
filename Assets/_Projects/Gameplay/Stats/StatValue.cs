@@ -14,10 +14,12 @@ namespace Asce.Game.Stats
         [SerializeField] private string _id;
         [SerializeField] private float _value;
         [SerializeField] private StatValueType _type;
+        [SerializeField] private StatSourceType _sourceType;
 
         public readonly string Id => _id;
         public readonly float Value => _value;
         public readonly StatValueType Type => _type;
+        public readonly StatSourceType SourceType => _sourceType;
         string IIdentifiable.Id 
         { 
             readonly get => Id; 
@@ -25,19 +27,21 @@ namespace Asce.Game.Stats
         }
 
         /// <summary> Create new stat with unique ID. </summary>
-        public StatValue(float value, StatValueType type = StatValueType.Flat)
+        public StatValue(float value, StatValueType type = StatValueType.Flat, StatSourceType sourceType = StatSourceType.Default)
         {
             _id = IdGenerator.NewId(PREFIX_ID);
             _value = value;
             _type = type;
+            _sourceType = sourceType;
         }
 
         /// <summary> Create stat with predefined ID </summary>
-        public StatValue(string id, float value, StatValueType type = StatValueType.Flat)
+        public StatValue(string id, float value, StatValueType type = StatValueType.Flat, StatSourceType sourceType = StatSourceType.Default)
         {
             _id = string.IsNullOrEmpty(id) ? IdGenerator.NewId(PREFIX_ID) : id;
             _value = value;
             _type = type;
+            _sourceType = sourceType;
         }
 
         public override readonly string ToString()
@@ -51,7 +55,8 @@ namespace Asce.Game.Stats
             {
                 id = _id,
                 value = _value,
-                type = _type
+                type = _type,
+                sourceType = _sourceType,
             };
         }
 
@@ -62,7 +67,8 @@ namespace Asce.Game.Stats
             {
                 _id = data.id,
                 _value = data.value,
-                _type = data.type
+                _type = data.type,
+                _sourceType = data.sourceType
             };
 
             return statValue;

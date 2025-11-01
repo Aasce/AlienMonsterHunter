@@ -24,9 +24,9 @@ namespace Asce.Game.Entities.Characters
 
             if (baseStats is not SO_CharacterStats enemyStats) return;
 
-            SelfViewRadius.Add(enemyStats.SelfViewRadius, StatValueType.Base);
-            ViewRadius.Add(enemyStats.ViewRadius, StatValueType.Base);
-            ViewAngle.Add(enemyStats.ViewAngle, StatValueType.Base);
+            SelfViewRadius.Add(enemyStats.SelfViewRadius, StatValueType.Flat, StatSourceType.Base);
+            ViewRadius.Add(enemyStats.ViewRadius, StatValueType.Flat, StatSourceType.Base);
+            ViewAngle.Add(enemyStats.ViewAngle, StatValueType.Flat, StatSourceType.Base);
         }
 
         public override void ResetStats()
@@ -34,13 +34,13 @@ namespace Asce.Game.Entities.Characters
             base.ResetStats();
         }
 
-        protected override void ClearStats(bool isClearBase = false)
+        protected override void ClearStats(Stats.StatSourceType sourceType = StatSourceType.Default)
         {
-            base.ClearStats(isClearBase);
+            base.ClearStats(sourceType);
 
-            SelfViewRadius.Clear(isClearBase);
-            ViewRadius.Clear(isClearBase);
-            ViewAngle.Clear(isClearBase);
+            SelfViewRadius.Clear(sourceType);
+            ViewRadius.Clear(sourceType);
+            ViewAngle.Clear(sourceType);
         }
     }
 }

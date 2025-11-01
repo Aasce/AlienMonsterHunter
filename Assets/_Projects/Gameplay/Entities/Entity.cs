@@ -68,6 +68,7 @@ namespace Asce.Game.Entities
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
             Stats.Initialize(Information.Stats);
             Leveling.Initialize(Information.Leveling);
+            Leveling.OnLevelSetted += Leveling_OnLevelSetted;
             Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
 
@@ -78,26 +79,40 @@ namespace Asce.Game.Entities
             _isDeath = false;
         }
 
-        protected virtual void Leveling_OnLevelUp(int newLevel)
+        protected virtual void LevelTo(int newLevel)
         {
             LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
             if (modificationGroup == null) return;
 
             if (modificationGroup.TryGetModification("Health", out LevelModification healthModification))
             {
-                Stats.Health.Add(healthModification.Value, healthModification.Type.ToStatType());
+                Stats.Health.Add(healthModification.Value, healthModification.Type.ToStatType(), StatSourceType.Levelup);
             }
 
             if (modificationGroup.TryGetModification("Armor", out LevelModification armorModification))
             {
-                Stats.Armor.Add(armorModification.Value, armorModification.Type.ToStatType());
+                Stats.Armor.Add(armorModification.Value, armorModification.Type.ToStatType(), StatSourceType.Levelup);
             }
 
             if (modificationGroup.TryGetModification("Speed", out LevelModification speedModification))
             {
-                Stats.Speed.Add(speedModification.Value, speedModification.Type.ToStatType());
+                Stats.Speed.Add(speedModification.Value, speedModification.Type.ToStatType(), StatSourceType.Levelup);
             }
         }
+
+        protected virtual void Leveling_OnLevelSetted(int newLevel)
+        {
+            Stats.Health.Clear(StatSourceType.Levelup);
+            Stats.Armor.Clear(StatSourceType.Levelup);
+            Stats.Speed.Clear(StatSourceType.Levelup);
+
+            for (int i = 1; i <= newLevel; i++)
+            {
+                this.LevelTo(i);
+            }
+        }
+
+        protected virtual void Leveling_OnLevelUp(int newLevel) => LevelTo(newLevel);
 
         void ISendDamageable.BeforeSendDamageCallback(DamageContainer container)
         {
@@ -141,6 +156,11 @@ namespace Asce.Game.Entities
                 rotation = this.transform.eulerAngles.z
             };
 
+            if (Leveling is ISaveable<LevelingSaveData> levelingSaveable)
+            {
+                saveData.leveling = levelingSaveable.Save();
+            }
+
             if (Stats is ISaveable<StatsSaveData> statsSaveable)
             {
                 saveData.stats = statsSaveable.Save();
@@ -160,6 +180,11 @@ namespace Asce.Game.Entities
             this._id = data.id;
             this.transform.position = data.position;
             this.transform.eulerAngles = new Vector3(0f, 0f, data.rotation);
+
+            if (Leveling is ILoadable<LevelingSaveData> levelingLoadable)
+            {
+                levelingLoadable.Load(data.leveling);
+            }
 
             if (Stats is ILoadable<StatsSaveData> statsLoadable)
             {

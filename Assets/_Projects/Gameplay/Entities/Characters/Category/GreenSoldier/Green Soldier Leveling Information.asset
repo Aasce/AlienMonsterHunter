@@ -26,5 +26,5 @@ MonoBehaviour:
     - _targetKey: Speed
       _deltaValue: 0.01
       _type: 1
-  _baseExpToLevelUp: 100
-  _expIncrementPerLevel: 100
+  _baseExpToLevelUp: 200
+  _expIncrementPerLevel: 350

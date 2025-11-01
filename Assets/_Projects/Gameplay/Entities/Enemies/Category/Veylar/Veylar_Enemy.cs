@@ -1,8 +1,10 @@
 using Asce.Game.Abilities;
 using Asce.Game.Combats;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
@@ -16,17 +18,20 @@ namespace Asce.Game.Entities.Enemies
 
         [Space]
         [SerializeField] private string _veylarEggsAbilityName = string.Empty;
-        [SerializeField] private Cooldown _maturationCooldown = new(5f);
-        [SerializeField] private Vector2 _sizeRange = Vector2.one;
 
         [Header("Phase")]
+        [SerializeField, Readonly] private Cooldown _maturationCooldown = new(5f);
+        [SerializeField] private Vector2 _sizeRange = Vector2.one;
         [SerializeField] private int _maxPhase = 3;
-        [SerializeField] private int _currentPhase = 0;
+        [SerializeField, Readonly] private int _currentPhase = 0;
+
+        [Header("Explosion")]
+        [SerializeField, Readonly] private float _explosionDamage;
 
         [Header("Lay")]
         [SerializeField] private int _layOnDeadAtPhase = 2;
-        [SerializeField] private bool _layable = true;
-        [SerializeField] private Cooldown _layCooldown = new(5f);
+        [SerializeField, Readonly] private bool _layable = true;
+        [SerializeField, Readonly] private Cooldown _layCooldown = new(5f);
 
         [Header("VFXs")]
         [SerializeField] private string _explosionVFXName = string.Empty;
@@ -40,6 +45,9 @@ namespace Asce.Game.Entities.Enemies
         public override void Initialize()
         {
             base.Initialize();
+            _layCooldown.SetBaseTime(Information.Stats.GetCustomStat("LayCooldown"));
+            _maturationCooldown.SetBaseTime(Information.Stats.GetCustomStat("MaturationCooldown"));
+            _explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
             Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.8f;
             Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
             {
@@ -47,16 +55,53 @@ namespace Asce.Game.Entities.Enemies
             };
 
             OnDead += Veylar_OnDead;
-            _maturationCooldown.ToComplete();
+            _maturationCooldown.Reset();
+            _currentPhase = 1;
+            this.SetSize();
         }
 
         public override void ResetStatus()
         {
             base.ResetStatus();
-            _currentPhase = 0;
+            _layCooldown.SetBaseTime(Information.Stats.GetCustomStat("LayCooldown"));
+            _maturationCooldown.SetBaseTime(Information.Stats.GetCustomStat("MaturationCooldown"));
+            _explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
             _layable = true;
-            _maturationCooldown.ToComplete();
-            _layCooldown.Reset();
+            _maturationCooldown.Reset();
+            _currentPhase = 1;
+            this.SetSize();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _layCooldown.SetBaseTime(Information.Stats.GetCustomStat("LayCooldown"));
+            _maturationCooldown.SetBaseTime(Information.Stats.GetCustomStat("MaturationCooldown"));
+            _explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("ExplosionDamage", out LevelModification explosionDamageModification))
+            {
+                _explosionDamage += explosionDamageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("LayCooldown", out LevelModification layCooldownModification))
+            {
+                _layCooldown.BaseTime += layCooldownModification.Value;
+                _layCooldown.Reset();
+            }
+
+            if (modificationGroup.TryGetModification("MaturationCooldown", out LevelModification maturationCooldownModification))
+            {
+                _maturationCooldown.BaseTime += maturationCooldownModification.Value;
+                _maturationCooldown.Reset();
+            }
         }
 
         protected override void Update()
@@ -98,10 +143,9 @@ namespace Asce.Game.Entities.Enemies
 
         private void Explosion()
         {
-            float explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
             float explosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             float radius = explosionRadius + _currentPhase * .5f;
-            float finalExplosionDamage = explosionDamage * _currentPhase;
+            float finalExplosionDamage = _explosionDamage * _currentPhase;
 
             LayerMask targetLayer = TargetDetection.TargetLayer;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, targetLayer);
@@ -167,6 +211,7 @@ namespace Asce.Game.Entities.Enemies
         protected override void OnBeforeSave(EnemySaveData data)
         {
             data.SetCustom("CurrentPhase", _currentPhase);
+            data.SetCustom("ExplosionDamage", _explosionDamage);
             data.SetCustom("Layable", _layable);
             data.SetCustom("MaturationCooldown", _maturationCooldown.CurrentTime);
             data.SetCustom("LayCooldown", _layCooldown.CurrentTime);
@@ -175,6 +220,7 @@ namespace Asce.Game.Entities.Enemies
         protected override void OnAfterLoad(EnemySaveData data)
         {
             _currentPhase = data.GetCustom("CurrentPhase", 1);
+            _explosionDamage = data.GetCustom("ExplosionDamage", 0f);
             _layable = data.GetCustom("Layable", false);
             _maturationCooldown.CurrentTime = data.GetCustom("MaturationCooldown", 0f);
             _layCooldown.CurrentTime = data.GetCustom("LayCooldown", 0f);

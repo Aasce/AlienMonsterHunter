@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: Shadowfang Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 10
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 3
+      _type: 0
+    - _targetKey: AttackDamage
+      _deltaValue: 3
+      _type: 0
+    - _targetKey: AttackSpeed
+      _deltaValue: -0.08
+      _type: 0
+    - _targetKey: AttackRange
+      _deltaValue: 0.5
+      _type: 0

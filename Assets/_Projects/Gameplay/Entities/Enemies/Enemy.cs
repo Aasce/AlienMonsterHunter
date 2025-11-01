@@ -1,5 +1,7 @@
 using Asce.Game.AIs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Game.Stats;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
@@ -107,6 +109,36 @@ namespace Asce.Game.Entities.Enemies
         protected virtual void ViewHandle()
         {
             View.Animator.SetFloat("Speed", Agent.velocity.magnitude);
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            Stats.AttackDamage.Clear(StatSourceType.Levelup);
+            Stats.AttackSpeed.Clear(StatSourceType.Levelup);
+            Stats.AttackRange.Clear(StatSourceType.Levelup);
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("AttackDamage", out LevelModification attackDamageModification))
+            {
+                Stats.AttackDamage.Add(attackDamageModification.Value, attackDamageModification.Type.ToStatType(), StatSourceType.Levelup);
+            }
+
+            if (modificationGroup.TryGetModification("AttackSpeed", out LevelModification attackSpeedModification))
+            {
+                Stats.AttackSpeed.Add(attackSpeedModification.Value, attackSpeedModification.Type.ToStatType(), StatSourceType.Levelup);
+            }
+
+            if (modificationGroup.TryGetModification("AttackRange", out LevelModification attackRangeModification))
+            {
+                Stats.AttackRange.Add(attackRangeModification.Value, attackRangeModification.Type.ToStatType(), StatSourceType.Levelup);
+            }
         }
 
 

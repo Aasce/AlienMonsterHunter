@@ -272,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 5025102880806509642}
     - target: {fileID: 4566655827590722312, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _expAmount
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _entity

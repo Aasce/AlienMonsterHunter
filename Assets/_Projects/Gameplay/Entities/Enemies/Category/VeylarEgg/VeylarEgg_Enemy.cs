@@ -1,3 +1,4 @@
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
 using System;
@@ -29,6 +30,24 @@ namespace Asce.Game.Entities.Enemies
             Rigidbody.linearVelocity = Vector2.zero;
             _hatchCooldown.Reset();
         }
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _hatchCooldown.SetBaseTime(Information.Stats.GetCustomStat("HatchCooldown"));
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("HatchCooldown", out LevelModification hatchCooldownModification))
+            {
+                _hatchCooldown.BaseTime += hatchCooldownModification.Value;
+                _hatchCooldown.Reset();
+            }
+        }
 
         protected override void Update()
         {
@@ -41,15 +60,8 @@ namespace Asce.Game.Entities.Enemies
             }
         }
 
-        protected override void Attack()
-        {
-
-        }
-
-        protected override void MoveToTaget()
-        {
-
-        }
+        protected override void Attack() { }
+        protected override void MoveToTaget() { }
 
         private IEnumerator SpawnVeylar()
         {
@@ -62,8 +74,10 @@ namespace Asce.Game.Entities.Enemies
             Veylar_Enemy veylar = EnemyController.Instance.Spawn(_veylarEnemyName, transform.position) as Veylar_Enemy;
             if (veylar == null) yield break;
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
+            veylar.Leveling.SetLevel(Leveling.CurrentLevel);
             veylar.Layable = false;
+
             EnemyController.Instance.Despawn(this);
         }
 

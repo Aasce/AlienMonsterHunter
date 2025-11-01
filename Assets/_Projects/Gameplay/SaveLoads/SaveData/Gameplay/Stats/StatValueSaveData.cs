@@ -10,6 +10,7 @@ namespace Asce.Game.SaveLoads
         public string id;
         public float value;
         public StatValueType type;
+        public StatSourceType sourceType;
 
         public override void CopyFrom(SaveData other)
         {
@@ -19,6 +20,7 @@ namespace Asce.Game.SaveLoads
                 id = otherStatValue.id;
                 value = otherStatValue.value;
                 type = otherStatValue.type;
+                sourceType = otherStatValue.sourceType;
             }
         }
     }

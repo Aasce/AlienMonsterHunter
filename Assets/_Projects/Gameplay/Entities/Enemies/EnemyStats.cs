@@ -30,11 +30,11 @@ namespace Asce.Game.Entities.Enemies
 
             if (baseStats is not SO_EnemyStats enemyStats) return;
 
-            AttackDamage.Add(enemyStats.AttackDamage, StatValueType.Base);
-            AttackSpeed.Add(enemyStats.AttackSpeed, StatValueType.Base);
-            AttackRange.Add(enemyStats.AttackRange, StatValueType.Base);
+            AttackDamage.Add(enemyStats.AttackDamage, StatValueType.Flat, StatSourceType.Base);
+            AttackSpeed.Add(enemyStats.AttackSpeed, StatValueType.Flat, StatSourceType.Base);
+            AttackRange.Add(enemyStats.AttackRange, StatValueType.Flat, StatSourceType.Base);
 
-            ViewRange.Add(enemyStats.ViewRange, StatValueType.Base);
+            ViewRange.Add(enemyStats.ViewRange, StatValueType.Flat, StatSourceType.Base);
         }
 
         public override void ResetStats()
@@ -42,14 +42,14 @@ namespace Asce.Game.Entities.Enemies
             base.ResetStats();
         }
 
-        protected override void ClearStats(bool isClearBase = false)
+        protected override void ClearStats(Stats.StatSourceType sourceType = StatSourceType.Default)
         {
-            base.ClearStats(isClearBase);
-            AttackDamage.Clear(isClearBase);
-            AttackSpeed.Clear(isClearBase);
-            AttackRange.Clear(isClearBase);
+            base.ClearStats(sourceType);
+            AttackDamage.Clear(sourceType);
+            AttackSpeed.Clear(sourceType);
+            AttackRange.Clear(sourceType);
 
-            ViewRange.Clear(isClearBase);
+            ViewRange.Clear(sourceType);
         }
     }
 }
