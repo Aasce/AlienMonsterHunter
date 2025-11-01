@@ -33,6 +33,7 @@ namespace Asce.Game.Entities.Enemies
         {
             base.RefReset();
             this.LoadComponent(out _agent);
+            this.LoadComponent(out _targetDetection);
         }
 
         public override void Initialize()

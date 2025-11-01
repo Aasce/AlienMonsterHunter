@@ -32,13 +32,20 @@ namespace Asce.Game.Entities.Enemies
                 int randomIndex = Random.Range(0, _enemyNames.Count);
                 string name = _enemyNames[randomIndex];
 
+                Enemy enemyPrefab = GameManager.Instance.AllEnemies.Get(name);
+                NavMeshQueryFilter filter = new()
+                {
+                    agentTypeID = enemyPrefab.Agent.agentTypeID,
+                    areaMask = NavMesh.AllAreas
+                };
+
                 for (int i = 0; i < _maxAttempts; i++)
                 {
                     float randomX = Random.Range(_spawnAreaX.x, _spawnAreaX.y);
                     float randomY = Random.Range(_spawnAreaY.x, _spawnAreaY.y);
                     Vector3 candidate = new Vector3(randomX, randomY, 0f);
-
-                    if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, _samplePositionMaxDistance, NavMesh.AllAreas))
+                    
+                    if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, _samplePositionMaxDistance, filter))
                     {
                         Debug.DrawLine(candidate, hit.position, Color.red, 10f);
                         Enemy enemy = this.Spawn(name, hit.position);

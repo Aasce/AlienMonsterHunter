@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40bd35d641ca2804897fcbefe8fdc90c, type: 3}
-  m_Name: Shadowfang Leveling
+  m_Name: Phantom Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
   _levelingMode: 1
@@ -18,17 +18,23 @@ MonoBehaviour:
   _uniformGrowth:
     _modifications:
     - _targetKey: Health
-      _deltaValue: 9
+      _deltaValue: 3
       _type: 0
     - _targetKey: Armor
       _deltaValue: 4
       _type: 0
+    - _targetKey: Speed
+      _deltaValue: 0.08
+      _type: 0
     - _targetKey: AttackDamage
-      _deltaValue: 3
+      _deltaValue: 1
       _type: 0
-    - _targetKey: AttackSpeed
-      _deltaValue: -0.1
+    - _targetKey: ShowDistance
+      _deltaValue: -0.2
       _type: 0
-    - _targetKey: AttackRange
-      _deltaValue: 0.5
+    - _targetKey: DecayDuration
+      _deltaValue: 1
+      _type: 0
+    - _targetKey: DecayStrength
+      _deltaValue: 0.01
       _type: 0

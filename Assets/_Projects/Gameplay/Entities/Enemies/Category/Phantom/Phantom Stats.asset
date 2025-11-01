@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cef632c8621768b4fbeb1e1b1f376e15, type: 3}
-  m_Name: Veylar Stats
+  m_Name: Phantom Stats
   m_EditorClassIdentifier: 
-  _maxHealth: 18
-  _armor: 6
-  _speed: 4
+  _maxHealth: 25
+  _armor: 25
+  _speed: 3.5
   _customStats:
     _list:
-    - _name: ExplosionDamage
-      _value: 5
-    - _name: ExplosionRadius
-      _value: 2
-    - _name: EggCount
-      _value: 2
-    - _name: MaturationCooldown
-      _value: 8
-    - _name: MultiPerPhase
-      _value: 0.2
-    - _name: LayCooldown
-      _value: 25
-  _attackDamage: 4
-  _attackSpeed: 1.5
-  _attackRange: 2.5
-  _viewRange: 14
+    - _name: ShowDistance
+      _value: 6
+    - _name: DecayDuration
+      _value: 10
+    - _name: DecayStrength
+      _value: 0.1
+  _attackDamage: 15
+  _attackSpeed: 2
+  _attackRange: 2
+  _viewRange: 10

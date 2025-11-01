@@ -1,4 +1,5 @@
 using Asce.Managers;
+using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,18 @@ namespace Asce.Game.Entities
         public virtual void ResetStatus()
         {
 
+        }
+
+        public virtual void SetAlpha(float alpha)
+        {
+            alpha = Mathf.Clamp01(alpha);
+            foreach (Renderer renderer in _renderers)
+            {
+                if (renderer is SpriteRenderer spriteRenderer)
+                {
+                    spriteRenderer.color = spriteRenderer.color.WithAlpha(alpha);
+                }
+            }
         }
     }
 }

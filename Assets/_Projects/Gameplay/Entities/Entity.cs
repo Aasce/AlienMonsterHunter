@@ -24,6 +24,7 @@ namespace Asce.Game.Entities
         [SerializeField, Readonly] protected EntityEffects _effects;
 
         protected bool _isDeath = false;
+        protected bool _isTargetable = true;
 
         public event Action<DamageContainer> OnBeforeTakeDamage;
         public event Action<DamageContainer> OnAfterTakeDamage;
@@ -40,6 +41,11 @@ namespace Asce.Game.Entities
         public EntityEffects Effects => _effects;
 
         public bool IsDeath => _isDeath;
+        public bool IsTargetable
+        {
+            get => _isTargetable;
+            set => _isTargetable = value;
+        }
 
         string IIdentifiable.Id 
         { 
@@ -49,7 +55,7 @@ namespace Asce.Game.Entities
 
         ResourceStat ITakeDamageable.Health => Stats.Health;
         Stat ITakeDamageable.Armor => Stats.Armor;
-        bool ITargetable.IsTargetable => true;
+       
 
         protected override void RefReset()
         {
