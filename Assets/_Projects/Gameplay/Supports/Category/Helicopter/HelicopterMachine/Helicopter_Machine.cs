@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -35,6 +36,19 @@ namespace Asce.Game.Entities.Machines
             this.LoadComponent(out _fovSelf);
         }
 
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+        }
+
         private void Update()
         {
             _fireCooldown.Update(Time.deltaTime);
@@ -44,6 +58,7 @@ namespace Asce.Game.Entities.Machines
                 Ability ability = AbilityController.Instance.Spawn(_fireAreaAbilityName, gameObject);
                 if (ability == null) return;
 
+                ability.Leveling.SetLevel(Leveling.CurrentLevel);
                 ability.transform.position = FirePosition;
                 ability.gameObject.SetActive(true);
                 ability.OnActive();

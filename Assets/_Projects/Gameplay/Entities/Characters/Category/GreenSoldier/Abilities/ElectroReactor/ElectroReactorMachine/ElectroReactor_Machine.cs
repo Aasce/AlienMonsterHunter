@@ -2,6 +2,7 @@ using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.Combats;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
@@ -24,6 +25,7 @@ namespace Asce.Game.Entities.Machines
 
         [Header("Link Settings")]
         [SerializeField, Min(0f)] private float _maxLinkDistance;
+        [SerializeField, Min(0f)] private float _linkDamage = 5f;
         [SerializeField] private Cooldown _checkMachineCooldown = new(.25f);
         private readonly HashSet<Transform> _linkedMachines = new();
 
@@ -34,9 +36,9 @@ namespace Asce.Game.Entities.Machines
         public MultiTargetDetection TargetDetection => _targetDetection;
         public float Damage => _damage;
         public float ShockRadius => _shockRadius;
-        public Cooldown AttackCooldown => _attackCooldown;
-
+        public float LinkDamage => _linkDamage;
         public float MaxLinkDistance => _maxLinkDistance;
+        public Cooldown AttackCooldown => _attackCooldown;
 
         protected override void RefReset()
         {
@@ -61,9 +63,52 @@ namespace Asce.Game.Entities.Machines
             _damage = Information.Stats.GetCustomStat("Damage");
             _shockRadius = Information.Stats.GetCustomStat("ShockRadius");
             _maxLinkDistance = Information.Stats.GetCustomStat("MaxLinkDistance");
+            _linkDamage = Information.Stats.GetCustomStat("LinkDamage");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
             _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
             _fov.ViewRadius = _targetDetection.ViewRadius;
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _shockRadius = Information.Stats.GetCustomStat("ShockRadius");
+            _maxLinkDistance = Information.Stats.GetCustomStat("MaxLinkDistance");
+            _linkDamage = Information.Stats.GetCustomStat("LinkDamage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ShockRadius", out LevelModification shockRadiusModification))
+            {
+                _shockRadius += shockRadiusModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("LinkDamage", out LevelModification linkDamageModification))
+            {
+                _linkDamage += linkDamageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                _targetDetection.ViewRadius += viewRadiusModification.Value;
+                _fov.ViewRadius = _targetDetection.ViewRadius;
+            }
         }
 
         private void Update()
@@ -105,15 +150,14 @@ namespace Asce.Game.Entities.Machines
         {
             ElectroReactor_Linker_Ability linker = AbilityController.Instance.Spawn(_linkAbilityName, gameObject) as ElectroReactor_Linker_Ability;
             if (linker == null) return;
-            linker.DamageDeal = Information.Stats.GetCustomStat("LinkDamage");
-            linker.LinkWidth = Information.Stats.GetCustomStat("LinkWidth");
+            linker.DamageDeal = _linkDamage;
             linker.MaxLinkDistance = MaxLinkDistance;
+            linker.LinkWidth = Information.Stats.GetCustomStat("LinkWidth");
             linker.Set(this, other);
             linker.transform.position = transform.position;
             linker.gameObject.SetActive(true);
             linker.OnActive();
         }
-
 
         /// <summary>
         ///     Attacks all visible enemies detected by MultiTargetDetection.
@@ -135,7 +179,6 @@ namespace Asce.Game.Entities.Machines
 
             _attackCooldown.Reset();
         }
-
 
         private void Attack(ITargetable target)
         {
@@ -161,13 +204,22 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Damage", _damage);
+            data.SetCustom("ShockRadius", _shockRadius);
+            data.SetCustom("LinkDamage", _linkDamage);
             data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+            data.SetCustom("ViewRadius", _targetDetection.ViewRadius);
         }
 
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
+            _damage = data.GetCustom<float>("Damage");
+            _shockRadius = data.GetCustom<float>("ShockRadius");
+            _linkDamage = data.GetCustom<float>("LinkDamage");
             _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _targetDetection.ViewRadius = data.GetCustom<float>("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
 
 #if UNITY_EDITOR

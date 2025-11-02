@@ -1,7 +1,7 @@
 using Asce.Game.Combats;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -38,6 +38,37 @@ namespace Asce.Game.Entities.Machines
             _healAmount = Information.Stats.GetCustomStat("HealAmount");
             _healRadius = Information.Stats.GetCustomStat("HealRadius");
             _healCooldown.SetBaseTime(Information.Stats.GetCustomStat("HealInterval"));
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _healAmount = Information.Stats.GetCustomStat("HealAmount");
+            _healRadius = Information.Stats.GetCustomStat("HealRadius");
+            _healCooldown.SetBaseTime(Information.Stats.GetCustomStat("HealInterval"));
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("HealAmount", out LevelModification healAmountModification))
+            {
+                _healAmount += healAmountModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("HealRadius", out LevelModification healRadiusModification))
+            {
+                _healRadius += healRadiusModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("HealInterval", out LevelModification healIntervalModification))
+            {
+                _healCooldown.BaseTime += healIntervalModification.Value;
+            }
+
         }
 
         private void Update()
@@ -86,6 +117,9 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("HealAmount", _healAmount);
+            data.SetCustom("HealRadius", _healRadius);
+            data.SetCustom("HealInterval", _healCooldown.BaseTime);
             data.SetCustom("HealCooldown", _healCooldown.CurrentTime);
         }
 
@@ -94,6 +128,9 @@ namespace Asce.Game.Entities.Machines
             base.OnAfterLoad(data);
             if (data == null) return;
             Agent.Warp(data.position);
+            _healAmount = data.GetCustom<float>("HealAmount");
+            _healRadius = data.GetCustom<float>("HealRadius");
+            _healCooldown.BaseTime = data.GetCustom<float>("HealInterval");
             _healCooldown.CurrentTime = data.GetCustom<float>("HealCooldown");
         }
     }

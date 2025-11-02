@@ -87,6 +87,14 @@ namespace Asce.Game.Entities.Enemies
                 _checkCooldown.Reset();
                 HandleVisibility();
             }
+
+            // Rotate
+            if (Agent.velocity.magnitude > 0.02f)
+            {
+                float angle = Mathf.Atan2(Agent.velocity.y, Agent.velocity.x) * Mathf.Rad2Deg - 90f;
+                float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, angle, Time.deltaTime * 10f);
+                transform.rotation = Quaternion.Euler(0f, 0f, smoothAngle);
+            }
         }
 
         protected override void MoveToTaget() => this.DefaultMoveToTaget();

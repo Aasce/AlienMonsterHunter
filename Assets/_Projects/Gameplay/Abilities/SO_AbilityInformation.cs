@@ -1,3 +1,4 @@
+using Asce.Game.Levelings;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using System.Collections.ObjectModel;
@@ -26,6 +27,8 @@ namespace Asce.Game.Abilities
             return custom.Name;
         });
 
+        [Header("Levelings")]
+        [SerializeField] protected SO_LevelingInformation _leveling;
 
         public string Id => _id;
         public string Name => _name;
@@ -37,6 +40,7 @@ namespace Asce.Game.Abilities
         public float Cooldown => _cooldown;
         public float UseRangeRadius => _useRangeRadius;
         public float DaspawnTime => _despawnTime;
+        public SO_LevelingInformation Leveling => _leveling;
 
         public ReadOnlyCollection<CustomValue> Customs => _customValues.List;
         public float GetCustomValue(string name)

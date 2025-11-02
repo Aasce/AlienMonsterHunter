@@ -83,6 +83,7 @@ namespace Asce.Game.Entities.Characters
             CharacterAbility ability = AbilityController.Instance.Spawn(abilityName, _owner.gameObject) as CharacterAbility;
             if (ability == null) return;
 
+            ability.Leveling.SetLevel(container.Level);
             ability.SetPosition(position);
             ability.gameObject.SetActive(true);
             ability.OnActive();

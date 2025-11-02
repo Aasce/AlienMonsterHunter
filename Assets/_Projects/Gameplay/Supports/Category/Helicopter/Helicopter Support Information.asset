@@ -28,5 +28,6 @@ MonoBehaviour:
     The
     Fire Area lasts for {DespawnTime} seconds.'
   _icon: {fileID: 21300000, guid: a5103566a6c401f4198f7908c73918c7, type: 3}
+  _leveling: {fileID: 11400000, guid: dbe6bf53ef3729c46974c3c27e1498df, type: 2}
   _cooldown: 15
   _cooldownOnRecall: 15

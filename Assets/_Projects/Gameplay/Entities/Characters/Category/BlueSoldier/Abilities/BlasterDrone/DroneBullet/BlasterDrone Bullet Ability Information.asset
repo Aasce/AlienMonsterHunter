@@ -18,8 +18,10 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: a08801384c2f8004dafe92f230f340cd, type: 3}
   _isPassive: 0
   _cooldown: 0
+  _useRangeRadius: Infinity
   _despawnTime: 5
   _customValues:
     _list:
     - _name: Force
       _value: 16
+  _leveling: {fileID: 11400000, guid: 722d8baf37627c84794dbd44334c9318, type: 2}

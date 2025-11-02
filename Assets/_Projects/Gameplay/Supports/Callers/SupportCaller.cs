@@ -85,6 +85,7 @@ namespace Asce.Game.Supports
 
                 spawnSupport.transform.position = SpawnPoint;
                 spawnSupport.CallPosition = position;
+                spawnSupport.Leveling.SetLevel(container.Level);
                 spawnSupport.gameObject.SetActive(true);
                 spawnSupport.OnActive();
                 container.CurrentSupport = spawnSupport;

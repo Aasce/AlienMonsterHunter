@@ -15,6 +15,7 @@ namespace Asce.Game.Abilities
 
         [SerializeField, Readonly] private string _id;
         [SerializeField] private string _name;
+        [SerializeField] private int _level = 0;
         [SerializeField] private Cooldown _cooldown = new(10f);
 
         [Space]
@@ -32,7 +33,7 @@ namespace Asce.Game.Abilities
                 this.UpdateAbilityReference();
             }
         }
-
+        public int Level => _level;
         public Cooldown Cooldown => _cooldown;
         public Ability AbilityPrefab => _abilityPrefab;
         public bool IsValid => _abilityPrefab != null;
@@ -70,6 +71,8 @@ namespace Asce.Game.Abilities
             {
                 _cooldown.BaseTime = _abilityPrefab.Information.Cooldown;
                 _cooldown.ToComplete();
+
+                _level = 0;
             }
         }
 

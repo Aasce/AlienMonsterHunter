@@ -31,7 +31,7 @@ namespace Asce.Game.Entities.Characters
 
         public new SO_CharacterInformation Information => base.Information as SO_CharacterInformation;
         public new CharacterStats Stats => base.Stats as CharacterStats;
-        public new CharacterLeveling Leveling => base.Leveling as CharacterLeveling;
+        public new ExpLeveling Leveling => base.Leveling as ExpLeveling;
 
         public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;

@@ -1,4 +1,6 @@
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Game.Stats;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -9,15 +11,17 @@ namespace Asce.Game.Abilities
 {
     public abstract class Ability : GameComponent, IIdentifiable, ISaveable<AbilitySaveData>, ILoadable<AbilitySaveData>
     {
-        public const string PREFIX_ID = "Ability";
+        public const string PREFIX_ID = "ability";
 
         [SerializeField, Readonly] protected string _id = string.Empty;
         [SerializeField] protected SO_AbilityInformation _information;
-        [SerializeField] protected GameObject _owner;
-        [SerializeField] protected Cooldown _despawnTime = new (10f);
+        [SerializeField, Readonly] protected Leveling _leveling;
+        [SerializeField, Readonly] protected GameObject _owner;
+        [SerializeField, Readonly] protected Cooldown _despawnTime = new (10f);
 
         public string Id => _id;
         public SO_AbilityInformation Information => _information;
+        public Leveling Leveling => _leveling;
         public virtual GameObject Owner
         {
             get => _owner;
@@ -31,6 +35,11 @@ namespace Asce.Game.Abilities
             set => _id = value;
         }
 
+        protected override void RefReset()
+        {
+            base.RefReset();
+            this.LoadComponent(out _leveling);
+        }
 
         protected virtual void Start()
         {
@@ -40,7 +49,10 @@ namespace Asce.Game.Abilities
         {
             if (string.IsNullOrEmpty(this._id)) this._id = IdGenerator.NewId(PREFIX_ID);
             DespawnTime.SetBaseTime(Information.DaspawnTime);
+            Leveling.Initialize(Information.Leveling);
 
+            Leveling.OnLevelSetted += Leveling_OnLevelSetted;
+            Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
 
         public virtual void ResetStatus()
@@ -59,6 +71,28 @@ namespace Asce.Game.Abilities
         {
 
         }
+
+        protected virtual void LevelTo(int newLevel)
+        {
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("DespawnTime", out LevelModification despawnTimeModification))
+            {
+                DespawnTime.BaseTime += despawnTimeModification.Value;
+            }
+        }
+
+        protected virtual void Leveling_OnLevelSetted(int newLevel)
+        {
+            DespawnTime.SetBaseTime(Information.DaspawnTime);
+            for (int i = 1; i <= newLevel; i++)
+            {
+                this.LevelTo(i);
+            }
+        }
+
+        protected virtual void Leveling_OnLevelUp(int newLevel) => LevelTo(newLevel);
 
         AbilitySaveData ISaveable<AbilitySaveData>.Save()
         {

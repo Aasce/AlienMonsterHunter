@@ -1,5 +1,8 @@
 using Asce.Game.Effects;
 using Asce.Game.Entities;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +13,32 @@ namespace Asce.Game.Abilities
     {
         private readonly HashSet<ITargetable> _targets = new();
         [SerializeField] private LayerMask _targetLayer;
-        [SerializeField] private Cooldown _updateCooldown = new(0.5f);
+        [SerializeField, Readonly] private Cooldown _updateCooldown = new(0.5f);
 
-        [SerializeField] private float _igniteDamage = 5f;
+        [SerializeField, Readonly] private float _igniteDamage = 5f;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _igniteDamage = Information.GetCustomValue("IgniteDamage");
+        }
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _igniteDamage = Information.GetCustomValue("IgniteDamage");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("IgniteDamage", out LevelModification igniteDamageModification))
+            {
+                _igniteDamage += igniteDamageModification.Value;
+            }
+        }
 
         private void Update()
         {
@@ -79,5 +105,19 @@ namespace Asce.Game.Abilities
             }
         }
 
+
+        protected override void OnBeforeSave(AbilitySaveData data)
+        {
+            base.OnBeforeSave(data);
+
+            data.SetCustom("IgniteDamage", _igniteDamage);
+        }
+
+        protected override void OnAfterLoad(AbilitySaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _igniteDamage = data.GetCustom<float>("IgniteDamage");
+        }
     }
 }

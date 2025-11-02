@@ -2,8 +2,8 @@ using Asce.Game.AIs;
 using Asce.Game.Combats;
 using Asce.Game.Entities.Characters;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Game.Stats;
 using Asce.Game.VFXs;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -99,6 +99,45 @@ namespace Asce.Game.Entities.Machines
         {
             base.ResetStatus();
             TargetDetection.ResetTarget();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetOrbitDistance = Information.Stats.GetCustomStat("TargetDistance");
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("AttackSpeed", out LevelModification attackSpeedModification))
+            {
+                _attackCooldown.BaseTime += attackSpeedModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                _targetDetection.ViewRadius += viewRadiusModification.Value;
+                _fov.ViewRadius = _targetDetection.ViewRadius;
+            }
+
+            if (modificationGroup.TryGetModification("TargetDistance", out LevelModification targetDistanceModification))
+            {
+                _targetOrbitDistance += targetDistanceModification.Value;
+            }
+
         }
 
         private void Update()
@@ -266,14 +305,23 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Damage", _damage);
+            data.SetCustom("AttackSpeed", _attackCooldown.BaseTime);
             data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+            data.SetCustom("TargetDistance", _targetOrbitDistance);
+            data.SetCustom("ViewRadius", _targetDetection.ViewRadius);
         }
 
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
             Agent.Warp(data.position);
+            _damage = data.GetCustom<float>("Damage");
+            _attackCooldown.BaseTime = data.GetCustom<float>("AttackSpeed");
             _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _targetOrbitDistance = data.GetCustom<float>("TargetDistance");
+            _targetDetection.ViewRadius = data.GetCustom<float>("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
     }
 }

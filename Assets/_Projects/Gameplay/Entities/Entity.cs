@@ -18,7 +18,7 @@ namespace Asce.Game.Entities
         [Header("Entity")]
         [SerializeField, Readonly] protected string _id;
         [SerializeField] protected SO_EntityInformation _information;
-        [SerializeField, Readonly] protected EntityLeveling _leveling;
+        [SerializeField, Readonly] protected Leveling _leveling;
         [SerializeField, Readonly] protected EntityView _view;
         [SerializeField, Readonly] protected EntityStats _stats;
         [SerializeField, Readonly] protected EntityEffects _effects;
@@ -35,7 +35,7 @@ namespace Asce.Game.Entities
 
         public string Id => _id;
         public SO_EntityInformation Information => _information;
-        public EntityLeveling Leveling => _leveling;
+        public Leveling Leveling => _leveling;
         public EntityView View => _view;
         public EntityStats Stats => _stats;
         public EntityEffects Effects => _effects;

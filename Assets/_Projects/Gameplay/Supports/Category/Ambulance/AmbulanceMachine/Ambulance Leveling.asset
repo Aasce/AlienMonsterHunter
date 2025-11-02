@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: Ambulance Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 8
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 5
+      _type: 0
+    - _targetKey: HealAmount
+      _deltaValue: 2
+      _type: 0
+    - _targetKey: HealRadius
+      _deltaValue: 0.4
+      _type: 0
+    - _targetKey: HealInterval
+      _deltaValue: -0.1
+      _type: 0

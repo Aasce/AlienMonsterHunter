@@ -1,17 +1,16 @@
-using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using System;
 using UnityEngine;
 
-namespace Asce.Game.Entities.Characters
+namespace Asce.Game.Levelings
 {
-    public class CharacterLeveling : EntityLeveling
+    public class ExpLeveling : Leveling
     {
         [SerializeField] private int _currentExp = 0;
         public event Action<int> OnAddExp;
         public event Action<int> OnCurrentExpChanged;
 
-        public new SO_CharacterLeveling BaseLeveling => base.BaseLeveling as SO_CharacterLeveling;
+        public new SO_ExpLevelingInformation BaseLeveling => base.BaseLeveling as SO_ExpLevelingInformation;
 
         public int CurrentExp
         {

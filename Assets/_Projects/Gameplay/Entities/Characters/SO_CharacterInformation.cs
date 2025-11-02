@@ -16,7 +16,7 @@ namespace Asce.Game.Entities.Characters
         [SerializeField] private List<string> _abilityNames = new();
         private ReadOnlyCollection<string> _abilityNamesReadonly;
 
-        public new SO_CharacterLeveling Leveling => base.Leveling as SO_CharacterLeveling;
+        public new SO_ExpLevelingInformation Leveling => base.Leveling as SO_ExpLevelingInformation;
 
         public CharacterRoleType Role => _role;
         public int Difficulty => _difficulty;

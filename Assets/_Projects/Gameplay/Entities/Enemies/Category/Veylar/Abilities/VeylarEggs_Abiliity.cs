@@ -35,6 +35,7 @@ namespace Asce.Game.Abilities
                 if (egg == null) continue;
 
                 Vector2 forceDirection = Random.insideUnitCircle.normalized;
+                egg.Leveling.SetLevel(Leveling.CurrentLevel);
                 egg.gameObject.SetActive(true);
                 egg.Rigidbody.AddForce(forceDirection * _eggForce, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(0.1f);

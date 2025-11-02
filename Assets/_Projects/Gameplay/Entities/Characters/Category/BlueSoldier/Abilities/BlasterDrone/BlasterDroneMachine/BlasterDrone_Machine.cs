@@ -1,7 +1,9 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +14,13 @@ namespace Asce.Game.Entities.Machines
     public class BlasterDrone_Machine : Machine
     {
         [Header("Reference")]
-        [SerializeField] private FieldOfView _fov;
-        [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private MultiTargetDetection _targetDetection;
+        [SerializeField, Readonly] private FieldOfView _fov;
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
+        [SerializeField, Readonly] private MultiTargetDetection _targetDetection;
 
         [Header("Attack")]
-        [SerializeField] private Cooldown _attackCooldown = new(1f);
+        [SerializeField, Readonly] private Cooldown _attackCooldown = new(1f);
+        [SerializeField, Readonly] private float _damage = 10;
         [SerializeField] private string _bulletAbilityName = "Blue Soldier Drone Bullet";
 
         [Header("Movement")]
@@ -36,6 +39,7 @@ namespace Asce.Game.Entities.Machines
         protected override void RefReset()
         {
             base.RefReset();
+            this.LoadComponent(out _fov);
             this.LoadComponent(out _rigidbody);
             if (this.LoadComponent(out _targetDetection))
             {
@@ -47,8 +51,9 @@ namespace Asce.Game.Entities.Machines
         public override void Initialize()
         {
             base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
-            TargetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
             _fov.ViewRadius = TargetDetection.ViewRadius;
         }
 
@@ -56,6 +61,39 @@ namespace Asce.Game.Entities.Machines
         {
             base.ResetStatus();
             TargetDetection.ResetTarget();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("AttackSpeed", out LevelModification attackSpeedModification))
+            {
+                _attackCooldown.BaseTime += attackSpeedModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                _targetDetection.ViewRadius += viewRadiusModification.Value;
+                _fov.ViewRadius = _targetDetection.ViewRadius;
+            }
+
         }
 
         private void Update()
@@ -133,7 +171,7 @@ namespace Asce.Game.Entities.Machines
                 AbilityController.Instance.Spawn(_bulletAbilityName, gameObject) as BlasterDrone_Bullet_Ability;
             if (bullet == null) return;
 
-            bullet.DamageDeal = Information.Stats.GetCustomStat("Damage");
+            bullet.DamageDeal = _damage;
             bullet.gameObject.SetActive(true);
             bullet.Fire(transform.position, direction);
             bullet.OnActive();
@@ -142,15 +180,22 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Damage", _damage);
             data.SetCustom("MoveDirection", _moveDirection);
+            data.SetCustom("AttackSpeed", _attackCooldown.BaseTime);
             data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+            data.SetCustom("ViewRadius", _targetDetection.ViewRadius);
         }
 
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
+            _damage = data.GetCustom<float>("Damage");
             _moveDirection = data.GetCustom<Vector2>("MoveDirection");
+            _attackCooldown.BaseTime = data.GetCustom<float>("AttackSpeed");
             _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _targetDetection.ViewRadius = data.GetCustom<float>("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
     }
 }

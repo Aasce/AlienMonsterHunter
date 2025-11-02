@@ -13,3 +13,28 @@ MonoBehaviour:
   m_Name: Aerial Vanguard Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 13
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 5
+      _type: 0
+    - _targetKey: Speed
+      _deltaValue: 0.4
+      _type: 0
+    - _targetKey: Damage
+      _deltaValue: 2
+      _type: 0
+    - _targetKey: AttackSpeed
+      _deltaValue: -0.015
+      _type: 0
+    - _targetKey: ViewRadius
+      _deltaValue: 0.3
+      _type: 0
+    - _targetKey: TargetDistance
+      _deltaValue: 0.25
+      _type: 0

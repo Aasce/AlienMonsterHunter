@@ -1,4 +1,3 @@
-using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
@@ -6,24 +5,24 @@ using Asce.SaveLoads;
 using System;
 using UnityEngine;
 
-namespace Asce.Game.Entities
+namespace Asce.Game.Levelings
 {
-    public class EntityLeveling : GameComponent, ISaveable<LevelingSaveData>, ILoadable<LevelingSaveData>
+    public class Leveling : GameComponent, ISaveable<LevelingSaveData>, ILoadable<LevelingSaveData>
     {
-        [SerializeField, Readonly] protected SO_EntityLeveling _baseLeveling;
+        [SerializeField, Readonly] protected SO_LevelingInformation _information;
         [SerializeField] protected int _currentLevel;
 
         public event Action<int> OnLevelChanged;
         public event Action<int> OnLevelUp;
         public event Action<int> OnLevelSetted;
 
-        public SO_EntityLeveling BaseLeveling => _baseLeveling;
+        public SO_LevelingInformation BaseLeveling => _information;
         public int CurrentLevel => _currentLevel;
         public bool IsMaxLevel => _currentLevel >= BaseLeveling.MaxLevel;
 
-        public virtual void Initialize(SO_EntityLeveling baseLeveling)
+        public virtual void Initialize(SO_LevelingInformation baseLeveling)
         {
-            _baseLeveling = baseLeveling;
+            _information = baseLeveling;
         }
 
         public virtual void SetLevel(int level)
@@ -44,7 +43,7 @@ namespace Asce.Game.Entities
 
         LevelingSaveData ISaveable<LevelingSaveData>.Save()
         {
-            LevelingSaveData levelingData = new LevelingSaveData()
+            LevelingSaveData levelingData = new()
             {
                 level = _currentLevel,
             };

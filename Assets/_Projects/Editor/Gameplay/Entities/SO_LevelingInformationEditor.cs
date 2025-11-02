@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Asce.Editors.Game.Levelings
 {
-    [CustomEditor(typeof(SO_EntityLeveling), editorForChildClasses: true)]
-    public class SO_EntityLevelingEditor : Editor
+    [CustomEditor(typeof(SO_LevelingInformation), editorForChildClasses: true)]
+    public class SO_LevelingInformationEditor : Editor
     {
         private SerializedProperty _maxLevelProp;
         private SerializedProperty _levelingModeProp;
@@ -24,7 +24,6 @@ namespace Asce.Editors.Game.Levelings
         {
             serializedObject.Update();
 
-            EditorGUILayout.LabelField("Level Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_maxLevelProp);
             EditorGUILayout.PropertyField(_levelingModeProp);
 

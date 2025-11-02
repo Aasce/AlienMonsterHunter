@@ -1,11 +1,9 @@
-using Asce.Game.Entities;
 using Asce.Game.Managers;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
-using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Supports
@@ -16,12 +14,13 @@ namespace Asce.Game.Supports
         public const string PREFIX_ID = "support_container";
 
         [SerializeField, Readonly] private string _id;
-        [SerializeField] private string _supportId;
-        [SerializeField] private Cooldown _cooldown = new(10f);
+        [SerializeField, Readonly] private string _supportId;
+        [SerializeField, Readonly] private int _level = 0;
+        [SerializeField, Readonly] private Cooldown _cooldown = new(10f);
 
         [Space]
-        [SerializeField] private Support _supportPrefab;
-        [SerializeField] private Support _currentSupport;
+        [SerializeField, Readonly] private Support _supportPrefab;
+        [SerializeField, Readonly] private Support _currentSupport;
 
         public string Id => _id;
 
@@ -36,6 +35,7 @@ namespace Asce.Game.Supports
             }
         }
 
+        public int Level => _level;
         public Cooldown Cooldown => _cooldown;
         public Support SupportPrefab => _supportPrefab;
         public SO_SupportInformation Information => IsValid ? _supportPrefab.Information : null;
@@ -83,6 +83,8 @@ namespace Asce.Game.Supports
             {
                 _cooldown.BaseTime = _supportPrefab.Information.Cooldown;
                 _cooldown.ToComplete();
+
+                _level = 0;
             }
         }
 

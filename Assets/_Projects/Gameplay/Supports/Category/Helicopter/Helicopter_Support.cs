@@ -1,6 +1,7 @@
 using Asce.Game.Abilities;
 using Asce.Game.Entities.Machines;
 using Asce.Game.Enviroments;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
@@ -25,6 +26,7 @@ namespace Asce.Game.Supports
 
             Machine.Initialize();
             Machine.OnDead += Machine_OnDead;
+            Leveling.OnLevelChanged += Leveling_OnLevelChanged;
         }
 
         public override void ResetStatus()
@@ -78,6 +80,11 @@ namespace Asce.Game.Supports
         private void Machine_OnDead(Combats.DamageContainer container)
         {
             SupportController.Instance.Despawn(this);
+        }
+
+        private void Leveling_OnLevelChanged(int newLevel)
+        {
+            Machine.Leveling.SetLevel(newLevel);
         }
 
         protected override void OnBeforeSave(SupportSaveData data)

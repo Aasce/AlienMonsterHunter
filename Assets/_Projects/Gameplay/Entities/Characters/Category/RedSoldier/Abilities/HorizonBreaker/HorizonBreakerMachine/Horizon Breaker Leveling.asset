@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: Horizon Breaker Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 10
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 5
+      _type: 0
+    - _targetKey: Damage
+      _deltaValue: 2.5
+      _type: 0
+    - _targetKey: Distance
+      _deltaValue: 2.5
+      _type: 0
+    - _targetKey: RechargeTime
+      _deltaValue: -0.22
+      _type: 0

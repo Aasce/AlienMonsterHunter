@@ -1,5 +1,6 @@
 using Asce.Game.Abilities;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -22,6 +23,10 @@ namespace Asce.Game.Entities.Machines
         [SerializeField] private LayerMask _targetLayer;
         [SerializeField] private string _lightAbilityName = string.Empty;
 
+        [Space]
+        [SerializeField] private float _damage;
+        [SerializeField] private float _distance;
+
         [Header("Cooldown")]
         [SerializeField] private Cooldown _rechargeCooldown = new(2f);
         [SerializeField] private bool _fired = false;
@@ -32,6 +37,9 @@ namespace Asce.Game.Entities.Machines
         public override void Initialize()
         {
             base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _distance = Information.Stats.GetCustomStat("Distance");
+
             _rechargeCooldown.SetBaseTime(Information.Stats.GetCustomStat("RechargeTime"));
             _fired = false;
         }
@@ -42,7 +50,40 @@ namespace Asce.Game.Entities.Machines
             _rechargeCooldown.Reset();
             _fired = false;
         }
-        
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _distance = Information.Stats.GetCustomStat("Distance");
+            _rechargeCooldown.SetBaseTime(Information.Stats.GetCustomStat("RechargeTime"));
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            // Damage
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            // Distance
+            if (modificationGroup.TryGetModification("Distance", out LevelModification distanceModification))
+            {
+                _distance += distanceModification.Value;
+            }
+
+            // RechargeTime
+            if (modificationGroup.TryGetModification("RechargeTime", out LevelModification rechargeTimeModification))
+            {
+                _rechargeCooldown.BaseTime += rechargeTimeModification.Value;
+            }
+        }
+
         private void Update()
         {
             if (_fired) return;
@@ -69,9 +110,9 @@ namespace Asce.Game.Entities.Machines
             if (light == null) return;
             light.transform.position = BarrielPosition;
             light.Direction = transform.up;
-            light.Damage = Information.Stats.GetCustomStat("Damage");
+            light.Damage = _damage;
+            light.Distance = _distance;
             light.Width = Information.Stats.GetCustomStat("Width");
-            light.Distance = Information.Stats.GetCustomStat("Distance");
             light.gameObject.SetActive(true);
             light.OnActive();
         }
@@ -79,14 +120,20 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
-            data.SetCustom("AttackCooldown", _rechargeCooldown.CurrentTime);
+            data.SetCustom("Damage", _damage);
+            data.SetCustom("Distance", _distance);
+            data.SetCustom("RechargeSpeed", _rechargeCooldown.BaseTime);
+            data.SetCustom("RechargeCooldown", _rechargeCooldown.CurrentTime);
             data.SetCustom("Fired", _fired);
         }
 
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
-            _rechargeCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _damage = data.GetCustom<float>("Damage");
+            _distance = data.GetCustom<float>("Distance");
+            _rechargeCooldown.BaseTime = data.GetCustom<float>("RechargeSpeed");
+            _rechargeCooldown.CurrentTime = data.GetCustom<float>("RechargeCooldown");
             _fired = data.GetCustom<bool>("Fired");
         }
 

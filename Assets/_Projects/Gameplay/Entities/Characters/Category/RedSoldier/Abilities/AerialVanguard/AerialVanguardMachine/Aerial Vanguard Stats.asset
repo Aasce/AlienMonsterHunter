@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b9d9707ab1af54387de4c252512c83, type: 3}
   m_Name: Aerial Vanguard Stats
   m_EditorClassIdentifier: 
-  _maxHealth: 60
+  _maxHealth: 70
   _armor: 25
   _speed: 10
   _customStats:
     _list:
     - _name: Damage
-      _value: 3
+      _value: 8
     - _name: AttackSpeed
-      _value: 0.3
+      _value: 0.32
     - _name: AttackRange
       _value: 7
     - _name: TargetDistance

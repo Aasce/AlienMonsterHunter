@@ -18,6 +18,7 @@ namespace Asce.Game.Abilities
             base.Initialize();
             Machine.Initialize();
             Machine.OnDead+= Machine_OnDead;
+            Leveling.OnLevelChanged += Leveling_OnLevelChanged;
         }
 
         public override void ResetStatus()
@@ -34,6 +35,11 @@ namespace Asce.Game.Abilities
         private void Machine_OnDead(Combats.DamageContainer container)
         {
             this.DespawnTime.ToComplete();
+        }
+
+        private void Leveling_OnLevelChanged(int newLevel)
+        {
+            Machine.Leveling.SetLevel(newLevel);
         }
 
 

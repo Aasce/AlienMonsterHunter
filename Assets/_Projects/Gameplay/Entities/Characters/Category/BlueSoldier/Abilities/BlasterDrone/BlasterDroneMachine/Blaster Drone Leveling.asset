@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: Blaster Drone Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 7
+      _type: 0
+    - _targetKey: Amor
+      _deltaValue: 5
+      _type: 0
+    - _targetKey: ViewRadius
+      _deltaValue: 0.3
+      _type: 0
+    - _targetKey: Damage
+      _deltaValue: 2
+      _type: 0
+    - _targetKey: AttackSpeed
+      _deltaValue: -0.02
+      _type: 0

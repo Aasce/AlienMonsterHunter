@@ -1,3 +1,4 @@
+using Asce.Game.Levelings;
 using Asce.Managers.Attributes;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ namespace Asce.Game.Supports
         [SerializeField, TextArea(3, 10)] private string _description = string.Empty;
         [SerializeField, SpritePreview] private Sprite _icon;
 
+        [Header("Levelings")]
+        [SerializeField] protected SO_LevelingInformation _leveling;
+
         [Space]
         [SerializeField, Min(0f)] private float _cooldown = 0f;
         [SerializeField, Min(0f)] private float _cooldownOnRecall = 0f;
@@ -19,6 +23,8 @@ namespace Asce.Game.Supports
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
+        public SO_LevelingInformation Leveling => _leveling;
+
         public float Cooldown => _cooldown;
         public float CooldownOnRecall => _cooldownOnRecall;
     }

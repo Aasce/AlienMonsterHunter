@@ -1,6 +1,9 @@
 using Asce.Game.Combats;
 using Asce.Game.Effects;
 using Asce.Game.Entities;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -13,6 +16,10 @@ namespace Asce.Game.Abilities
         [Space]
         [SerializeField, Min(0f)] private float _damageDeal = 0f;
         [SerializeField] private bool _isDealing = false;
+
+        [Header("Toxic Effects")]
+        [SerializeField, Readonly] private float _toxicDuration = 0f;
+        [SerializeField, Readonly] private float _toxicStrength = 0f;
 
         [Space]
         [SerializeField] private LayerMask _layer;
@@ -36,6 +43,42 @@ namespace Asce.Game.Abilities
             set => _force = value;
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+            _toxicDuration = Information.GetCustomValue("ToxicDuration");
+            _toxicStrength = Information.GetCustomValue("ToxicStrength");
+        }
+
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _toxicDuration = Information.GetCustomValue("ToxicDuration");
+            _toxicStrength = Information.GetCustomValue("ToxicStrength");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("ToxicDuration", out LevelModification toxicDurationModification))
+            {
+                _toxicDuration += toxicDurationModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ToxicStrength", out LevelModification toxicStrengthModification))
+            {
+                _toxicStrength += toxicStrengthModification.Value;
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (this.IsDealing) return;
@@ -49,8 +92,8 @@ namespace Asce.Game.Abilities
             });
             EffectController.Instance.AddEffect("Toxic", Owner.GetComponent<Entity>(), target as Entity, new EffectData()
             {
-                Duration = 5.5f,
-                Strength = 3f,
+                Duration = _toxicDuration,
+                Strength = _toxicStrength,
             });
 
             this.IsDealing = true;
@@ -77,6 +120,22 @@ namespace Asce.Game.Abilities
             transform.position = position;
             Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
             transform.up = direction;
+        }
+
+        protected override void OnBeforeSave(AbilitySaveData data)
+        {
+            base.OnBeforeSave(data);
+
+            data.SetCustom("ToxicDuration", _toxicDuration);
+            data.SetCustom("ToxicStrength", _toxicStrength);
+        }
+
+        protected override void OnAfterLoad(AbilitySaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _toxicDuration = data.GetCustom<float>("ToxicDuration");
+            _toxicStrength = data.GetCustom<float>("ToxicStrength");
         }
     }
 }

@@ -1,7 +1,9 @@
 using Asce.Game.Abilities;
 using Asce.Game.AIs;
 using Asce.Game.FOVs;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
@@ -24,9 +26,10 @@ namespace Asce.Game.Entities.Machines
         [SerializeField] private SingleTargetDetection _targetDetection;
 
         [Header("Attack Settings")]
-        [SerializeField, Min(0)] private int _maxAmmo = 2;
-        [SerializeField, Min(0)] private int _currentAmmo = 2;
-        [SerializeField] private Cooldown _attackCooldown = new(1f);
+        [SerializeField, Readonly] private float _damage = 10f;
+        [SerializeField, Readonly, Min(0)] private int _maxAmmo = 2;
+        [SerializeField, Readonly, Min(0)] private int _currentAmmo = 2;
+        [SerializeField, Readonly] private Cooldown _attackCooldown = new(1f);
         [SerializeField] private string _bulletAbilityName = "Oblivion Turret Bullet";
 
         public event Action<int> OnCurrentAmmoChanged;
@@ -58,7 +61,9 @@ namespace Asce.Game.Entities.Machines
         public override void Initialize()
         {
             base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
             _maxAmmo = (int)Information.Stats.GetCustomStat("MaxAmmo");
+            CurrentAmmo = _maxAmmo;
             _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
             TargetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
             TargetDetection.ViewAngle = Information.Stats.GetCustomStat("ViewAngle");
@@ -73,6 +78,48 @@ namespace Asce.Game.Entities.Machines
             TargetDetection.ResetTarget();
             CurrentAmmo = _maxAmmo;
             _attackCooldown.SetCurrentByRatio(0.5f);
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _maxAmmo = (int)Information.Stats.GetCustomStat("MaxAmmo");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                _targetDetection.ViewRadius += viewRadiusModification.Value;
+                _fov.ViewRadius = _targetDetection.ViewRadius;
+            }
+
+            if (modificationGroup.TryGetModification("AttackSpeed", out LevelModification attackSpeedModification))
+            {
+                _attackCooldown.BaseTime += attackSpeedModification.Value;
+                _attackCooldown.Reset();
+            }
+
+            if (modificationGroup.TryGetModification("MaxAmmo", out LevelModification maxAmmoModification))
+            {
+                _maxAmmo += Mathf.RoundToInt(maxAmmoModification.Value);
+                CurrentAmmo = _maxAmmo;
+            }
         }
 
         private void Update()
@@ -138,7 +185,7 @@ namespace Asce.Game.Entities.Machines
             Vector2 shootPos = barrel != null ? barrel.position : transform.position;
             Vector2 direction = target.transform.position - transform.position;
 
-            bullet.DamageDeal = Information.Stats.GetCustomStat("Damage");
+            bullet.DamageDeal = _damage;
             bullet.ExplosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             bullet.gameObject.SetActive(true);
             bullet.Fire(shootPos, direction);
@@ -150,15 +197,22 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Damage", _damage);
             data.SetCustom("CurrentAmmo", _currentAmmo);
+            data.SetCustom("AttackSpeed", _attackCooldown.BaseTime);
             data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+            data.SetCustom("ViewRadius", _targetDetection.ViewRadius);
         }
 
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
+            _damage = data.GetCustom<float>("Damage");
             _currentAmmo = data.GetCustom<int>("CurrentAmmo");
+            _attackCooldown.BaseTime = data.GetCustom<float>("AttackSpeed");
             _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _targetDetection.ViewRadius = data.GetCustom<float>("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
         }
     }
 }

@@ -184,6 +184,7 @@ namespace Asce.Game.Entities.Enemies
             VeylarEggs_Abiliity eggs = AbilityController.Instance.Spawn(_veylarEggsAbilityName, gameObject) as VeylarEggs_Abiliity;
             if (eggs == null) return;
 
+            eggs.Leveling.SetLevel(Leveling.CurrentLevel);
             eggs.EggCount = eggCount;
             eggs.transform.position = transform.position;
             eggs.gameObject.SetActive(true);

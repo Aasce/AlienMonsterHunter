@@ -13,3 +13,25 @@ MonoBehaviour:
   m_Name: Oblivion Turret Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 11
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 4.5
+      _type: 0
+    - _targetKey: Damage
+      _deltaValue: 7
+      _type: 0
+    - _targetKey: ViewRadius
+      _deltaValue: 0.6
+      _type: 0
+    - _targetKey: AttackSpeed
+      _deltaValue: -0.2
+      _type: 0
+    - _targetKey: MaxAmmo
+      _deltaValue: 1
+      _type: 0

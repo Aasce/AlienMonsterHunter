@@ -18,7 +18,7 @@ MonoBehaviour:
   _customStats:
     _list:
     - _name: Damage
-      _value: 4
+      _value: 5
     - _name: Width
       _value: 2.5
     - _name: Distance

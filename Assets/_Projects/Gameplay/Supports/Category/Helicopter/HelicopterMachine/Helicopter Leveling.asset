@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: Helicopter Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
+  _levelingMode: 1
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications:
+    - _targetKey: Health
+      _deltaValue: 20
+      _type: 0
+    - _targetKey: Armor
+      _deltaValue: 5
+      _type: 0

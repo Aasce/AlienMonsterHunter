@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Asce.Game.Levelings
 {
-    [CreateAssetMenu(menuName = "Asce/Entity Leveling Data", fileName = "SO_EntityLeveling")]
-    public class SO_EntityLeveling : ScriptableObject
+    [CreateAssetMenu(menuName = "Asce/Levelings/Leveling Information", fileName = "Leveling Information")]
+    public class SO_LevelingInformation : ScriptableObject
     {
         [Header("Level Settings")]
         [SerializeField, Min(1)] protected int _maxLevel = 10;

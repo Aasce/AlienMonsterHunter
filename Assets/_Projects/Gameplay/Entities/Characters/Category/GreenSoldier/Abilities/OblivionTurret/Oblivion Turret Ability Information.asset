@@ -39,3 +39,4 @@ MonoBehaviour:
   _despawnTime: 20
   _customValues:
     _list: []
+  _leveling: {fileID: 11400000, guid: 0479ac1be41e586479c17584b29acbdb, type: 2}

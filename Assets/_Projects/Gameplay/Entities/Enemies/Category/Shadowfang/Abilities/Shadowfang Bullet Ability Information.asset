@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
-  m_Name: Horizon Breaker Ability Information
+  m_Name: Shadowfang Bullet Ability Information
   m_EditorClassIdentifier: 
-  _id: Horizon Breaker Light
-  _name: Horizon Breaker Light
+  _id: Shadowfang Bullet
+  _name: Shadowfang Bullet
   _description: 
-  _icon: {fileID: 21300000, guid: 8ecb881f23cc17c4b9c2f7bc9ff24ac2, type: 3}
+  _icon: {fileID: 21300000, guid: 87af042fa828b1c438ce619e1acc6a4a, type: 3}
   _isPassive: 0
   _cooldown: 0
   _useRangeRadius: Infinity
-  _despawnTime: 1000
+  _despawnTime: 10
   _customValues:
-    _list: []
+    _list:
+    - _name: ToxicDuration
+      _value: 5
+    - _name: ToxicStrength
+      _value: 3
+  _leveling: {fileID: 11400000, guid: 7fbcd618082b9f74788cd7c2f1429aef, type: 2}

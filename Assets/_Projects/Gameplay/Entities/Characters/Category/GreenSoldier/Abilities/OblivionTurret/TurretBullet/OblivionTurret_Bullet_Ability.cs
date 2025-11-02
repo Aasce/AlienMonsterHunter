@@ -1,5 +1,7 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
+using Asce.Game.Entities.Characters;
+using Asce.Game.Entities.Machines;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
 using System;
@@ -51,15 +53,24 @@ namespace Asce.Game.Abilities
         {
             if (this.IsDealing) return;
             if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _collideLayer)) return;
+            if (collision.TryGetComponent(out ITargetable targetable))
+                if (!targetable.IsTargetable) return;
+
+            ISendDamageable ownerSender = Owner.GetComponent<ISendDamageable>();
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius, _victimLayer);
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
                 if (!collision.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
-                CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
+
+                float damage = DamageDeal;
+                if (target is Character) damage *= 0.25f;
+                else if (target is Machine) damage *= 0.5f;
+
+                CombatController.Instance.DamageDealing(new DamageContainer(ownerSender, target as ITakeDamageable)
                 {
-                    Damage = DamageDeal
+                    Damage = damage
                 });
             }
 

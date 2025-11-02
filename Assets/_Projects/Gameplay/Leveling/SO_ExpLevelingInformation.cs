@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Asce.Game.Levelings
 {
-    [CreateAssetMenu(menuName = "Asce/Entities/Character Leveling", fileName = "Character Leveling")]
-    public class SO_CharacterLeveling : SO_EntityLeveling
+    [CreateAssetMenu(menuName = "Asce/Levelings/Exp Leveling Information", fileName = "Exp Leveling")]
+    public class SO_ExpLevelingInformation : SO_LevelingInformation
     {
         [Header("Experience Settings")]
-        [Tooltip("Base experience required to reach Level 2.")]
+        [Tooltip("Base experience required to reach Level")]
         [SerializeField, Min(0)] private int _baseExpToLevelUp = 100;
 
         [Tooltip("Additional experience increase required for each next level.")]
