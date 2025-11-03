@@ -254,13 +254,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f4e7b8c32207746848cc38e81e467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: f46b622fdb0e44b4b98c955ced222c5d, type: 2}
+  _leveling: {fileID: 2324041352091628789}
   _barrel: {fileID: 6336134917708506214}
   _hitLayer:
     serializedVersion: 2
     m_Bits: 704
-  _owner: {fileID: 0}
   _damage: 10
+  _penetration: 0
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
@@ -315,6 +317,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 4331446303938667604}
   _gunHitVFXName: Bullet Hit
+--- !u!114 &2324041352091628789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7510038510125901758, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 5222384977885500235}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4657180211164412653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

@@ -1,7 +1,9 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
+using Asce.Managers.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Guns
@@ -9,12 +11,37 @@ namespace Asce.Game.Guns
     public class ScatterGun : Gun
     {
         [SerializeField] private float _distance = 20f;
-        [SerializeField] private int _bulletPerShoot = 4;
         [SerializeField, Range(0f, 90f)] private float _spreadAngle = 15f; // total cone angle
+        [SerializeField, Readonly] private int _bulletPerShoot = 4;
         private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[8];
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _bulletPerShoot = (int)Information.GetCustomValue("BulletPerShoot");
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _bulletPerShoot = (int)Information.GetCustomValue("BulletPerShoot");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("BulletPerShoot", out LevelModification bulletPerShootModification))
+            {
+                _bulletPerShoot += (int)bulletPerShootModification.Value;
+            }
+        }
 
         protected override void Shooting(Vector2 direction)
         {
@@ -85,5 +112,19 @@ namespace Asce.Game.Guns
             line.LineRenderer.SetPosition(0, startPoint);
             line.LineRenderer.SetPosition(1, endPoint);
         }
+
+        protected override void OnBeforeSave(GunSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("BulletPerShoot", _bulletPerShoot);
+        }
+
+        protected override void OnAfterLoad(GunSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _bulletPerShoot = data.GetCustom<int>("BulletPerShoot");
+        }
+
     }
 }

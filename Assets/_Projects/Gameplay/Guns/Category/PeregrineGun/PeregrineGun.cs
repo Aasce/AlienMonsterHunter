@@ -1,6 +1,7 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
 using UnityEngine;
 
@@ -28,6 +29,30 @@ namespace Asce.Game.Guns
             }
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+            _damageLosePerHit = Information.GetCustomValue("DamageLost");
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damageLosePerHit = Information.GetCustomValue("DamageLost");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("DamageLost", out LevelModification damageLoseModification))
+            {
+                _damageLosePerHit += damageLoseModification.Value;
+            }
+        }
         public override void AltFire(Vector2 direction)
         {
             base.AltFire(direction);
@@ -62,7 +87,7 @@ namespace Asce.Game.Guns
                             Damage = currentDamage,
                             Penetration = Penetration,
                         });
-                        currentDamage *= _damageLosePerHit;
+                        currentDamage *= (1 - _damageLosePerHit);
                         this.Hit(hit.point, direction);
                     }
                     continue; // Continue to next hit (piercing)
@@ -88,6 +113,20 @@ namespace Asce.Game.Guns
             line.LineRenderer.SetPosition(1, endPoint);
             line.LineRenderer.startWidth = .5f;
             line.LineRenderer.endWidth = .5f;
+        }
+
+        protected override void OnBeforeSave(GunSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("DamageLost", _damageLosePerHit);
+        }
+
+        protected override void OnAfterLoad(GunSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+
+            _damageLosePerHit = data.GetCustom<float>("DamageLost");
         }
     }
 }

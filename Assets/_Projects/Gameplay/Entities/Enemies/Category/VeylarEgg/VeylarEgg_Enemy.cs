@@ -77,6 +77,7 @@ namespace Asce.Game.Entities.Enemies
             yield return new WaitForSeconds(0.2f);
             veylar.Leveling.SetLevel(Leveling.CurrentLevel);
             veylar.Layable = false;
+            veylar.gameObject.SetActive(true);
 
             EnemyController.Instance.Despawn(this);
         }

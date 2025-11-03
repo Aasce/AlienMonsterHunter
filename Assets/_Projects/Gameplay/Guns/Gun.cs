@@ -1,4 +1,4 @@
-using Asce.Game.Entities;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
@@ -17,6 +17,7 @@ namespace Asce.Game.Guns
 
         [Header("Setup")]
         [SerializeField] protected SO_GunInformation _information;
+        [SerializeField, Readonly] protected Leveling _leveling;
         [SerializeField] protected Transform _barrel;
         [SerializeField] protected LayerMask _hitLayer;
         [SerializeField] protected IUsableGun _owner;
@@ -24,10 +25,12 @@ namespace Asce.Game.Guns
         [Header("Stats")]
         [SerializeField, Readonly] protected float _damage = 10f;
         [SerializeField, Readonly] protected float _penetration = 0f;
-        [SerializeField] protected Cooldown _shootCooldown = new(0.5f);
+        [SerializeField, Readonly] protected float _shootSpeed = 1f;
+        [SerializeField, Readonly] protected Cooldown _shootCooldown = new(0.5f);
 
         [Header("Magazine")]
         [SerializeField, Readonly] protected int _magazineSize = 10;
+        [SerializeField, Readonly] protected int _startAmmo = 10;
         [SerializeField, Readonly] protected int _remainingAmmo;
         [SerializeField, Readonly] protected int _currentAmmo;
 
@@ -48,6 +51,7 @@ namespace Asce.Game.Guns
 
         public string Id => _id;
         public SO_GunInformation Information => _information;
+        public Leveling Leveling => _leveling;
         public virtual Vector2 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
         public IUsableGun Owner
         {
@@ -64,6 +68,11 @@ namespace Asce.Game.Guns
             get => _penetration;
             set => _penetration = value;
         }
+        public float ShootSpeed
+        {
+            get => _shootSpeed;
+            set => _shootSpeed = value;
+        }
         public int MagazineSize
         {
             get => _magazineSize;
@@ -77,6 +86,11 @@ namespace Asce.Game.Guns
                 _remainingAmmo = value;
                 OnRemainingAmmoChanged?.Invoke(value);
             }
+        }
+        public int StartAmmo
+        {
+            get => _startAmmo; 
+            set => _startAmmo = value;
         }
         public int CurrentAmmo
         {
@@ -122,16 +136,25 @@ namespace Asce.Game.Guns
             set => _id = value;
         }
 
+        protected override void RefReset()
+        {
+            base.RefReset();
+            this.LoadComponent(out _leveling);
+        }
+
         public virtual void Initialize()
         {
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
+            Leveling.Initialize(Information.Leveling);
 
             Damage = Information.Damage;
             Penetration = Information.Penetration;
-            ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
+            ShootSpeed = Information.ShootSpeed;
+            ShootCooldown.SetBaseTime(ShootSpeed, isReset: true);
 
             MagazineSize = Information.MagazineSize;
-            RemainingAmmo = Information.StartAmmo;
+            StartAmmo = Information.StartAmmo;
+            RemainingAmmo = StartAmmo;
             CurrentAmmo = MagazineSize;
             ReloadCooldown.SetBaseTime(Information.ReloadTime);
             ReloadCooldown.ToComplete();
@@ -140,18 +163,15 @@ namespace Asce.Game.Guns
             _maxSpreadDistance = Information.MaxSpreadDistance;
             _maxBulletSpreadAngle = Information.MaxBulletSpreadAngle;
             _minBulletSpreadAngle = Information.MinBulletSpreadAngle;
+
+            Leveling.OnLevelSetted += Leveling_OnLevelSetted;
+            Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
 
         public virtual void ResetStatus()
         {
-            Damage = Information.Damage;
-            Penetration = Information.Penetration;
-            ShootCooldown.SetBaseTime(Information.ShootSpeed, isReset: true);
-
-            MagazineSize = Information.MagazineSize;
-            RemainingAmmo = Information.StartAmmo;
+            RemainingAmmo = StartAmmo;
             CurrentAmmo = MagazineSize;
-            ReloadCooldown.SetBaseTime(Information.ReloadTime);
             ReloadCooldown.ToComplete();
         }
 
@@ -247,15 +267,81 @@ namespace Asce.Game.Guns
             OnHit?.Invoke(position, direction);
         }
 
+        protected virtual void LevelTo(int newLevel)
+        {
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                Damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("Penetration", out LevelModification penetrationModification))
+            {
+                Penetration += penetrationModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ShootSpeed", out LevelModification shootSpeedModification))
+            {
+                ShootSpeed += shootSpeedModification.Value;
+                ShootCooldown.BaseTime = ShootSpeed;
+                ShootCooldown.ToComplete();
+            }
+
+            if (modificationGroup.TryGetModification("MagazineSize", out LevelModification magazineSizeModification))
+            {
+                MagazineSize += (int)magazineSizeModification.Value;
+                CurrentAmmo = MagazineSize;
+            }
+
+            if (modificationGroup.TryGetModification("StartAmmo", out LevelModification startAmmoModification))
+            {
+                StartAmmo += (int)startAmmoModification.Value;
+                RemainingAmmo = StartAmmo;
+            }
+
+            if (modificationGroup.TryGetModification("ReloadCooldown", out LevelModification reloadCooldownModification))
+            {
+                ReloadCooldown.BaseTime += reloadCooldownModification.Value;
+                ReloadCooldown.ToComplete();
+            }
+        }
+
+        protected virtual void Leveling_OnLevelSetted(int newLevel)
+        {
+            Damage = Information.Damage;
+            Penetration = Information.Penetration;
+            ShootSpeed = Information.ShootSpeed;
+
+            MagazineSize = Information.MagazineSize;
+            StartAmmo = Information.StartAmmo;
+            ReloadCooldown.SetBaseTime(Information.ReloadTime);
+            ReloadCooldown.ToComplete();
+            for (int i = 1; i <= newLevel; i++)
+            {
+                this.LevelTo(i);
+            }
+        }
+        protected virtual void Leveling_OnLevelUp(int newLevel) => LevelTo(newLevel);
+
         GunSaveData ISaveable<GunSaveData>.Save()
         {
             GunSaveData saveData = new()
             {
                 id = Id,
                 name = Information.Name,
+                damage = Damage,
+                penetration = Penetration,
+                shootSpeed = ShootSpeed,
                 currentAmmo = CurrentAmmo,
                 remainingAmmo = RemainingAmmo,
+                magazineSize = MagazineSize,
+                startAmmo = StartAmmo,
+                reloadSpeed = ReloadCooldown.BaseTime,
             };
+
+            this.OnBeforeSave(saveData);
             return saveData;
         }
 
@@ -263,10 +349,21 @@ namespace Asce.Game.Guns
         {
             if (data == null) return;
             _id = data.id;
+            Damage = data.damage;
+            Penetration = data.penetration;
+            ShootSpeed = data.shootSpeed;
             CurrentAmmo = data.currentAmmo;
             RemainingAmmo = data.remainingAmmo;
+            MagazineSize = data.magazineSize;
+            StartAmmo = data.startAmmo;
+            ReloadCooldown.SetBaseTime(data.reloadSpeed);
+            ReloadCooldown.ToComplete();
+
+            this.OnAfterLoad(data);
         }
 
+        protected virtual void OnBeforeSave(GunSaveData data) { }
+        protected virtual void OnAfterLoad(GunSaveData data) { }
 
 #if UNITY_EDITOR
         // Place this method inside your Gun class

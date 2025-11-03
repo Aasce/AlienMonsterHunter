@@ -11,6 +11,7 @@ namespace Asce.Editors.Game.Levelings
         private SerializedProperty _levelingModeProp;
         private SerializedProperty _levelChangesProp;
         private SerializedProperty _uniformGrowthProp;
+        private SerializedProperty _specificLevelChangesProp;
 
         private void OnEnable()
         {
@@ -18,6 +19,7 @@ namespace Asce.Editors.Game.Levelings
             _levelingModeProp = serializedObject.FindProperty("_levelingMode");
             _levelChangesProp = serializedObject.FindProperty("_levelChanges");
             _uniformGrowthProp = serializedObject.FindProperty("_uniformGrowth");
+            _specificLevelChangesProp = serializedObject.FindProperty("_specificLevelChanges");
         }
 
         public override void OnInspectorGUI()
@@ -40,6 +42,10 @@ namespace Asce.Editors.Game.Levelings
                 case LevelingMode.UniformGrowth:
                     DrawUniformGrowth();
                     break;
+
+                case LevelingMode.HybridGrowth:
+                    DrawHybridGrowth();
+                    break;
             }
 
             DrawPropertiesExcluding(
@@ -48,7 +54,8 @@ namespace Asce.Editors.Game.Levelings
                 "_levelingMode",
                 "_levelChanges",
                 "_uniformGrowth",
-                "m_Script" // always exclude script reference
+                "_specificLevelChanges",
+                "m_Script"
             );
 
             serializedObject.ApplyModifiedProperties();
@@ -64,6 +71,19 @@ namespace Asce.Editors.Game.Levelings
         {
             EditorGUILayout.LabelField("Uniform Growth", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_uniformGrowthProp, includeChildren: true);
+        }
+
+        private void DrawHybridGrowth()
+        {
+            EditorGUILayout.LabelField("Hybrid Growth Settings", EditorStyles.boldLabel);
+
+            EditorGUILayout.LabelField("Uniform Growth (Fallback)", EditorStyles.miniBoldLabel);
+            EditorGUILayout.PropertyField(_uniformGrowthProp, includeChildren: true);
+
+            EditorGUILayout.Space(5);
+
+            EditorGUILayout.LabelField("Specific Level Modifications", EditorStyles.miniBoldLabel);
+            EditorGUILayout.PropertyField(_specificLevelChangesProp, includeChildren: true);
         }
     }
 }

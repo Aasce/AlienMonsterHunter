@@ -5,6 +5,7 @@ namespace Asce.Game.Levelings
     public enum LevelingMode
     {
         PerLevelChanges,
-        UniformGrowth
+        UniformGrowth,
+        HybridGrowth // New mode: specific levels + fallback to uniform growth
     }
 }

@@ -227,13 +227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed74acc68ff82c438ca3a2a86e8d6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 5b9d252a4241dc344bb72255543919d6, type: 2}
+  _leveling: {fileID: 2859096113015761911}
   _barrel: {fileID: 5765542848989150052}
   _hitLayer:
     serializedVersion: 2
     m_Bits: 704
-  _owner: {fileID: 0}
   _damage: 14
+  _penetration: 0
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
@@ -284,6 +286,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
   m_PrefabInstance: {fileID: 5734358826137668681}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2859096113015761911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7510038510125901758, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 5734358826137668681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5137634337035036143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

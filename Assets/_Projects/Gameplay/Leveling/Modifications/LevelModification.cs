@@ -17,5 +17,18 @@ namespace Asce.Game.Levelings
 
         /// <summary> How to interpret the value (additive, multiplicative, set, custom). </summary>
         public ModificationType Type => _type;
+
+        /// <summary>
+        /// Creates a deep copy of this LevelModification.
+        /// </summary>
+        public LevelModification Clone()
+        {
+            return new LevelModification
+            {
+                _targetKey = _targetKey,
+                _deltaValue = _deltaValue,
+                _type = _type
+            };
+        }
     }
 }

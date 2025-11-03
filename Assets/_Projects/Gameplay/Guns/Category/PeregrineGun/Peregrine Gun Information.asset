@@ -16,7 +16,8 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: 82c2f4db46abf814199388034a846cb6, type: 3}
   _type: 3
-  _damage: 45
+  _leveling: {fileID: 11400000, guid: 03dd2626fee7b4a4dbed7d3e62474134, type: 2}
+  _damage: 50
   _penetration: 15
   _shootSpeed: 1.75
   _magazineSize: 5
@@ -26,3 +27,7 @@ MonoBehaviour:
   _maxSpreadDistance: 5
   _maxBulletSpreadAngle: 15
   _minBulletSpreadAngle: 3
+  _customValues:
+    _list:
+    - _name: DamageLost
+      _value: 0.1

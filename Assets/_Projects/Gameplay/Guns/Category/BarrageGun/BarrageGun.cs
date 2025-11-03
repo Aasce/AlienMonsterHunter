@@ -1,6 +1,7 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Stats;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
@@ -19,9 +20,9 @@ namespace Asce.Game.Guns
         [SerializeField, Readonly] private int _barrelIndex = 0;
 
         [Space]
-        [SerializeField] private Cooldown _firingCooldown = new(1f); 
-        [SerializeField] private float _fireAccelerationRate = 0.1f;
-        [SerializeField] private float _maxFireSpeed = 0.1f;
+        [SerializeField, Readonly] private Cooldown _firingCooldown = new(1f); 
+        [SerializeField, Readonly] private float _fireAccelerationRate = 0.1f;
+        [SerializeField, Readonly] private float _maxFireSpeed = 0.1f;
 
         [Header("VFXs")]
         [SerializeField] private string _bulletLineVFXName;
@@ -33,6 +34,38 @@ namespace Asce.Game.Guns
                 if (_barrels.Count <= 0) return base.BarrelPosition;
                 Transform barrel = _barrels[_barrelIndex];
                 return barrel != null ? (Vector2)barrel.position : base.BarrelPosition;
+            }
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _fireAccelerationRate = Information.GetCustomValue("FireAccelerationRate");
+            _maxFireSpeed = Information.GetCustomValue("MaxFireSpeed");
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _fireAccelerationRate = Information.GetCustomValue("FireAccelerationRate");
+            _maxFireSpeed = Information.GetCustomValue("MaxFireSpeed");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("FireAccelerationRate", out LevelModification fireAccelerationRateModification))
+            {
+                _fireAccelerationRate += fireAccelerationRateModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("MaxFireSpeed", out LevelModification maxFireSpeedModification))
+            {
+                _maxFireSpeed += maxFireSpeedModification.Value;
             }
         }
 
@@ -102,6 +135,21 @@ namespace Asce.Game.Guns
             line.LineRenderer.positionCount = 2;
             line.LineRenderer.SetPosition(0, startPoint);
             line.LineRenderer.SetPosition(1, endPoint);
+        }
+
+        protected override void OnBeforeSave(GunSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("FireAccelerationRate", _fireAccelerationRate);
+            data.SetCustom("MaxFireSpeed", _maxFireSpeed);
+        }
+
+        protected override void OnAfterLoad(GunSaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            _fireAccelerationRate = data.GetCustom<float>("FireAccelerationRate");
+            _maxFireSpeed = data.GetCustom<float>("MaxFireSpeed");
         }
     }
 }

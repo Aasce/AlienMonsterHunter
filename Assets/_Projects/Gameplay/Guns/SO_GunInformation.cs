@@ -1,4 +1,7 @@
+using Asce.Game.Levelings;
+using Asce.Managers;
 using Asce.Managers.Attributes;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.Guns
@@ -10,6 +13,7 @@ namespace Asce.Game.Guns
         [SerializeField, TextArea(3, 10)] private string _description = string.Empty;
         [SerializeField, SpritePreview] private Sprite _icon;
         [SerializeField] private GunType _type = GunType.Pistol;
+        [SerializeField] private SO_LevelingInformation _leveling;
 
         [Header("Shoot")]
         [SerializeField, Min(0f)] private float _damage = 10f;
@@ -34,10 +38,18 @@ namespace Asce.Game.Guns
         [Tooltip("Minimum bullet spread angle (degrees) when distance is far.")]
         [SerializeField, Range(0f, 30f)] private float _minBulletSpreadAngle = 1f;
 
+        [Space]
+        [SerializeField]
+        private ListObjects<string, CustomValue> _customValues = new((custom) =>
+        {
+            return custom.Name;
+        });
+
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
         public GunType Type => _type;
+        public SO_LevelingInformation Leveling => _leveling;
 
         public float Damage => _damage;
         public float Penetration => _penetration;
@@ -51,5 +63,17 @@ namespace Asce.Game.Guns
         public float MaxSpreadDistance => _maxSpreadDistance;
         public float MaxBulletSpreadAngle => _maxBulletSpreadAngle;
         public float MinBulletSpreadAngle => _minBulletSpreadAngle;
+
+        public ReadOnlyCollection<CustomValue> Customs => _customValues.List;
+        public float GetCustomValue(string name)
+        {
+            if (_customValues.TryGet(name, out CustomValue customValue))
+            {
+                return customValue.Value;
+            }
+
+            Debug.LogWarning($"Custom Value \"{name}\" not found.", this);
+            return 0f;
+        }
     }
 }

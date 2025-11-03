@@ -18,8 +18,9 @@ MonoBehaviour:
   _uniformGrowth:
     _modifications:
     - _targetKey: Health
-      _deltaValue: 20
+      _deltaValue: 50
       _type: 0
     - _targetKey: Armor
-      _deltaValue: 5
+      _deltaValue: 15
       _type: 0
+  _specificLevelChanges: []

@@ -16,6 +16,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: f4586049ddf7d2c4fb329b0cde1f2e01, type: 3}
   _type: 1
+  _leveling: {fileID: 11400000, guid: afb05074e9ba91b40b19e8258030ef08, type: 2}
   _damage: 12
   _penetration: 0
   _shootSpeed: 0.75
@@ -26,3 +27,7 @@ MonoBehaviour:
   _maxSpreadDistance: 20
   _maxBulletSpreadAngle: 2
   _minBulletSpreadAngle: 0
+  _customValues:
+    _list:
+    - _name: BulletPerShoot
+      _value: 7

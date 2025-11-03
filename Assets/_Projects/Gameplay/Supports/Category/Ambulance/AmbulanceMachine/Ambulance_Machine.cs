@@ -13,6 +13,7 @@ namespace Asce.Game.Entities.Machines
     {
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private FieldOfView _fovSelf;
+        [SerializeField] private ParticleSystem _healRadiusVFX;
 
         [Space]
         [SerializeField] private float _healAmount = 5f;
@@ -25,6 +26,19 @@ namespace Asce.Game.Entities.Machines
 
         public NavMeshAgent Agent => _agent;
 
+        public float HealRadius
+        {
+            get => _healRadius;
+            protected set
+            {
+                _healRadius = value;
+                var mainModule = _healRadiusVFX.main;
+                mainModule.startSize = _healRadius * 2f; 
+                _healRadiusVFX.Clear();
+                _healRadiusVFX.Play();
+                _fovSelf.ViewRadius = _healRadius + 1f;
+            }
+        }
 
         protected override void RefReset()
         {
@@ -36,14 +50,14 @@ namespace Asce.Game.Entities.Machines
         {
             base.Initialize();
             _healAmount = Information.Stats.GetCustomStat("HealAmount");
-            _healRadius = Information.Stats.GetCustomStat("HealRadius");
+            HealRadius = Information.Stats.GetCustomStat("HealRadius");
             _healCooldown.SetBaseTime(Information.Stats.GetCustomStat("HealInterval"));
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
         {
             _healAmount = Information.Stats.GetCustomStat("HealAmount");
-            _healRadius = Information.Stats.GetCustomStat("HealRadius");
+            HealRadius = Information.Stats.GetCustomStat("HealRadius");
             _healCooldown.SetBaseTime(Information.Stats.GetCustomStat("HealInterval"));
             base.Leveling_OnLevelSetted(newLevel);
         }
@@ -61,7 +75,7 @@ namespace Asce.Game.Entities.Machines
 
             if (modificationGroup.TryGetModification("HealRadius", out LevelModification healRadiusModification))
             {
-                _healRadius += healRadiusModification.Value;
+                HealRadius += healRadiusModification.Value;
             }
 
             if (modificationGroup.TryGetModification("HealInterval", out LevelModification healIntervalModification))
@@ -96,7 +110,7 @@ namespace Asce.Game.Entities.Machines
 
         private void Healing()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _healRadius, _healeeLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, HealRadius, _healeeLayer);
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
@@ -118,7 +132,7 @@ namespace Asce.Game.Entities.Machines
         {
             base.OnBeforeSave(data);
             data.SetCustom("HealAmount", _healAmount);
-            data.SetCustom("HealRadius", _healRadius);
+            data.SetCustom("HealRadius", HealRadius);
             data.SetCustom("HealInterval", _healCooldown.BaseTime);
             data.SetCustom("HealCooldown", _healCooldown.CurrentTime);
         }
@@ -129,7 +143,7 @@ namespace Asce.Game.Entities.Machines
             if (data == null) return;
             Agent.Warp(data.position);
             _healAmount = data.GetCustom<float>("HealAmount");
-            _healRadius = data.GetCustom<float>("HealRadius");
+            HealRadius = data.GetCustom<float>("HealRadius");
             _healCooldown.BaseTime = data.GetCustom<float>("HealInterval");
             _healCooldown.CurrentTime = data.GetCustom<float>("HealCooldown");
         }

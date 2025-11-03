@@ -218,6 +218,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4381345279645715725}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+--- !u!114 &508577714281303024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7510038510125901758, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 8014103313289325646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3646822461094141155 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
@@ -235,17 +246,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d31a4c7d3977d14ab5c64cdb0310291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 1daf5429a99e2bd4782e369c6bd77005, type: 2}
+  _leveling: {fileID: 508577714281303024}
   _barrel: {fileID: 8115498435649559395}
   _hitLayer:
     serializedVersion: 2
     m_Bits: 576
-  _owner: {fileID: 0}
   _damage: 10
+  _penetration: 0
+  _shootSpeed: 1
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _magazineSize: 10
+  _startAmmo: 10
   _remainingAmmo: 0
   _currentAmmo: 0
   _reloadCooldown:
@@ -255,7 +270,7 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
-  _distance: 50
+  _distance: 60
   _damageLosePerHit: 0.9
   _scope: {fileID: 6212127389268486996}
   _bulletLineVFXName: Peregrine Gun Bullet Line

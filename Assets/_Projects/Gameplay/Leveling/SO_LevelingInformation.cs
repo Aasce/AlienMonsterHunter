@@ -19,6 +19,10 @@ namespace Asce.Game.Levelings
         [Tooltip("Use when Leveling Mode = UniformGrowth")]
         [SerializeField] protected LevelModificationGroup _uniformGrowth;
 
+        [Tooltip("Use when Leveling Mode = HybridGrowth (specific levels only)")]
+        [SerializeField] protected List<LevelSpecificModification> _specificLevelChanges = new();
+        private ReadOnlyCollection<LevelSpecificModification> _specificLevelChangesReadonly;
+
 
         /// <summary> The maximum level that can be reached. </summary>
         public int MaxLevel => _maxLevel;
@@ -31,6 +35,10 @@ namespace Asce.Game.Levelings
 
         /// <summary> The uniform modification applied on every level-up (used when LevelingMode = UniformGrowth). </summary>
         public LevelModificationGroup UniformGrowth => _uniformGrowth;
+
+        /// <summary> The list of specific-level modifications (used when LevelingMode = HybridGrowth). </summary>
+        public ReadOnlyCollection<LevelSpecificModification> SpecificLevelChanges => _specificLevelChangesReadonly ??= _specificLevelChanges.AsReadOnly();
+
 
         /// <summary>
         /// Get the modification group for a specific level based on the current leveling mode.
@@ -46,6 +54,14 @@ namespace Asce.Game.Levelings
                     return _levelChanges[level];
 
                 case LevelingMode.UniformGrowth:
+                    return _uniformGrowth;
+
+                case LevelingMode.HybridGrowth:
+                    foreach (var entry in _specificLevelChanges)
+                    {
+                        if (entry.Level != level) continue;
+                        return entry.ModificationGroup + _uniformGrowth;
+                    }
                     return _uniformGrowth;
 
                 default:
