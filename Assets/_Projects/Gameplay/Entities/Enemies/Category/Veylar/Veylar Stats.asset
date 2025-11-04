@@ -24,11 +24,11 @@ MonoBehaviour:
     - _name: EggCount
       _value: 2
     - _name: MaturationCooldown
-      _value: 8
+      _value: 10
     - _name: MultiPerPhase
-      _value: 0.2
+      _value: 0.15
     - _name: LayCooldown
-      _value: 25
+      _value: 28
   _attackDamage: 4
   _attackSpeed: 1.5
   _attackRange: 2.5

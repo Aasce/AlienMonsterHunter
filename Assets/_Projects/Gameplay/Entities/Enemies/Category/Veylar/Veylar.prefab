@@ -855,11 +855,11 @@ MonoBehaviour:
   _maturationCooldown:
     _baseTime: 7
     _currentTime: 0
-  _sizeRange: {x: 0.3, y: 1.2}
-  _maxPhase: 5
+  _sizeRange: {x: 0.3, y: 1.5}
+  _maxPhase: 6
   _currentPhase: 0
   _explosionDamage: 0
-  _layOnDeadAtPhase: 3
+  _layOnDeadAtPhase: 4
   _layable: 1
   _layCooldown:
     _baseTime: 23
@@ -969,7 +969,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff5488782b8cb746a7f77e742a00548, type: 3}
+  m_Script: {fileID: 11500000, guid: a465ae6833342894490e4c6fbe75f800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &9068869752717131643 stripped

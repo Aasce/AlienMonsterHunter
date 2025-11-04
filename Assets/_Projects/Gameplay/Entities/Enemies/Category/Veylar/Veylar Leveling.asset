@@ -33,8 +33,9 @@ MonoBehaviour:
       _deltaValue: 1
       _type: 0
     - _targetKey: LayCooldown
-      _deltaValue: -0.5
+      _deltaValue: -0.8
       _type: 0
     - _targetKey: MaturationCooldown
-      _deltaValue: -0.15
+      _deltaValue: -0.3
       _type: 0
+  _specificLevelChanges: []
