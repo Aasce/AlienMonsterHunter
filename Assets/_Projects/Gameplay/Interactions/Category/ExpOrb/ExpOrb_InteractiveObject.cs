@@ -63,5 +63,10 @@ namespace Asce.Game.Interactions
 
             _isValid = false;
         }
+
+        public override void Interact(GameObject interacter)
+        {
+
+        }
     }
 }

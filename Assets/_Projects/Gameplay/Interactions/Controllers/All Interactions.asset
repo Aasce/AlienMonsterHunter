@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactiveObjects:
     _list:
+    - {fileID: 8842590793169270877, guid: b2458722496e0cf45a265c61aa2e788f, type: 3}
     - {fileID: 5365583952029499183, guid: 5052de5888ec3eb4cbfcbefc64b1e7eb, type: 3}

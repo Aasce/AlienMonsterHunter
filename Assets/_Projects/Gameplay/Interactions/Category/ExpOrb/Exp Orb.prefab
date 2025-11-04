@@ -5027,6 +5027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _information: {fileID: 11400000, guid: 507ac2965b70c6e4b84efebb8b0d6a8c, type: 2}
+  _isInteractable: 0
   _collider: {fileID: 7780491293763387028}
   _rigidbody: {fileID: 2870842909979550712}
   _despawnCooldown:

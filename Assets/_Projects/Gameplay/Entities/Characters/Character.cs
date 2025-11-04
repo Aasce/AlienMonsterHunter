@@ -18,6 +18,7 @@ namespace Asce.Game.Entities.Characters
         [SerializeField, Readonly] private Rigidbody2D _rigidbody;
         [SerializeField, Readonly] private CharacterFOV _fov;
         [SerializeField, Readonly] private CharacterAbilities _abilities;
+        [SerializeField, Readonly] private CharacterInteraction _interaction;
         [SerializeField, Readonly] private Gun _gun;
 
         [Space]
@@ -37,6 +38,8 @@ namespace Asce.Game.Entities.Characters
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
         public CharacterAbilities Abilities => _abilities;
+        public CharacterInteraction Interaction => _interaction;
+
         public Gun Gun
         {
             get => _gun;
@@ -69,6 +72,10 @@ namespace Asce.Game.Entities.Characters
             this.LoadComponent(out _collider);
             this.LoadComponent(out _rigidbody);
             this.LoadComponent(out _fov);
+            if (this.LoadComponent(out _interaction)) 
+            {
+                _interaction.Character = this;
+            }
         }
 
         public override void ResetStatus()
@@ -184,10 +191,13 @@ namespace Asce.Game.Entities.Characters
 
         public void UseAbility(int index, Vector2 position)
         {
-            if (Abilities == null) return;
             Abilities.Use(index, position);
         }
 
+        public void Interact()
+        {
+            Interaction.Interact(_lookPosition);
+        }
 
         CharacterSaveData ISaveable<CharacterSaveData>.Save()
         {

@@ -217,6 +217,12 @@ namespace Asce.Game.Guns
             OnStartReload?.Invoke();
         }
 
+        public void FillAmmo()
+        {
+            RemainingAmmo = Mathf.Max(RemainingAmmo, StartAmmo);
+            CurrentAmmo = MagazineSize;
+        }
+
         /// <summary>
         ///     Apply a bullet spread based on distance between gun and target direction.
         /// </summary>

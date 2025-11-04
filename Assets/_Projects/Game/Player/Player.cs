@@ -109,6 +109,7 @@ namespace Asce.Game.Players
             }
             bool isAim = Input.GetMouseButton(2);
             bool isReload = Input.GetKeyDown(KeyCode.R);
+            bool isInteract = Input.GetKeyDown(KeyCode.F);
 
             for (int i = 0; i < _callSupportKeys.Count; i++)
             {
@@ -144,6 +145,8 @@ namespace Asce.Game.Players
                         Character.UseAbility(i, worldMousePosition);
                     }
                 }
+
+                if (isInteract) Character.Interact();
 
                 if (isPressU)
                 {

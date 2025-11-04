@@ -682,6 +682,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Veylar
       objectReference: {fileID: 0}
+    - target: {fileID: 1385415373530656909, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _obstacleLayer.m_Bits
+      value: 65728
+      objectReference: {fileID: 0}
     - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_Height
       value: 0.8
