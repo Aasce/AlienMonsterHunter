@@ -13,10 +13,9 @@ namespace Asce.Game.Combats
         public void DamageDealing(DamageContainer container)
         {
             if (container == null) return;
-            if (container.Sender == null) return;
             if (container.Receiver == null) return;
 
-            container.Sender.BeforeSendDamageCallback(container);
+            if (container.Sender != null) container.Sender.BeforeSendDamageCallback(container);
             container.Receiver.BeforeTakeDamageCallback(container);
 
             float finalArmor = this.CalculateArmor(container.Receiver.Armor.FinalValue, container.Penetration);
@@ -30,11 +29,11 @@ namespace Asce.Game.Combats
             else container.IsKill = false;
 
             container.Receiver.AfterTakeDamageCallback(container);
-            container.Sender.AfterSendDamageCallback(container);
+            if (container.Sender != null) container.Sender.AfterSendDamageCallback(container);
             if (container.IsKill) 
             {
                 container.Receiver.DeadCallback(container);
-                container.Sender.KillCallback(container);
+                if (container.Sender != null) container.Sender.KillCallback(container);
             }
             this.ShowDamageText(container.Receiver, finalDamage);
         }

@@ -77,6 +77,7 @@ namespace Asce.Game.Levelings
         /// <summary> Returns the required experience to reach the next level. </summary>
         public int ExpToLevelUp()
         {
+            if (BaseLeveling == null) return 0;
             return BaseLeveling.BaseExpToLevelUp + BaseLeveling.ExpIncrementPerLevel * CurrentLevel;
         }
         protected override void OnBeforeSave(LevelingSaveData data)

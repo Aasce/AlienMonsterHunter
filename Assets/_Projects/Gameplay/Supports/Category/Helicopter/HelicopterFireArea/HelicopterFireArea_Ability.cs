@@ -84,6 +84,7 @@ namespace Asce.Game.Abilities
 
         private void UpdateEffects()
         {
+            if (DespawnTime.CurrentTime <= 0.1f) return;
             foreach (ITargetable target in _targets)
             {
                 if (target is not Entity entity) continue;
@@ -96,7 +97,8 @@ namespace Asce.Game.Abilities
                 }
                 else
                 {
-                    EffectController.Instance.AddEffect("Helicopter Ignite", Owner.GetComponent<Entity>(), entity, new EffectData()
+                    Entity ownerEntity = Owner == null ? null : Owner.GetComponent<Entity>();
+                    EffectController.Instance.AddEffect("Helicopter Ignite", ownerEntity, entity, new EffectData()
                     {
                         Strength = _igniteDamage,
                         Duration = 10f

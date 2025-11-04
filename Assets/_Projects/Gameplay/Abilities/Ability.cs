@@ -1,3 +1,4 @@
+using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
@@ -5,6 +6,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -117,8 +119,14 @@ namespace Asce.Game.Abilities
             this.transform.position = data.position;
             this.transform.eulerAngles = new Vector3(0f, 0f, data.rotation);
             this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
-
+            StartCoroutine(LoadOwner(data));
             this.OnAfterLoad(data);
+
+            IEnumerator LoadOwner(AbilitySaveData data)
+            {
+                yield return null;
+                this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
+            }
         }
 
         protected virtual void OnBeforeSave(AbilitySaveData data) { }
