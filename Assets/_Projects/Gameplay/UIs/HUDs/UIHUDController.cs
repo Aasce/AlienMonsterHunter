@@ -18,5 +18,6 @@ namespace Asce.Game.UIs.HUDs
             this.LoadComponent(out _canvas);
         }
 
+        public virtual void Initialize() { }
     }
 }

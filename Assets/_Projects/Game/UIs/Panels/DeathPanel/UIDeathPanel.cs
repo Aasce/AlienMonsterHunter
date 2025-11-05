@@ -18,8 +18,9 @@ namespace Asce.Game.UIs.Panels
             _name = "Death";
         }
 
-        private void Start()
+        public override void Initialize()
         {
+            base.Initialize();
             if (_reviveButton != null) _reviveButton.onClick.AddListener(ReviveButton_OnClick);
         }
 

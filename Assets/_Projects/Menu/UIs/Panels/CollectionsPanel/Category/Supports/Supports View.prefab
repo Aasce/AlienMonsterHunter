@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_CellSize.y
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 418998854413577741, guid: 7701a11f378786845843a45103cd59ef, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 436346359264996641, guid: 7701a11f378786845843a45103cd59ef, type: 3}
       propertyPath: m_Name
       value: Supports View

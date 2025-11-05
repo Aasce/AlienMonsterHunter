@@ -1,6 +1,7 @@
 using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Asce.Game.Entities.Enemies
     {
         private readonly Dictionary<string, Pool<Enemy>> _pools = new();
 
+        public event Action<Enemy> OnSpawned;
+        public event Action<Enemy> OnDespawned;
 
         public List<Enemy> GetAllEnemies()
         {
@@ -32,6 +35,7 @@ namespace Asce.Game.Entities.Enemies
             if (isCreated) enemy.Initialize();
             else enemy.ResetStatus();
 
+            OnSpawned?.Invoke(enemy);
             return enemy;
         }
 
@@ -43,6 +47,7 @@ namespace Asce.Game.Entities.Enemies
             {
                 pool.Deactivate(enemy);
                 enemy.gameObject.SetActive(false);
+                OnDespawned?.Invoke(enemy);
             }
             else
             {

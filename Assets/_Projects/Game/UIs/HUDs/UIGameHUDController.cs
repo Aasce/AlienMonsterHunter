@@ -40,8 +40,9 @@ namespace Asce.Game.UIs.HUDs
             this.LoadComponent(out _gunInformation);
         }
 
-        private void Start()
+        public override void Initialize()
         {
+            base.Initialize();
             CharacterInformation.Abilities.SetUseKeys(Player.Instance.UseAbilityKeys);
             Character = Player.Instance.Character;
             Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;

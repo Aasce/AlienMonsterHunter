@@ -23,5 +23,11 @@ namespace Asce.Menu.UIs
             this.LoadComponent(out _panelController);
             if (_panelController == null) Debug.LogError($"[{typeof(UIMainMenuController).ToString().ColorWrap(Color.red)}]] UIPanelController is not assigned", this);
         }
+
+        public void Initialize()
+        {
+            HUDController.Initialize();
+            PanelController.Initialize();
+        }
     }
 }

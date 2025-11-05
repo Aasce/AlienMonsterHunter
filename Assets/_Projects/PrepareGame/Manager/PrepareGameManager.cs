@@ -1,6 +1,8 @@
 using Asce.Game.Managers;
 using Asce.Managers;
+using Asce.Menu.UIs;
 using Asce.PrepareGame.Picks;
+using Asce.PrepareGame.UIs;
 using System.Linq;
 using UnityEngine;
 
@@ -13,8 +15,15 @@ namespace Asce.PrepareGame
 
         private void Start()
         {
+            this.InitialzeControllers();
             Shared.SetOrAdd("NewGame", true);
         }
+
+        private void InitialzeControllers()
+        {
+            UIPrepareGameController.Instance.Initialize();
+        }
+
 
         public void PlayGame()
         {

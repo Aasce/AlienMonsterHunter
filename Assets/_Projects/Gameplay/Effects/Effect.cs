@@ -67,7 +67,7 @@ namespace Asce.Game.Effects
             {
                 id = _id,
                 name = Information.Name,
-                senderId = Sender.Id,
+                senderId = Sender != null ? Sender.Id : string.Empty,
                 baseDuration = Duration.BaseTime,
                 duration = Duration.CurrentTime,
                 strength = Strength,

@@ -1,6 +1,8 @@
 using Asce.Game.Managers;
 using Asce.Managers;
+using Asce.Menu.UIs;
 using Asce.SaveLoads;
+using System;
 using UnityEngine;
 
 namespace Asce.Menu
@@ -10,6 +12,16 @@ namespace Asce.Menu
         [SerializeField] private string _mainGameSceneName;
         [SerializeField] private string _prepareGameSceneName;
 
+        private void Start()
+        {
+            this.InitialzeControllers();
+            Shared.Remove("NewGame");
+        }
+
+        private void InitialzeControllers()
+        {
+            UIMainMenuController.Instance.Initialize();
+        }
 
         public void PlayGame()
         {

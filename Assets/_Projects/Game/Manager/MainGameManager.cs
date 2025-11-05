@@ -68,7 +68,8 @@ namespace Asce.Game
 
         private void InitializeController()
         {
-            UIGameController.Instance.PanelController.HideAll();
+            GameStateController.Instance.Initialize();
+            UIGameController.Instance.Initialze();
         }
 
         private void LoadCurrentGame()
@@ -110,6 +111,8 @@ namespace Asce.Game
         {
             Player.Instance.Character.OnDead += Character_OnDead;
             Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
+
+            OnGameStateChanged += MainGameManager_OnGameStateChanged;
         }
 
         private void Player_OnCharacterChanged(ValueChangedEventArgs<Character> args)
@@ -124,7 +127,6 @@ namespace Asce.Game
 
         private void Character_OnDead(Combats.DamageContainer container)
         {
-            GameState = MainGameState.Failed;
             Player.Instance.Character.gameObject.SetActive(false);
             UIDeathPanel deathPanel = UIGameController.Instance.PanelController.GetPanelByName("Death") as UIDeathPanel;
             if (deathPanel == null) return;
@@ -134,10 +136,28 @@ namespace Asce.Game
             deathPanel.Show();
         }
 
+        private void MainGameManager_OnGameStateChanged(ValueChangedEventArgs<MainGameState> args)
+        {
+            if (args.NewValue == MainGameState.Completed)
+            {
+                UIGameVictoryPanel victoryPanel = UIGameController.Instance.PanelController.GetPanelByName("Game Victory") as UIGameVictoryPanel;
+                if (victoryPanel == null) return;
+
+                victoryPanel.Show();
+            }
+
+            else if (args.NewValue == MainGameState.Failed)
+            {
+                UIGameDefeatPanel defeatPanel = UIGameController.Instance.PanelController.GetPanelByName("Game Defeat") as UIGameDefeatPanel;
+                if (defeatPanel == null) return;
+
+                defeatPanel.Show();
+            }
+        }
+
         private void DeathPanel_OnReviveClicked()
         {
             Player.Instance.ReviveCharacter(isReviveAtSpawnPoint: true);
-            GameState = MainGameState.Playing;
         }
     }
 }

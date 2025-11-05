@@ -24,5 +24,11 @@ namespace Asce.Game.UIs
             this.LoadComponent(out _panel);
             if (_panel == null) Debug.LogError($"[{typeof(UIGameController).ToString().ColorWrap(Color.red)}]] UIPanelController is not assigned", this);
         }
+
+        public void Initialze()
+        {
+            HUDController.Initialize();
+            PanelController.Initialize();
+        }
     }
 }

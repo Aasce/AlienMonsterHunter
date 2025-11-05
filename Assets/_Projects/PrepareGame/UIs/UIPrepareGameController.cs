@@ -1,3 +1,4 @@
+using Asce.Game.UIs.HUDs;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
 using Asce.Managers.Utils;
@@ -21,6 +22,12 @@ namespace Asce.PrepareGame.UIs
 
             this.LoadComponent(out _panelController);
             if (_panelController == null) Debug.LogError($"[{typeof(UIPrepareGameController).ToString().ColorWrap(Color.red)}]] UIPanelController is not assigned", this);
+        }
+
+        public void Initialize()
+        {
+            HUDController.Initialize();
+            PanelController.Initialize();
         }
     }
 }

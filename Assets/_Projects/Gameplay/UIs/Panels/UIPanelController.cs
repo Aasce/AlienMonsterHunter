@@ -17,7 +17,7 @@ namespace Asce.Game.UIs.Panels
         });
 
         [Space]
-        [SerializeField] private bool _isHideOnStart = true;
+        [SerializeField] private bool _isHideOnInitialze = true;
 
         public Canvas Canvas => _canvas;
 
@@ -33,11 +33,16 @@ namespace Asce.Game.UIs.Panels
             this.LoadPanels();
         }
 
-        protected virtual void Start()
+        public virtual void Initialize()
         {
-            if (_isHideOnStart) this.HideAll();
-        }
+            foreach (UIPanel panel in Panels)
+            {
+                if (panel == null) continue;
+                panel.Initialize();
+            }
 
+            if (_isHideOnInitialze) this.HideAll();
+        }
 
         public T GetPanel<T>() where T : UIPanel
         {

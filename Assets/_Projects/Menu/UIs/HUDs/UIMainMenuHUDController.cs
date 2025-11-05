@@ -11,10 +11,10 @@ namespace Asce.Menu.UIs.HUDs
     {
         [SerializeField] private Button _playButton;
 
-        private void Start()
+        public override void Initialize()
         {
+            base.Initialize();
             if (_playButton != null) _playButton.onClick.AddListener(PlayButton_OnClick);
-            Shared.Remove("NewGame");
         }
 
         private void PlayButton_OnClick()
