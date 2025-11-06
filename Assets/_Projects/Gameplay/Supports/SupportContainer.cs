@@ -14,7 +14,7 @@ namespace Asce.Game.Supports
         public const string PREFIX_ID = "support_container";
 
         [SerializeField, Readonly] private string _id;
-        [SerializeField, Readonly] private string _supportId;
+        [SerializeField, Readonly] private string _supportKey;
         [SerializeField, Readonly] private int _level = 0;
         [SerializeField, Readonly] private Cooldown _cooldown = new(10f);
 
@@ -23,17 +23,7 @@ namespace Asce.Game.Supports
         [SerializeField, Readonly] private Support _currentSupport;
 
         public string Id => _id;
-
-        public string SupportId
-        {
-            get => _supportId;
-            protected set
-            {
-                if (_supportId == value) return;
-                _supportId = value;
-                this.UpdateSupportReference();
-            }
-        }
+        public string SupportKey => _supportKey;
 
         public int Level => _level;
         public Cooldown Cooldown => _cooldown;
@@ -60,7 +50,7 @@ namespace Asce.Game.Supports
         public SupportContainer(string id)
         {
             _id = IdGenerator.NewId(PREFIX_ID);
-            _supportId = id;
+            _supportKey = id;
             this.UpdateSupportReference();
         }
 
@@ -76,7 +66,7 @@ namespace Asce.Game.Supports
                 return;
             }
 
-            Support supportPrefab = GameManager.Instance.AllSupports.Get(_supportId);
+            Support supportPrefab = GameManager.Instance.AllSupports.Get(_supportKey);
             _supportPrefab = supportPrefab;
 
             if (_supportPrefab != null && _supportPrefab.Information != null)
@@ -93,7 +83,7 @@ namespace Asce.Game.Supports
             return new SupportContainerSaveData()
             {
                 id = _id,
-                supportId = _supportId,
+                supportKey = _supportKey,
                 currentSupportId = _currentSupport != null ? _currentSupport.Id : string.Empty,
                 cooldown = _cooldown.CurrentTime,
             };
@@ -103,7 +93,7 @@ namespace Asce.Game.Supports
         {
             if (data == null) return;
             _id = data.id;
-            _supportId = data.supportId;
+            _supportKey = data.supportKey;
             this.UpdateSupportReference();
             _cooldown.CurrentTime = data.cooldown;
             _currentSupport = ComponentUtils.FindComponentById<Support>(data.currentSupportId);

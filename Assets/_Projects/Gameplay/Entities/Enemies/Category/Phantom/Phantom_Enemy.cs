@@ -30,11 +30,6 @@ namespace Asce.Game.Entities.Enemies
             _showDistance = Information.Stats.GetCustomStat("ShowDistance");
             _decayDuration = Information.Stats.GetCustomStat("DecayDuration");
             _decayStrength = Information.Stats.GetCustomStat("DecayStrength");
-            Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.9f;
-            Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
-            {
-                Agent.stoppingDistance = newValue;
-            };
         }
 
         public override void ResetStatus()

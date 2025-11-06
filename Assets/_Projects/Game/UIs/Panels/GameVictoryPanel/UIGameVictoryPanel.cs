@@ -1,9 +1,9 @@
-using System;
-using TMPro;
+using Asce.Game.UIs.Panels;
+using Asce.MainGame.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs.Panels
+namespace Asce.MainGame.UIs.Panels
 {
 
     public class UIGameVictoryPanel : UIPanel

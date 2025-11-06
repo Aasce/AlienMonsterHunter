@@ -88,21 +88,43 @@ namespace Asce.Game.Entities.Enemies
         }
 
         protected abstract void MoveToTaget();
-        protected abstract void Attack();
-
+        protected abstract void Attack(); 
+        
         protected virtual void AttackHandle()
         {
             AttackCooldown.Update(Time.deltaTime);
-            if (AttackCooldown.IsComplete)
+            if (!AttackCooldown.IsComplete) return;
+
+            ITargetable target = TargetDetection.CurrentTarget;
+            if (target == null) return;
+
+            float attackRange = Stats.AttackRange.FinalValue;
+
+            Vector2 enemyPosition = transform.position;
+            Vector2 targetPosition = target.transform.position;
+
+            Vector2 targetCenter = targetPosition;
+            float targetRadius = 0f;
+
+            // Use collider info if available
+            if (target.transform.TryGetComponent(out CircleCollider2D targetCollider))
             {
-                ITargetable target = TargetDetection.CurrentTarget;
-                if (target == null) return;
-                float attackRange = Stats.AttackRange.FinalValue;
-                if (Vector2.Distance(transform.position, target.transform.position) <= attackRange)
-                {
-                    this.Attack();
-                    AttackCooldown.Reset();
-                }
+                targetCenter = (Vector2)targetPosition + targetCollider.offset;
+                targetRadius = targetCollider.radius * target.transform.lossyScale.x;
+            }
+
+            Vector2 direction = targetCenter - enemyPosition;
+            float distance = direction.magnitude;
+            if (distance < Mathf.Epsilon) return;
+            direction.Normalize();
+
+            Vector2 closestPoint = targetCenter - direction * targetRadius;
+
+            if (Vector2.Distance(enemyPosition, closestPoint) <= attackRange)
+            {
+                this.RotateToTarget();
+                this.Attack();
+                AttackCooldown.Reset();
             }
         }
 
@@ -115,6 +137,10 @@ namespace Asce.Game.Entities.Enemies
                 float angle = Mathf.Atan2(Agent.velocity.y, Agent.velocity.x) * Mathf.Rad2Deg - 90f;
                 float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, angle, Time.deltaTime * 10f);
                 transform.rotation = Quaternion.Euler(0f, 0f, smoothAngle);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, transform.eulerAngles.z);
             }
         }
 
@@ -169,5 +195,15 @@ namespace Asce.Game.Entities.Enemies
 
         protected virtual void OnBeforeSave(EnemySaveData data) { }
         protected virtual void OnAfterLoad(EnemySaveData data) { }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            float attackRange = Stats.AttackRange.FinalValue;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+#endif
     }
 }

@@ -55,6 +55,7 @@ namespace Asce.Game.AIs
             foreach (Collider2D collider in colliders)
             {
                 if (collider == null) continue;
+                if (collider.transform == transform) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
                 if (!IsInViewAngle(target.transform.position)) continue;

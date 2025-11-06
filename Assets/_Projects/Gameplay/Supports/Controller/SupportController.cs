@@ -22,11 +22,11 @@ namespace Asce.Game.Supports
             return supports;
         }
 
-        public Support Spawn(string id)
+        public Support Spawn(string key)
         {
-            if (string.IsNullOrEmpty(id)) return null;
-            if (!_pools.ContainsKey(id)) this.CreatePool(id);
-            if (!_pools.TryGetValue(id, out Pool<Support> pool)) return null;
+            if (string.IsNullOrEmpty(key)) return null;
+            if (!_pools.ContainsKey(key)) this.CreatePool(key);
+            if (!_pools.TryGetValue(key, out Pool<Support> pool)) return null;
 
             Support support = pool.Activate(out bool isCreated);
             if (support == null) return null;
@@ -50,12 +50,12 @@ namespace Asce.Game.Supports
             GameObject.Destroy(support);
         }
 
-        private void CreatePool(string id)
+        private void CreatePool(string key)
         {
-            Support supportPrefab = GameManager.Instance.AllSupports.Get(id);
+            Support supportPrefab = GameManager.Instance.AllSupports.Get(key);
             if (supportPrefab == null) return;
 
-            GameObject poolParent = new GameObject($"{id} Pool");
+            GameObject poolParent = new GameObject($"{key} Pool");
             poolParent.transform.SetParent(this.transform);
 
             Pool<Support> pool = new()
@@ -64,7 +64,7 @@ namespace Asce.Game.Supports
                 Parent = poolParent.transform,
                 IsSetActive = false
             };
-            _pools[id] = pool;
+            _pools[key] = pool;
         }
     }
 }

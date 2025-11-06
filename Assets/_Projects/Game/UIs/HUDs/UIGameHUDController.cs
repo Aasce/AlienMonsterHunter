@@ -1,5 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
+using Asce.MainGame.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -14,24 +15,9 @@ namespace Asce.Game.UIs.HUDs
         [SerializeField] UIGunInformation _gunInformation;
         [SerializeField] UISupportsInformation _supportsInformation;
 
-        [Space]
-        [SerializeField] private Character _character;
-
         public UICharacterInformation CharacterInformation => _characterInformation;
         public UIGunInformation GunInformation => _gunInformation;
         public UISupportsInformation SupportsInformation => _supportsInformation;
-
-        public Character Character
-        {
-            get => _character;
-            set
-            {
-                if (_character == value) return;
-                this.Unregister();
-                _character = value;
-                this.Register();
-            }
-        }
 
         protected override void RefReset()
         {
@@ -43,29 +29,13 @@ namespace Asce.Game.UIs.HUDs
         public override void Initialize()
         {
             base.Initialize();
-            CharacterInformation.Abilities.SetUseKeys(Player.Instance.UseAbilityKeys);
-            Character = Player.Instance.Character;
-            Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
-
-            SupportsInformation.SetCallKeys(Player.Instance.CallSupportKeys);
-            SupportsInformation.Caller = Player.Instance.SupportCaller;
         }
 
-        private void Register()
+        public void SetSettings(PlayerSettings settings)
         {
-            if (CharacterInformation != null) CharacterInformation.Character = Character;
-            if (GunInformation != null) GunInformation.Character = Character;
+            CharacterInformation.Abilities.SetUseKeys(settings.UseAbilityKeys);
+            SupportsInformation.SetCallKeys(settings.CallSupportKeys);
         }
 
-        private void Unregister()
-        {
-            if (Character == null) return;
-        }
-
-
-        private void Player_OnCharacterChanged(ValueChangedEventArgs<Character> args)
-        {
-            Character = args.NewValue;
-        }
     }
 }

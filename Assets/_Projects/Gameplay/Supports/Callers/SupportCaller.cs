@@ -1,3 +1,4 @@
+using Asce.Game.Enviroments;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
@@ -5,7 +6,9 @@ using Asce.SaveLoads;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Asce.Game.Supports
 {
@@ -17,28 +20,16 @@ namespace Asce.Game.Supports
         [Space]
         [SerializeField, Readonly] private List<SupportContainer> _supports = new();
         private ReadOnlyCollection<SupportContainer> _supportsReadonly;
-        [SerializeField] private Transform _spawnPoint;
 
-        public event Action OnInitializeCompleted;
+        public event Action OnSupportChanged;
 
         public string Id => _id;
         public ReadOnlyCollection<SupportContainer> Supports => _supportsReadonly ??= _supports.AsReadOnly();
-        public Vector2 SpawnPoint => _spawnPoint != null ? _spawnPoint.position : Vector2.zero;
 
         string IIdentifiable.Id 
         {
             get => this.Id; 
             set => _id = value; 
-        }
-
-        private void Update()
-        {
-            foreach (SupportContainer container in _supports)
-            {
-                if (container == null) continue;
-                if (!container.IsValid) continue;
-                container.Cooldown.Update(Time.deltaTime);
-            }
         }
 
         public void Initialize(List<string> _supportIds)
@@ -59,7 +50,30 @@ namespace Asce.Game.Supports
                 _supports.Add(container);
             }
 
-            this.OnInitializeCompleted?.Invoke();
+            this.OnSupportChanged?.Invoke();
+        }
+
+        public void OnLoad()
+        {
+
+        }
+
+        private void Update()
+        {
+            foreach (SupportContainer container in _supports)
+            {
+                if (container == null) continue;
+                if (!container.IsValid) continue;
+                container.Cooldown.Update(Time.deltaTime);
+                if (container.CurrentSupport != null)
+                {
+                    if (!container.CurrentSupport.gameObject.activeInHierarchy)
+                    {
+                        container.CurrentSupport = null;
+                        container.Cooldown.SetBaseTime(container.Information.Cooldown);
+                    }
+                }
+            }
         }
 
         public void Call(int index, Vector2 position)
@@ -70,28 +84,32 @@ namespace Asce.Game.Supports
             if (!container.IsValid) return;
             if (!container.Cooldown.IsComplete) return;
 
-            if (container.CurrentSupportIsValid) 
-            {
-                Support currentSupport = container.CurrentSupport;
-                currentSupport.CallPosition = position;
-                currentSupport.Recall();
+            if (container.CurrentSupportIsValid) this.Recall(container, position);
+            else this.NewCall(container, position);
+        }
 
-                container.Cooldown.SetBaseTime(container.Information.CooldownOnRecall);
-            }
-            else
-            {
-                Support spawnSupport = SupportController.Instance.Spawn(container.SupportId);
-                if (spawnSupport == null) return;
+        private void Recall(SupportContainer container, Vector2 position)
+        {
+            Support currentSupport = container.CurrentSupport;
+            currentSupport.CallPosition = position;
+            currentSupport.Recall();
 
-                spawnSupport.transform.position = SpawnPoint;
-                spawnSupport.CallPosition = position;
-                spawnSupport.Leveling.SetLevel(container.Level);
-                spawnSupport.gameObject.SetActive(true);
-                spawnSupport.OnActive();
-                container.CurrentSupport = spawnSupport;
+            container.Cooldown.SetBaseTime(container.Information.CooldownOnRecall);
+        }
 
-                container.Cooldown.SetBaseTime(container.Information.Cooldown);
-            }
+        private void NewCall(SupportContainer container, Vector2 position)
+        {
+            Support spawnSupport = SupportController.Instance.Spawn(container.SupportKey);
+            if (spawnSupport == null) return;
+
+            spawnSupport.transform.position = EnviromentController.Instance.SupportSpawnPoint;
+            spawnSupport.CallPosition = position;
+            spawnSupport.Leveling.SetLevel(container.Level);
+            spawnSupport.gameObject.SetActive(true);
+            spawnSupport.OnActive();
+            container.CurrentSupport = spawnSupport;
+
+            container.Cooldown.SetBaseTime(container.Information.CooldownOnRecall);
         }
 
         SupportCallerSaveData ISaveable<SupportCallerSaveData>.Save()
@@ -120,6 +138,8 @@ namespace Asce.Game.Supports
                 (container as ILoadable<SupportContainerSaveData>).Load(containerData);
                 _supports.Add(container);
             }
+
+            this.OnSupportChanged?.Invoke();
         }
     }
 }

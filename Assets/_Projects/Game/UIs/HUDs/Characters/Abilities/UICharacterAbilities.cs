@@ -43,14 +43,14 @@ namespace Asce.Game.UIs
             if (_characterAbilities == null) return;
 
             this.SetAbilities();
-            _characterAbilities.OnInitializeCompleted += CharacterAbilities_OnInitializeCompleted;
+            _characterAbilities.OnAbilityChanged += CharacterAbilities_OnInitializeCompleted;
         }
 
 
         private void Unregister()
         {
             if (_characterAbilities == null) return;
-            _characterAbilities.OnInitializeCompleted -= CharacterAbilities_OnInitializeCompleted;
+            _characterAbilities.OnAbilityChanged -= CharacterAbilities_OnInitializeCompleted;
         }
 
         private void SetAbilities()

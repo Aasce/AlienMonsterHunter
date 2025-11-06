@@ -1,7 +1,7 @@
 using Asce.Managers;
 using UnityEngine;
 
-namespace Asce.Game.Managers
+namespace Asce.MainGame.Managers
 {
     public abstract class GameStateCondition : GameComponent
     {

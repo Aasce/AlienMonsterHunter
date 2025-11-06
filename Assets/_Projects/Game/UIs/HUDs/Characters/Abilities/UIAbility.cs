@@ -55,6 +55,9 @@ namespace Asce.Game.UIs
             }
             this.ShowContent(true);
             _icon.sprite = _container.AbilityPrefab.Information.Icon;
+            float ratio = _container.Cooldown.Ratio;
+            this.SetCooldown(ratio);
+
             _container.Cooldown.OnBaseTimeChanged += AbilityCooldown_OnBaseTimeChanged;
             _container.Cooldown.OnCurrentTimeChanged += AbilityCooldown_OnCurrentTimeChanged;
         }

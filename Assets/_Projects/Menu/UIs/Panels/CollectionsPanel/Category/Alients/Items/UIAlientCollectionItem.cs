@@ -1,6 +1,4 @@
 using Asce.Game.Entities.Enemies;
-using Asce.PrepareGame.UIs;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

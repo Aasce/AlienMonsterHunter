@@ -13,10 +13,14 @@ namespace Asce.Game.Spawners
         [SerializeField] private List<string> _enemyNames = new();
 
         [Header("Spawner Info")]
-        [SerializeField] protected bool _autoStart = true;
         [SerializeField] protected bool _active = true;
 
         public List<string> Enemies => _enemyNames;
+        public bool Active
+        {
+            get => _active;
+            set => _active = value;
+        }
 
         protected override void RefReset()
         {
@@ -24,22 +28,19 @@ namespace Asce.Game.Spawners
             this.LoadComponent(out _spawnArea);
         }
 
-        protected virtual void Start()
+        public virtual void Initialize()
         {
-            if (_autoStart) StartSpawning();
+
         }
+
+        public virtual void OnCreate() { }
+        public virtual void OnLoad() { }
 
         protected virtual void Update()
         {
-            if (!_active) return;
-            OnUpdateSpawning();
+            if (!Active) return;
+            this.OnUpdateSpawning();
         }
-
-        /// <summary> Called once when spawning should begin </summary>
-        public virtual void StartSpawning() => _active = true;
-
-        /// <summary> Called once when spawning should stop. </summary>
-        public virtual void StopSpawning() => _active = false;
 
         /// <summary> Called every frame while spawner is active. </summary>
         protected abstract void OnUpdateSpawning();

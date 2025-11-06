@@ -592,6 +592,14 @@ PrefabInstance:
       propertyPath: _viewRadius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
+      propertyPath: _meshResolution
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
+      propertyPath: _edgeResolveIterations
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7388973181560732050, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

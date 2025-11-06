@@ -34,8 +34,6 @@ namespace Asce.Game.Entities.Enemies
 
         protected override void Attack()
         {
-            this.RotateToTarget();
-
             ShadowfangBullet_Ability bullet = AbilityController.Instance.Spawn("Shadowfang Bullet", gameObject) as ShadowfangBullet_Ability;
             if (bullet == null) return;
 

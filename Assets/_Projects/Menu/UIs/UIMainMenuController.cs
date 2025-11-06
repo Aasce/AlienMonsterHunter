@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Asce.Menu.UIs
 {
-    public class UIMainMenuController : MonoBehaviourSingleton<UIMainMenuController>, IHasPanelController
+    public class UIMainMenuController : GameComponent, IHasPanelController
     {
         [SerializeField] private UIMainMenuHUDController _hudController;
         [SerializeField] private UIPanelController _panelController;

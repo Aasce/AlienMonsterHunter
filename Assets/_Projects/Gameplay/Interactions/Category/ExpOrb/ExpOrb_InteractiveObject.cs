@@ -1,5 +1,5 @@
 using Asce.Game.Entities.Characters;
-using Asce.Managers;
+using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
@@ -67,6 +67,20 @@ namespace Asce.Game.Interactions
         public override void Interact(GameObject interacter)
         {
 
+        }
+
+        protected override void OnBeforeSave(InteractiveObjectSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("ExpAmount", ExpAmount);
+            data.SetCustom("DespawnCooldown", _despawnCooldown.CurrentTime);
+        }
+
+        protected override void OnAfterLoad(InteractiveObjectSaveData data)
+        {
+            base.OnAfterLoad(data);
+            ExpAmount = data.GetCustom<int>("ExpAmount");
+            _despawnCooldown.CurrentTime = data.GetCustom<float>("DespawnCooldown");
         }
     }
 }

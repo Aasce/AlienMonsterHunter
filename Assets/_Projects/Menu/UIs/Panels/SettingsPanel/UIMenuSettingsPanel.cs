@@ -16,7 +16,7 @@ namespace Asce.Menu.UIs.Panels
             base.Start();
             if (_quitButton != null) _quitButton.onClick.AddListener(() =>
             {
-                UIConfirmPanel confirmPanel = UIMainMenuController.Instance.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
+                UIConfirmPanel confirmPanel = MenuManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
                 if (confirmPanel == null) return;
                 confirmPanel.Show(
                     title: "Quit Game",

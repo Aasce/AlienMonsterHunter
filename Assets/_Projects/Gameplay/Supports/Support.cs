@@ -83,7 +83,7 @@ namespace Asce.Game.Supports
             SupportSaveData data = new()
             {
                 id = this.Id,
-                nameId = this.Information.Id,
+                nameId = this.Information.Key,
                 position = transform.position,
                 rotation = transform.eulerAngles.z,
                 callPosition = this.CallPosition

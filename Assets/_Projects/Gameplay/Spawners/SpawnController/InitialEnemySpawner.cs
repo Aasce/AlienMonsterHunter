@@ -11,13 +11,23 @@ namespace Asce.Game.Spawners
         [SerializeField] private int _spawnCount = 10;
         [SerializeField] private Vector2Int _levelRange = new(0, 10);
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-            if (_autoStart) Spawn();
+            base.Initialize();
         }
 
-        protected override void OnUpdateSpawning() { /* No update needed */ }
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            this.Spawn();
+        }
+
+        public override void OnLoad()
+        {
+            base.OnLoad();
+        }
+
+        protected override void OnUpdateSpawning() { }
 
         protected override void Spawn()
         {

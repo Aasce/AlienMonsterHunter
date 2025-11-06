@@ -8,11 +8,6 @@ namespace Asce.Game.Entities.Enemies
         public override void Initialize()
         {
             base.Initialize();
-            Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.9f;
-            Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
-            {
-                Agent.stoppingDistance = newValue;
-            };
         }
 
         protected override void MoveToTaget() =>  this.DefaultMoveToTaget();       

@@ -1,4 +1,3 @@
-using Asce.Game.UIs.HUDs;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
 using Asce.Managers.Utils;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIPrepareGameController : MonoBehaviourSingleton<UIPrepareGameController>, IHasPanelController
+    public class UIPrepareGameController : GameComponent, IHasPanelController
     {
         [SerializeField] private UIPrepareGameHUDController _hudController;
         [SerializeField] private UIPanelController _panelController;

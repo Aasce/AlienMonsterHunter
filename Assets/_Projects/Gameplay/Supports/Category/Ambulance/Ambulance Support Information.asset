@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33db6c94ad2e9e54ba8df51612fa1dfb, type: 3}
   m_Name: Ambulance Support Information
   m_EditorClassIdentifier: 
-  _id: Ambulance
+  _key: Ambulance
   _name: Ambulance
   _description: 'Call: Call an Ambulance that travels from the base to the target
     location, healing all Characters within {HealRadius} for {HealAmount} Health
@@ -28,4 +28,4 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 0bcb20c5caba30d4d928bbc990d45a47, type: 3}
   _leveling: {fileID: 11400000, guid: 420afabc5f5db48409e0496015e5996c, type: 2}
   _cooldown: 15
-  _cooldownOnRecall: 15
+  _cooldownOnRecall: 6

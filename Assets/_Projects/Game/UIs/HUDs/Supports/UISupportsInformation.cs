@@ -20,13 +20,24 @@ namespace Asce.Game.UIs
             set
             {
                 if (_caller == value) return;
+                this.Unregister();
                 _caller = value;
-                this.Initialize();
-                if (_caller != null)
-                {
-                    _caller.OnInitializeCompleted += Caller_OnInitializeCompleted;
-                }
+                this.Register();
             }
+        }
+
+        private void Register()
+        {
+            if (_caller == null) return;
+
+            this.SetSupport();
+            _caller.OnSupportChanged += Caller_OnSupportChanged;
+        }
+
+        private void Unregister()
+        {
+            if (_caller == null) return;
+            _caller.OnSupportChanged -= Caller_OnSupportChanged;
         }
 
         public void SetCallKeys(List<KeyCode> keys)
@@ -36,8 +47,7 @@ namespace Asce.Game.UIs
             _callKeys.AddRange(keys);
         }
 
-
-        private void Initialize()
+        private void SetSupport()
         {
             _pool.Clear(onClear: (item) => item.Hide());
             if (Caller == null) return;
@@ -57,15 +67,16 @@ namespace Asce.Game.UIs
             }
         }
 
-        private void Caller_OnInitializeCompleted()
-        {
-            this.Initialize();
-        }
-
         private KeyCode GetKey(int index)
         {
             if (index < 0 || index >= _callKeys.Count) return KeyCode.None;
             return _callKeys[index];
         }
+
+        private void Caller_OnSupportChanged()
+        {
+            this.SetSupport();
+        }
+
     }
 }

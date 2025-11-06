@@ -1,4 +1,5 @@
 using Asce.Managers.UIs;
+using Asce.PrepareGame.Manager;
 using Asce.PrepareGame.UIs.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -43,7 +44,7 @@ namespace Asce.PrepareGame.UIs
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            UIPrepareGameController.Instance.HUDController.Tabs.ShowTabByTabView(_collection.RectTransform);
+            PrepareGameManager.Instance.UIController.HUDController.Tabs.ShowTabByTabView(_collection.RectTransform);
             if (Item != null) _collection.ShowDetails(Item);
         }
 

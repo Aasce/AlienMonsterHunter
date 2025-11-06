@@ -61,8 +61,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1567937210646380158}
+  - {fileID: 7292114929701358549}
   - {fileID: 7777336541542031035}
+  - {fileID: 1567937210646380158}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2818381215328377488
@@ -74,14 +75,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 3477101698624265933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64791785c6668324ba3f24323cbf7c69, type: 3}
+  m_Script: {fileID: 11500000, guid: d5052e4c93948f24397819a2fee5ddb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 50294651547596440}
   _spawnPoint: {fileID: 0}
-  _callSupportKeys: 7a00000078000000
   _character: {fileID: 0}
   _supportCaller: {fileID: 2188518711307171375}
-  _supports: []
+--- !u!1 &9162770885395380141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7292114929701358549}
+  - component: {fileID: 50294651547596440}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7292114929701358549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162770885395380141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7308737384878189862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &50294651547596440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162770885395380141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bf22385f6ee2047a58c89aa40db0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reloadKey: 114
+  _interactKey: 102
+  _callSupportKeys: 7a00000078000000
+  _useAbilityKeys: 710000006500000063000000
 --- !u!1001 &5189937723269069856
 PrefabInstance:
   m_ObjectHideFlags: 0

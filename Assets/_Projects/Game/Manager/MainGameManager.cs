@@ -1,163 +1,96 @@
-using Asce.Game.Entities.Characters;
-using Asce.Game.Guns;
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Game.UIs;
-using Asce.Game.UIs.Panels;
+using Asce.MainGame.Players;
+using Asce.MainGame.UIs;
 using Asce.Managers;
-using System;
-using System.Collections.Generic;
+using Asce.Managers.Attributes;
+using Asce.Managers.Utils;
 using UnityEngine;
 
-namespace Asce.Game
+namespace Asce.MainGame.Managers
 {
     public class MainGameManager : MonoBehaviourSingleton<MainGameManager>
     {
+        [Header("References")]
+        [SerializeField, Readonly] private GameStateController _gameStateController;
+        [SerializeField, Readonly] private MainGameSaveLoadController _saveLoadController;
+        [SerializeField, Readonly] private NewGameController _newGameController;
+        [SerializeField, Readonly] private SpawnerController _spawnerController;
+
+        [SerializeField] private MainGamePlayer _player;
+        [SerializeField] private UIMainGameController _uiController;
+
+        [Space]
         [SerializeField] private string _mainMenuSceneName;
-        [SerializeField] private MainGameState _gameState = MainGameState.None;
 
-        public event Action<ValueChangedEventArgs<MainGameState>> OnGameStateChanged;
+        public GameStateController GameStateController => _gameStateController;
+        public MainGameSaveLoadController SaveLoadController => _saveLoadController;
+        public NewGameController NewGameController => _newGameController;
+        public SpawnerController SpawnerController => _spawnerController;
+        public MainGamePlayer Player => _player;
+        public UIMainGameController UIController => _uiController;
 
-        public MainGameState GameState
+
+        protected override void RefReset()
         {
-            get => _gameState;
-            set
-            {
-                if (_gameState == value) return;
-                MainGameState oldValue = _gameState;
-                _gameState = value;
-                OnGameStateChanged?.Invoke(new ValueChangedEventArgs<MainGameState>(oldValue, _gameState));
-            }
+            base.RefReset();
+            this.LoadComponent(out _gameStateController);
+            this.LoadComponent(out _saveLoadController);
+            this.LoadComponent(out _newGameController);
+            this.LoadComponent(out _spawnerController);
         }
-
-        public bool IsPlaying => GameState == MainGameState.Playing || GameState == MainGameState.Pausing;
 
         protected override void Awake()
         {
             base.Awake();
-            GameState = MainGameState.Initialize;
+            GameStateController.GameState = MainGameState.Initialize;
         }
 
         private void Start()
         {
-            this.InitializeController();
+            this.Initialize();
 
             bool isNewGame = Shared.Get<bool>("NewGame");
             if (isNewGame)
             {
-                this.CreateCharacterForPlayer();
-                this.CreateSupportForPlayer();
+                GameStateController.GameState = MainGameState.Creating;
+                NewGameController.CreateNewGame();
+                SaveLoadController.SaveCurrentGame();
             }
             else
             {
-                GameState = MainGameState.Loading;
-                this.LoadCurrentGame();
+                GameStateController.GameState = MainGameState.Loading;
+                SaveLoadController.LoadCurrentGame();
             }
-            Player.Instance.Initialize();
-            this.AssignUI();
 
-            GameState = MainGameState.Playing;
+            UIController.AssignUI();
+            CameraController.Instance.SetToTarget();
+            GameStateController.GameState = MainGameState.Playing;
+        }
+
+        private void Initialize()
+        {
+            GameStateController.GameState = MainGameState.Initialize;
+            GameStateController.Initialize();
+            NewGameController.Initialize();
+            SpawnerController.Initialize();
+            Player.Initialize();
+            UIController.Initialze();
+            PlayerManager.Instance.RegisterPlayer(Player);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (PlayerManager.Instance != null) PlayerManager.Instance.UnregisterPlayer(Player);
         }
 
         public void BackToMainMenu()
         {
-            MainGameSaveLoadController.Instance.SaveCurrentGame();
-            GameState = MainGameState.Exiting; 
+            SaveLoadController.SaveCurrentGame();
+            GameStateController.GameState = MainGameState.Exiting; 
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
 
-        private void InitializeController()
-        {
-            GameStateController.Instance.Initialize();
-            UIGameController.Instance.Initialze();
-        }
-
-        private void LoadCurrentGame()
-        {
-            MainGameSaveLoadController.Instance.LoadCurrentGame();
-        }
-
-        private void CreateCharacterForPlayer()
-        {
-            string characterName = Shared.Get<string>("character");
-            string gunName = Shared.Get<string>("gun");
-
-            Gun gunPrefab = GameManager.Instance.AllGuns.Get(gunName);
-            Gun gunInstance = Instantiate(gunPrefab);
-            gunInstance.name = gunPrefab.name;
-
-            Character characterPrefab = GameManager.Instance.AllCharacters.Get(characterName);
-            Character characterInstance = Instantiate(characterPrefab);
-            if (characterInstance != null)
-            {
-                characterInstance.Gun = gunInstance;
-            }
-
-            Player.Instance.Character = characterInstance;
-            Player.Instance.Character.transform.position = Player.Instance.SpawnPoint;
-            Player.Instance.InitializeCharacter();
-        }
-
-        private void CreateSupportForPlayer()
-        {
-            Player.Instance.Supports.Clear();
-            List<string> supportNames = Shared.Get<List<string>>("supports");
-            if (supportNames == null) return;
-            Player.Instance.Supports.AddRange(supportNames);
-            Player.Instance.InitializeSupportCaller();
-        }
-
-        private void AssignUI()
-        {
-            Player.Instance.Character.OnDead += Character_OnDead;
-            Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
-
-            OnGameStateChanged += MainGameManager_OnGameStateChanged;
-        }
-
-        private void Player_OnCharacterChanged(ValueChangedEventArgs<Character> args)
-        {
-            if (args.OldValue != null) args.OldValue.OnDead -= Character_OnDead;
-            if (args.NewValue != null)
-            {
-                args.NewValue.OnDead -= Character_OnDead;
-                args.NewValue.OnDead += Character_OnDead;
-            }
-        }
-
-        private void Character_OnDead(Combats.DamageContainer container)
-        {
-            Player.Instance.Character.gameObject.SetActive(false);
-            UIDeathPanel deathPanel = UIGameController.Instance.PanelController.GetPanelByName("Death") as UIDeathPanel;
-            if (deathPanel == null) return;
-
-            deathPanel.OnReviveClicked -= DeathPanel_OnReviveClicked;
-            deathPanel.OnReviveClicked += DeathPanel_OnReviveClicked;
-            deathPanel.Show();
-        }
-
-        private void MainGameManager_OnGameStateChanged(ValueChangedEventArgs<MainGameState> args)
-        {
-            if (args.NewValue == MainGameState.Completed)
-            {
-                UIGameVictoryPanel victoryPanel = UIGameController.Instance.PanelController.GetPanelByName("Game Victory") as UIGameVictoryPanel;
-                if (victoryPanel == null) return;
-
-                victoryPanel.Show();
-            }
-
-            else if (args.NewValue == MainGameState.Failed)
-            {
-                UIGameDefeatPanel defeatPanel = UIGameController.Instance.PanelController.GetPanelByName("Game Defeat") as UIGameDefeatPanel;
-                if (defeatPanel == null) return;
-
-                defeatPanel.Show();
-            }
-        }
-
-        private void DeathPanel_OnReviveClicked()
-        {
-            Player.Instance.ReviveCharacter(isReviveAtSpawnPoint: true);
-        }
     }
 }

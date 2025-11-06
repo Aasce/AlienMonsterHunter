@@ -1,27 +1,43 @@
 using Asce.Game.Managers;
+using Asce.Game.Players;
 using Asce.Managers;
-using Asce.Menu.UIs;
 using Asce.PrepareGame.Picks;
+using Asce.PrepareGame.Players;
 using Asce.PrepareGame.UIs;
 using System.Linq;
 using UnityEngine;
 
-namespace Asce.PrepareGame
+namespace Asce.PrepareGame.Manager
 {
     public class PrepareGameManager : MonoBehaviourSingleton<PrepareGameManager>
     {
+        [SerializeField] private PrepareGamePlayer _player;
+        [SerializeField] private UIPrepareGameController _uiController;
+
+        [Space]
         [SerializeField] private string _mainGameSceneName;
         [SerializeField] private string _mainMenuSceneName;
 
+        public PrepareGamePlayer Player => _player;
+        public UIPrepareGameController UIController => _uiController;
+
         private void Start()
         {
-            this.InitialzeControllers();
+            this.Initialze();
             Shared.SetOrAdd("NewGame", true);
         }
 
-        private void InitialzeControllers()
+        private void Initialze()
         {
-            UIPrepareGameController.Instance.Initialize();
+            Player.Initialize();
+            UIController.Initialize();
+            PlayerManager.Instance.RegisterPlayer(Player);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (PlayerManager.Instance != null) PlayerManager.Instance.UnregisterPlayer(Player);
         }
 
 

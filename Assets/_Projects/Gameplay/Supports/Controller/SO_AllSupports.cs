@@ -11,7 +11,7 @@ namespace Asce.Game.Supports
         {
             if (support == null) return null;
             if (support.Information == null) return null;
-            return support.Information.Id;
+            return support.Information.Key;
         });
 
         public ReadOnlyCollection<Support> Supports => _supports.List;

@@ -2,6 +2,8 @@ namespace Asce.SaveLoads
 {
 	public interface ISaveable<T>
 	{
-		T Save();
+		bool IsNeedSave => true;
+
+        T Save();
 	}
 }

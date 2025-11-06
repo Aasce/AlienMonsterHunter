@@ -18,7 +18,7 @@ namespace Asce.Game.Entities.Characters
         private readonly List<AbilityContainer> _passiveAbilities = new();
         private readonly List<AbilityContainer> _activeAbilities = new();
 
-        public event Action OnInitializeCompleted;
+        public event Action OnAbilityChanged;
 
         public List<AbilityContainer> Abilities => _abilities;
         public List<AbilityContainer> PassiveAbilities => _passiveAbilities;
@@ -58,7 +58,7 @@ namespace Asce.Game.Entities.Characters
                 else _activeAbilities.Add(abilityContainer);
             }
 
-            this.OnInitializeCompleted?.Invoke();
+            this.OnAbilityChanged?.Invoke();
         }
 
         public void ResetStatus()
@@ -117,6 +117,8 @@ namespace Asce.Game.Entities.Characters
                 if (abilityContainer.AbilityPrefab.Information.IsPassive) _passiveAbilities.Add(abilityContainer);
                 else _activeAbilities.Add(abilityContainer);
             }
+
+            OnAbilityChanged?.Invoke();
         }
     }
 }

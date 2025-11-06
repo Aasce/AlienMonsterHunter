@@ -2,19 +2,19 @@ using Asce.Game.Abilities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
+using Asce.Game.Interactions;
 using Asce.Game.Managers;
-using Asce.Game.Players;
 using Asce.Game.SaveLoads;
 using Asce.Game.Supports;
+using Asce.MainGame.Managers;
 using Asce.Managers;
 using Asce.SaveLoads;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Game
+namespace Asce.MainGame
 {
-    public class MainGameSaveLoadController : MonoBehaviourSingleton<MainGameSaveLoadController>
+    public class MainGameSaveLoadController : GameComponent
     {
         private readonly Dictionary<string, bool> _isLoadeds = new();
 
@@ -22,20 +22,24 @@ namespace Asce.Game
         {
             this.SaveGameConfig();
             this.SaveEnemies();
+            this.SaveSpawners();
             this.SaveCharacter();
             this.SaveAbilities();
             this.SaveSupports();
             this.SaveSupportCaller();
+            this.SaveInteractiveObjects();
         }
 
         public void LoadCurrentGame()
         {
             this.LoadGameConfig();
             this.LoadEnemies();
+            this.LoadSpawners();
             this.LoadCharacter();
             this.LoadAbilities();
             this.LoadSupports();
             this.LoadSupportCaller();
+            this.LoadInteractiveObjects();
         }
 
         public bool IsLoaded(string key)
@@ -46,7 +50,7 @@ namespace Asce.Game
         public void SaveGameConfig()
         {
             CurrentGameConfigData configData = new CurrentGameConfigData();
-            configData.hasSave = MainGameManager.Instance.IsPlaying;
+            configData.hasSave = MainGameManager.Instance.GameStateController.IsPlaying;
             configData.playTime = Time.time;
             SaveLoadManager.Instance.Save("CurrentGameConfig", configData);
         }
@@ -58,15 +62,23 @@ namespace Asce.Game
             foreach (Enemy enemy in enemies)
             {
                 if (enemy is ISaveable<EnemySaveData> saveable)
+                {
+                    if (!saveable.IsNeedSave) continue;
                     allData.entities.Add(saveable.Save());
+                }
             }
 
             SaveLoadManager.Instance.Save("CurrentGameEnemies", allData);
         }
 
+        private void SaveSpawners()
+        {
+
+        }
+
         private void SaveCharacter()
         {
-            CharacterSaveData characterData = (Player.Instance.Character as ISaveable<CharacterSaveData>).Save();
+            CharacterSaveData characterData = (MainGameManager.Instance.Player.Character as ISaveable<CharacterSaveData>).Save();
             SaveLoadManager.Instance.Save("CurrentGameCharacter", characterData);
         }
 
@@ -77,7 +89,10 @@ namespace Asce.Game
             foreach (Ability ability in abilities)
             {
                 if (ability is ISaveable<AbilitySaveData> saveable)
+                {
+                    if (!saveable.IsNeedSave) continue;
                     allData.abilities.Add(saveable.Save());
+                }
             }
 
             SaveLoadManager.Instance.Save("CurrentGameAbilities", allData);
@@ -90,7 +105,10 @@ namespace Asce.Game
             foreach (Support support in supports)
             {
                 if (support is ISaveable<SupportSaveData> saveable)
+                {
+                    if (!saveable.IsNeedSave) continue;
                     allData.supports.Add(saveable.Save());
+                }
             }
 
             SaveLoadManager.Instance.Save("CurrentGameSupports", allData);
@@ -99,8 +117,25 @@ namespace Asce.Game
 
         private void SaveSupportCaller()
         {
-            SupportCallerSaveData supportCallerData = (Player.Instance.SupportCaller as ISaveable<SupportCallerSaveData>).Save();
+            SupportCallerSaveData supportCallerData = (MainGameManager.Instance.Player.SupportCaller as ISaveable<SupportCallerSaveData>).Save();
             SaveLoadManager.Instance.Save("CurrentGameSupportCaller", supportCallerData);
+        }
+
+        private void SaveInteractiveObjects()
+        {
+            AllInteractiveObjectsSaveData allData = new();
+            List<InteractiveObject> interactiveObjects = InteractionController.Instance.GetAllInteractiveObjects();
+            foreach (InteractiveObject interactiveObject in interactiveObjects)
+            {
+                if (interactiveObject is ISaveable<InteractiveObjectSaveData> saveable)
+                {
+                    if (!saveable.IsNeedSave) continue;
+                    allData.interactiveObjects.Add(saveable.Save());
+                }
+            }
+
+            SaveLoadManager.Instance.Save("CurrentInteractiveObjects", allData);
+
         }
 
         private void LoadGameConfig()
@@ -126,6 +161,12 @@ namespace Asce.Game
             _isLoadeds["Enemies"] = true;
         }
 
+        private void LoadSpawners()
+        {
+
+            MainGameManager.Instance.SpawnerController.StartSpawn();
+        }
+
         private void LoadCharacter()
         {
             CharacterSaveData characterData = SaveLoadManager.Instance.Load<CharacterSaveData>("CurrentGameCharacter");
@@ -139,8 +180,8 @@ namespace Asce.Game
                 characterInstance.Gun = gun;
             }
 
-            Player.Instance.Character = characterInstance;
-            Player.Instance.InitializeCharacter();
+            MainGameManager.Instance.Player.Character = characterInstance;
+            MainGameManager.Instance.Player.Character.Initialize();
 
             (characterInstance as ILoadable<CharacterSaveData>).Load(characterData);
             _isLoadeds["Character"] = true;
@@ -188,10 +229,30 @@ namespace Asce.Game
             SupportCallerSaveData supportCallerData = SaveLoadManager.Instance.Load<SupportCallerSaveData>("CurrentGameSupportCaller");
             if (supportCallerData == null) return;
 
-            Player.Instance.InitializeSupportCaller();
-            (Player.Instance.SupportCaller as ILoadable<SupportCallerSaveData>).Load(supportCallerData);
+            (MainGameManager.Instance.Player.SupportCaller as ILoadable<SupportCallerSaveData>).Load(supportCallerData);
+            MainGameManager.Instance.Player.SupportCaller.OnLoad();
 
             _isLoadeds["SupportCaller"] = true;
+        }
+
+        private void LoadInteractiveObjects()
+        {
+            AllInteractiveObjectsSaveData allData = SaveLoadManager.Instance.Load<AllInteractiveObjectsSaveData>("CurrentInteractiveObjects");
+            if (allData == null) return;
+            foreach (InteractiveObjectSaveData data in allData.interactiveObjects)
+            {
+                InteractiveObject interactiveObject = InteractionController.Instance.Spawn(data.name);
+                if (interactiveObject == null) continue;
+                if (interactiveObject is ILoadable<InteractiveObjectSaveData> loadable)
+                {
+                    loadable.Load(data);
+                }
+
+                interactiveObject.gameObject.SetActive(true);
+                interactiveObject.OnLoad();
+            }
+
+            _isLoadeds["InteractiveObjects"] = true;
         }
 
 

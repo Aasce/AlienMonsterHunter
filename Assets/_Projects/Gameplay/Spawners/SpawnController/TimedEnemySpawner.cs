@@ -12,9 +12,19 @@ namespace Asce.Game.Spawners
         [SerializeField] private Cooldown _spawnCooldown = new(5f);
         [SerializeField] private Vector2Int _levelRange = new(0, 10);
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
+            base.Initialize();
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+        }
+
+        public override void OnLoad()
+        {
+            base.OnLoad();
         }
 
         protected override void OnUpdateSpawning()

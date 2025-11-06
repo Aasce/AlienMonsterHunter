@@ -31,9 +31,10 @@ namespace Asce.Game.Entities.Enemies
             Enemy enemy = pool.Activate(out bool isCreated);
             if (enemy == null) return null;
 
-            enemy.Agent.Warp(position);
             if (isCreated) enemy.Initialize();
             else enemy.ResetStatus();
+
+            enemy.Agent.Warp(position);
 
             OnSpawned?.Invoke(enemy);
             return enemy;

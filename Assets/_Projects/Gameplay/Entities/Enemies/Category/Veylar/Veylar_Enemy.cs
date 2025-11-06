@@ -48,11 +48,6 @@ namespace Asce.Game.Entities.Enemies
             _layCooldown.SetBaseTime(Information.Stats.GetCustomStat("LayCooldown"));
             _maturationCooldown.SetBaseTime(Information.Stats.GetCustomStat("MaturationCooldown"));
             _explosionDamage = Information.Stats.GetCustomStat("ExplosionDamage");
-            Agent.stoppingDistance = Stats.AttackRange.FinalValue * 0.8f;
-            Stats.AttackRange.OnFinalValueChanged += (oldValue, newValue) =>
-            {
-                Agent.stoppingDistance = newValue;
-            };
 
             OnDead += Veylar_OnDead;
             _maturationCooldown.Reset();

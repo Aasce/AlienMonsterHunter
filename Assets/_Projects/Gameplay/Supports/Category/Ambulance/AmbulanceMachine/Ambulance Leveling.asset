@@ -23,6 +23,9 @@ MonoBehaviour:
     - _targetKey: Armor
       _deltaValue: 7.5
       _type: 0
+    - _targetKey: Speed
+      _deltaValue: 0.1
+      _type: 0
     - _targetKey: HealAmount
       _deltaValue: 1.6
       _type: 0

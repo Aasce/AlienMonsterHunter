@@ -44,7 +44,7 @@ namespace Asce.Game.Supports
         public override void Recall()
         {
             base.Recall();
-            this.SetMachinePositionAndDirection();
+
         }
 
         public override void OnLoad()

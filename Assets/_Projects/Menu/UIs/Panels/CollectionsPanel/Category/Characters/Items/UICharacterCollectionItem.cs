@@ -1,6 +1,4 @@
 using Asce.Game.Entities.Characters;
-using Asce.PrepareGame.UIs;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +17,7 @@ namespace Asce.Menu.UIs.Characters
 
         [Header("Invite or Join")]
         [SerializeField] protected RectTransform _joinedContent;
-        [SerializeField] protected UILevelProgess _levelProgess;
+        // [SerializeField] protected UILevelProgess _levelProgess;
         
         [Space]
         [SerializeField] protected RectTransform _inviteContent;

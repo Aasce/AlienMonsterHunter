@@ -247,6 +247,7 @@ MonoBehaviour:
     _baseTime: 1
     _currentTime: 1
   _maxLinkDistance: 20
+  _linkDamage: 5
   _checkMachineCooldown:
     _baseTime: 0.25
     _currentTime: 0.25
@@ -384,7 +385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: _meshResolution
-      value: 0.4
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
+      propertyPath: _edgeResolveIterations
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7388973181560732050, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,5 +1,5 @@
-using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
+using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
 using TMPro;
 using UnityEngine;
@@ -17,8 +17,7 @@ namespace Asce.Game.UIs
         [SerializeField] private TextMeshProUGUI _reloadingAlertText;
 
         [Space]
-        [SerializeField] private Character _character;
-        [SerializeField] private Gun _gun;
+        [SerializeField, Readonly] private Gun _gun;
 
 
         public Image GunIcon => _gunIcon;
@@ -26,18 +25,6 @@ namespace Asce.Game.UIs
         public TextMeshProUGUI MagazineText => _magazineText;
 
         public TextMeshProUGUI ReloadingAlertText => _reloadingAlertText;
-
-        public Character Character
-        {
-            get => _character;
-            set
-            {
-                if (_character == value) return;
-                this.UnregisterCharacter();
-                _character = value;
-                this.RegisterCharacter();
-            }
-        }
 
         public Gun Gun
         {
@@ -50,25 +37,6 @@ namespace Asce.Game.UIs
                 this.RegisterGun();
             }
         }
-
-
-        private void RegisterCharacter()
-        {
-            if (Character == null)
-            {
-                Gun = null;
-                return;
-            }
-            Gun = Character.Gun;
-            Character.OnGunChanged += Character_OnGunChanged;
-        }
-
-        private void UnregisterCharacter()
-        {
-            if (Character == null) return;
-            Character.OnGunChanged -= Character_OnGunChanged;
-        }
-
 
         private void RegisterGun()
         {
@@ -131,8 +99,6 @@ namespace Asce.Game.UIs
             if (ReloadingAlertText == null) return;
             ReloadingAlertText.gameObject.SetActive(isShow);
         }
-
-        private void Character_OnGunChanged(Gun gun) => Gun = gun;
 
         private void Gun_OnCurrentAmmoChanged(float newAmmo) => this.SetGunMagazine();
         private void Gun_OnRemainingAmmoChanged(float newAmmo) => this.SetGunMagazine();

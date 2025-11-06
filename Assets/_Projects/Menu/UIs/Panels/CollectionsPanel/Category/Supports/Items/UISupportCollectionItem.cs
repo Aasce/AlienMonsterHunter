@@ -1,6 +1,4 @@
 using Asce.Game.Supports;
-using Asce.PrepareGame.UIs;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

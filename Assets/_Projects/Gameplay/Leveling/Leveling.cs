@@ -25,6 +25,11 @@ namespace Asce.Game.Levelings
             _information = baseLeveling;
         }
 
+        public virtual void OnLoad(SO_LevelingInformation baseLeveling)
+        {
+            _information = baseLeveling;
+        }
+
         public virtual void SetLevel(int level)
         {
             if (_currentLevel == level) return;

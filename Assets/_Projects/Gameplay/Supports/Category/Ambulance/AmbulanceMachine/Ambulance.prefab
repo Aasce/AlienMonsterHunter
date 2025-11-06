@@ -1792,6 +1792,9 @@ PrefabInstance:
       addedObject: {fileID: 70264434300075263}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1638484217204957972}
+    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4674635985159231442}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
@@ -1865,6 +1868,42 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _healVFXName: Ambulance Heal VFX
+--- !u!58 &1638484217204957972
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265602496493724803}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.6
 --- !u!61 &4674635985159231442
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1996,16 +2035,6 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 4674635985159231442}
-    m_ColliderPaths:
-    - - X: 9881504
-        Y: 7704192
-      - X: -9881504
-        Y: 7704192
-      - X: -9881504
-        Y: -18525938
-      - X: 9881504
-        Y: -18525938
   - m_Collider: {fileID: 617493356337543238}
     m_ColliderPaths:
     - - X: 7581656
@@ -2016,6 +2045,16 @@ CompositeCollider2D:
         Y: 5621333
       - X: 7581656
         Y: 5621333
+  - m_Collider: {fileID: 4674635985159231442}
+    m_ColliderPaths:
+    - - X: 9881504
+        Y: 7704192
+      - X: -9881504
+        Y: 7704192
+      - X: -9881504
+        Y: -18525938
+      - X: 9881504
+        Y: -18525938
   m_CompositePaths:
     m_Paths:
     - - {x: 0.9881211, y: -1.8525938}

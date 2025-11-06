@@ -4,6 +4,7 @@ using Asce.Game.Managers;
 using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.Utils;
+using Asce.PrepareGame.Manager;
 using Asce.PrepareGame.Players;
 using Asce.PrepareGame.SaveLoads;
 using Asce.SaveLoads;
@@ -74,7 +75,7 @@ namespace Asce.PrepareGame.Picks
 
         private void RegisterCharacter()
         {
-            Character oldCharacter = PrepareGamePlayer.Instance.Character;
+            Character oldCharacter = PrepareGameManager.Instance.Player.Character;
             if (_characterPrefab == null)
             {
                 // Clear current character
@@ -87,7 +88,7 @@ namespace Asce.PrepareGame.Picks
                     }
 
                     Destroy(oldCharacter.gameObject);
-                    PrepareGamePlayer.Instance.Character = null;
+                    PrepareGameManager.Instance.Player.Character = null;
                     _characterInstance = null;
                 }
                 return;
@@ -113,7 +114,7 @@ namespace Asce.PrepareGame.Picks
             // Assign new character
             newCharacter.Initialize();
             _characterInstance = newCharacter;
-            PrepareGamePlayer.Instance.Character = newCharacter;
+            PrepareGameManager.Instance.Player.Character = newCharacter;
 
             // If gun instance already exists, transfer it to new character
             if (_gunInstance != null)
@@ -131,7 +132,7 @@ namespace Asce.PrepareGame.Picks
         {
             if (GunPrefab == null) return;
 
-            Character playerCharacter = PrepareGamePlayer.Instance.Character;
+            Character playerCharacter = PrepareGameManager.Instance.Player.Character;
 
             // Instantiate new gun
             _gunInstance = Instantiate(GunPrefab);
@@ -155,7 +156,7 @@ namespace Asce.PrepareGame.Picks
             if (_gunInstance == null) return;
 
             // If attached to a character, clear reference first
-            Character playerCharacter = PrepareGamePlayer.Instance.Character;
+            Character playerCharacter = PrepareGameManager.Instance.Player.Character;
             if (playerCharacter != null && playerCharacter.Gun == _gunInstance)
             {
                 playerCharacter.Gun = null;
@@ -174,7 +175,7 @@ namespace Asce.PrepareGame.Picks
             {
                 Support support = _supportPrefabs[i];
                 if (support == null) continue;
-                lastPickData.supportIds.InsertOrExpandAt(i, support.Information.Id);
+                lastPickData.supportIds.InsertOrExpandAt(i, support.Information.Key);
             }
 
             return lastPickData;

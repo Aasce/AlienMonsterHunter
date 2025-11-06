@@ -841,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: _meshResolution
-      value: 0.1
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 7119198725073034515, guid: 5fce8ed4589c64d4e819dcd21850b7c7, type: 3}
       propertyPath: _obstacleMask.m_Bits
@@ -983,6 +983,9 @@ PrefabInstance:
       addedObject: {fileID: -4556532504688633257}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5930936306930077917}
+    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 790026561101365997}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
@@ -1019,6 +1022,42 @@ MonoBehaviour:
   _fireCooldown:
     _baseTime: 0.25
     _currentTime: 0.25
+--- !u!58 &5930936306930077917
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526750033327765736}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_Radius: 1.2
 --- !u!70 &790026561101365997
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

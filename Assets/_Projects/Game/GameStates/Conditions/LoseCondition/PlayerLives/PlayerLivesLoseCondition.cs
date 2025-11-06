@@ -1,8 +1,8 @@
-using Asce.Game.Players;
+using Asce.MainGame.Players;
 using Asce.Managers;
 using UnityEngine;
 
-namespace Asce.Game.Managers
+namespace Asce.MainGame.Managers
 {
     public class PlayerLivesLoseCondition : LoseCondition
     {
@@ -13,8 +13,8 @@ namespace Asce.Game.Managers
         {
             base.Initialize();
             _currentLives = _maxLives;
-            if (Player.Instance.Character != null) Player.Instance.Character.OnDead += Character_OnDead;
-            Player.Instance.OnCharacterChanged += Player_OnCharacterChanged;
+            if (MainGameManager.Instance.Player.Character != null) MainGameManager.Instance.Player.Character.OnDead += Character_OnDead;
+            MainGameManager.Instance.Player.OnCharacterChanged += Player_OnCharacterChanged;
         }
 
         public override bool IsSatisfied()
@@ -22,12 +22,12 @@ namespace Asce.Game.Managers
             return _currentLives <= 0;
         }
 
-        private void Character_OnDead(Combats.DamageContainer container)
+        private void Character_OnDead(Game.Combats.DamageContainer container)
         {
             _currentLives--;
         }
 
-        private void Player_OnCharacterChanged(ValueChangedEventArgs<Entities.Characters.Character> eventArgs)
+        private void Player_OnCharacterChanged(ValueChangedEventArgs<Game.Entities.Characters.Character> eventArgs)
         {
             if (eventArgs.OldValue != null)
             {

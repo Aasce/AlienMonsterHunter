@@ -1,7 +1,9 @@
+using Asce.Game.UIs.Panels;
+using Asce.MainGame.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs.Panels
+namespace Asce.MainGame.UIs.Panels
 {
     public class UIGameSettingsPanel : UISettingsPanel
     {
@@ -14,7 +16,7 @@ namespace Asce.Game.UIs.Panels
             base.Start();
             if (_backMenuButton != null) _backMenuButton.onClick.AddListener(() =>
             {
-                UIConfirmPanel confirmPanel = UIGameController.Instance.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
+                UIConfirmPanel confirmPanel = MainGameManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
                 if (confirmPanel == null) return;
                 confirmPanel.Show(
                     title: "Back to Menu?",

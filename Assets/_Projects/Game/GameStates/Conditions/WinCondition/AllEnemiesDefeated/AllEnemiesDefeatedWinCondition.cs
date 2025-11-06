@@ -1,10 +1,9 @@
 using Asce.Game.Entities.Enemies;
-using Asce.Managers;
 using Asce.Managers.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Game.Managers
+namespace Asce.MainGame.Managers
 {
     public class AllEnemiesDefeatedWinCondition : WinCondition
     {

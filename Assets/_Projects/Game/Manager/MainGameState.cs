@@ -1,10 +1,11 @@
-namespace Asce.Game.Managers
+namespace Asce.MainGame.Managers
 {
     public enum MainGameState
     {
         None = 0,
         Initialize = 1,
-        Loading = 2,
+        Creating = 2,
+        Loading = 3,
 
         Playing = 5,
         Pausing = 6,

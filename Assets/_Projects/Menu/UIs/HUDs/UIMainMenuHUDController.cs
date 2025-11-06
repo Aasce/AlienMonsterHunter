@@ -26,7 +26,7 @@ namespace Asce.Menu.UIs.HUDs
                 return;
             }
 
-            UIConfirmPanel confirmPanel = UIMainMenuController.Instance.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
+            UIConfirmPanel confirmPanel = MenuManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
             if (confirmPanel == null)
             {
                 MenuManager.Instance.PlayGame();

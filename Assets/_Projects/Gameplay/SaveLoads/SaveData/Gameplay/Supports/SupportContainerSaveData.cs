@@ -7,7 +7,7 @@ namespace Asce.Game.SaveLoads
     public class SupportContainerSaveData : SaveData
     {
         public string id;
-        public string supportId;
+        public string supportKey;
         public string currentSupportId;
         public float cooldown;
 
@@ -18,7 +18,7 @@ namespace Asce.Game.SaveLoads
             if (other is SupportContainerSaveData abilityData)
             {
                 id = abilityData.id;
-                supportId = abilityData.supportId;
+                supportKey = abilityData.supportKey;
                 currentSupportId = abilityData.currentSupportId;
                 cooldown = abilityData.cooldown;
             }
