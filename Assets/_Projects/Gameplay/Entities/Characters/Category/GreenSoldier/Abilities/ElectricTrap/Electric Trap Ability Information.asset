@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: Electric Trap Ability Information
+  m_EditorClassIdentifier: 
+  _id: Electric Trap
+  _name: Electric Trap
+  _description: "Throws an electric trap that bounces off walls upon impact. \nAfter
+    2 seconds, it detonates, creating an energy field that detains all enemies within
+    a {CatchRadius}m radius for {DetentionDuration}s.\n\nThe trap deals no damage."
+  _icon: {fileID: 21300000, guid: 43c7fdb62ffe76443a547541974a0b00, type: 3}
+  _isPassive: 0
+  _cooldown: 6
+  _useRangeRadius: 1.5
+  _despawnTime: 2.5
+  _customValues:
+    _list:
+    - _name: CatchRadius
+      _value: 2.5
+    - _name: DetentionDuration
+      _value: 2
+  _leveling: {fileID: 11400000, guid: 513b3e7ff3d18b54ca116c899c1f9438, type: 2}

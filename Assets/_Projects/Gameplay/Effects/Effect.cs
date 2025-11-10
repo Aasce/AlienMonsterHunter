@@ -4,6 +4,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ namespace Asce.Game.Effects
         [SerializeField] protected Entity _receiver;
         [SerializeField] protected Cooldown _duration = new();
         [SerializeField] protected float _strength;
+
+        public event Action OnApplied;
+        public event Action OnUnapplied;
 
         public string Id => _id;
         public SO_EffectInformation Information => _information;
@@ -50,10 +54,24 @@ namespace Asce.Game.Effects
         {
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
         }
+
         public virtual void ResetStatus() { }
 
-        public abstract void Apply();
-        public abstract void Unpply();
+        public virtual void Apply()
+        {
+            this.InternalApply();
+            OnApplied?.Invoke();
+        }
+
+        public virtual void Unapply()
+        {
+            this.InternalUnapply();
+            OnUnapplied?.Invoke();
+        }
+
+
+        protected abstract void InternalApply();
+        protected abstract void InternalUnapply();
 
         public virtual void SetData(EffectData data)
         {

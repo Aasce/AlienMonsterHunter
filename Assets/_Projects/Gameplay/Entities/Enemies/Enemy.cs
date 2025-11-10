@@ -59,6 +59,14 @@ namespace Asce.Game.Entities.Enemies
                 AttackCooldown.BaseTime = newValue;
             };
 
+            Effects.Unmoveable.OnAffectChanged += (isAffect) =>
+            {
+                if (!isAffect) return;
+                if (!Agent.isActiveAndEnabled) return;
+                if (!Agent.isOnNavMesh) return;
+                Agent.ResetPath();
+            };
+
             this.OnDead += (Combats.DamageContainer container) =>
             {
                 EnemyController.Instance.Despawn(this);
@@ -69,11 +77,8 @@ namespace Asce.Game.Entities.Enemies
         protected virtual void Update()
         {
             TargetDetection.UpdateDetection();
-            if (TargetDetection.CurrentTarget != null)
-            {
-                this.MoveToTaget();
-            }
             
+            this.MoveHandle();
             this.AttackHandle();
             this.ViewHandle();
         }
@@ -90,10 +95,20 @@ namespace Asce.Game.Entities.Enemies
         protected abstract void MoveToTaget();
         protected abstract void Attack(); 
         
+        protected virtual void MoveHandle()
+        {
+            if (TargetDetection.CurrentTarget == null) return;
+            if (Effects.Unmoveable.IsAffect) return;
+
+            this.MoveToTaget();
+        }
+
         protected virtual void AttackHandle()
         {
             AttackCooldown.Update(Time.deltaTime);
             if (!AttackCooldown.IsComplete) return;
+
+            if (Effects.Unattackable.IsAffect) return;
 
             ITargetable target = TargetDetection.CurrentTarget;
             if (target == null) return;

@@ -6,7 +6,7 @@ namespace Asce.Game.Effects
     public class Decay_Effect : Effect
     {
         [SerializeField] private string _statId = string.Empty;
-        public override void Apply()
+        protected override void InternalApply()
         {
             _statId = Receiver.Stats.Health.Add(-Strength, Stats.StatValueType.Ratio).Id;
             foreach(Effect effect in Receiver.Effects.Effects)
@@ -18,7 +18,7 @@ namespace Asce.Game.Effects
             }
         }
 
-        public override void Unpply()
+        protected override void InternalUnapply()
         {
             Receiver.Stats.Health.RemoveById(_statId);
         }

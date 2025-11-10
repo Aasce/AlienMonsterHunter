@@ -19,6 +19,10 @@ namespace Asce.Game.Entities
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
         private ReadOnlyCollection<Effect> _effectsReadonly;
 
+        [Space]
+        [SerializeField] private EffectStat _unmoveable = new();
+        [SerializeField] private EffectStat _unattackable = new();
+
         public Entity Entity
         {
             get => _entity;
@@ -26,6 +30,8 @@ namespace Asce.Game.Entities
         }
         public ReadOnlyCollection<Effect> Effects => _effectsReadonly ??= _effects.AsReadOnly();
 
+        public EffectStat Unmoveable => _unmoveable;
+        public EffectStat Unattackable => _unattackable;
 
         protected override void RefReset()
         {

@@ -50,7 +50,7 @@ namespace Asce.Game.Effects
             if (effect.Receiver.Effects == null) return false;
             if (!effect.Receiver.Effects.Remove(effect)) return false;
 
-            effect.Unpply();
+            effect.Unapply();
             effect.gameObject.SetActive(false);
             Pool<Effect> pool = GetPool(effect.Information.Name);
             if (pool != null) pool.Deactivate(effect);

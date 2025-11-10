@@ -101,6 +101,7 @@ namespace Asce.Game.AIs
         /// </summary>
         private void MoveToRandomPoint()
         {
+            if (_enemy.Effects.Unmoveable.IsAffect) return;
             Vector3 destination = GetVisibleNavMeshPoint(_origin.position, _patrolRadius);
             _agent.SetDestination(destination);
         }

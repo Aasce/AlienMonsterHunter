@@ -161,6 +161,11 @@ namespace Asce.Game.Entities.Characters
 
         public void Move(Vector2 direction)
         {
+            if (Effects.Unmoveable.IsAffect)
+            {
+                _moveDirection = Vector2.zero;
+                return;
+            }
             _moveDirection = direction;
         }
 
@@ -172,6 +177,8 @@ namespace Asce.Game.Entities.Characters
         public void Fire()
         {
             if (Gun == null) return;
+            if (Effects.Unattackable.IsAffect) return;
+            
             Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
             Gun.Fire(lookDirection);
         }
@@ -179,6 +186,8 @@ namespace Asce.Game.Entities.Characters
         public void AltFire()
         {
             if (Gun == null) return;
+            if (Effects.Unattackable.IsAffect) return;
+
             Vector2 lookDirection = _lookPosition - (Vector2)transform.position;
             Gun.AltFire(lookDirection);
         }

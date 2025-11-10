@@ -14,7 +14,7 @@ namespace Asce.Game.Effects
             _igniteCooldown.SetBaseTime(Information.GetCustomValue("IgniteInterval"));
         }
 
-        public override void Apply()
+        protected override void InternalApply()
         {
 
         }
@@ -32,7 +32,7 @@ namespace Asce.Game.Effects
             }
         }
 
-        public override void Unpply()
+        protected override void InternalUnapply()
         {
 
         }

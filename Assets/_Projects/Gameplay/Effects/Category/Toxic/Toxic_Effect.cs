@@ -14,8 +14,8 @@ namespace Asce.Game.Effects
 			base.Initialize();
 			_damageCooldown.SetBaseTime(Information.GetCustomValue("DamageInterval"));
 		}
-		
-        public override void Apply()
+
+        protected override void InternalApply()
         {
 			
         }
@@ -36,7 +36,7 @@ namespace Asce.Game.Effects
 			}
 		}
 
-        public override void Unpply()
+        protected override void InternalUnapply()
         {
 
         }
