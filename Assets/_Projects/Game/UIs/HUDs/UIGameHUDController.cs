@@ -1,11 +1,9 @@
-using Asce.Game.Entities.Characters;
-using Asce.Game.Players;
-using Asce.MainGame.Managers;
-using Asce.Managers;
+using Asce.Game.UIs;
+using Asce.Game.UIs.HUDs;
 using Asce.Managers.Utils;
 using UnityEngine;
 
-namespace Asce.Game.UIs.HUDs
+namespace Asce.MainGame.UIs.HUDs
 {
     [RequireComponent(typeof(Canvas))]
     public class UIGameHUDController : UIHUDController
@@ -30,12 +28,5 @@ namespace Asce.Game.UIs.HUDs
         {
             base.Initialize();
         }
-
-        public void SetSettings(PlayerSettings settings)
-        {
-            CharacterInformation.Abilities.SetUseKeys(settings.UseAbilityKeys);
-            SupportsInformation.SetCallKeys(settings.CallSupportKeys);
-        }
-
     }
 }

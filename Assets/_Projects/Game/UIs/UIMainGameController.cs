@@ -1,9 +1,11 @@
-using Asce.Game.UIs;
-using Asce.Game.UIs.HUDs;
+using Asce.Game.Players;
 using Asce.Game.UIs.Panels;
 using Asce.MainGame.Managers;
+using Asce.MainGame.UIs.HUDs;
 using Asce.MainGame.UIs.Panels;
+using Asce.MainGame.UIs.ToolTips;
 using Asce.Managers;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -11,12 +13,14 @@ namespace Asce.MainGame.UIs
 {
     public class UIMainGameController : GameComponent
     {
-        [SerializeField] private UIGameHUDController _hud;
-        [SerializeField] private UIPanelController _panel;
+        [SerializeField, Readonly] private UIGameHUDController _hud;
+        [SerializeField, Readonly] private UIPanelController _panel;
+        [SerializeField, Readonly] private UIWorldTooltipController _worldTooltip;
 
 
         public UIGameHUDController HUDController => _hud;
         public UIPanelController PanelController => _panel;
+        public UIWorldTooltipController WorldTooltipController => _worldTooltip;
 
         protected override void RefReset()
         {
@@ -26,28 +30,39 @@ namespace Asce.MainGame.UIs
 
             this.LoadComponent(out _panel);
             if (_panel == null) Debug.LogError($"[{typeof(UIMainGameController).ToString().ColorWrap(Color.red)}]] UIPanelController is not assigned", this);
+
+            this.LoadComponent(out _worldTooltip);
+            if (_worldTooltip == null) Debug.LogError($"[{typeof(UIMainGameController).ToString().ColorWrap(Color.red)}]] UITooltipController is not assigned", this);
         }
 
         public void Initialze()
         {
             HUDController.Initialize();
             PanelController.Initialize();
+            WorldTooltipController.Initialize();
         }
 
         public void AssignUI()
         {
-            HUDController.SetSettings(MainGameManager.Instance.Player.Settings);
+            this.SetSettings(MainGameManager.Instance.Player.Settings);
             HUDController.SupportsInformation.Caller = MainGameManager.Instance.Player.SupportCaller;
             HUDController.CharacterInformation.Character = MainGameManager.Instance.Player.Character;
 
             if (MainGameManager.Instance.Player.Character != null)
             {
                 HUDController.GunInformation.Gun = MainGameManager.Instance.Player.Character.Gun;
+                WorldTooltipController.InteractionTip.Interaction = MainGameManager.Instance.Player.Character.Interaction;
                 MainGameManager.Instance.Player.Character.OnDead += Character_OnDead;
             } 
 
             MainGameManager.Instance.Player.OnCharacterChanged += Player_OnCharacterChanged;
             MainGameManager.Instance.GameStateController.OnGameStateChanged += MainGameManager_OnGameStateChanged;
+        }
+
+        public void SetSettings(PlayerSettings settings)
+        {
+            HUDController.CharacterInformation.Abilities.SetUseKeys(settings.UseAbilityKeys);
+            HUDController.SupportsInformation.SetCallKeys(settings.CallSupportKeys);
         }
 
         private void Player_OnCharacterChanged(ValueChangedEventArgs<Game.Entities.Characters.Character> args)
@@ -60,6 +75,7 @@ namespace Asce.MainGame.UIs
 
                 HUDController.CharacterInformation.Character = args.NewValue;
                 HUDController.GunInformation.Gun = args.NewValue.Gun;
+                WorldTooltipController.InteractionTip.Interaction = args.NewValue.Interaction;
             }
         }
 

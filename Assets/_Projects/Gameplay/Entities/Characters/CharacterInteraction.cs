@@ -1,6 +1,7 @@
 using Asce.Game.Interactions;
 using Asce.Managers;
 using Asce.Managers.Attributes;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Characters
@@ -13,48 +14,79 @@ namespace Asce.Game.Entities.Characters
         [SerializeField] private float _interactionSearchRadius = 2f;
         [SerializeField] private LayerMask _interactionLayerMask;
 
+        [Header("Runtime")]
+        [SerializeField, Readonly] private InteractiveObject _focusInteractiveObject = null;
+
+        // Cached results to avoid GC alloc each frame
+        private readonly Collider2D[] _overlapResults = new Collider2D[8];
+        private ContactFilter2D _contactFilter;
+
+        public event Action<InteractiveObject> OnFocusNewObject;
+        public event Action<InteractiveObject> OnInteracted;
+
         public Character Character
         {
             get => _character;
             set => _character = value;
         }
 
-        public void Initialize() { }
+        public InteractiveObject FocusInteractiveObject
+        {
+            get => _focusInteractiveObject;
+            protected set
+            {
+                if (_focusInteractiveObject == value) return;
+                _focusInteractiveObject = value;
+                OnFocusNewObject?.Invoke(_focusInteractiveObject);
+            }
+        }
+
+        public void Initialize()
+        {
+            _contactFilter = new ContactFilter2D
+            {
+                layerMask = _interactionLayerMask,
+                useLayerMask = true
+            };
+        }
+
+        private void Update()
+        {
+            this.Focus(_character.LookPosition);
+        }
 
         /// <summary>
-        ///     Attempts to interact with the nearest valid InteractiveObject
-        ///     around the specified world position.
-        ///     Only objects within their own InteractDistance range
-        ///     relative to the character can be interacted with.
+        ///     Finds the nearest valid InteractiveObject around the given world position.
+        ///     Uses OverlapCircleNonAlloc to avoid GC allocations.
         /// </summary>
-        /// <param name="position">The world position where the player attempts to interact.</param>
-        public void Interact(Vector2 position)
+        /// <param name="position">The world position to search from.</param>
+        private void Focus(Vector2 position)
         {
-            Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(
+            int count = Physics2D.OverlapCircle(
                 position,
                 _interactionSearchRadius,
-                _interactionLayerMask
+                _contactFilter,
+                _overlapResults
             );
 
             InteractiveObject closestInteractiveObject = null;
             float closestDistance = float.MaxValue;
 
-            foreach (Collider2D collider in nearbyColliders)
+            for (int i = 0; i < count; i++)
             {
-                if (!collider.enabled) continue;
+                Collider2D collider = _overlapResults[i];
+                if (collider == null || !collider.enabled) continue;
                 if (!collider.TryGetComponent(out InteractiveObject interactiveObject)) continue;
                 if (!interactiveObject.IsInteractable) continue;
 
-                // Calculate the actual contact point between the given position and this collider
-                Vector2 closestPointOnCollider = collider.ClosestPoint(position);
-
-                // Ensure the character is close enough to interact
                 float characterToObjectDistance = Vector2.Distance(
                     _character.transform.position,
-                    closestPointOnCollider
+                    collider.ClosestPoint(_character.transform.position)
                 );
 
                 if (characterToObjectDistance > interactiveObject.InteractDistance) continue;
+
+                Vector2 closestPointOnCollider = collider.ClosestPoint(position);
                 float positionToObjectDistance = Vector2.Distance(position, closestPointOnCollider);
                 if (positionToObjectDistance < closestDistance)
                 {
@@ -63,10 +95,18 @@ namespace Asce.Game.Entities.Characters
                 }
             }
 
-            if (closestInteractiveObject != null)
-            {
-                closestInteractiveObject.Interact(_character.gameObject);
-            }
+            FocusInteractiveObject = closestInteractiveObject;
+        }
+
+        /// <summary>
+        ///     Attempts to interact with the currently focused InteractiveObject.
+        ///     Calls Focus() first to update the target if necessary.
+        /// </summary>
+        public void Interact()
+        {
+            if (FocusInteractiveObject == null) return;
+            FocusInteractiveObject.Interact(_character.gameObject);
+            OnInteracted?.Invoke(FocusInteractiveObject);
         }
 
 #if UNITY_EDITOR
@@ -76,6 +116,5 @@ namespace Asce.Game.Entities.Characters
             Gizmos.DrawWireSphere(transform.position, _interactionSearchRadius);
         }
 #endif
-
     }
 }

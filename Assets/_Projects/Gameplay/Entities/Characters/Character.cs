@@ -88,8 +88,9 @@ namespace Asce.Game.Entities.Characters
         public override void Initialize()
         {
             base.Initialize();
-            Abilities.Initialize(this);
             if (Gun != null) Gun.Initialize();
+            Abilities.Initialize(this);
+            Interaction.Initialize();
 
             Fov.FovSelf.ViewRadius = Stats.SelfViewRadius.FinalValue;
             Fov.Fov.ViewRadius = Stats.ViewRadius.FinalValue;
@@ -205,7 +206,7 @@ namespace Asce.Game.Entities.Characters
 
         public void Interact()
         {
-            Interaction.Interact(_lookPosition);
+            Interaction.Interact();
         }
 
         CharacterSaveData ISaveable<CharacterSaveData>.Save()

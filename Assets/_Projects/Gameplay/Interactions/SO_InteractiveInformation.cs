@@ -7,9 +7,10 @@ namespace Asce.Game.Interactions
     public class SO_InteractiveInformation : ScriptableObject
     {
         [SerializeField] private string _name = string.Empty;
-
+        [SerializeField, TextArea(3, 3)] private string _focusDescription = string.Empty;
 
 
         public string Name => _name;
+        public string FocusDescription => _focusDescription;
     }
 }

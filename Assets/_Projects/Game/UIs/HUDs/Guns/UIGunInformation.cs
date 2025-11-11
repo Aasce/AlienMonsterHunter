@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs
+namespace Asce.MainGame.UIs
 {
     public class UIGunInformation : UIObject
     {

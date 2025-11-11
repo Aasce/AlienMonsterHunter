@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Game.UIs
+namespace Asce.MainGame.UIs
 {
     public class UISupportsInformation : UIObject
     {
