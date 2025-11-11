@@ -3,7 +3,6 @@ using Asce.Game.Effects;
 using Asce.Game.Levelings;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
-using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies
@@ -23,6 +22,8 @@ namespace Asce.Game.Entities.Enemies
         [SerializeField, Readonly] private float _decayDuration = 5f;
         [SerializeField, Readonly] private float _decayStrength = .05f;
 
+        private string _untargetableStatId;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -35,6 +36,7 @@ namespace Asce.Game.Entities.Enemies
         public override void ResetStatus()
         {
             base.ResetStatus();
+            this.Hide();
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
@@ -122,22 +124,22 @@ namespace Asce.Game.Entities.Enemies
                     nearest = distance;
             }
 
-            if (nearest < _showDistance)
-                Show();
-            else
-                Hide();
+            if (nearest < _showDistance) Show();
+            else Hide();
         }
 
         private void Hide()
         {
-            IsTargetable = false;
             _targetAlpha = 0f;
+            if (!string.IsNullOrEmpty(_untargetableStatId)) return;
+            _untargetableStatId = Effects.Untargetable.Add().Id;
         }
 
         private void Show()
         {
-            IsTargetable = true;
             _targetAlpha = 1f;
+            Effects.Untargetable.RemoveById(_untargetableStatId);
+            _untargetableStatId = string.Empty;
         }
     }
 }

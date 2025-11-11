@@ -21,6 +21,7 @@ namespace Asce.Game.Entities
 
         [Space]
         [SerializeField, Readonly] private List<EffectStatContainer> _effectStats = new();
+        [SerializeField] private EffectStat _untargetable = new();
         [SerializeField] private EffectStat _unmoveable = new();
         [SerializeField] private EffectStat _unattackable = new();
 
@@ -31,6 +32,7 @@ namespace Asce.Game.Entities
         }
         public ReadOnlyCollection<Effect> Effects => _effectsReadonly ??= _effects.AsReadOnly();
 
+        public EffectStat Untargetable => _untargetable;
         public EffectStat Unmoveable => _unmoveable;
         public EffectStat Unattackable => _unattackable;
 
@@ -42,6 +44,7 @@ namespace Asce.Game.Entities
 
         public virtual void Initialize()
         {
+            _effectStats.Add(new ("Untargetable", _untargetable));
             _effectStats.Add(new ("Unmoveable", _unmoveable));
             _effectStats.Add(new ("Unattackable", _unattackable));
         }
@@ -97,6 +100,13 @@ namespace Asce.Game.Entities
                 Effect effect = _effects[i];
                 if (effect == null) continue;
                 EffectController.Instance.RemoveEffect(effect);
+            }
+
+            foreach (EffectStatContainer container in _effectStats)
+            {
+                EffectStat effectStat = container.EffectStat;
+                if (effectStat == null) continue;
+                effectStat.ClearAll();
             }
         }
 

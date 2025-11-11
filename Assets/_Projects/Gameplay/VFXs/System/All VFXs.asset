@@ -15,6 +15,7 @@ MonoBehaviour:
   _vfxs:
   - {fileID: 110753174408773563, guid: 02c6123dc961a9f4eab59a69e110c5d2, type: 3}
   - {fileID: 7546869456429147753, guid: 2a8fb41ec6ee603408ea6045b2f169d4, type: 3}
+  - {fileID: 6925130673013795917, guid: f68e84010e7a7864b80507e220a025ba, type: 3}
   - {fileID: 5987343377135027491, guid: 3def1fcb41fcdfe41ae2629f78c89fa0, type: 3}
   - {fileID: 4873381703382426616, guid: 51fe222a6a66d804b8ae63d39aeb90e9, type: 3}
   - {fileID: 3879954018649303918, guid: ac883cdc396ff4442915eef7ab962fb3, type: 3}

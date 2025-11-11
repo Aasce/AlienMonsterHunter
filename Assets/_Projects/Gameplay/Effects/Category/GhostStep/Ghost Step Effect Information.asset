@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e200d5e0a994e4589ae739df20b675, type: 3}
-  m_Name: Ammo Crate Information
+  m_Script: {fileID: 11500000, guid: d531bdcaf419c1548b1855538faeab31, type: 3}
+  m_Name: Ghost Step Effect Information
   m_EditorClassIdentifier: 
-  _name: Ammo Crate
-  _focusDescription: refill magazine
+  _name: Ghost Step
+  _description: 
+  _icon: {fileID: 0}
+  _customValues:
+    _list: []

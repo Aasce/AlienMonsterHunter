@@ -27,10 +27,10 @@ MonoBehaviour:
       _deltaValue: 0.4
       _type: 0
     - _targetKey: Damage
-      _deltaValue: 2
+      _deltaValue: 1
       _type: 0
     - _targetKey: AttackSpeed
-      _deltaValue: -0.015
+      _deltaValue: -0.012
       _type: 0
     - _targetKey: ViewRadius
       _deltaValue: 0.3
@@ -38,3 +38,4 @@ MonoBehaviour:
     - _targetKey: TargetDistance
       _deltaValue: 0.25
       _type: 0
+  _specificLevelChanges: []

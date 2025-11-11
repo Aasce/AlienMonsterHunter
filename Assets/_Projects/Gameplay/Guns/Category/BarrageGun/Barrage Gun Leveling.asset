@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Barrage Gun Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _levelingMode: 1
+  _levelingMode: 2
   _levelChanges: []
   _uniformGrowth:
     _modifications:
@@ -38,6 +38,22 @@ MonoBehaviour:
     - _targetKey: FireAccelerationRate
       _deltaValue: 0.01
       _type: 0
-    - _targetKey: MaxFireSpeed
-      _deltaValue: -0.005
-      _type: 0
+  _specificLevelChanges:
+  - Level: 4
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MaxFireSpeed
+        _deltaValue: -0.02
+        _type: 0
+  - Level: 8
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MaxFireSpeed
+        _deltaValue: -0.02
+        _type: 0
+  - Level: 10
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MaxFireSpeed
+        _deltaValue: -0.02
+        _type: 0

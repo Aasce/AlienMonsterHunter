@@ -29,7 +29,7 @@ namespace Asce.Game.Entities.Enemies
             direction.Normalize();
             Vector2 closestPoint = targetCenter - direction * targetCollider.radius;
 
-            float attackRange = enemy.Stats.AttackRange.FinalValue * 0.9f;
+            float attackRange = enemy.Stats.AttackRange.FinalValue * 0.85f;
             Vector2 destination = closestPoint - direction * attackRange;
 
             enemy.Agent.SetDestination(destination);

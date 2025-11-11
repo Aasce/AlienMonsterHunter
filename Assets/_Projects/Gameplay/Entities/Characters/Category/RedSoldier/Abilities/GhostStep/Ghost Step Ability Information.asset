@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: Ghost Step Ability Information
+  m_EditorClassIdentifier: 
+  _id: Ghost Step
+  _name: Ghost Step
+  _description: 
+  _icon: {fileID: 21300000, guid: 3561a492424272a47a2f2faba5c9d4dc, type: 3}
+  _isPassive: 0
+  _cooldown: 10
+  _useRangeRadius: 1.8
+  _despawnTime: 1
+  _customValues:
+    _list:
+    - _name: HealAmount
+      _value: 5
+    - _name: Duration
+      _value: 2.5
+    - _name: SpeedBuff
+      _value: 0.2
+  _leveling: {fileID: 11400000, guid: b91912f9d3ba5b440b1c9d4913e3443d, type: 2}

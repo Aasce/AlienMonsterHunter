@@ -78,7 +78,7 @@ NavMeshAgent:
   m_Acceleration: 64
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -256,6 +256,13 @@ MonoBehaviour:
   _updateCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
+  _effectStats: []
+  _untargetable:
+    _statValues: []
+  _unmoveable:
+    _statValues: []
+  _unattackable:
+    _statValues: []
 --- !u!1 &8759248493955586036
 GameObject:
   m_ObjectHideFlags: 0

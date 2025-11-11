@@ -22,4 +22,4 @@ MonoBehaviour:
   _attackDamage: 5
   _attackSpeed: 1
   _attackRange: 1.5
-  _viewRange: 18
+  _viewRange: 15
