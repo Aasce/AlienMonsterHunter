@@ -25,7 +25,11 @@ namespace Asce.Game.Supports
         public string Id => _id;
         public string SupportKey => _supportKey;
 
-        public int Level => _level;
+        public int Level
+        {
+            get => _level;
+            set => _level = value;
+        }
         public Cooldown Cooldown => _cooldown;
         public Support SupportPrefab => _supportPrefab;
         public SO_SupportInformation Information => IsValid ? _supportPrefab.Information : null;

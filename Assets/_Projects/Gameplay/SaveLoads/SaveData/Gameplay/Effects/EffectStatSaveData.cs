@@ -5,17 +5,17 @@ using UnityEngine;
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]
-    public class StatsSaveData : SaveData
+    public class EffectStatSaveData : SaveData
     {
-        public List<StatContainerSaveData> stats = new();
+        public List<string> ids = new();
 
         public override void CopyFrom(SaveData other)
         {
             base.CopyFrom(other);
-            if (other is StatsSaveData statData)
+            if (other is EffectStatSaveData statData)
             {
-                stats.Clear();
-                stats.AddRange(statData.stats);
+                ids.Clear();
+                ids.AddRange(statData.ids);
             }
         }
     }

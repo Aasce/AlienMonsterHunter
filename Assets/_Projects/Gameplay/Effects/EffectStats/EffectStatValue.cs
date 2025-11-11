@@ -1,7 +1,7 @@
 using Asce.Managers;
 using UnityEngine;
 
-namespace Asce.Game.Entities
+namespace Asce.Game.Effects
 {
     [System.Serializable]
     public struct EffectStatValue : IIdentifiable

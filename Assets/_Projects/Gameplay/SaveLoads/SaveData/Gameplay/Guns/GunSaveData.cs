@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]
-    public class GunSaveData : SaveData
+    public class GunSaveData : SaveDataWithCustoms
     {
         public string id;
         public string name;

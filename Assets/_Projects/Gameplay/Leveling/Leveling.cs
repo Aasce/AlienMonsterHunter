@@ -52,7 +52,6 @@ namespace Asce.Game.Levelings
             {
                 level = _currentLevel,
             };
-            this.OnBeforeSave(levelingData);
             return levelingData;
         }
 
@@ -60,10 +59,6 @@ namespace Asce.Game.Levelings
         {
             if (data == null) return;
             _currentLevel = data.level;
-            this.OnAfterLoad(data);
         }
-
-        protected virtual void OnBeforeSave(LevelingSaveData data) { }
-        protected virtual void OnAfterLoad(LevelingSaveData data) { }
     }
 }

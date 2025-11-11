@@ -1,10 +1,11 @@
 using Asce.Game.SaveLoads;
+using Asce.SaveLoads;
 using System;
 using UnityEngine;
 
 namespace Asce.Game.Levelings
 {
-    public class ExpLeveling : Leveling
+    public class ExpLeveling : Leveling, ISaveable<ExpLevelingSaveData>, ILoadable<ExpLevelingSaveData>
     {
         [SerializeField] private int _currentExp = 0;
         public event Action<int> OnAddExp;
@@ -80,18 +81,22 @@ namespace Asce.Game.Levelings
             if (BaseLeveling == null) return 0;
             return BaseLeveling.BaseExpToLevelUp + BaseLeveling.ExpIncrementPerLevel * CurrentLevel;
         }
-        protected override void OnBeforeSave(LevelingSaveData data)
+
+        ExpLevelingSaveData ISaveable<ExpLevelingSaveData>.Save()
         {
-            base.OnBeforeSave(data);
-            data.SetCustom("CurrentExp", _currentExp);
+            ExpLevelingSaveData levelingData = new()
+            {
+                level = _currentLevel,
+                exp = _currentExp,
+            };
+            return levelingData;
         }
 
-        protected override void OnAfterLoad(LevelingSaveData data)
+        void ILoadable<ExpLevelingSaveData>.Load(ExpLevelingSaveData data)
         {
-            base.OnAfterLoad(data);
-            _currentExp = data.GetCustom<int>("CurrentExp");
-
+            if (data == null) return;
+            _currentLevel = data.level;
+            _currentExp = data.exp;
         }
-
     }
 }

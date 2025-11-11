@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Asce.Game.SaveLoads
 {
     [System.Serializable]
-    public class EffectSaveData : SaveData
+    public class EffectSaveData : SaveDataWithCustoms
     {
         public string id;
         public string name;

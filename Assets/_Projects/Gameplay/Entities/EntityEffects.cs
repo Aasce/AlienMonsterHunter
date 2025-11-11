@@ -15,11 +15,12 @@ namespace Asce.Game.Entities
         [SerializeField, Readonly] private Entity _entity;
 
         [Space]
-        [SerializeField] private List<Effect> _effects = new();
+        [SerializeField, Readonly] private List<Effect> _effects = new();
         [SerializeField] private Cooldown _updateCooldown = new(0.1f);
         private ReadOnlyCollection<Effect> _effectsReadonly;
 
         [Space]
+        [SerializeField, Readonly] private List<EffectStatContainer> _effectStats = new();
         [SerializeField] private EffectStat _unmoveable = new();
         [SerializeField] private EffectStat _unattackable = new();
 
@@ -37,6 +38,12 @@ namespace Asce.Game.Entities
         {
             base.RefReset();
             this.LoadComponent(out _entity);
+        }
+
+        public virtual void Initialize()
+        {
+            _effectStats.Add(new ("Unmoveable", _unmoveable));
+            _effectStats.Add(new ("Unattackable", _unattackable));
         }
 
         private void Update()
@@ -101,6 +108,15 @@ namespace Asce.Game.Entities
                 EffectSaveData effectData = (effect as ISaveable<EffectSaveData>).Save();
                 data.effects.Add(effectData);
             }
+
+            foreach (EffectStatContainer container in _effectStats)
+            {
+                if (container.EffectStat is ISaveable<EffectStatSaveData> saveable)
+                {
+                    EffectStatSaveData effectData = saveable.Save();
+                    data.effectStats.Add(new(container.Name, effectData));
+                }
+            }
             return data;
         }
 
@@ -120,6 +136,15 @@ namespace Asce.Game.Entities
                 this.Add(effect);
                 (effect as ILoadable<EffectSaveData>).Load(effectData);
                 effect.gameObject.SetActive(true);
+            }
+
+            foreach (EffectStatContainerSaveData effectStatData in data.effectStats)
+            {
+                EffectStatContainer container = _effectStats.Find((c) => c.Name == effectStatData.Name);
+                if (container.EffectStat is ILoadable<EffectStatSaveData> loadable)
+                {
+                    loadable.Load(effectStatData.EffectStat);
+                }
             }
         }
     }

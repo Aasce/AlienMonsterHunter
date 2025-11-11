@@ -53,11 +53,8 @@ namespace Asce.Game.Abilities
         public override void ResetStatus()
         {
             base.ResetStatus();
-            _catchCooldown.Reset();
-            _catched = false;
-
-            _collider.isTrigger = false;
-            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            this.SetCatched(false);
+            _catchCooldown.Reset(); 
         }
 
         public override void OnActive()
@@ -121,12 +118,7 @@ namespace Asce.Game.Abilities
             _catchCooldown.Update(Time.deltaTime);
             if (_catchCooldown.IsComplete)
             {
-                _catched = true;
-                _collider.isTrigger = true;
-
-                _rigidbody.linearVelocity = Vector2.zero;
-                _rigidbody.angularVelocity = 0f;
-                _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+                this.SetCatched(true);
                 this.Catching();
                 this.SpawnVFX();
             }
@@ -152,6 +144,24 @@ namespace Asce.Game.Abilities
             }
         }
 
+        private void SetCatched(bool isCatched)
+        {
+            _catched = isCatched;
+            if (_catched)
+            {
+                _collider.isTrigger = true;
+
+                _rigidbody.linearVelocity = Vector2.zero;
+                _rigidbody.angularVelocity = 0f;
+                _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+            }
+            else
+            {
+                _collider.isTrigger = false;
+                _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            }
+        }
+
         private void SpawnVFX()
         {
             VFXController.Instance.Spawn(_electricVFXName, transform.position);
@@ -160,11 +170,26 @@ namespace Asce.Game.Abilities
         protected override void OnBeforeSave(AbilitySaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Catched", _catched);
+            data.SetCustom("CatchCooldown", _catchCooldown.CurrentTime);
+            data.SetCustom("MoveDirection", _moveDirection);
+            data.SetCustom("LinearVelocity", _rigidbody.linearVelocity);
+
+            data.SetCustom("CatchRadius", _catchRadius);
+            data.SetCustom("DetentionDuration", _detentionDuration);
         }
 
         protected override void OnAfterLoad(AbilitySaveData data)
         {
             base.OnAfterLoad(data);
+            if (data == null) return;
+            this.SetCatched(data.GetCustom<bool>("Catched"));
+            _catchCooldown.CurrentTime = data.GetCustom<float>("CatchCooldown");
+            _moveDirection = data.GetCustom<Vector2>("MoveDirection");
+            _rigidbody.linearVelocity = data.GetCustom<Vector2>("LinearVelocity");
+
+            _catchRadius = data.GetCustom<float>("CatchRadius");
+            _detentionDuration = data.GetCustom<float>("DetentionDuration");
         }
 
 #if UNITY_EDITOR

@@ -1,11 +1,13 @@
+using Asce.Game.SaveLoads;
+using Asce.SaveLoads;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Game.Entities
+namespace Asce.Game.Effects
 {
     [System.Serializable]
-    public class EffectStat
+    public class EffectStat : ISaveable<EffectStatSaveData>, ILoadable<EffectStatSaveData>
     {
         [SerializeField] protected List<EffectStatValue> _statValues = new();
         public event Action<bool> OnAffectChanged;
@@ -36,5 +38,26 @@ namespace Asce.Game.Entities
             if (isAffect != IsAffect) OnAffectChanged?.Invoke(IsAffect);
         }
 
+        EffectStatSaveData ISaveable<EffectStatSaveData>.Save()
+        {
+            EffectStatSaveData data = new();
+            foreach (EffectStatValue statValue in _statValues)
+            {
+                data.ids.Add(statValue.Id);
+            }
+            return data;
+        }
+
+        void ILoadable<EffectStatSaveData>.Load(EffectStatSaveData data)
+        {
+            if (data == null) return;
+
+            _statValues.Clear();
+            foreach (string id in data.ids)
+            {
+                EffectStatValue statValue = new(id);
+                _statValues.Add(statValue);
+            }
+        }
     }
 }

@@ -24,4 +24,4 @@ MonoBehaviour:
     - _name: Distance
       _value: 25
     - _name: RechargeTime
-      _value: 3
+      _value: 2

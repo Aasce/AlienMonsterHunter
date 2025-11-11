@@ -73,6 +73,7 @@ namespace Asce.Game.Entities
         {
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
             Stats.Initialize(Information.Stats);
+            Effects.Initialize();
             Leveling.Initialize(Information.Leveling);
             Leveling.OnLevelSetted += Leveling_OnLevelSetted;
             Leveling.OnLevelUp += Leveling_OnLevelUp;

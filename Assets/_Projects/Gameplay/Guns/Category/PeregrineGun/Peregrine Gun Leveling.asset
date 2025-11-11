@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Peregrine Gun Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _levelingMode: 1
+  _levelingMode: 2
   _levelChanges: []
   _uniformGrowth:
     _modifications:
@@ -26,15 +26,46 @@ MonoBehaviour:
     - _targetKey: ShootSpeed
       _deltaValue: -0.075
       _type: 0
-    - _targetKey: MagazineSize
-      _deltaValue: 1
-      _type: 0
-    - _targetKey: StartAmmo
-      _deltaValue: 10
-      _type: 0
     - _targetKey: ReloadCooldown
       _deltaValue: -0.15
       _type: 0
     - _targetKey: DamageLost
       _deltaValue: -0.01
       _type: 0
+  _specificLevelChanges:
+  - Level: 2
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MagazineSize
+        _deltaValue: 1
+        _type: 0
+      - _targetKey: StartAmmo
+        _deltaValue: 10
+        _type: 0
+  - Level: 5
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MagazineSize
+        _deltaValue: 1
+        _type: 0
+      - _targetKey: StartAmmo
+        _deltaValue: 10
+        _type: 0
+  - Level: 8
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MagazineSize
+        _deltaValue: 1
+        _type: 0
+      - _targetKey: StartAmmo
+        _deltaValue: 10
+        _type: 0
+  - Level: 10
+    ModificationGroup:
+      _modifications:
+      - _targetKey: MagazineSize
+        _deltaValue: 1
+        _type: 0
+      - _targetKey: StartAmmo
+        _deltaValue: 10
+        _type: 0

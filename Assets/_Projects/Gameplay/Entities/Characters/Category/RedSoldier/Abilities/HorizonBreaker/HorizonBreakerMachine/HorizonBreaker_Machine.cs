@@ -81,6 +81,7 @@ namespace Asce.Game.Entities.Machines
             if (modificationGroup.TryGetModification("RechargeTime", out LevelModification rechargeTimeModification))
             {
                 _rechargeCooldown.BaseTime += rechargeTimeModification.Value;
+                _rechargeCooldown.Reset();
             }
         }
 

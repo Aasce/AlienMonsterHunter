@@ -33,7 +33,11 @@ namespace Asce.Game.Abilities
                 this.UpdateAbilityReference();
             }
         }
-        public int Level => _level;
+        public int Level
+        {
+            get => _level;
+            set => _level = value;
+        }
         public Cooldown Cooldown => _cooldown;
         public Ability AbilityPrefab => _abilityPrefab;
         public bool IsValid => _abilityPrefab != null;

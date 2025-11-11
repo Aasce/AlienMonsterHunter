@@ -22,9 +22,9 @@ MonoBehaviour:
     - _name: ExplosionRadius
       _value: 2.5
     - _name: MaxAmmo
-      _value: 2
-    - _name: AttackSpeed
       _value: 3
+    - _name: AttackSpeed
+      _value: 2.5
     - _name: ViewRadius
       _value: 14
     - _name: ViewAngle

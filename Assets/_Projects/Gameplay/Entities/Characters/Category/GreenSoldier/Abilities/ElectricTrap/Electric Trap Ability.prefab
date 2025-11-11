@@ -342,8 +342,8 @@ MonoBehaviour:
   _detentionDuration: 2
   _catched: 0
   _catchCooldown:
-    _baseTime: 2
-    _currentTime: 2
+    _baseTime: 1.75
+    _currentTime: 1.75
   _electricVFXName: Electric Trap Electric
 --- !u!58 &2537134569583104914
 CircleCollider2D:

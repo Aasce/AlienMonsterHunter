@@ -8,6 +8,7 @@ namespace Asce.Game.SaveLoads
     public class EffectsSaveData : SaveData
     {
         public List<EffectSaveData> effects = new();
+        public List<EffectStatContainerSaveData> effectStats = new();
 
         public override void CopyFrom(SaveData other)
         {
@@ -16,6 +17,9 @@ namespace Asce.Game.SaveLoads
             {
                 effects.Clear();
                 effects.AddRange(effectsData.effects);
+
+                effectStats.Clear();
+                effectStats.AddRange(effectsData.effectStats);
             }
         }
     }
