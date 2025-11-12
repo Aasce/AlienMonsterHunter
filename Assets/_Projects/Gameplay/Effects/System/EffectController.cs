@@ -3,6 +3,7 @@ using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Asce.Game.Effects
@@ -15,11 +16,12 @@ namespace Asce.Game.Effects
         {
             if (string.IsNullOrEmpty(effectName)) return null;
 
-            Pool<Effect> pool = this.GetPool(effectName);
+            Pool<Effect> pool = GetPool(effectName);
             if (pool == null) return null;
 
             Effect effect = pool.Activate(out bool isCreated);
             if (effect == null) return null;
+
             if (isCreated) effect.Initialize();
             else effect.ResetStatus();
 
@@ -29,41 +31,60 @@ namespace Asce.Game.Effects
 
         public Effect AddEffect(string effectName, Entity sender, Entity receiver, EffectData data)
         {
-            if (receiver == null) return null;
-            if (receiver.IsDeath) return null;
-            if (receiver.Effects == null) return null;
+            if (receiver == null || receiver.IsDeath || receiver.Effects == null) return null;
 
-            Effect effect = this.CreateEffect(effectName, data);
+            Effect effectPrefab = GameManager.Instance.AllEffects.Get(effectName);
+            if (effectPrefab == null)
+            {
+                Debug.LogWarning($"Effect with name: \"{effectName}\" not exist.");
+                return null;
+            }
 
-            effect.Sender = sender;
-            effect.Receiver = receiver;
-            receiver.Effects.Add(effect);
-            effect.gameObject.SetActive(true);
-            effect.Apply();
-            return effect;
+            return effectPrefab.Information.ApplyType switch
+            {
+                EffectApplyType.Stacking => HandleStackingEffect(effectName, sender, receiver, data, effectPrefab),
+                EffectApplyType.ResetDuration => HandleResetDurationEffect(effectName, sender, receiver, data),
+                _ => AddNewEffect(effectName, sender, receiver, data),
+            };
         }
 
         public bool RemoveEffect(Effect effect)
         {
             if (effect == null) return true;
-            if (effect.Receiver == null) return false;
-            if (effect.Receiver.Effects == null) return false;
+            if (effect.Receiver == null || effect.Receiver.Effects == null) return false;
             if (!effect.Receiver.Effects.Remove(effect)) return false;
 
             effect.Unapply();
             effect.gameObject.SetActive(false);
+
             Pool<Effect> pool = GetPool(effect.Information.Name);
-            if (pool != null) pool.Deactivate(effect);
+            pool?.Deactivate(effect);
             return true;
+        }
+
+        private Effect AddNewEffect(string effectName, Entity sender, Entity receiver, EffectData data)
+        {
+            Effect effect = CreateEffect(effectName, data);
+            if (effect == null) return null;
+
+            effect.Sender = sender;
+            effect.Receiver = receiver;
+            effect.gameObject.SetActive(true);
+
+            receiver.Effects.Add(effect);
+            effect.Apply();
+
+            return effect;
         }
 
         private Pool<Effect> GetPool(string name)
         {
             if (string.IsNullOrEmpty(name)) return null;
             if (_pools.TryGetValue(name, out Pool<Effect> pool)) return pool;
-            this.CreatePool(name); 
-            if (_pools.TryGetValue(name, out pool)) return pool;
-            return null;
+
+            CreatePool(name);
+            _pools.TryGetValue(name, out pool);
+            return pool;
         }
 
         private void CreatePool(string name)
@@ -75,38 +96,48 @@ namespace Asce.Game.Effects
                 return;
             }
 
-            if (!_pools.ContainsKey(name))
+            if (_pools.ContainsKey(name)) return;
+
+            GameObject poolGO = new($"{name} Pool");
+            poolGO.transform.SetParent(transform);
+
+            Pool<Effect> newPool = new()
             {
-                GameObject poolGameObject = new($"{name} Pool");
-                poolGameObject.transform.SetParent(transform);
+                Prefab = effectPrefab,
+                Parent = poolGO.transform,
+                IsSetActive = false
+            };
 
-                Pool<Effect> newPool = new()
-                {
-                    Prefab = effectPrefab,
-                    Parent = poolGameObject.transform,
-                    IsSetActive = false,
-                };
-                _pools.Add(name, newPool);
-            }
+            _pools.Add(name, newPool);
         }
-    }
 
-    [System.Serializable]
-    public struct EffectData
-    {
-        [SerializeField] private float _duration;
-        [SerializeField] private float _strength;
+        #region --- ApplyType Handlers ---
 
-        public float Duration
+        private Effect HandleStackingEffect(string effectName, Entity sender, Entity receiver, EffectData data, Effect prefab)
         {
-            get => _duration;
-            set => _duration = value;
+            // Not stackable
+            if (!prefab.Information.IsStackable)
+                return AddNewEffect(effectName, sender, receiver, data);
+
+            Effect existStackEffect = receiver.Effects.Effects.FirstOrDefault(e => e.Information.Name == effectName);
+            if (existStackEffect == null)
+                return AddNewEffect(effectName, sender, receiver, data);
+
+            existStackEffect.ApplyStack(data);
+            return existStackEffect;
         }
 
-        public float Strength
+        private Effect HandleResetDurationEffect(string effectName, Entity sender, Entity receiver, EffectData data)
         {
-            get => _strength;
-            set => _strength = value;
+            Effect existEffect = receiver.Effects.Effects.FirstOrDefault(e => e.Information.Name == effectName);
+            if (existEffect == null)
+                return AddNewEffect(effectName, sender, receiver, data);
+
+            existEffect.Duration.Reset();
+            return existEffect;
         }
+
+        #endregion
+
     }
 }

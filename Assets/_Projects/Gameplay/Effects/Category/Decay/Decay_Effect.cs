@@ -9,18 +9,23 @@ namespace Asce.Game.Effects
         protected override void InternalApply()
         {
             _statId = Receiver.Stats.Health.Add(-Strength, Stats.StatValueType.Ratio).Id;
-            foreach(Effect effect in Receiver.Effects.Effects)
-            {
-                if (effect is Decay_Effect decay)
-                {
-                    decay.Duration.SetBaseTime(Duration.BaseTime, isReset: true);
-                }
-            }
         }
 
         protected override void InternalUnapply()
         {
             Receiver.Stats.Health.RemoveById(_statId);
+        }
+
+        public override void ApplyStack(EffectData data)
+        {
+            Strength *= (1 + data.Strength);
+            Strength = Mathf.Clamp(Strength, 0, 0.99f);
+            Receiver.Stats.Health.ModifyValue(_statId, -Strength);
+
+            float largestDuration = Mathf.Max(Duration.BaseTime, data.Duration);
+            Duration.SetBaseTime(largestDuration);
+
+            base.ApplyStack(data);
         }
 
 

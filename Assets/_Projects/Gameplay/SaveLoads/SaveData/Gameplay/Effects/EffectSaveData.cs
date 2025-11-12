@@ -12,6 +12,7 @@ namespace Asce.Game.SaveLoads
         public float strength;
         public float baseDuration;
         public float duration;
+        public int stack;
 
         public override void CopyFrom(SaveData other)
         {
@@ -24,6 +25,7 @@ namespace Asce.Game.SaveLoads
                 senderId = effectData.senderId;
                 baseDuration = effectData.baseDuration;
                 duration = effectData.duration;
+                stack = effectData.stack;
             }
         }
     }

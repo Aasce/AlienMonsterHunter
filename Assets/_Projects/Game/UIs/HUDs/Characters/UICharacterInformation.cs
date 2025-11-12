@@ -1,9 +1,11 @@
 using Asce.Game.Entities.Characters;
+using Asce.Game.UIs;
+using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs.HUDs
+namespace Asce.MainGame.UIs.HUDs
 {
     public class UICharacterInformation : UIObject
     {
@@ -12,13 +14,15 @@ namespace Asce.Game.UIs.HUDs
         [SerializeField] private UIExpLeveling _leveling;
         [SerializeField] private UIResourceStatBar _healthBar;
         [SerializeField] private UICharacterAbilities _abilities;
+        [SerializeField] private UIEffects _effects;
 
         [Space]
-        [SerializeField] private Character _character;
+        [SerializeField, Readonly] private Character _character;
 
         public UIExpLeveling Leveling => _leveling;
         public UIResourceStatBar HealthBar => _healthBar;
         public UICharacterAbilities Abilities => _abilities;
+        public UIEffects Effects => _effects;
 
         public Character Character
         {
@@ -42,14 +46,17 @@ namespace Asce.Game.UIs.HUDs
         {
             if (Character == null)
             {
+                Leveling.ExpLeveling = null;
                 HealthBar.ResourceStat = null;
                 Abilities.CharacterAbilities = null;
-                Leveling.ExpLeveling = null;
+                Effects.EntityEffects = null;
                 return;
             }
+
+            Leveling.ExpLeveling = Character.Leveling;
             HealthBar.ResourceStat = Character.Stats.Health;
             Abilities.CharacterAbilities = Character.Abilities;
-            Leveling.ExpLeveling = Character.Leveling;
+            Effects.EntityEffects = Character.Effects;
         }
 
         private void Unregister()

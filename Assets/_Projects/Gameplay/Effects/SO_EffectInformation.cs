@@ -10,6 +10,11 @@ namespace Asce.Game.Effects
         [SerializeField] private string _name;
         [SerializeField, TextArea(3, 10)] private string _description;
         [SerializeField, SpritePreview] private Sprite _icon;
+        [SerializeField] private EffectType _type;
+
+        [Space]
+        [SerializeField] private bool _isStackable = false;
+        [SerializeField] private EffectApplyType _applyType;
 
         [Space]
         [SerializeField]
@@ -22,6 +27,10 @@ namespace Asce.Game.Effects
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
+        public EffectType Type => _type;
+        
+        public bool IsStackable => _isStackable;
+        public EffectApplyType ApplyType => _applyType;
 
         public float GetCustomValue(string name) => _customValues.Get(name).Value;
     }

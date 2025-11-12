@@ -52,6 +52,16 @@ namespace Asce.Game.Stats
             return addValue;
         }
 
+        public virtual void ModifyValue(string id, float value)
+        {
+            int statIndex = _statValues.FindIndex((statValue) => statValue.Id == id);
+            if (statIndex < 0) return;
+
+            StatValue stat = _statValues[statIndex].CopyWith(value: value);
+            _statValues[statIndex] = stat;
+            this.Recalculate();
+        }
+
         public virtual void RemoveById(string id)
         {
             _statValues.RemoveAll((statValue) => statValue.Id == id);

@@ -21,9 +21,11 @@ namespace Asce.Game.Effects
         [SerializeField] protected Entity _receiver;
         [SerializeField] protected Cooldown _duration = new();
         [SerializeField] protected float _strength;
+        [SerializeField] protected int _stack = 1;
 
         public event Action OnApplied;
         public event Action OnUnapplied;
+        public event Action OnStacked;
 
         public string Id => _id;
         public SO_EffectInformation Information => _information;
@@ -44,6 +46,11 @@ namespace Asce.Game.Effects
             get => _strength;
             set => _strength = value;
         }
+        public int Stack
+        {
+            get => _stack;
+            set => _stack = value;
+        }
         string IIdentifiable.Id
         {
             get => Id;
@@ -55,7 +62,10 @@ namespace Asce.Game.Effects
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
         }
 
-        public virtual void ResetStatus() { }
+        public virtual void ResetStatus() 
+        {
+            Stack = 1;
+        }
 
         public virtual void Apply()
         {
@@ -67,6 +77,12 @@ namespace Asce.Game.Effects
         {
             this.InternalUnapply();
             OnUnapplied?.Invoke();
+        }
+
+        public virtual void ApplyStack(EffectData data)
+        {
+            Stack++;
+            OnStacked?.Invoke();
         }
 
 
@@ -89,6 +105,7 @@ namespace Asce.Game.Effects
                 baseDuration = Duration.BaseTime,
                 duration = Duration.CurrentTime,
                 strength = Strength,
+                stack = Stack,
             };
 
             this.OnBeforeSave(effectData);
@@ -101,7 +118,8 @@ namespace Asce.Game.Effects
             _id = data.id;
             Duration.BaseTime = data.baseDuration;
             Duration.CurrentTime = data.duration;
-            _strength = data.strength;
+            Strength = data.strength;
+            Stack = data.stack;
             StartCoroutine(LoadSender(data));
 
             this.OnAfterLoad(data);

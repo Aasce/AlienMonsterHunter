@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Toxic
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 2047992146, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+  _type: 2
+  _isStackable: 0
+  _applyType: 0
   _customValues:
     _list:
     - _name: DamageInterval

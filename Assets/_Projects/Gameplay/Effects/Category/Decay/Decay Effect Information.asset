@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Decay
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 374495580, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+  _type: 2
+  _isStackable: 1
+  _applyType: 1
   _customValues:
     _list: []

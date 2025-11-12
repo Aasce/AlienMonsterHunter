@@ -6,7 +6,7 @@ using Asce.Managers.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Game.UIs
+namespace Asce.MainGame.UIs.HUDs
 {
     public class UICharacterAbilities : UIObject
     {

@@ -48,8 +48,21 @@ namespace Asce.Game.Stats
         {
             return $"StatValue(Id={_id}, Value={_value}, Type={_type})";
         }
+        public readonly StatValue CopyWith(
+            float? value = null,
+            StatValueType? type = null,
+            StatSourceType? sourceType = null)
+        {
+            return new StatValue(
+                _id,
+                value ?? _value,
+                type ?? _type,
+                sourceType ?? _sourceType
+            );
+        }
 
-        StatValueSaveData ISaveable<StatValueSaveData>.Save()
+
+        readonly StatValueSaveData ISaveable<StatValueSaveData>.Save()
         {
             return new StatValueSaveData()
             {
@@ -63,7 +76,7 @@ namespace Asce.Game.Stats
         public static StatValue Create(StatValueSaveData data)
         {
             if (data == null) return default;
-            StatValue statValue = new StatValue()
+            StatValue statValue = new ()
             {
                 _id = data.id,
                 _value = data.value,

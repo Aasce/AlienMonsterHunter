@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Helicopter Ignite
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 695775810, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+  _type: 2
+  _isStackable: 0
+  _applyType: 2
   _customValues:
     _list:
     - _name: IgniteInterval

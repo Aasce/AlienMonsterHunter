@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs.HUDs
+namespace Asce.MainGame.UIs.HUDs
 {
     public class UIExpLeveling : UIObject
     {

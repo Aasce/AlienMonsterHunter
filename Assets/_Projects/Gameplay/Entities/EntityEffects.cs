@@ -4,6 +4,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -24,6 +25,9 @@ namespace Asce.Game.Entities
         [SerializeField] private EffectStat _untargetable = new();
         [SerializeField] private EffectStat _unmoveable = new();
         [SerializeField] private EffectStat _unattackable = new();
+
+        public event Action<Effect> OnEffectAdded;
+        public event Action<Effect> OnEffectRemoved;
 
         public Entity Entity
         {
@@ -77,11 +81,14 @@ namespace Asce.Game.Entities
         {
             if (effect == null) return;
             _effects.Add(effect);
+            OnEffectAdded?.Invoke(effect);
         }
 
         public bool Remove(Effect effect) 
         {
-            return _effects.Remove(effect);
+            bool isRemoved = _effects.Remove(effect);
+            if (isRemoved) OnEffectRemoved?.Invoke(effect);
+            return isRemoved;
         }
 
         public bool Contains(string name)
