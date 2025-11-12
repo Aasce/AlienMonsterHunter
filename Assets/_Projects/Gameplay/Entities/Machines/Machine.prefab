@@ -94,25 +94,25 @@ MonoBehaviour:
   _health:
     _statValues: []
     _finalValue: 0
-    _baseValue: 0
     _flatValue: 0
     _ratioValue: 0
     _scaleValue: 0
+    _setValue: 0
     _currentValue: 0
   _armor:
     _statValues: []
     _finalValue: 0
-    _baseValue: 0
     _flatValue: 0
     _ratioValue: 0
     _scaleValue: 0
+    _setValue: 0
   _speed:
     _statValues: []
     _finalValue: 0
-    _baseValue: 0
     _flatValue: 0
     _ratioValue: 0
     _scaleValue: 0
+    _setValue: 0
 --- !u!1 &3199985385991913716
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +197,13 @@ MonoBehaviour:
   _updateCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
+  _effectStats: []
+  _untargetable:
+    _statValues: []
+  _unmoveable:
+    _statValues: []
+  _unattackable:
+    _statValues: []
 --- !u!1 &6533844145007021853
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,5 +248,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseLeveling: {fileID: 0}
+  _information: {fileID: 0}
   _currentLevel: 0

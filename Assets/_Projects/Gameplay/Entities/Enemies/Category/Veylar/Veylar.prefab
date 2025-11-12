@@ -678,6 +678,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 810962020781528771, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 8727078275380452219}
+    - target: {fileID: 810962020781528771, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _entity
+      value: 
+      objectReference: {fileID: 8727078275380452219}
     - target: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_Name
       value: Veylar
@@ -738,6 +746,14 @@ PrefabInstance:
       propertyPath: '_renderers.Array.data[6]'
       value: 
       objectReference: {fileID: 501437752807148611}
+    - target: {fileID: 4256875220220033955, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256875220220033955, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4566655827590722312, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _entity
       value: 
@@ -750,6 +766,18 @@ PrefabInstance:
       propertyPath: _entity
       value: 
       objectReference: {fileID: 8727078275380452219}
+    - target: {fileID: 5915571698391829430, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 8727078275380452219}
+    - target: {fileID: 5915571698391829430, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _offset.y
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042491706405415577, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6455034772851875770, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -810,6 +838,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -1867968962784685099}
   m_SourcePrefab: {fileID: 100100000, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+--- !u!114 &1180934137194151021 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5915571698391829430, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 4790651642123466715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c585d2fdf95dc248a84ba97664539da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3974592246808758942 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8454178846099897669, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -849,6 +888,7 @@ MonoBehaviour:
   _view: {fileID: 7278013877516238317}
   _stats: {fileID: 3974592246808758942}
   _effects: {fileID: 9068869752717131643}
+  _ui: {fileID: 1180934137194151021}
   _agent: {fileID: 6568635142161705386}
   _targetDetection: {fileID: 5855290536935671638}
   _attackCooldown:
@@ -924,6 +964,10 @@ MonoBehaviour:
     _baseTime: 0
     _currentTime: 0
   _isWaiting: 0
+  _navMeshAreaMask: -1
+  _eyeHeight: 0.5
+  _maxSearchAttempts: 5
+  _wallOffset: 0.3
 --- !u!114 &-1867968962784685099
 MonoBehaviour:
   m_ObjectHideFlags: 0

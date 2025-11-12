@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Asce.Game.Entities
 {
-    public class Entity : GameComponent, IIdentifiable, ITakeDamageable, ISendDamageable, ITargetable, ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
+    public abstract class Entity : GameComponent, IIdentifiable, ITakeDamageable, ISendDamageable, ITargetable, ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
     {
         public const string PREFIX_ID = "entity";
 
@@ -55,7 +55,7 @@ namespace Asce.Game.Entities
         protected override void RefReset()
         {
             base.RefReset();
-            this.LoadComponent(out _leveling);
+            this.LoadComponent(out _leveling); 
             this.LoadComponent(out _view);
             this.LoadComponent(out _stats);
             if (this.LoadComponent(out _effects))

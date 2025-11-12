@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324856635146346893}
   - component: {fileID: 8407780750165128917}
+  - component: {fileID: 1804285872919288118}
   m_Layer: 0
   m_Name: Electro Reactor Ability
   m_TagString: Untagged
@@ -60,6 +61,19 @@ MonoBehaviour:
   _raycastRadius: 0.1
   _useCircleCast: 0
   _machine: {fileID: 5885364587101420747}
+--- !u!114 &1804285872919288118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292225996522935662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abfcd5cc33af0944890fe4a629323e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAbility: {fileID: 8407780750165128917}
 --- !u!1001 &454887758983301387
 PrefabInstance:
   m_ObjectHideFlags: 0

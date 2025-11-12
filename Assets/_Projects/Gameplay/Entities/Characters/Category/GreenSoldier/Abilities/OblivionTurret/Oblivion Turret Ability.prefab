@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3130911818045429400}
   - component: {fileID: 3715971126707112031}
+  - component: {fileID: 4928620354189241270}
   m_Layer: 0
   m_Name: Oblivion Turret Ability
   m_TagString: Untagged
@@ -60,6 +61,19 @@ MonoBehaviour:
   _raycastRadius: 0.1
   _useCircleCast: 0
   _machine: {fileID: 2812012787083685413}
+--- !u!114 &4928620354189241270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716321100445219088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abfcd5cc33af0944890fe4a629323e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAbility: {fileID: 3715971126707112031}
 --- !u!1001 &1578863715333046408
 PrefabInstance:
   m_ObjectHideFlags: 0

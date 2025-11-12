@@ -290,6 +290,13 @@ MonoBehaviour:
   _updateCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
+  _effectStats: []
+  _untargetable:
+    _statValues: []
+  _unmoveable:
+    _statValues: []
+  _unattackable:
+    _statValues: []
 --- !u!1 &3764308907927331195
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +413,7 @@ MonoBehaviour:
   _interactionLayerMask:
     serializedVersion: 2
     m_Bits: 262144
+  _focusInteractiveObject: {fileID: 0}
 --- !u!1 &5867197909989179987
 GameObject:
   m_ObjectHideFlags: 0

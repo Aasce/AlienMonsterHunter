@@ -11,9 +11,10 @@ using UnityEngine.AI;
 namespace Asce.Game.Entities.Enemies
 {
     [RequireComponent(typeof (NavMeshAgent))]
-    public abstract class Enemy : Entity, IHasAgent, ISaveable<EnemySaveData>, ILoadable<EnemySaveData>
+    public abstract class Enemy : Entity, IHasAgent, IHasEntityUI, ISaveable<EnemySaveData>, ILoadable<EnemySaveData>
     {
         [Header("Enemy")]
+        [SerializeField, Readonly] protected EnemyUI _ui;
         [SerializeField, Readonly] protected NavMeshAgent _agent;
         [SerializeField, Readonly] private SingleTargetDetection _targetDetection;
 
@@ -24,13 +25,20 @@ namespace Asce.Game.Entities.Enemies
         public new EnemyView View => base.View as EnemyView;
         public new EnemyStats Stats => base.Stats as EnemyStats;
 
+        public EnemyUI UI => _ui;
         public NavMeshAgent Agent => _agent;
         public SingleTargetDetection TargetDetection => _targetDetection;
         public Cooldown AttackCooldown => _attackCooldown;
 
+        EntityUI IHasEntityUI.UI => this.UI;
+
         protected override void RefReset()
         {
             base.RefReset();
+            if (this.LoadComponent(out _ui))
+            {
+                _ui.Owner = this;
+            }
             this.LoadComponent(out _agent);
             this.LoadComponent(out _targetDetection);
         }
@@ -38,6 +46,7 @@ namespace Asce.Game.Entities.Enemies
         public override void Initialize()
         {
             base.Initialize();
+            UI.Initialize();
             Agent.speed = Stats.Speed.FinalValue;
             AttackCooldown.BaseTime = Stats.AttackSpeed.FinalValue;
             TargetDetection.Origin = transform;
@@ -73,6 +82,15 @@ namespace Asce.Game.Entities.Enemies
             };
         }
 
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            AttackCooldown.Reset();
+
+            View.ResetStatus();
+            UI.ResetStatus();
+            TargetDetection.ResetTarget();
+        }
 
         protected virtual void Update()
         {
@@ -81,15 +99,6 @@ namespace Asce.Game.Entities.Enemies
             this.MoveHandle();
             this.AttackHandle();
             this.ViewHandle();
-        }
-
-        public override void ResetStatus()
-        {
-            base.ResetStatus();
-            AttackCooldown.Reset();
-
-            View.ResetStatus();
-            TargetDetection.ResetTarget();
         }
 
         protected abstract void MoveToTaget();

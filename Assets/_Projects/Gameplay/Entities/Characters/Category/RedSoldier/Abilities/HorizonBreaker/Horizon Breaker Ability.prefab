@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53663642121372832}
   - component: {fileID: -2529734045113283420}
+  - component: {fileID: 2400116629725038031}
   m_Layer: 0
   m_Name: Horizon Breaker Ability
   m_TagString: Untagged
@@ -60,6 +61,19 @@ MonoBehaviour:
   _raycastRadius: 0.1
   _useCircleCast: 0
   _machine: {fileID: 789514803403641968}
+--- !u!114 &2400116629725038031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150458811000532577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abfcd5cc33af0944890fe4a629323e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAbility: {fileID: -2529734045113283420}
 --- !u!1001 &522631184015065231
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6377872728735818308, guid: dad14ed4bf7ee5049a26a42798b31937, type: 3}
       propertyPath: m_Name
-      value: Helicopter Support Variant
+      value: Helicopter Support
       objectReference: {fileID: 0}
     - target: {fileID: 7994732083436338144, guid: dad14ed4bf7ee5049a26a42798b31937, type: 3}
       propertyPath: m_LocalPosition.x
