@@ -102,6 +102,7 @@ namespace Asce.Game.Abilities
                 id = this.Id,
                 name = Information.Name,
                 ownerId = this.Owner.GetId(),
+                baseDespawnTime = this.DespawnTime.BaseTime,
                 despawnTime = this.DespawnTime.CurrentTime,
                 position = this.transform.position,
                 rotation = this.transform.eulerAngles.z,
@@ -114,6 +115,7 @@ namespace Asce.Game.Abilities
         {
             if (data == null) return;
             this._id = data.id;
+            this._despawnTime.BaseTime = data.baseDespawnTime;
             this._despawnTime.CurrentTime = data.despawnTime;
             this.transform.position = data.position;
             this.transform.eulerAngles = new Vector3(0f, 0f, data.rotation);

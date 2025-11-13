@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d856d635a80d3b54ea7412371360ab5a, type: 3}
+  m_Name: Hell Flamethrower Ability Leveling
+  m_EditorClassIdentifier: 
+  _maxLevel: 10
+  _levelingMode: 2
+  _levelChanges: []
+  _uniformGrowth:
+    _modifications: []
+  _specificLevelChanges:
+  - Level: 5
+    ModificationGroup:
+      _modifications:
+      - _targetKey: DespawnTime
+        _deltaValue: 6.8
+        _type: 0
+  - Level: 10
+    ModificationGroup:
+      _modifications:
+      - _targetKey: DespawnTime
+        _deltaValue: 4.8
+        _type: 0

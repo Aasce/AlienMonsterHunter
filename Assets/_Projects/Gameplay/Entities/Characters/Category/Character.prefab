@@ -161,7 +161,7 @@ MonoBehaviour:
   _abilities: {fileID: 4214618338705883435}
   _interaction: {fileID: 6562127096449332757}
   _gun: {fileID: 0}
-  _weaponSlot: {fileID: 0}
+  _weaponSlot: {fileID: 6193936041271012591}
   _moveDirection: {x: 0, y: 0}
   _lookPosition: {x: 0, y: 0}
 --- !u!58 &3285569828326788888
@@ -199,7 +199,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!50 &2125223173831006573
 Rigidbody2D:
   serializedVersion: 5

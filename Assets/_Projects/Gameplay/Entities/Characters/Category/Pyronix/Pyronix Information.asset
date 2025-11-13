@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a164c91910024bc41a31fe22632f6caa, type: 3}
+  m_Name: Pyronix Information
+  m_EditorClassIdentifier: 
+  _name: Pyronix
+  _description: 
+  _icon: {fileID: 21300000, guid: c826db35c26ee8a45a87d9d019ce88bf, type: 3}
+  _stats: {fileID: 11400000, guid: 0247537c5b7a8464d8265cc4cf2b796f, type: 2}
+  _leveling: {fileID: 11400000, guid: 187ecc82dd71a3c44807e17143cb3df5, type: 2}
+  _role: 0
+  _difficulty: 3
+  _abilityNames:
+  - Hell Flamethrower
+  - 
+  - 

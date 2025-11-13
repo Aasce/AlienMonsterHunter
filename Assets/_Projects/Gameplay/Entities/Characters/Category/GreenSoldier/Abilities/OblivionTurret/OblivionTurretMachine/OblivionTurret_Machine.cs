@@ -185,6 +185,7 @@ namespace Asce.Game.Entities.Machines
             Vector2 shootPos = barrel != null ? barrel.position : transform.position;
             Vector2 direction = target.transform.position - transform.position;
 
+            bullet.Leveling.SetLevel(Leveling.CurrentLevel);
             bullet.DamageDeal = _damage;
             bullet.ExplosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
             bullet.gameObject.SetActive(true);
@@ -197,6 +198,7 @@ namespace Asce.Game.Entities.Machines
         protected override void OnBeforeSave(MachineSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("Angle", _weapon.eulerAngles.z);
             data.SetCustom("Damage", _damage);
             data.SetCustom("CurrentAmmo", _currentAmmo);
             data.SetCustom("AttackSpeed", _attackCooldown.BaseTime);
@@ -207,6 +209,7 @@ namespace Asce.Game.Entities.Machines
         protected override void OnAfterLoad(MachineSaveData data)
         {
             base.OnAfterLoad(data);
+            _weapon.eulerAngles = new Vector3(0f, 0f, data.GetCustom<float>("Angle"));
             _damage = data.GetCustom<float>("Damage");
             _currentAmmo = data.GetCustom<int>("CurrentAmmo");
             _attackCooldown.BaseTime = data.GetCustom<float>("AttackSpeed");

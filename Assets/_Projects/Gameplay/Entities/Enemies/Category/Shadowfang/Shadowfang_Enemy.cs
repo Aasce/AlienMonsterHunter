@@ -40,8 +40,8 @@ namespace Asce.Game.Entities.Enemies
             Vector2 firePosition = _mouth != null ? _mouth.position : transform.position;
             Vector2 fireDirection = (Vector2)TargetDetection.CurrentTarget.transform.position - firePosition;
 
-            bullet.DamageDeal = Stats.AttackDamage.FinalValue;
             bullet.Leveling.SetLevel(Leveling.CurrentLevel);
+            bullet.DamageDeal = Stats.AttackDamage.FinalValue;
             bullet.gameObject.SetActive(true);
             bullet.Fire(firePosition, fireDirection);
             bullet.OnActive();

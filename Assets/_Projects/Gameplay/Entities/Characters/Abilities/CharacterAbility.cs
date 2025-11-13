@@ -1,3 +1,4 @@
+using Asce.Managers.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -5,7 +6,7 @@ namespace Asce.Game.Abilities
     public class CharacterAbility : Ability
     {
         [Header("Range Settings")]
-        [SerializeField, Min(0f)] protected float _useRangeRadius = 10f;
+        [SerializeField, Readonly] protected float _useRangeRadius = 10f;
 
         [Header("Raycast Settings")]
         [SerializeField] protected LayerMask _obstacleMask;   // Layers considered as obstacles

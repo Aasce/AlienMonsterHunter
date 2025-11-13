@@ -119,7 +119,9 @@ namespace Asce.Game.Abilities
             if (Rigidbody == null) return;
             transform.position = position;
             Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
-            transform.up = direction;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         protected override void OnBeforeSave(AbilitySaveData data)
@@ -128,6 +130,7 @@ namespace Asce.Game.Abilities
 
             data.SetCustom("ToxicDuration", _toxicDuration);
             data.SetCustom("ToxicStrength", _toxicStrength);
+            data.SetCustom("LinearVelocity", Rigidbody.linearVelocity);
         }
 
         protected override void OnAfterLoad(AbilitySaveData data)
@@ -136,6 +139,7 @@ namespace Asce.Game.Abilities
             if (data == null) return;
             _toxicDuration = data.GetCustom<float>("ToxicDuration");
             _toxicStrength = data.GetCustom<float>("ToxicStrength");
+            Rigidbody.linearVelocity = data.GetCustom<Vector2>("LinearVelocity");
         }
     }
 }

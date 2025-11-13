@@ -9,6 +9,7 @@ namespace Asce.Game.SaveLoads
         public string id;
         public string name;
         public string ownerId;
+        public float baseDespawnTime;
         public float despawnTime;
         public Vector2 position;
         public float rotation;
@@ -21,6 +22,7 @@ namespace Asce.Game.SaveLoads
                 id = abilityData.id;
                 name = abilityData.name;
                 ownerId = abilityData.ownerId;
+                baseDespawnTime = abilityData.baseDespawnTime;
                 despawnTime = abilityData.despawnTime;
                 position = abilityData.position;
                 rotation = abilityData.rotation;

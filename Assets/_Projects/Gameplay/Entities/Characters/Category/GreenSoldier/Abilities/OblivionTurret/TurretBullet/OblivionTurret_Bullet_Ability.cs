@@ -2,6 +2,7 @@ using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Machines;
+using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
 using Asce.Managers.Utils;
 using System;
@@ -49,6 +50,12 @@ namespace Asce.Game.Abilities
             set => _force = value;
         }
 
+        protected override void RefReset()
+        {
+            base.RefReset();
+            this.LoadComponent(out _rigidbody);
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (this.IsDealing) return;
@@ -61,7 +68,7 @@ namespace Asce.Game.Abilities
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
-                if (!collision.TryGetComponent(out ITargetable target)) continue;
+                if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
                 float damage = DamageDeal;
@@ -97,13 +104,27 @@ namespace Asce.Game.Abilities
             if (Rigidbody == null) return;
             transform.position = position;
             Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
-            transform.up = direction;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         private void SpawnVFX()
         {
-            VFXObject explosionVFX = VFXController.Instance.Spawn(_explosionVFXName, transform.position);
+            VFXController.Instance.Spawn(_explosionVFXName, transform.position);
         }
 
+        protected override void OnBeforeSave(AbilitySaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("LinearVelocity", Rigidbody.linearVelocity);
+        }
+
+        protected override void OnAfterLoad(AbilitySaveData data)
+        {
+            base.OnAfterLoad(data);
+            if (data == null) return;
+            Rigidbody.linearVelocity = data.GetCustom<Vector2>("LinearVelocity");
+        }
     }
 }
