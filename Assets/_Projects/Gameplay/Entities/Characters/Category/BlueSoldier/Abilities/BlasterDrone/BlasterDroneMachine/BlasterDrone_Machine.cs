@@ -117,6 +117,7 @@ namespace Asce.Game.Entities.Machines
         /// </summary>
         private void MoveHandle()
         {
+            if (Effects.Unmoveable.IsAffect) return;
             float speed = Stats.Speed.FinalValue;
             if (speed <= 0f) return;
 

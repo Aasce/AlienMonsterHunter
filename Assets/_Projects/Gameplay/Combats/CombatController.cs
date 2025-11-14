@@ -1,5 +1,6 @@
 using Asce.Game.VFXs;
 using Asce.Managers;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace Asce.Game.Combats
@@ -43,6 +44,20 @@ namespace Asce.Game.Combats
             if (receiver == null || healAmount <= 0f) return;
             receiver.Health.CurrentValue += healAmount;
             this.ShowHealText(receiver, healAmount);
+        }
+
+        public void Killing(ISendDamageable killer, ITakeDamageable victim)
+        {
+            if (victim == null) return;
+            DamageContainer container = new DamageContainer(killer, victim)
+            {
+                Damage = victim.Health.FinalValue,
+                FinalDamage = victim.Health.FinalValue,
+                DamageType = DamageType.TrueDamage,
+                IsKill = true,
+            };
+            victim.DeadCallback(container);
+            if (killer != null) killer.KillCallback(container);
         }
 
         public float CalculateArmor(float armor, float penetration)

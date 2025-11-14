@@ -49,6 +49,7 @@ namespace Asce.Game.Entities.Enemies
         private void Owner_OnAfterTakeDamage(Combats.DamageContainer container)
         {
             _hideCooldown.Reset();
+            if (!Owner.IsTargetable) return;
             _canvas.gameObject.SetActive(true);
         }
     }
