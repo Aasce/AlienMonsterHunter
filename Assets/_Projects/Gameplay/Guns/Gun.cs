@@ -42,12 +42,19 @@ namespace Asce.Game.Guns
         [SerializeField, Readonly] protected float _maxBulletSpreadAngle = 10f;
         [SerializeField, Readonly] protected float _minBulletSpreadAngle = 1f;
 
+        [Header("Runtime")]
+        [SerializeField, Readonly] protected bool _isFiring = false;
+        [SerializeField, Readonly] protected bool _isFireRequested = false;
+        [SerializeField, Readonly] protected Vector2 _requestedDirection;
+
         public event Action<float> OnRemainingAmmoChanged;
         public event Action<float> OnCurrentAmmoChanged;
         public event Action OnStartReload;
         public event Action OnFinishReload;
         public event Action<Vector2> OnFired;
         public event Action<Vector2, Vector2> OnHit;
+        public event Action OnFireStart;
+        public event Action OnFireEnd;
 
         public string Id => _id;
         public SO_GunInformation Information => _information;
@@ -130,6 +137,7 @@ namespace Asce.Game.Guns
         public Cooldown ReloadCooldown => _reloadCooldown;
 
         public bool IsReloading => !_reloadCooldown.IsComplete;
+        public virtual bool IsFireable => CurrentAmmo > 0 && !IsReloading && ShootCooldown.IsComplete;
         string IIdentifiable.Id
         {
             get => Id;
@@ -178,28 +186,41 @@ namespace Asce.Game.Guns
         protected virtual void Update()
         {
             ShootCooldown.Update(Time.deltaTime);
+            // Reload logic
             if (IsReloading)
             {
                 ReloadCooldown.Update(Time.deltaTime);
-                if (_reloadCooldown.IsComplete)
+                if (ReloadCooldown.IsComplete)
+                    ApplyReload();
+            }
+
+            // Firing state logic
+            if (_isFireRequested)
+            {
+                if (!_isFiring && IsFireable)
                 {
-                    this.ApplyReload();
+                    _isFiring = true;
+                    OnFireStart?.Invoke();
+                }
+
+                this.InternalFire(_requestedDirection);
+            }
+            else
+            {
+                if (_isFiring)
+                {
+                    _isFiring = false;
+                    OnFireEnd?.Invoke();
                 }
             }
+
+            _isFireRequested = false;
         }
 
         public virtual void Fire(Vector2 direction)
         {
-            if (IsReloading) return;
-            if (CurrentAmmo > 0 && ShootCooldown.IsComplete)
-            {
-                // Apply bullet spread based on distance
-                direction = ApplyBulletSpread(direction);
-
-                this.Shooting(direction);
-                this.OnFired?.Invoke(direction);
-                ShootCooldown.Reset();
-            }
+            _isFireRequested = true;
+            _requestedDirection = direction;
         }
 
         public virtual void AltFire(Vector2 direction)
@@ -251,6 +272,18 @@ namespace Asce.Game.Guns
         }
 
         protected abstract void Shooting(Vector2 direction);
+
+        protected virtual void InternalFire(Vector2 direction)
+        {
+            if (!IsFireable) return;
+
+            // Apply bullet spread based on distance
+            direction = ApplyBulletSpread(direction);
+
+            Shooting(direction);
+            OnFired?.Invoke(direction);
+            ShootCooldown.Reset();
+        }
 
         protected virtual void ApplyReload()
         {
