@@ -17,11 +17,11 @@ namespace Asce.Game.Effects
         
         [Space]
         [SerializeField] protected SO_EffectInformation _information;
-        [SerializeField] protected Entity _sender;
-        [SerializeField] protected Entity _receiver;
-        [SerializeField] protected Cooldown _duration = new();
-        [SerializeField] protected float _strength;
-        [SerializeField] protected int _stack = 1;
+        [SerializeField, Readonly] protected Entity _sender;
+        [SerializeField, Readonly] protected Entity _receiver;
+        [SerializeField, Readonly] protected Cooldown _duration = new();
+        [SerializeField, Readonly] protected float _strength;
+        [SerializeField, Readonly] protected int _stack = 1;
 
         public event Action OnApplied;
         public event Action OnUnapplied;

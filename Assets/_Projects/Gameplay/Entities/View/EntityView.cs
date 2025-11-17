@@ -10,8 +10,11 @@ namespace Asce.Game.Entities
         [SerializeField] protected Transform _rootTransform;
         [SerializeField] protected List<Renderer> _renderers = new();
 
+        protected Vector2 _baseScale = Vector2.one;
+
         public Transform RootTransform => _rootTransform != null ? _rootTransform : transform;
         public List<Renderer> Renderers => _renderers;
+
 
 
         protected override void RefReset()
@@ -30,6 +33,11 @@ namespace Asce.Game.Entities
             }
         }
 
+        public virtual void Initialize()
+        {
+            _baseScale = RootTransform.localScale;
+        }
+
         public virtual void ResetStatus()
         {
 
@@ -45,6 +53,11 @@ namespace Asce.Game.Entities
                     spriteRenderer.color = spriteRenderer.color.WithAlpha(alpha);
                 }
             }
+        }
+
+        public virtual void SetSize(float size)
+        {
+            RootTransform.localScale = _baseScale * size;
         }
     }
 }

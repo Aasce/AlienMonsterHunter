@@ -534,6 +534,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Radius
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -545,10 +557,7 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 4219010634262668761}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 3808980928891687044}
-    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: 4
+      insertIndex: 3
       addedObject: {fileID: 5575927004581293760}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
@@ -573,6 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: ebdf2fa043a8aca4586a0fdf1e712bbe, type: 2}
+  _collider: {fileID: 9029245763788667638}
   _leveling: {fileID: 4438582925215279361}
   _view: {fileID: 3074325819203815600}
   _stats: {fileID: 8683527855374450627}
@@ -583,43 +593,6 @@ MonoBehaviour:
   _attackCooldown:
     _baseTime: 1
     _currentTime: 1
---- !u!70 &3808980928891687044
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255783305889590310}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.06377339}
-  m_Size: {x: 0.8, y: 1.2724533}
-  m_Direction: 0
 --- !u!114 &5575927004581293760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,3 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dba721745a626340bda7d7d92583c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &9029245763788667638 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}

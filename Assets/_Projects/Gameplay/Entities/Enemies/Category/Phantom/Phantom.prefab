@@ -4997,7 +4997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1385415373530656909, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _obstacleLayer.m_Bits
-      value: 65536
+      value: 65600
       objectReference: {fileID: 0}
     - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_Height
@@ -5014,6 +5014,10 @@ PrefabInstance:
     - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: m_AgentTypeID
       value: 287145453
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: avoidancePriority
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _animator
@@ -5103,6 +5107,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5119,9 +5127,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1840990485107862943}
-    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7009433463050520670}
   m_SourcePrefab: {fileID: 100100000, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
 --- !u!114 &808344999117013566 stripped
 MonoBehaviour:
@@ -5175,6 +5180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: b0bfc62cfefffb14e8812614ca961288, type: 2}
+  _collider: {fileID: 6688884879690772600}
   _leveling: {fileID: 2018986826549945231}
   _view: {fileID: 808344999117013566}
   _stats: {fileID: 6422120866526295373}
@@ -5191,6 +5197,10 @@ MonoBehaviour:
     _currentTime: 0.1
   _checkDistance: 10
   _fadeSpeed: 6
+  _healingAmount: 1
+  _healCooldown:
+    _baseTime: 0.75
+    _currentTime: 0.75
   _decayDuration: 5
   _decayStrength: 0.05
 --- !u!114 &-1840990485107862943
@@ -5207,42 +5217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 585028057131228837}
   _takeDamageVFXName: Phantom Blood Splatter
---- !u!58 &7009433463050520670
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2454844403444344488}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.8
 --- !u!4 &2778859958281650143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -5275,6 +5249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dba721745a626340bda7d7d92583c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &6688884879690772600 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 3192122192515794952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9103154900060357566 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5915571698391829430, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

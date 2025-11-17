@@ -18,11 +18,13 @@ namespace Asce.Game.Entities
         [Header("Entity")]
         [SerializeField, Readonly] protected string _id;
         [SerializeField] protected SO_EntityInformation _information;
+        [SerializeField, Readonly] protected CircleCollider2D _collider;
         [SerializeField, Readonly] protected Leveling _leveling;
         [SerializeField, Readonly] protected EntityView _view;
         [SerializeField, Readonly] protected EntityStats _stats;
         [SerializeField, Readonly] protected EntityEffects _effects;
 
+        protected float _defaultSize = 1f;
         protected bool _isDeath = false;
 
         public event Action<DamageContainer> OnBeforeTakeDamage;
@@ -34,6 +36,7 @@ namespace Asce.Game.Entities
 
         public string Id => _id;
         public SO_EntityInformation Information => _information;
+        public CircleCollider2D Collider => _collider;
         public Leveling Leveling => _leveling;
         public EntityView View => _view;
         public EntityStats Stats => _stats;
@@ -41,6 +44,7 @@ namespace Asce.Game.Entities
 
         public bool IsDeath => _isDeath;
         public bool IsTargetable => !Effects.Untargetable.IsAffect;
+        public float Size => Collider.radius / _defaultSize;
 
         string IIdentifiable.Id 
         { 
@@ -55,6 +59,7 @@ namespace Asce.Game.Entities
         protected override void RefReset()
         {
             base.RefReset();
+            this.LoadComponent(out _collider);
             this.LoadComponent(out _leveling); 
             this.LoadComponent(out _view);
             this.LoadComponent(out _stats);
@@ -67,9 +72,15 @@ namespace Asce.Game.Entities
         public virtual void Initialize()
         {
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
+
+            Leveling.Initialize(Information.Leveling);
+            View.Initialize();
             Stats.Initialize(Information.Stats);
             Effects.Initialize();
-            Leveling.Initialize(Information.Leveling);
+
+            _defaultSize = _collider.radius;
+            this.SetSize(1f);
+
             Leveling.OnLevelSetted += Leveling_OnLevelSetted;
             Leveling.OnLevelUp += Leveling_OnLevelUp;
         }
@@ -79,6 +90,18 @@ namespace Asce.Game.Entities
             Stats.ResetStats();
             Effects.Clear();
             _isDeath = false;
+        }
+
+        protected virtual void OnDeactive()
+        {
+
+        }
+
+        public virtual void SetSize(float size)
+        {
+            size = Mathf.Max(0f, size);
+            _collider.radius = _defaultSize * size;
+            View.SetSize(size);
         }
 
         protected virtual void LevelTo(int newLevel)

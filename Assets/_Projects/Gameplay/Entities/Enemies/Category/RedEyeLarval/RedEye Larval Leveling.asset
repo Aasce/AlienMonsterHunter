@@ -24,7 +24,7 @@ MonoBehaviour:
       _deltaValue: 3
       _type: 0
     - _targetKey: Speed
-      _deltaValue: 0.1
+      _deltaValue: 0.08
       _type: 0
     - _targetKey: AttackDamage
       _deltaValue: 1
@@ -32,3 +32,4 @@ MonoBehaviour:
     - _targetKey: AttackSpeed
       _deltaValue: -0.06
       _type: 0
+  _specificLevelChanges: []

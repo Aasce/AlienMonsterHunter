@@ -21,6 +21,6 @@ MonoBehaviour:
       _deltaValue: 0
       _type: 0
     - _targetKey: IgniteDamage
-      _deltaValue: 2.2
+      _deltaValue: 2
       _type: 0
   _specificLevelChanges: []

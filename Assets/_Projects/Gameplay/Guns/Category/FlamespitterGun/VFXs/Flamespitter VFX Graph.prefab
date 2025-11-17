@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1614266610392460395}
   - component: {fileID: 2316596019696798637}
   - component: {fileID: 1209435557587110508}
+  - component: {fileID: 6816439003375473843}
   m_Layer: 0
   m_Name: Flamespitter VFX Graph
   m_TagString: Untagged
@@ -158,3 +159,16 @@ VFXRenderer:
   m_SortingLayerID: -118909145
   m_SortingLayer: 1
   m_SortingOrder: 60
+--- !u!114 &6816439003375473843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447204997232637833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fbabef59cbbc44ab64ed97908f3e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepWorldScale: 1

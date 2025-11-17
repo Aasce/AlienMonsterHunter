@@ -81,7 +81,6 @@ namespace Asce.MainGame.UIs
 
         private void Character_OnDead(Game.Combats.DamageContainer container)
         {
-            MainGameManager.Instance.Player.Character.gameObject.SetActive(false);
             UIDeathPanel deathPanel = PanelController.GetPanelByName("Death") as UIDeathPanel;
             if (deathPanel == null) return;
 

@@ -183,6 +183,12 @@ namespace Asce.Game.Guns
             ReloadCooldown.ToComplete();
         }
 
+        public virtual void OnDeactive()
+        {
+            _isFireRequested = false;
+            _isFiring = false;
+        }
+
         protected virtual void Update()
         {
             ShootCooldown.Update(Time.deltaTime);

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &474014087066715356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2901960233895059432}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2901960233895059432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474014087066715356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.40999997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5138677205302101753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2187496694517704516
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +60,8 @@ Transform:
   m_LocalPosition: {x: 0.61, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2901960233895059432}
   m_Father: {fileID: 2554151281100757433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9192211083062409334
@@ -430,7 +462,7 @@ PrefabInstance:
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _weaponSlot
       value: 
-      objectReference: {fileID: 4701006785987877705}
+      objectReference: {fileID: 2901960233895059432}
     - target: {fileID: 7269911351320589851, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
       propertyPath: _information
       value: 
@@ -483,11 +515,6 @@ PrefabInstance:
       addedObject: {fileID: 2554151281100757433}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
---- !u!4 &4701006785987877705 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6193936041271012591, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}
-  m_PrefabInstance: {fileID: 1497478491102295974}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5441143646133516738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6866528806364630628, guid: 39f21f2e20c74f34fbfeb7587a3eb340, type: 3}

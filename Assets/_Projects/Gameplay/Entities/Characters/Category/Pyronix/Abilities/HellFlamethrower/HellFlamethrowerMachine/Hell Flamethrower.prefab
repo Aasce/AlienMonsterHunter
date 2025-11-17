@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8612561732694516754}
   - component: {fileID: 6753365717457845743}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flamethrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2478643321522103825}
   - component: {fileID: 4914000824423690626}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Chevron3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5024253880348214231}
   - component: {fileID: 3599149906201800380}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8037648711993050290}
   - component: {fileID: 4361507238448624828}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Chevron1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2214367992022717780}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Turret3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3854305072694252806}
   - component: {fileID: 4858490189834432600}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Chevron2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7459919729310042645}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2758404481065427388}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Barriel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,6 +931,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      propertyPath: m_Radius
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -945,14 +949,11 @@ PrefabInstance:
       addedObject: {fileID: 2214367992022717780}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 6644710616123814808}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 215771438482278003}
-    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5931515608283035065}
     - targetCorrespondingSourceObject: {fileID: 1148935409875242304, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4585557305161807061}
@@ -968,6 +969,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &890088018215735893 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 7770575921076954389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2509753202912583704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -1003,6 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: 0e92672c769d4fa4f9ac747dcdb96a36, type: 2}
+  _collider: {fileID: 890088018215735893}
   _leveling: {fileID: 36654321969514260}
   _view: {fileID: 6629668329275346555}
   _stats: {fileID: 4704843696197874417}
@@ -1049,42 +1056,6 @@ MonoBehaviour:
   _detectCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
---- !u!58 &5931515608283035065
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169569836086568417}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.85
 --- !u!4 &5441663077838536802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2328935080028939639, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}

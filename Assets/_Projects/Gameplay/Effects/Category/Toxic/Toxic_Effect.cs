@@ -1,6 +1,6 @@
 using Asce.Game.Combats;
 using Asce.Game.SaveLoads;
-using Asce.Game.Stats;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -8,7 +8,8 @@ namespace Asce.Game.Effects
 {
     public class Toxic_Effect : Effect
     {
-		[SerializeField] private Cooldown _damageCooldown = new(1f);
+		[SerializeField, Readonly] private Cooldown _damageCooldown = new(1f);
+
 		public override void Initialize() 
 		{
 			base.Initialize();

@@ -216,11 +216,8 @@ MonoBehaviour:
   _isFireRequested: 0
   _requestedDirection: {x: 0, y: 0}
   _flameEffect: {fileID: 5957914451058396424}
-  _igniteCooldown:
-    _baseTime: 0.2
-    _currentTime: 0.2
-  _hitRadius: 10
-  _angle: 35
+  _fireRadius: 10
+  _fireAngle: 30
   _targetLayer:
     serializedVersion: 2
     m_Bits: 512

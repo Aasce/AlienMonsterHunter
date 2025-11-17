@@ -1,13 +1,14 @@
 using Asce.Game.Entities;
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Effects
 {
     public class GhostStep_Effect : Effect
     {
-        [SerializeField] private string _speedStatId = string.Empty;
-        [SerializeField] private string _untargetableStatId = string.Empty;
+        [SerializeField, Readonly] private string _speedStatId = string.Empty;
+        [SerializeField, Readonly] private string _untargetableStatId = string.Empty;
 
         protected override void InternalApply()
         {

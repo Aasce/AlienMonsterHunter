@@ -41,6 +41,7 @@ namespace Asce.Game.Entities.Machines
             get => _moveDirection;
             set => _moveDirection = value.normalized;
         }
+        public bool IsStopMoving => _isStopMoving;
 
         protected override void RefReset()
         {

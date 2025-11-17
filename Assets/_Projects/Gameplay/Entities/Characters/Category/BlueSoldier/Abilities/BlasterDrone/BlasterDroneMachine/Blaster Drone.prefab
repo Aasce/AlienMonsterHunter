@@ -1428,6 +1428,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 22.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8261770142665938220, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.2
@@ -1449,14 +1453,11 @@ PrefabInstance:
       addedObject: {fileID: 5672528481010606621}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 83928014521103576}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 4171414739935295679}
-    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6984300752042976519}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3381059469015896167}
@@ -1521,6 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: 1f1da895c207b254290b73d08fa601bf, type: 2}
+  _collider: {fileID: 6277843562576335373}
   _leveling: {fileID: 6613364298095298380}
   _view: {fileID: 523555667531533859}
   _stats: {fileID: 1877910099987362473}
@@ -1560,42 +1562,6 @@ MonoBehaviour:
   _detectCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
---- !u!58 &6984300752042976519
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088363195667506617}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.6
 --- !u!50 &3381059469015896167
 Rigidbody2D:
   serializedVersion: 5
@@ -1650,6 +1616,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &6277843562576335373 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 3500416772148798797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6613364298095298380 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7733974995214737921, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}

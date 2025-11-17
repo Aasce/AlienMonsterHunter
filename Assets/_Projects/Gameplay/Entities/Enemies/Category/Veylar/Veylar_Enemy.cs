@@ -13,9 +13,6 @@ namespace Asce.Game.Entities.Enemies
 {
     public class Veylar_Enemy : Enemy
     {
-        [Header("Veylar")]
-        [SerializeField] private CircleCollider2D _collider;
-
         [Space]
         [SerializeField] private string _veylarEggsAbilityName = string.Empty;
 
@@ -52,7 +49,7 @@ namespace Asce.Game.Entities.Enemies
             OnDead += Veylar_OnDead;
             _maturationCooldown.Reset();
             _currentPhase = 1;
-            this.SetSize();
+            this.ApplySize();
         }
 
         public override void ResetStatus()
@@ -64,7 +61,7 @@ namespace Asce.Game.Entities.Enemies
             _layable = true;
             _maturationCooldown.Reset();
             _currentPhase = 1;
-            this.SetSize();
+            this.ApplySize();
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
@@ -110,7 +107,7 @@ namespace Asce.Game.Entities.Enemies
                 if (_currentPhase < maxPhase)
                 {
                     _currentPhase++;
-                    this.SetSize();
+                    this.ApplySize();
                 }
             }
 
@@ -160,13 +157,12 @@ namespace Asce.Game.Entities.Enemies
             this.SpawnExplosionVFX(radius);
         }
 
-        private void SetSize()
+        private void ApplySize()
         {
             float t = (_currentPhase - 1) / (float)(_maxPhase - 1);
             float size = Mathf.Lerp(_sizeRange.x, _sizeRange.y, t);
-            _collider.radius = size;
-            Agent.radius = size * 0.5f;
-            View.RootTransform.localScale = Vector3.one * size;
+            
+            this.SetSize(size);
 
             float multiPerPhase = Information.Stats.GetCustomStat("MultiPerPhase");
             Stats.Health.Add(multiPerPhase, StatValueType.Ratio);
@@ -220,7 +216,7 @@ namespace Asce.Game.Entities.Enemies
             _layable = data.GetCustom("Layable", false);
             _maturationCooldown.CurrentTime = data.GetCustom("MaturationCooldown", 0f);
             _layCooldown.CurrentTime = data.GetCustom("LayCooldown", 0f);
-            this.SetSize();
+            this.ApplySize();
         }
     }
 }

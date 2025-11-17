@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7223390183717523865}
   - component: {fileID: 8699901770634668839}
+  - component: {fileID: -338828737191882775}
   m_Layer: 0
   m_Name: Helicopter Ignite Effect
   m_TagString: Untagged
@@ -44,12 +45,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2b59b5a32d0634fb4a78e55c0e2c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: ada3ef3117ac6c848a044de93caeb313, type: 2}
+  _sender: {fileID: 0}
   _receiver: {fileID: 0}
   _duration:
     _baseTime: 0
     _currentTime: 0
   _strength: 0
+  _stack: 0
   _igniteCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
+--- !u!114 &-338828737191882775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6628943802869201297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d984a7236d5ff43819d087b8cbd0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 8699901770634668839}
+  _vfxName: Ignite Effect VFX
+  _despawnTimeAdding: 0
+  _vfxObject: {fileID: 0}

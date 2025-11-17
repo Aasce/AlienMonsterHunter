@@ -16,7 +16,7 @@ namespace Asce.Game.Stats
 
         public override float FinalValue
         {
-            get => _finalValue;
+            get => base.FinalValue;
             protected set
             {
                 float oldValue = _finalValue;
@@ -37,6 +37,8 @@ namespace Asce.Game.Stats
             }
         }
 
+        public bool IsFull => CurrentValue >= FinalValue;
+        public bool IsEmpty => CurrentValue <= 0f;
 
         ResourceStatSaveData ISaveable<ResourceStatSaveData>.Save()
         {

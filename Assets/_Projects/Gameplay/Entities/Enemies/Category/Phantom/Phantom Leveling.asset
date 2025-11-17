@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Phantom Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _levelingMode: 1
+  _levelingMode: 2
   _levelChanges: []
   _uniformGrowth:
     _modifications:
@@ -21,7 +21,7 @@ MonoBehaviour:
       _deltaValue: 3
       _type: 0
     - _targetKey: Armor
-      _deltaValue: 4
+      _deltaValue: 5
       _type: 0
     - _targetKey: Speed
       _deltaValue: 0.08
@@ -29,12 +29,43 @@ MonoBehaviour:
     - _targetKey: AttackDamage
       _deltaValue: 1
       _type: 0
-    - _targetKey: ShowDistance
-      _deltaValue: -0.2
-      _type: 0
     - _targetKey: DecayDuration
       _deltaValue: 1
       _type: 0
     - _targetKey: DecayStrength
       _deltaValue: 0.01
       _type: 0
+  _specificLevelChanges:
+  - Level: 3
+    ModificationGroup:
+      _modifications:
+      - _targetKey: ShowDistance
+        _deltaValue: -0.5
+        _type: 0
+  - Level: 5
+    ModificationGroup:
+      _modifications:
+      - _targetKey: HealAmount
+        _deltaValue: 2
+        _type: 0
+      - _targetKey: ShowDistance
+        _deltaValue: -0.5
+        _type: 0
+  - Level: 8
+    ModificationGroup:
+      _modifications:
+      - _targetKey: HealAmount
+        _deltaValue: 2
+        _type: 0
+      - _targetKey: ShowDistance
+        _deltaValue: -0.5
+        _type: 0
+  - Level: 10
+    ModificationGroup:
+      _modifications:
+      - _targetKey: HealAmount
+        _deltaValue: 2
+        _type: 0
+      - _targetKey: ShowDistance
+        _deltaValue: -0.5
+        _type: 0

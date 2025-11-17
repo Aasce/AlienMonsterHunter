@@ -14,7 +14,6 @@ namespace Asce.Game.Entities.Characters
     public class Character : Entity, IUsableGun, ISaveable<CharacterSaveData>, ILoadable<CharacterSaveData>
     {
         [Header("Character")]
-        [SerializeField, Readonly] private CircleCollider2D _collider;
         [SerializeField, Readonly] private Rigidbody2D _rigidbody;
         [SerializeField, Readonly] private CharacterFOV _fov;
         [SerializeField, Readonly] private CharacterAbilities _abilities;
@@ -34,7 +33,6 @@ namespace Asce.Game.Entities.Characters
         public new CharacterStats Stats => base.Stats as CharacterStats;
         public new ExpLeveling Leveling => base.Leveling as ExpLeveling;
 
-        public CircleCollider2D Collider => _collider;
         public Rigidbody2D Rigidbody => _rigidbody;
         public CharacterFOV Fov => _fov;
         public CharacterAbilities Abilities => _abilities;
@@ -78,13 +76,6 @@ namespace Asce.Game.Entities.Characters
             }
         }
 
-        public override void ResetStatus()
-        {
-            base.ResetStatus();
-            Abilities.ResetStatus();
-            if (Gun != null) Gun.ResetStatus();
-        }
-
         public override void Initialize()
         {
             base.Initialize();
@@ -110,6 +101,31 @@ namespace Asce.Game.Entities.Characters
             {
                 Fov.Fov.ViewAngle = newValue;
             };
+
+            OnDead += (Combats.DamageContainer container) =>
+            {
+                _moveDirection = Vector2.zero;
+                this.OnDeactive();
+                gameObject.SetActive(false);
+            };
+        }
+
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            Abilities.ResetStatus();
+            if (Gun != null) Gun.ResetStatus();
+        }
+
+        protected override void OnDeactive()
+        {
+            base.OnDeactive();
+            if (Gun != null) Gun.OnDeactive();
+        }
+
+        public override void SetSize(float size)
+        {
+            base.SetSize(size);
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)

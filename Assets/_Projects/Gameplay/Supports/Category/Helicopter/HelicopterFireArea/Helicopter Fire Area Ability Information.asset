@@ -19,9 +19,9 @@ MonoBehaviour:
   _isPassive: 0
   _cooldown: 0
   _useRangeRadius: Infinity
-  _despawnTime: 10
+  _despawnTime: 8
   _customValues:
     _list:
     - _name: IgniteDamage
-      _value: 8
+      _value: 6
   _leveling: {fileID: 11400000, guid: 9683ebed4c8518841bc1ec24faf8bc17, type: 2}

@@ -1788,6 +1788,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6518278466991250572, guid: dc3d01ff6094a114bba37cc73d2ae9e2, type: 3}
   m_PrefabInstance: {fileID: 5549576088510674506}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5855204952522559745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2037267422986708811, guid: dc3d01ff6094a114bba37cc73d2ae9e2, type: 3}
+  m_PrefabInstance: {fileID: 5549576088510674506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ccd692f848da7499e1922a2fed8441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7312592709713552503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1852,6 +1863,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      propertyPath: m_Radius
+      value: 1.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1869,11 +1884,8 @@ PrefabInstance:
       addedObject: {fileID: 531470170407234864}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 70264434300075263}
-    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1638484217204957972}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4674635985159231442}
@@ -1893,6 +1905,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 107440792372533045}
   m_SourcePrefab: {fileID: 100100000, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+--- !u!58 &213665500783973175 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 7312592709713552503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1022058847253120630 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7733974995214737921, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -1933,11 +1950,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: cabb9f50be61d134e887d56f453b7a16, type: 2}
+  _collider: {fileID: 213665500783973175}
   _leveling: {fileID: 1022058847253120630}
   _view: {fileID: 5957274715578289945}
   _stats: {fileID: 5757812095336100755}
   _effects: {fileID: 6297840916617960471}
-  _ui: {fileID: 0}
+  _ui: {fileID: 5855204952522559745}
   _agent: {fileID: 2805387932534156414}
   _fovSelf: {fileID: 4837649807917477831}
   _healRadiusVFX: {fileID: 8128854185971403708}
@@ -1950,42 +1968,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _healVFXName: Ambulance Heal VFX
---- !u!58 &1638484217204957972
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5265602496493724803}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1.6
 --- !u!61 &4674635985159231442
 BoxCollider2D:
   m_ObjectHideFlags: 0

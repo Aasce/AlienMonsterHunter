@@ -78,6 +78,7 @@ namespace Asce.Game.Entities.Enemies
 
             this.OnDead += (Combats.DamageContainer container) =>
             {
+                this.OnDeactive();
                 EnemyController.Instance.Despawn(this);
             };
         }
@@ -90,6 +91,12 @@ namespace Asce.Game.Entities.Enemies
             View.ResetStatus();
             UI.ResetStatus();
             TargetDetection.ResetTarget();
+        }
+
+        public override void SetSize(float size)
+        {
+            base.SetSize(size);
+            Agent.radius = Collider.radius;
         }
 
         protected virtual void Update()

@@ -5,6 +5,7 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
+using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -28,6 +29,8 @@ namespace Asce.Game.Abilities
         [Header("Runtime")]
         [SerializeField, Readonly] private float _currentRadius = 0f;
         private ISendDamageable _ownerSender;
+        private readonly Collider2D[] _overlapResults = new Collider2D[16];
+        private ContactFilter2D _contactFilter;
 
         public Rigidbody2D Rigidbody => _rigidbody;
         public float DamageDeal
@@ -64,6 +67,12 @@ namespace Asce.Game.Abilities
             _igniteStrength = Information.GetCustomValue("IgniteStrength");
             CurrentRadius = _radiusRange.x;
             this.InitializeFireVFX();
+            _contactFilter = new ContactFilter2D
+            {
+                layerMask = _victimLayer,
+                useLayerMask = true,
+                useTriggers = true,
+            };
         }
 
         private void InitializeFireVFX()
@@ -94,6 +103,7 @@ namespace Asce.Game.Abilities
         public override void OnActive()
         {
             base.OnActive();
+            if (Owner == null) return;
             _ownerSender = Owner.GetComponent<ISendDamageable>();
         }
 
@@ -134,9 +144,10 @@ namespace Asce.Game.Abilities
 
         private void SendDamage()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, CurrentRadius, _victimLayer);
-            foreach (Collider2D collider in colliders)
+            int count = Physics2D.OverlapCircle(transform.position, CurrentRadius, _contactFilter, _overlapResults);
+            for (int i = 0; i < count; i++)
             {
+                Collider2D collider = _overlapResults[i];
                 if (!collider.enabled) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
@@ -182,6 +193,16 @@ namespace Asce.Game.Abilities
             _damageInterval.CurrentTime = data.GetCustom<float>("DamageCooldown");
             Rigidbody.linearVelocity = data.GetCustom<Vector2>("LinearVelocity");
             CurrentRadius = data.GetCustom<float>("CurrentRadius");
+
+            StartCoroutine(LoadOwner(data));
+
+            IEnumerator LoadOwner(AbilitySaveData data)
+            {
+                yield return null;
+                this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
+                if (Owner == null) yield break;
+                _ownerSender = Owner.GetComponent<ISendDamageable>();
+            }
 
             this.LoadVFX();
         }

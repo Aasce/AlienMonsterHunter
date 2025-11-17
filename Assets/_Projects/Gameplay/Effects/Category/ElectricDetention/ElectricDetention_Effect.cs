@@ -1,12 +1,13 @@
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Effects
 {
     public class ElectricDetention_Effect : Effect
     {
-        [SerializeField] private string _unmoveableStatId = string.Empty;
-        [SerializeField] private string _unattackableStatId = string.Empty;
+        [SerializeField, Readonly] private string _unmoveableStatId = string.Empty;
+        [SerializeField, Readonly] private string _unattackableStatId = string.Empty;
 
         protected override void InternalApply()
         {

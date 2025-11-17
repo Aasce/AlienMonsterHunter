@@ -17,7 +17,6 @@ namespace Asce.Game.Effects
         [Space]
         [SerializeField, Readonly] private VFXObject _vfxObject;
 
-
         protected override void RefReset()
         {
             base.RefReset();
@@ -31,6 +30,12 @@ namespace Asce.Game.Effects
             _effect.OnUnapplied += Effect_OnUnapplied;
         }
 
+        private void Update()
+        {
+            if (_vfxObject == null) return;
+            _vfxObject.DespawnCooldown.CurrentTime = _effect.Duration.CurrentTime + _despawnTimeAdding;
+        }
+
         private void Effect_OnApplied()
         {
             if (_effect.Receiver == null) return;
@@ -38,7 +43,7 @@ namespace Asce.Game.Effects
             if (_vfxObject == null) return;
 
             _vfxObject.DespawnCooldown.SetBaseTime(_effect.Duration.CurrentTime + _despawnTimeAdding);
-            if (_vfxObject.TryGetComponent(out FollowingVFX following))
+            if (_vfxObject.TryGetComponent(out FollowingVFXObject following))
             {
                 following.Target = _effect.Receiver.transform;
             }
@@ -47,7 +52,7 @@ namespace Asce.Game.Effects
         private void Effect_OnUnapplied()
         {
             if (_vfxObject == null) return;
-
+            _vfxObject.DespawnCooldown.CurrentTime = _despawnTimeAdding;
         }
 
     }

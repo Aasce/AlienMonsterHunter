@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6912594444350751745}
   - component: {fileID: 3575954223004293713}
+  - component: {fileID: 4054163919601119968}
   m_Layer: 0
   m_Name: Decay Effect
   m_TagString: Untagged
@@ -52,4 +53,21 @@ MonoBehaviour:
     _baseTime: 0
     _currentTime: 0
   _strength: 0
+  _stack: 0
   _statId: 
+--- !u!114 &4054163919601119968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704542592409285525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d984a7236d5ff43819d087b8cbd0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 3575954223004293713}
+  _vfxName: Decay Effect VFX
+  _despawnTimeAdding: 0.2
+  _vfxObject: {fileID: 0}

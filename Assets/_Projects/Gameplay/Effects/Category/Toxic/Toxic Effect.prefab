@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 655934599668204714}
   - component: {fileID: 4580831413785609179}
+  - component: {fileID: 5073551274998682989}
   m_Layer: 0
   m_Name: Toxic Effect
   m_TagString: Untagged
@@ -44,12 +45,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e6b2a8093d0f14b8cbad08c401090a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 8ba97a9d2b60b3248a85200c32debb78, type: 2}
+  _sender: {fileID: 0}
   _receiver: {fileID: 0}
   _duration:
     _baseTime: 0
     _currentTime: 0
   _strength: 0
+  _stack: 0
   _damageCooldown:
     _baseTime: 1
     _currentTime: 1
+--- !u!114 &5073551274998682989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126226975046913544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d984a7236d5ff43819d087b8cbd0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 4580831413785609179}
+  _vfxName: Toxic Effect VFX
+  _despawnTimeAdding: 0.2
+  _vfxObject: {fileID: 0}

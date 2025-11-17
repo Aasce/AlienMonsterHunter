@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha_Clip: 0.1
-    - _Speed: 0.5
+    - _Speed: 0.6
     m_Colors:
     - _Color: {r: 2.2672567, g: 0.64703, b: 0.13603541, a: 1}
     - _Tilling: {r: 2.5, g: 2.5, b: 0, a: 0}

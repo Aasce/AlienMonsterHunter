@@ -1,11 +1,12 @@
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Effects
 {
     public class Root_Effect : Effect
     {
-        [SerializeField] private string _statId = string.Empty;
+        [SerializeField, Readonly] private string _statId = string.Empty;
 
         protected override void InternalApply()
         {

@@ -24,5 +24,6 @@ MonoBehaviour:
       _deltaValue: 0.5
       _type: 0
     - _targetKey: ToxicStrength
-      _deltaValue: 0.7
+      _deltaValue: 0.6
       _type: 0
+  _specificLevelChanges: []

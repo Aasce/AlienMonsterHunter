@@ -826,6 +826,10 @@ PrefabInstance:
       propertyPath: m_AgentTypeID
       value: -334000983
       objectReference: {fileID: 0}
+    - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: avoidancePriority
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _animator
       value: 
@@ -938,6 +942,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.175
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -948,9 +960,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: 1
       addedObject: {fileID: 3035042326583770649}
-    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 3651779634959012725}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: 4
       addedObject: {fileID: 7162019434357919257}
@@ -998,6 +1007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: b38c87fd8461e1542a6d75afd3fa6db5, type: 2}
+  _collider: {fileID: 7622473334329894525}
   _leveling: {fileID: 2963130601497834890}
   _view: {fileID: 4479981263036912699}
   _stats: {fileID: 7783401725456655176}
@@ -1009,43 +1019,6 @@ MonoBehaviour:
     _baseTime: 0
     _currentTime: 0
   _mouth: {fileID: 6585977737803448331}
---- !u!70 &3651779634959012725
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660312851770388653}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.2}
-  m_Size: {x: 1.25, y: 1.5}
-  m_Direction: 0
 --- !u!114 &7162019434357919257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c585d2fdf95dc248a84ba97664539da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &7622473334329894525 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1826056266009959949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7783401725456655176 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8454178846099897669, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

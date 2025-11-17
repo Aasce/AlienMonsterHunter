@@ -1,5 +1,6 @@
 using Asce.Game.Combats;
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ namespace Asce.Game.Effects
 {
     public class HelicopterIgnite_Effect : Effect
     {
-        [SerializeField] private Cooldown _igniteCooldown = new(0.5f);
+        [SerializeField, Readonly] private Cooldown _igniteCooldown = new(0.5f);
+
         public override void Initialize()
         {
             base.Initialize();

@@ -35,7 +35,7 @@ namespace Asce.Game
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (_points == null || _points.Count == 0) return;
 

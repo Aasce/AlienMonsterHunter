@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 861541010000062730}
   - component: {fileID: 8960925648448065414}
   - component: {fileID: 4863129201304188434}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Check Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4856,9 +4856,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1045652585
-  m_SortingLayer: -1
-  m_SortingOrder: 10
+  m_SortingLayerID: -118909145
+  m_SortingLayer: 1
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -205,14 +209,11 @@ PrefabInstance:
       addedObject: {fileID: 9117009424017864097}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 6340247942037272000}
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 517232104960402180}
-    - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5317723731595728239}
   m_SourcePrefab: {fileID: 100100000, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
 --- !u!4 &2694993667880455196 stripped
 Transform:
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: 9e411ac411fa5f44a8c35f679959731b, type: 2}
+  _collider: {fileID: 7113465970685468203}
   _leveling: {fileID: 7953384583278627690}
   _view: {fileID: 3666899809849082373}
   _stats: {fileID: 3434231801076383375}
@@ -282,42 +284,6 @@ MonoBehaviour:
   _detectCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
---- !u!58 &5317723731595728239
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2980294071628491167}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
 --- !u!114 &3434231801076383375 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3070425576698468324, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -354,6 +320,11 @@ MonoBehaviour:
 --- !u!4 &5491663618482973798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 375065869851765099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7113465970685468203 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7461510169741653824, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
   m_PrefabInstance: {fileID: 375065869851765099}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7953384583278627690 stripped

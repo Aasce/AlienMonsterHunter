@@ -18,7 +18,7 @@ MonoBehaviour:
   _uniformGrowth:
     _modifications:
     - _targetKey: Damage
-      _deltaValue: 0.01
+      _deltaValue: 0.008
       _type: 0
     - _targetKey: ReloadCooldown
       _deltaValue: -0.15
@@ -28,19 +28,19 @@ MonoBehaviour:
     ModificationGroup:
       _modifications:
       - _targetKey: MagazineSize
-        _deltaValue: 5
+        _deltaValue: 6
         _type: 0
       - _targetKey: StartAmmo
-        _deltaValue: 50
+        _deltaValue: 60
         _type: 0
   - Level: 5
     ModificationGroup:
       _modifications:
       - _targetKey: MagazineSize
-        _deltaValue: 5
+        _deltaValue: 6
         _type: 0
       - _targetKey: StartAmmo
-        _deltaValue: 50
+        _deltaValue: 60
         _type: 0
       - _targetKey: IgniteDuration
         _deltaValue: 1
@@ -52,19 +52,19 @@ MonoBehaviour:
     ModificationGroup:
       _modifications:
       - _targetKey: MagazineSize
-        _deltaValue: 5
+        _deltaValue: 6
         _type: 0
       - _targetKey: StartAmmo
-        _deltaValue: 50
+        _deltaValue: 60
         _type: 0
   - Level: 10
     ModificationGroup:
       _modifications:
       - _targetKey: MagazineSize
-        _deltaValue: 5
+        _deltaValue: 6
         _type: 0
       - _targetKey: StartAmmo
-        _deltaValue: 50
+        _deltaValue: 60
         _type: 0
       - _targetKey: IgniteDuration
         _deltaValue: 1

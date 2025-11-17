@@ -3,6 +3,7 @@ using Asce.Game.Effects;
 using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -14,16 +15,16 @@ namespace Asce.Game.Guns
         [SerializeField] VisualEffect _flameEffect;
 
         [Header("Flame Settings")]
-        [SerializeField] private Cooldown _igniteCooldown = new(0.25f);
-        [SerializeField] private float _hitRadius = 0.3f;
-        [SerializeField] private float _angle = 45f;
+        [SerializeField] private float _fireRadius = 10f;
+        [SerializeField] private float _fireAngle = 30f;
         [SerializeField] private LayerMask _targetLayer;
-        private readonly Collider2D[] _overlapResults = new Collider2D[8];
+
+        private readonly Collider2D[] _overlapResults = new Collider2D[16];
         private ContactFilter2D _contactFilter;
 
         [Header("Ignite Settings")]
-        [SerializeField, Min(0f)] private float _igniteDuration = 5f;
-        [SerializeField, Min(0f)] private float _igniteStrength = 3f;
+        [SerializeField, Readonly] private float _igniteDuration = 5f;
+        [SerializeField, Readonly] private float _igniteStrength = 3f;
 
         public override void Initialize()
         {
@@ -46,6 +47,11 @@ namespace Asce.Game.Guns
         public override void ResetStatus()
         {
             base.ResetStatus();
+        }
+
+        public override void OnDeactive()
+        {
+            base.OnDeactive();
             _flameEffect.Stop();
         }
 
@@ -74,6 +80,11 @@ namespace Asce.Game.Guns
             }
         }
 
+        private void OnEnable()
+        {
+            _flameEffect.Stop();
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -88,7 +99,7 @@ namespace Asce.Game.Guns
             Vector3 origin = _barrel != null ? _barrel.position : transform.position;
             Vector2 forward = transform.up;
 
-            int count = Physic2DUtils.OverlapConeNonAlloc(origin, _hitRadius, forward, _angle, _contactFilter, _overlapResults);
+            int count = Physic2DUtils.OverlapConeNonAlloc(origin, _fireRadius, forward, _fireAngle, _contactFilter, _overlapResults);
             for (int i = 0; i < count; i++)
             {
                 Collider2D collider = _overlapResults[i];
@@ -135,7 +146,6 @@ namespace Asce.Game.Guns
 
         }
 
-        // ensure buffer rebind if effect changed
         protected override void OnAfterLoad(GunSaveData data)
         {
             base.OnAfterLoad(data);
@@ -163,8 +173,8 @@ namespace Asce.Game.Guns
                 Gizmos.DrawLine(origin, origin + rightDir * distance);
             }
 
-            DrawSpreadEdges(_angle, _hitRadius, Color.red);
-            Gizmos.DrawWireSphere(origin, _hitRadius);
+            DrawSpreadEdges(_fireAngle, _fireRadius, Color.red);
+            Gizmos.DrawWireSphere(origin, _fireRadius);
         }
 #endif
     }

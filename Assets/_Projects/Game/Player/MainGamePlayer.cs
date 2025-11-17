@@ -126,6 +126,12 @@ namespace Asce.MainGame.Players
                 }
 
                 if (isInteract) Character.Interact();
+
+                if (Input.GetKeyDown(KeyCode.P)) Character.Gun.Leveling.SetLevel(10);
+                if (Input.GetKeyDown(KeyCode.O)) Character.Leveling.SetLevel(10);
+                if (Input.GetKeyDown(KeyCode.I)) foreach (var abi in Character.Abilities.ActiveAbilities) abi.Level = 10;
+                if (Input.GetKeyDown(KeyCode.I)) foreach (var sup in SupportCaller.Supports) sup.Level = 10;
+                if (Input.GetKeyDown(KeyCode.G)) Character.SetSize(Character.Size + 0.1f);
             }
         }
 

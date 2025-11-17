@@ -706,6 +706,10 @@ PrefabInstance:
       propertyPath: m_AgentTypeID
       value: -334000983
       objectReference: {fileID: 0}
+    - target: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: avoidancePriority
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _animator
       value: 
@@ -818,6 +822,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Radius
+      value: 0.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -829,10 +841,7 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 8727078275380452219}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 3902003007277446763}
-    - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
-      insertIndex: 4
+      insertIndex: 3
       addedObject: {fileID: 4189329990699897520}
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
@@ -849,6 +858,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c585d2fdf95dc248a84ba97664539da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3667288174776913835 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 4790651642123466715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3974592246808758942 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8454178846099897669, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -884,6 +898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _information: {fileID: 11400000, guid: 08beecfa3d201c14d9d7cf063268e806, type: 2}
+  _collider: {fileID: 3667288174776913835}
   _leveling: {fileID: 8229065683280944220}
   _view: {fileID: 7278013877516238317}
   _stats: {fileID: 3974592246808758942}
@@ -894,12 +909,11 @@ MonoBehaviour:
   _attackCooldown:
     _baseTime: 0
     _currentTime: 0
-  _collider: {fileID: 3902003007277446763}
   _veylarEggsAbilityName: Veylar Eggs
   _maturationCooldown:
     _baseTime: 7
     _currentTime: 0
-  _sizeRange: {x: 0.3, y: 1.5}
+  _sizeRange: {x: 1, y: 6}
   _maxPhase: 6
   _currentPhase: 0
   _explosionDamage: 0
@@ -909,42 +923,6 @@ MonoBehaviour:
     _baseTime: 23
     _currentTime: 23
   _explosionVFXName: Veylar Explosion Splatter
---- !u!58 &3902003007277446763
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5487136466935306619}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.3
 --- !u!114 &4189329990699897520
 MonoBehaviour:
   m_ObjectHideFlags: 0
