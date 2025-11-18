@@ -3,6 +3,7 @@ using Asce.Game.Enviroments;
 using Asce.Game.Managers;
 using Asce.Game.Players;
 using Asce.Game.Supports;
+using Asce.MainGame.Managers;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
@@ -52,8 +53,8 @@ namespace Asce.MainGame.Players
             }
 
             OnCharacterChanged += MainGamePlayer_OnCharacterChanged;
+            MainGameManager.Instance.GameStateController.OnEndGame += GameStateController_OnEndGame;
         }
-
 
         public void ReviveCharacter(bool isReviveAtSpawnPoint = false)
         {
@@ -143,5 +144,15 @@ namespace Asce.MainGame.Players
                 CameraController.Instance.SetToTarget();
             }
         }
+
+        private void GameStateController_OnEndGame()
+        {
+            PlayerManager.Instance.Progress.CharactersProgress.SetLevel(
+                Character.Information.Name,
+                Character.Leveling.CurrentLevel,
+                Character.Leveling.CurrentExp
+            );
+        }
+
     }
 }

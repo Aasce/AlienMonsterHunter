@@ -1,6 +1,7 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
+using Asce.Game.Players;
 using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.Utils;
@@ -51,6 +52,16 @@ namespace Asce.PrepareGame.Picks
         public void PickCharacter(Character prefab)
         {
             if (CharacterPrefab == prefab) return;
+            if (prefab != null)
+            {
+                SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
+                if (playerProgressController == null) return;
+
+                CharacterProgress progress = PlayerManager.Instance.Progress.CharactersProgress.Get(prefab.Information.Name);
+                bool isUnlocked = progress != null && progress.IsUnlocked;
+                if (!isUnlocked) return;
+            }
+
             this.UnregisterCharacter();
             _characterPrefab = prefab;
             this.RegisterCharacter();
@@ -112,9 +123,10 @@ namespace Asce.PrepareGame.Picks
             }
 
             // Assign new character
-            newCharacter.Initialize();
             _characterInstance = newCharacter;
-            PrepareGameManager.Instance.Player.Character = newCharacter;
+            _characterInstance.Initialize();
+            PlayerManager.Instance.Progress.CharactersProgress.ApplyTo(_characterInstance);
+            PrepareGameManager.Instance.Player.Character = _characterInstance;
 
             // If gun instance already exists, transfer it to new character
             if (_gunInstance != null)

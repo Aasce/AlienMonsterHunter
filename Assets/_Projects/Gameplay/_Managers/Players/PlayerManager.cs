@@ -1,4 +1,5 @@
 using Asce.Managers;
+using Asce.Managers.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Players
@@ -6,11 +7,19 @@ namespace Asce.Game.Players
     public class PlayerManager : DontDestroyOnLoadSingleton<PlayerManager>
     {
         [SerializeField] private Player _player;
+        [SerializeField] private PlayerProgress _progress;
 
         public Player Player
         {
             get => _player;
             protected set => _player = value;
+        }
+
+        public PlayerProgress Progress => _progress;
+
+        private void Reset()
+        {
+            this.LoadComponent(out _progress);
         }
 
         /// <summary>

@@ -30,6 +30,11 @@ namespace Asce.Game.Levelings
             CurrentExp = 0;
         }
 
+        public virtual void SetExp(int exp)
+        {
+            CurrentExp = Mathf.Clamp(exp, 0, ExpToLevelUp());
+        }
+
         public override void LevelUp()
         {
             base.LevelUp();
@@ -79,7 +84,7 @@ namespace Asce.Game.Levelings
         public int ExpToLevelUp()
         {
             if (BaseLeveling == null) return 0;
-            return BaseLeveling.BaseExpToLevelUp + BaseLeveling.ExpIncrementPerLevel * CurrentLevel;
+            return BaseLeveling.ExpToLevelUp(CurrentLevel);
         }
 
         ExpLevelingSaveData ISaveable<ExpLevelingSaveData>.Save()

@@ -17,5 +17,10 @@ namespace Asce.Game.Levelings
 
         /// <summary> The additional experience required for each subsequent level. </summary>
         public int ExpIncrementPerLevel => _expIncrementPerLevel;
+
+        public virtual int ExpToLevelUp(int currentLevel)
+        {
+            return BaseExpToLevelUp + ExpIncrementPerLevel * currentLevel;
+        }
     }
 }

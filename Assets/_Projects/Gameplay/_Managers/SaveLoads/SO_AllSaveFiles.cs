@@ -12,8 +12,19 @@ namespace Asce.SaveLoads
 			return saveFile.Name;
 		});
 
+        [SerializeField]
+        private ListObjects<string, SaveFile> _saveFolders = new((saveFolder) =>
+        {
+            if (saveFolder == null) return null;
+            return saveFolder.Name;
+        });
+
 
         public SaveFile Get(string name) => _saveFiles.Get(name);
 		public string GetPath(string name) => this.Get(name)?.Path;
+
+
+        public SaveFile GetFolder(string name) => _saveFolders.Get(name);
+		public string GetFolderPath(string name) => this.GetFolder(name)?.Path;
     }
 }

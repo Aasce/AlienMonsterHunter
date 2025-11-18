@@ -1,6 +1,7 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
 using Asce.PrepareGame.Picks;
+using Asce.SaveLoads;
 using System.Collections.Generic;
 
 namespace Asce.PrepareGame.UIs.Collections
@@ -13,8 +14,6 @@ namespace Asce.PrepareGame.UIs.Collections
         {
             base.ItemClick(uiItem);
             PickController.Instance.PickCharacter(uiItem.Item);
-            //if (UIPrepareGameController.Instance.HUDController.Picked.CharacterSlot == null) return; 
-            //UIPrepareGameController.Instance.HUDController.Picked.CharacterSlot.Set(uiItem.Item);
         }
 
     }

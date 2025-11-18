@@ -30,17 +30,18 @@ namespace Asce.PrepareGame.UIs.Collections
             _buyButton.onClick.AddListener(BuyButton_OnClick);
         }
 
-        protected override void InternalSet(Gun gun)
+        protected override void Register()
         {
-            if (gun == null || gun.Information == null)
+            base.Register();
+            if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
                 return;
             }
 
             this.IsShowContent(true);
-            _icon.sprite = gun.Information.Icon;
-            _nameText.text = gun.Information.Name;
+            _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
             this.SetBuyButton();
         }
 

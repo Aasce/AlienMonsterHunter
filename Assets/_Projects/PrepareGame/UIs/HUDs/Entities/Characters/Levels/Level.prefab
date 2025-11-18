@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1753080907417557462}
   - component: {fileID: 2994241270975397881}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Exp Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelText: {fileID: 4924640754421453444}
   _progessText: {fileID: 2799915888133920718}
-  _levelSlider: {fileID: 2994241270975397881}
+  _expSlider: {fileID: 2994241270975397881}
 --- !u!1 &6403979036283003053
 GameObject:
   m_ObjectHideFlags: 0

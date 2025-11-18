@@ -2,6 +2,7 @@ using Asce.Game.Entities.Characters;
 using Asce.Game.Enviroments;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
+using Asce.Game.Players;
 using Asce.Managers;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Asce.MainGame.Managers
             MainGameManager.Instance.Player.Character = characterInstance;
             MainGameManager.Instance.Player.Character.transform.position = EnviromentController.Instance.CharacterSpawnPoint;
             MainGameManager.Instance.Player.Character.Initialize();
+            PlayerManager.Instance.Progress.CharactersProgress.ApplyTo(MainGameManager.Instance.Player.Character);
         }
 
         private void CreateSupportForPlayer()

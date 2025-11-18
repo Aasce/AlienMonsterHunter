@@ -1,4 +1,5 @@
 using Asce.Game.Entities.Characters;
+using Asce.Game.Players;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,10 @@ namespace Asce.PrepareGame.UIs
         [Header("Abilitites")]
         [SerializeField] private UIAbilities _abilities;
 
+        private void Start()
+        {
+            _inviteButton.onClick.AddListener(InviteButton_OnClick);
+        }
 
         public override void Set(Character character)
         {
@@ -61,18 +66,26 @@ namespace Asce.PrepareGame.UIs
 
         private void SetInviteContent()
         {
-            bool isJoined = false;
-            _joinedContent.gameObject.SetActive(isJoined);
-            _inviteContent.gameObject.SetActive(!isJoined);
+            CharacterProgress progress = PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
+            bool isUnlocked = progress != null && progress.IsUnlocked;
+            _joinedContent.gameObject.SetActive(isUnlocked);
+            _inviteContent.gameObject.SetActive(!isUnlocked);
 
-            if (isJoined)
+            if (isUnlocked)
             {
-                _levelProgess.Set(Item);
+                _levelProgess.Set(progress);
             }
             else
             {
 
             }
         }
+
+        private void InviteButton_OnClick()
+        {
+            PlayerManager.Instance.Progress.CharactersProgress.Unlock(Item.Information.Name);
+            this.SetInviteContent();
+        }
+
     }
 }

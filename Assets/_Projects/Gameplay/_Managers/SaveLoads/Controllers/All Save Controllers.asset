@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controllers:
     _list:
+    - {fileID: 6296496084533819029, guid: 8b88878913180fc479418a9eb9fc2f21, type: 3}
     - {fileID: 4481059259994278846, guid: 71b6a5e8bde26954299a028345aa1a33, type: 3}
-    - {fileID: 7734930926541254472, guid: 6e544ebc5b7051e4da02deb3f2ce163d, type: 3}

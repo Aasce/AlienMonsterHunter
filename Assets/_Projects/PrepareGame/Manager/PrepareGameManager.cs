@@ -54,14 +54,20 @@ namespace Asce.PrepareGame.Manager
                 .ToList()
             );
 
-            PrepareGameSaveLoadController.Instance.SaveLastPick();
+            this.BeforeChangeScene();
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
         public void BackToMainMenu()
         {
-            PrepareGameSaveLoadController.Instance.SaveLastPick();
+            this.BeforeChangeScene();
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
+        }
+
+        private void BeforeChangeScene()
+        {
+            PrepareGameSaveLoadController.Instance.SaveLastPick();
+            PlayerManager.Instance.Progress.SaveAll();
         }
     }
 }

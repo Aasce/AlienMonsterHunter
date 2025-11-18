@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -73,7 +74,7 @@ namespace Asce.Managers.Utils
         ///     If the input is null, empty, or contains no valid characters, 
         ///     returns <see cref="string.Empty"/>.
         /// </returns>
-        public static string SanitizeAndCamelCase(string input)
+        public static string SanitizeAndCamelCase(this string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return string.Empty;
 
@@ -94,6 +95,40 @@ namespace Asce.Managers.Utils
 
             // Combine the words into a single CamelCase string
             return string.Join("", words);
+        }
+
+        /// <summary>
+        ///     Convert a string to standard snake_case:
+        ///     - Split words by CamelCase, PascalCase, spaces, and symbols.
+        ///     - Convert to lowercase.
+        ///     - Collapse consecutive separators into a single underscore.
+        ///     - Trim leading and trailing underscores.
+        /// </summary>
+        public static string ToSnakeCase(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+
+            // Normalize whitespace and make splitting easier
+            string result = input;
+
+            // Insert underscore before capital letters (CamelCase tp snake_case)
+            // But not at the very start.
+            result = Regex.Replace(result, "([a-z0-9])([A-Z])", "$1_$2");
+
+            // Replace any non-alphanumeric with an underscore
+            result = Regex.Replace(result, "[^a-zA-Z0-9]", "_");
+
+            // Collapse multiple underscores
+            result = Regex.Replace(result, "_+", "_");
+
+            // Lowercase
+            result = result.ToLowerInvariant();
+
+            // Trim leading/trailing underscores
+            result = result.Trim('_');
+
+            return result;
         }
     }
 }

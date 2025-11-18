@@ -525,10 +525,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.5
-  m_fontSizeBase: 36
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -832,6 +832,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8287572464189063803, guid: b0dc29704feb52d4fa8e17820de21b40, type: 3}
       insertIndex: 1
       addedObject: {fileID: 8503257309862499762}
+    - targetCorrespondingSourceObject: {fileID: 8287572464189063803, guid: b0dc29704feb52d4fa8e17820de21b40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5527635802834297614}
   m_SourcePrefab: {fileID: 100100000, guid: b0dc29704feb52d4fa8e17820de21b40, type: 3}
 --- !u!1 &4122257678846834685 stripped
 GameObject:
@@ -854,11 +857,25 @@ MonoBehaviour:
   _item: {fileID: 0}
   _content: {fileID: 4042371047923007799}
   _nothingContent: {fileID: 5640208305305243094}
+  _tintColor: {fileID: 5527635802834297614}
   _icon: {fileID: 5147659793274655700}
   _nameText: {fileID: 60367981967323084}
   _levelText: {fileID: 8605834652910457357}
   _roleValueText: {fileID: 8808548521828153131}
   _difficultySlider: {fileID: 1243005205813973209}
+--- !u!114 &5527635802834297614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122257678846834685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d7e277a7a565741932f61c0aae3a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!224 &7634236394641665161 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2577234597116860687, guid: b0dc29704feb52d4fa8e17820de21b40, type: 3}

@@ -30,3 +30,11 @@ MonoBehaviour:
       _path: current/interactive_objects.json
     - _name: PrepareGameLastPick
       _path: prepare/last_pick.json
+  _saveFolders:
+    _list:
+    - _name: Characters
+      _path: players/characters
+    - _name: Guns
+      _path: players/guns
+    - _name: Supports
+      _path: players/supports

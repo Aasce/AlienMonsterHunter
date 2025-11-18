@@ -19,6 +19,7 @@ namespace Asce.MainGame.Managers
         public event Action<ValueChangedEventArgs<MainGameState>> OnGameStateChanged;
         public event Action OnVictory;
         public event Action OnDefeat;
+        public event Action OnEndGame;
 
         public MainGameState GameState
         {
@@ -73,12 +74,14 @@ namespace Asce.MainGame.Managers
         {
             GameState = MainGameState.Completed;
             OnVictory?.Invoke();
+            OnEndGame?.Invoke();
         }
 
         public void ToDefeat()
         {
             GameState = MainGameState.Failed;
             OnDefeat?.Invoke();
+            OnEndGame?.Invoke();
         }
     }
 }

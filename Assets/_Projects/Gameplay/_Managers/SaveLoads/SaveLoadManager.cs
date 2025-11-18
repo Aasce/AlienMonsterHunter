@@ -1,5 +1,7 @@
 using Asce.Managers;
 using Asce.Managers.SaveLoads;
+using Asce.Managers.Utils;
+using System.IO;
 using UnityEngine;
 
 namespace Asce.SaveLoads
@@ -26,13 +28,13 @@ namespace Asce.SaveLoads
         }
 
         /// <summary> Load an object from the specified save file. </summary>
-        public T Load<T>(string saveName)
+        public T Load<T>(string saveName, T defaultResult = default)
         {
             string path = _allSaveFiles.GetPath(saveName);
             if (string.IsNullOrEmpty(path))
             {
                 Debug.LogError($"[SaveLoadManager] Save file '{saveName}' not found.");
-                return default;
+                return defaultResult;
             }
 
             return SaveLoadSystem.Load<T>(path);
@@ -49,6 +51,34 @@ namespace Asce.SaveLoads
             }
 
             SaveLoadSystem.Delete(path);
+        }
+
+        /// <summary> Save an object to the specified save file. </summary>
+        public void SaveIntoFolder<T>(string folder, string saveName, T data)
+        {
+            string path = _allSaveFiles.GetFolderPath(folder);
+            if (string.IsNullOrEmpty(path))
+            {
+                Debug.LogError($"[SaveLoadManager] Save folder '{folder}' not found.");
+                return;
+            }
+
+            string saveFileName = $"{saveName.ToSnakeCase()}.json";
+            SaveLoadSystem.Save(data, Path.Combine(path, saveFileName));
+        }
+
+        /// <summary> Load an object from the specified save file. </summary>
+        public T LoadFromFolder<T>(string folder, string saveName, T defaultResult = default)
+        {
+            string path = _allSaveFiles.GetFolderPath(folder);
+            if (string.IsNullOrEmpty(path))
+            {
+                Debug.LogError($"[SaveLoadManager] Save folder '{folder}' not found.");
+                return defaultResult;
+            }
+
+            string saveFileName = $"{saveName.ToSnakeCase()}.json";
+            return SaveLoadSystem.Load<T>(Path.Combine(path, saveFileName));
         }
     }
 }

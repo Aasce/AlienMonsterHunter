@@ -34,10 +34,20 @@ namespace Asce.PrepareGame.UIs.Collections
 
         public void Set(T item)
         {
+            this.Unregister();
             Item = item;
-            this.InternalSet(item);
+            this.Register();
         }
-        protected abstract void InternalSet(T item);
+
+        protected virtual void Register()
+        {
+
+        }
+
+        protected virtual void Unregister()
+        {
+
+        }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {

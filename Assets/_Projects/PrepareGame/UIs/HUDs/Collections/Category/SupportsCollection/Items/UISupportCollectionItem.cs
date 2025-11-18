@@ -11,17 +11,18 @@ namespace Asce.PrepareGame.UIs.Collections
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
-        protected override void InternalSet(Support support)
+        protected override void Register()
         {
-            if (support == null || support.Information == null)
+            base.Register();
+            if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
                 return;
             }
 
             this.IsShowContent(true);
-            _icon.sprite = support.Information.Icon;
-            _nameText.text = support.Information.Name;
+            _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
             _levelText.text = "lv. NaN";
         }
     }
