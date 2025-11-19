@@ -54,9 +54,6 @@ namespace Asce.PrepareGame.Picks
             if (CharacterPrefab == prefab) return;
             if (prefab != null)
             {
-                SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-                if (playerProgressController == null) return;
-
                 CharacterProgress progress = PlayerManager.Instance.Progress.CharactersProgress.Get(prefab.Information.Name);
                 bool isUnlocked = progress != null && progress.IsUnlocked;
                 if (!isUnlocked) return;
@@ -70,7 +67,14 @@ namespace Asce.PrepareGame.Picks
 
         public void PickGun(Gun prefab)
         {
-            if (GunPrefab == prefab) return; 
+            if (GunPrefab == prefab) return;
+            if (prefab != null)
+            {
+                GunProgress progress = PlayerManager.Instance.Progress.GunsProgress.Get(prefab.Information.Name);
+                bool isUnlocked = progress != null && progress.IsUnlocked;
+                if (!isUnlocked) return;
+            }
+
             this.UnregisterGun();
             _gunPrefab = prefab;
             this.RegisterGun();
@@ -149,6 +153,7 @@ namespace Asce.PrepareGame.Picks
             // Instantiate new gun
             _gunInstance = Instantiate(GunPrefab);
             _gunInstance.Initialize();
+            PlayerManager.Instance.Progress.GunsProgress.ApplyTo(_gunInstance);
 
             // If character exists
             if (playerCharacter != null)
@@ -156,6 +161,7 @@ namespace Asce.PrepareGame.Picks
                 // Destroy old gun if exists
                 if (playerCharacter.Gun != null)
                 {
+                    playerCharacter.Gun.OnDeactive();
                     Destroy(playerCharacter.Gun.gameObject);
                 }
 

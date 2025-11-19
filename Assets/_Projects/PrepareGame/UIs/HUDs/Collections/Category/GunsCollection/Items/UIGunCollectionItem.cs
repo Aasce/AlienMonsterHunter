@@ -1,4 +1,7 @@
 using Asce.Game.Guns;
+using Asce.Game.Players;
+using Asce.Game.UIs;
+using log4net.Core;
 using System;
 using TMPro;
 using UnityEngine;
@@ -9,25 +12,17 @@ namespace Asce.PrepareGame.UIs.Collections
     public class UIGunCollectionItem : UICollectionItem<Gun>
     {
         [Header("Gun")]
+        [SerializeField] private UITintColor _tintColor;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
-        [Header("Purchase")]
-        [SerializeField] private RectTransform _purchasedContent;
-        [SerializeField] private TextMeshProUGUI _purchasedText;
+        public GunProgress Progress => PlayerManager.Instance.Progress.GunsProgress.Get(Item.Information.Name);
 
-        [Space]
-        [SerializeField] private RectTransform _buyContent;
-        [SerializeField] private TextMeshProUGUI _priceText;
-        [SerializeField] private Button _buyButton;
-
-        public bool IsPurchased => false;
-
-        protected override void Start()
+        protected void OnDestroy()
         {
-            base.Start();
-            _buyButton.onClick.AddListener(BuyButton_OnClick);
+            if (PlayerManager.Instance == null) return;
+            this.Unregister();
         }
 
         protected override void Register()
@@ -42,31 +37,41 @@ namespace Asce.PrepareGame.UIs.Collections
             this.IsShowContent(true);
             _icon.sprite = Item.Information.Icon;
             _nameText.text = Item.Information.Name;
-            this.SetBuyButton();
+            this.SetPurchasedState();
+
+            Progress.OnUnlocked += SetPurchasedState;
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
-        private void SetBuyButton()
+        protected override void Unregister()
         {
-            bool isPurchased = this.IsPurchased;
-            _purchasedContent.gameObject.SetActive(isPurchased);
-            _levelText.gameObject.SetActive(isPurchased);
-            _buyContent.gameObject.SetActive(!isPurchased);
+            base.Unregister();
+            if (Item == null || Item.Information == null) return;
 
+            Progress.OnUnlocked -= SetPurchasedState;
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
+        }
+
+        protected virtual void SetPurchasedState()
+        {
+            GunProgress progress = Progress;
+            bool isPurchased = progress != null && progress.IsUnlocked;
             if (isPurchased)
             {
-                _levelText.text = $"lv. {100}";
+                _tintColor.TintColor = Color.white;
+                _levelText.gameObject.SetActive(true);
+                _levelText.text = $"lv. {progress.Level}";
             }
             else
             {
-                _priceText.text = $"${1000}";
+                _tintColor.TintColor = Color.gray;
+                _levelText.gameObject.SetActive(false);
             }
         }
 
-        private void BuyButton_OnClick()
+        private void Progress_OnLevelChanged(int newLevel)
         {
-            if (this.IsPurchased) return;
-
-
+            _levelText.text = $"lv. {newLevel}";
         }
 
     }

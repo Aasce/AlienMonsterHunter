@@ -1,29 +1,15 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
-using Asce.Managers;
 using Asce.SaveLoads;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UnityEngine;
-
 namespace Asce.Game.Players
 {
-    public class CharactersProgress : GameComponent
+    public class CharactersProgress : PlayerCollectionProgress<Character, CharacterProgress>
     {
-        [SerializeField] private List<CharacterProgress> _charactersProgress = new();
-        private Dictionary<string, CharacterProgress> _charactersProgressDictionary;
-        private ReadOnlyCollection<CharacterProgress> _charactersProgressReadonly;
+        protected override IEnumerable<Character> Collection => GameManager.Instance.AllCharacters.Characters;
 
-        public ReadOnlyCollection<CharacterProgress> AllProgresses => _charactersProgressReadonly ??= _charactersProgress.AsReadOnly();
-        public CharacterProgress Get(string name)
-        {
-            if (_charactersProgressDictionary == null) this.Initialize();
-            if (_charactersProgressDictionary.TryGetValue(name, out CharacterProgress progress))
-            {
-                return progress;
-            }
-            return null;
-        }
+        protected override CharacterProgress CreateProgressInstance(string name) => new (name);
+        protected override string GetInformationName(Character item) => item == null? string.Empty : item.Information.Name;
 
         public void ApplyTo(Character character)
         {
@@ -36,19 +22,6 @@ namespace Asce.Game.Players
             character.Leveling.SetExp(characterProgress.Exp);
         }
 
-        public void Unlock(string name)
-        {
-            CharacterProgress characterProgress = Get(name);
-            if (characterProgress == null) return;
-            if (characterProgress.IsUnlocked) return;
-
-            characterProgress.IsUnlocked = true;
-
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.SaveCharacterProgress(characterProgress);
-        }
 
         public void SetLevel(string name, int level, int exp)
         {
@@ -58,31 +31,23 @@ namespace Asce.Game.Players
 
             characterProgress.Level = level;
             characterProgress.Exp = exp;
+            this.SaveProgress(characterProgress);
+        }
 
+        protected override void SaveProgress(CharacterProgress characterProgress)
+        {
             SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
             if (playerProgressController == null) return;
 
             playerProgressController.SaveCharacterProgress(characterProgress);
         }
 
-        private void Initialize()
+        protected override void LoadProgress(CharacterProgress characterProgress)
         {
             SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
             if (playerProgressController == null) return;
-            
-            IEnumerable<Character> characters = GameManager.Instance.AllCharacters.Characters;
-            foreach (Character character in characters)
-            {
-                CharacterProgress characterProgress = new(character.Information.Name);
-                playerProgressController.LoadCharacterProgress(characterProgress);
-                _charactersProgress.Add(characterProgress);
-            }
 
-            _charactersProgressDictionary = new Dictionary<string, CharacterProgress>();
-            foreach (var characterProgress in _charactersProgress)
-            {
-                _charactersProgressDictionary[characterProgress.Name] = characterProgress;
-            }
+            playerProgressController.LoadCharacterProgress(characterProgress);
         }
     }
 }

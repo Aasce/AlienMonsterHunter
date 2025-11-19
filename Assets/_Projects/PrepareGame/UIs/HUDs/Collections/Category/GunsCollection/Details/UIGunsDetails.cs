@@ -1,4 +1,6 @@
 using Asce.Game.Guns;
+using Asce.Game.Players;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,14 +13,26 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private Image _icon;
 
-        [Space]
+        [Header("Purchase")]
+        [SerializeField] private RectTransform _buyContent;
         [SerializeField] private Button _buyButton;
 
+        [Space]
         [SerializeField] private RectTransform _purchasedContent;
         [SerializeField] private TextMeshProUGUI _level;
+        [SerializeField] private Button _upgradeButton;
 
+        [Header("Stats")]
         [SerializeField] private UIMagazineGroup _magazineGroup;
         [SerializeField] private UIGunMode _gunMode;
+
+        protected GunProgress Progress => PlayerManager.Instance.Progress.GunsProgress.Get(Item.Information.Name);
+
+        private void Start()
+        {
+            _buyButton.onClick.AddListener(BuyButton_OnClick);
+            _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
+        }
 
 
         public override void Set(Gun gun)
@@ -34,12 +48,13 @@ namespace Asce.PrepareGame.UIs
             if (Item == null) return;
             if (Item.Information == null) return;
 
-            if (_nameText != null) _nameText.text = Item.Information.Name;
-            if (_icon != null) _icon.sprite = Item.Information.Icon;
-            this.SetBuyButton();
+            _nameText.text = Item.Information.Name;
+            _icon.sprite = Item.Information.Icon;
+            _magazineGroup.Set(Item.Information);
+            _gunMode.Set(null);
 
-            if (_magazineGroup != null) _magazineGroup.Set(Item.Information);
-            if (_gunMode != null) _gunMode.Set(null);
+            this.SetPurchasedState();
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
         private void Unregister()
@@ -47,30 +62,43 @@ namespace Asce.PrepareGame.UIs
             if (Item == null) return;
             if (Item.Information == null) return;
 
-
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        private void SetBuyButton()
+        private void SetPurchasedState()
         {
-            bool isBought = false;
-            if (isBought)
+            GunProgress progress = Progress;
+            bool isPurchased = progress != null && progress.IsUnlocked;
+            _purchasedContent.gameObject.SetActive(isPurchased);
+            _buyContent.gameObject.SetActive(!isPurchased);
+
+            if (isPurchased)
             {
-                if (_buyButton != null) _buyButton.gameObject.SetActive(false);
-                if (_purchasedContent != null)
-                {
-                    _purchasedContent.gameObject.SetActive(true);
-                    if (_level != null) _level.text = $"lv. NaN";
-                }
+                _level.text = $"lv. {progress.Level}";
             }
             else
             {
-                if (_purchasedContent != null) _purchasedContent.gameObject.SetActive(false);
-                if (_buyButton != null)
-                {
-                    _buyButton.gameObject.SetActive(true);
-                }
+
             }
         }
 
+        private void BuyButton_OnClick()
+        {
+            PlayerManager.Instance.Progress.GunsProgress.Unlock(Item.Information.Name);
+            this.SetPurchasedState();
+        }
+
+        private void UpgradeButton_OnClick()
+        {
+            GunProgress progress = Progress;
+            if (progress == null) return;
+
+            PlayerManager.Instance.Progress.GunsProgress.SetLevel(Item.Information.Name, progress.Level + 1);
+        }
+
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _level.text = $"lv. {newLevel}";
+        }
     }
 }

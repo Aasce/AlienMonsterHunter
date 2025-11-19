@@ -21,7 +21,7 @@ namespace Asce.PrepareGame.UIs
             int expToLevelUp = progress.ExpToLevelUp(progress.Level);
             _expSlider.maxValue = expToLevelUp;
             _expSlider.value = progress.Exp;
-            if (progress.IsMaxLevel())
+            if (progress.IsMaxLevel)
             {
                 _progessText.text = "MAX";
             }

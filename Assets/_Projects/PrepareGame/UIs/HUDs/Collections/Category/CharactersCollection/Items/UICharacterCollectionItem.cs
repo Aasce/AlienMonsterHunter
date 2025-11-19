@@ -1,7 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
 using Asce.Game.UIs;
-using Asce.SaveLoads;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ namespace Asce.PrepareGame.UIs.Collections
 {
     public class UICharacterCollectionItem : UICollectionItem<Character>
     {
-        [Space]
+        [Header("Character")]
         [SerializeField] private UITintColor _tintColor;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
@@ -46,6 +45,7 @@ namespace Asce.PrepareGame.UIs.Collections
             this.SetLockedState();
 
             Progress.OnUnlocked += SetLockedState;
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
         protected override void Unregister()
@@ -54,6 +54,7 @@ namespace Asce.PrepareGame.UIs.Collections
             if (Item == null || Item.Information == null) return;
 
             Progress.OnUnlocked -= SetLockedState;
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
         protected virtual void SetLockedState()
@@ -71,7 +72,12 @@ namespace Asce.PrepareGame.UIs.Collections
                 _tintColor.TintColor = Color.gray;
                 _levelText.gameObject.SetActive(false);
             }
-
         }
+
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _levelText.text = $"lv. {newLevel}";
+        }
+
     }
 }

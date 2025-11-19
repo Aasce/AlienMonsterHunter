@@ -32,9 +32,9 @@ MonoBehaviour:
       _path: prepare/last_pick.json
   _saveFolders:
     _list:
-    - _name: Characters
-      _path: players/characters
-    - _name: Guns
-      _path: players/guns
-    - _name: Supports
-      _path: players/supports
+    - _name: CharactersProgress
+      _path: progress/characters
+    - _name: GunsProgress
+      _path: progress/guns
+    - _name: SupportsProgress
+      _path: progress/supports

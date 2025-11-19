@@ -28,7 +28,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8166026178649325076}
+  - {fileID: 7748133279726121928}
   - {fileID: 8932562322394860017}
   m_Father: {fileID: 3840859013525944287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8932562322394860017}
   m_Layer: 5
-  m_Name: Purchased
+  m_Name: Purchased Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7180339054171404928}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.32598507
+  m_Size: 0.32598504
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -869,6 +869,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6803888175355708905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7748133279726121928}
+  m_Layer: 5
+  m_Name: Buy Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7748133279726121928
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803888175355708905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8166026178649325076}
+  m_Father: {fileID: 3966224559287769636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7039300249543337613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,13 +1991,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 118245385336236107, guid: fd1da2bf6cabc644bb236e849fe212cc, type: 3}
   m_PrefabInstance: {fileID: 1318502100079829335}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5171707294859789690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6163698147067913261, guid: fd1da2bf6cabc644bb236e849fe212cc, type: 3}
+  m_PrefabInstance: {fileID: 1318502100079829335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3175768695407651140
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3966224559287769636}
+    m_TransformParent: {fileID: 7748133279726121928}
     m_Modifications:
     - target: {fileID: 1444328261511922209, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_Name
@@ -1969,7 +2016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1444328261511922209, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6719675510319404880, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_Pivot.x
@@ -2021,15 +2068,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6719675510319404880, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6719675510319404880, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6719675510319404880, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6719675510319404880, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2308,9 +2355,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nameText: {fileID: 9076622158349259746}
   _icon: {fileID: 105136286364797426}
+  _buyContent: {fileID: 7748133279726121928}
   _buyButton: {fileID: 2701668057277936242}
   _purchasedContent: {fileID: 8932562322394860017}
   _level: {fileID: 6029051107511524688}
+  _upgradeButton: {fileID: 5171707294859789690}
   _magazineGroup: {fileID: 7362830854606494638}
   _gunMode: {fileID: 7732383900971877923}
 --- !u!224 &9021982935055179490 stripped

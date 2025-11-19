@@ -7,31 +7,23 @@ using UnityEngine;
 namespace Asce.Game.Players
 {
     [System.Serializable]
-    public class CharacterProgress : ISaveable<CharacterProgressSaveData>, ILoadable<CharacterProgressSaveData>
+    public class CharacterProgress : PlayerItemProgress, ISaveable<CharacterProgressSaveData>, ILoadable<CharacterProgressSaveData>
     {
-        [SerializeField] private string _name = string.Empty;
-        [SerializeField] private bool _isUnlocked = false;
         [SerializeField] private int _level = 0;
         [SerializeField] private int _exp = 0;
 
-        public event Action OnUnlocked;
-
-        public string Name => _name;
-        public bool IsUnlocked
-        {
-            get => _isUnlocked;
-            set
-            {
-                if (_isUnlocked == value) return;
-                _isUnlocked = value;
-                if (_isUnlocked) OnUnlocked?.Invoke();
-            }
-        }
+        public event Action<int> OnLevelChanged;
 
         public int Level
         {
             get => _level;
-            set => _level = value;
+            set
+            {
+                int newLevel = Mathf.Clamp(value, 0, MaxLevel);
+                if (_level == newLevel) return;
+                _level = newLevel;
+                OnLevelChanged?.Invoke(_level);
+            }
         }
 
         public int Exp
@@ -40,10 +32,19 @@ namespace Asce.Game.Players
             set => _exp = value;
         }
 
-        public CharacterProgress(string name) 
+        public int MaxLevel
         {
-            _name = name;
+            get
+            {
+                Character characterPrefab = GameManager.Instance.AllCharacters.Get(_name);
+                if (characterPrefab == null) return 0;
+                return characterPrefab.Information.Leveling.MaxLevel;
+            }
         }
+
+        public bool IsMaxLevel => _level >= MaxLevel;
+
+        public CharacterProgress(string name) : base(name) { }
 
         public int ExpToLevelUp(int currentLevel)
         {
@@ -53,12 +54,6 @@ namespace Asce.Game.Players
             return characterPrefab.Information.Leveling.ExpToLevelUp(currentLevel);
         }
 
-        public bool IsMaxLevel()
-        {
-            Character characterPrefab = GameManager.Instance.AllCharacters.Get(_name);
-            if (characterPrefab == null) return true;
-            return _level >= characterPrefab.Information.Leveling.MaxLevel;
-        }
 
         CharacterProgressSaveData ISaveable<CharacterProgressSaveData>.Save()
         {

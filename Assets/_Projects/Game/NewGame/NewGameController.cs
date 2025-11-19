@@ -45,6 +45,7 @@ namespace Asce.MainGame.Managers
             MainGameManager.Instance.Player.Character.transform.position = EnviromentController.Instance.CharacterSpawnPoint;
             MainGameManager.Instance.Player.Character.Initialize();
             PlayerManager.Instance.Progress.CharactersProgress.ApplyTo(MainGameManager.Instance.Player.Character);
+            PlayerManager.Instance.Progress.GunsProgress.ApplyTo(MainGameManager.Instance.Player.Character.Gun);
         }
 
         private void CreateSupportForPlayer()
