@@ -22,6 +22,11 @@ namespace Asce.SaveLoads
             {
                 this.SaveGunProgress(progress);
             }
+
+            foreach (SupportProgress progress in PlayerManager.Instance.Progress.SupportsProgress.AllProgresses)
+            {
+                this.SaveSupportProgress(progress);
+            }
         }
 
         public void SaveCharacterProgress(CharacterProgress characterProgress)
@@ -55,6 +60,24 @@ namespace Asce.SaveLoads
             GunProgressSaveData saveData = SaveLoadManager.Instance.LoadFromFolder<GunProgressSaveData>("GunsProgress", gunProgress.Name);
             if (saveData == null) return;
             if (gunProgress is ILoadable<GunProgressSaveData> loadable)
+            {
+                loadable.Load(saveData);
+            }
+        }
+
+        public void SaveSupportProgress(SupportProgress supportProgress)
+        {
+            if (supportProgress is not ISaveable<SupportProgressSaveData> saveable) return;
+            SupportProgressSaveData saveData = saveable.Save();
+
+            SaveLoadManager.Instance.SaveIntoFolder("SupportsProgress", supportProgress.Name, saveData);
+        }
+
+        public void LoadSupportProgress(SupportProgress supportProgress)
+        {
+            SupportProgressSaveData saveData = SaveLoadManager.Instance.LoadFromFolder<SupportProgressSaveData>("SupportsProgress", supportProgress.Name);
+            if (saveData == null) return;
+            if (supportProgress is ILoadable<SupportProgressSaveData> loadable)
             {
                 loadable.Load(saveData);
             }

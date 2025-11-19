@@ -1,4 +1,5 @@
 using Asce.Game.Enviroments;
+using Asce.Game.Players;
 using Asce.Game.SaveLoads;
 using Asce.Managers;
 using Asce.Managers.Attributes;
@@ -32,12 +33,12 @@ namespace Asce.Game.Supports
             set => _id = value; 
         }
 
-        public void Initialize(List<string> _supportIds)
+        public void Initialize(List<string> _supportKeys)
         {
             if (string.IsNullOrEmpty(_id)) _id = IdGenerator.NewId(PREFIX_ID);
-            if (_supportIds == null) return;
+            if (_supportKeys == null) return;
             _supports.Clear();
-            foreach (string id in _supportIds)
+            foreach (string id in _supportKeys)
             {
                 if (string.IsNullOrEmpty(id)) continue;
                 SupportContainer container = new(id);
@@ -47,6 +48,7 @@ namespace Asce.Game.Supports
                     continue;
                 }
 
+                PlayerManager.Instance.Progress.SupportsProgress.ApplyTo(container);
                 _supports.Add(container);
             }
 

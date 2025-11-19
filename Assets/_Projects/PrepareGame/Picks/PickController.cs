@@ -84,6 +84,13 @@ namespace Asce.PrepareGame.Picks
         public void PickSupport(int index, Support support)
         {
             if (index < 0) return;
+            if (support != null)
+            {
+                SupportProgress progress = PlayerManager.Instance.Progress.SupportsProgress.Get(support.Information.Key);
+                bool isUnlocked = progress != null && progress.IsUnlocked;
+                if (!isUnlocked) return;
+            }
+
             _supportPrefabs.InsertOrExpandAt(index, support);
             OnPickSupport?.Invoke(index, support);
         }

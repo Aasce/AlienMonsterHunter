@@ -34,7 +34,6 @@ namespace Asce.PrepareGame.UIs
             _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
         }
 
-
         public override void Set(Gun gun)
         {
             if (Item == gun) return;

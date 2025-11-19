@@ -1,8 +1,6 @@
 using Asce.Game.Guns;
 using Asce.Game.Players;
 using Asce.Game.UIs;
-using log4net.Core;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

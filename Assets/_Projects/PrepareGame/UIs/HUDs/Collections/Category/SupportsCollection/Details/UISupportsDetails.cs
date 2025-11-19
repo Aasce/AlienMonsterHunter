@@ -1,3 +1,4 @@
+using Asce.Game.Players;
 using Asce.Game.Supports;
 using TMPro;
 using UnityEngine;
@@ -11,16 +12,26 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private Image _icon;
 
+        [Header("Locked")]
+        [SerializeField] private RectTransform _lockedContent;
+        [SerializeField] private Button _unlockButton;
+
+        [Space]
+        [SerializeField] private RectTransform _unlockedContent;
+        [SerializeField] private TextMeshProUGUI _level;
+        [SerializeField] private Button _upgradeButton;
+
         [Header("Description")]
         [SerializeField] private TextMeshProUGUI _callCDText;
         [SerializeField] private TextMeshProUGUI _recallCDText;
         [SerializeField] private TextMeshProUGUI _descriptionText;
-        [SerializeField] private Button _upgradeButton;
 
+        protected SupportProgress Progress => PlayerManager.Instance.Progress.SupportsProgress.Get(Item.Information.Name);
 
         private void Start()
         {
-            if (_upgradeButton != null) _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
+            _unlockButton.onClick.AddListener(UnlockButton_OnClick);
+            _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
         }
 
         public override void Set(Support support)
@@ -31,18 +42,20 @@ namespace Asce.PrepareGame.UIs
             this.Register();
         }
 
-
         private void Register()
         {
             if (Item == null) return;
             if (Item.Information == null) return;
 
-            if (_nameText != null) _nameText.text = Item.Information.Name;
-            if (_icon != null) _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
+            _icon.sprite = Item.Information.Icon;
 
-            if (_callCDText != null) _callCDText.text = $"Call CD: {Item.Information.Cooldown:#.#}s";
-            if (_recallCDText != null) _recallCDText.text = $"Recall CD: {Item.Information.CooldownOnRecall:#.#}s";
-            if (_descriptionText != null) _descriptionText.text = Item.Information.Description;
+            _callCDText.text = $"Call CD: {Item.Information.Cooldown:#.#}s";
+            _recallCDText.text = $"Recall CD: {Item.Information.CooldownOnRecall:#.#}s";
+            _descriptionText.text = Item.Information.Description;
+
+            this.SetLockedState();
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
         private void Unregister()
@@ -50,12 +63,43 @@ namespace Asce.PrepareGame.UIs
             if (Item == null) return;
             if (Item.Information == null) return;
 
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
+        }
+
+        private void SetLockedState()
+        {
+            SupportProgress progress = Progress;
+            bool isUnlocked = progress != null && progress.IsUnlocked;
+            _unlockedContent.gameObject.SetActive(isUnlocked);
+            _lockedContent.gameObject.SetActive(!isUnlocked);
+
+            if (isUnlocked)
+            {
+                _level.text = $"lv. {progress.Level}";
+            }
+            else
+            {
+
+            }
+        }
+
+        private void UnlockButton_OnClick()
+        {
+            PlayerManager.Instance.Progress.SupportsProgress.Unlock(Item.Information.Name);
+            this.SetLockedState();
         }
 
         private void UpgradeButton_OnClick()
         {
+            SupportProgress progress = Progress;
+            if (progress == null) return;
 
+            PlayerManager.Instance.Progress.SupportsProgress.SetLevel(Item.Information.Name, progress.Level + 1);
+        }
 
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _level.text = $"lv. {newLevel}";
         }
 
     }

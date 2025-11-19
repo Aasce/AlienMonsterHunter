@@ -8,10 +8,12 @@ namespace Asce.Game.Players
     {
         [SerializeField] private CharactersProgress _charactersProgress;
         [SerializeField] private GunsProgress _gunsProgress;
+        [SerializeField] private SupportsProgress _supportsProgress;
 
 
         public CharactersProgress CharactersProgress => _charactersProgress;
         public GunsProgress GunsProgress => _gunsProgress;
+        public SupportsProgress SupportsProgress => _supportsProgress;
 
         public void SaveAll()
         {

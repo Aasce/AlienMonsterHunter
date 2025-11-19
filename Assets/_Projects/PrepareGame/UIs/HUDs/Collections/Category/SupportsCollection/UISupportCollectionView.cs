@@ -14,33 +14,23 @@ namespace Asce.PrepareGame.UIs.Collections
         {
             base.ItemClick(uiItem);
             int index = PickController.Instance.SupportPrefabs.FindIndex((support) => support == uiItem.Item);
-            if (index >= 0) return;
+            if (index >= 0) return; // Already picked
+
             for (int i = 0; i < PickController.Instance.MaxSupport; i++)
             {
-                if (i >= PickController.Instance.SupportPrefabs.Count)
+                if (i >= PickController.Instance.SupportPrefabs.Count) // Out of range, pick here
                 {
                     PickController.Instance.PickSupport(i, uiItem.Item);
                     return;
                 }
 
-                if (PickController.Instance.SupportPrefabs[i] == null)
+                if (PickController.Instance.SupportPrefabs[i] == null) // Empty slot
                 {
                     PickController.Instance.PickSupport(i, uiItem.Item);
                     return;
                 }
             }
 
-            //List<UISupportPickedSlot> slots = UIPrepareGameController.Instance.HUDController.Picked.SupportSlots;
-            //slots.FindIndex((uiSlot) => uiSlot.Item == uiItem.Item);
-            
-            //foreach (UISupportPickedSlot slot in slots) 
-            //{
-            //    if (slot.Item == null)
-            //    {
-            //        slot.Set(uiItem.Item);
-            //        return;
-            //    }
-            //}
         }
     }
 }
