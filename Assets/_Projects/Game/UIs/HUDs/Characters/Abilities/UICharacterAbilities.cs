@@ -58,10 +58,10 @@ namespace Asce.MainGame.UIs.HUDs
             _pools.Clear(onClear: (ability) => ability.Hide());
             this.AbilitiesHandle(_characterAbilities.PassiveAbilities);
             if (_divider != null) _divider.SetAsLastSibling();
-            this.AbilitiesHandle(_characterAbilities.ActiveAbilities, isShowKey: true);
+            this.AbilitiesHandle(_characterAbilities.ActiveAbilities);
         }
 
-        private void AbilitiesHandle(List<AbilityContainer> abilities, bool isShowKey = false) 
+        private void AbilitiesHandle(List<AbilityContainer> abilities) 
         {
             for (int i = 0; i < abilities.Count; i++)
             {
@@ -69,7 +69,7 @@ namespace Asce.MainGame.UIs.HUDs
                 UIAbility uiAbility = _pools.Activate();
                 if (uiAbility == null) continue;
 
-                uiAbility.SetKey(isShowKey ? this.GetKey(i) : KeyCode.None);
+                if (!container.Information.IsPassive) uiAbility.SetKey(this.GetKey(i));
                 uiAbility.Container = container;
                 uiAbility.transform.SetAsLastSibling();
                 uiAbility.Show();

@@ -20,6 +20,8 @@ MonoBehaviour:
   _cooldown: 8
   _useRangeRadius: 3
   _despawnTime: 6.1
+  _isReactive: 1
+  _reactiveCooldown: 0.25
   _customValues:
     _list: []
   _leveling: {fileID: 11400000, guid: 92da4da7a697ab64c8605b576e9c4401, type: 2}

@@ -77,8 +77,6 @@ namespace Asce.Game.Supports
             {
                 _cooldown.BaseTime = _supportPrefab.Information.Cooldown;
                 _cooldown.ToComplete();
-
-                _level = 0;
             }
         }
 

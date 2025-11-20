@@ -24,16 +24,6 @@ namespace Asce.Game.Entities.Characters
         public List<AbilityContainer> PassiveAbilities => _passiveAbilities;
         public List<AbilityContainer> ActiveAbilities => _activeAbilities;
 
-        private void Update()
-        {
-            foreach (AbilityContainer ability in _abilities)
-            {
-                if (ability == null) continue;
-                ability.Cooldown.Update(Time.deltaTime);
-            }
-        }
-
-
         public void Initialize(Character owner)
         {
             if (owner == null) return;
@@ -66,7 +56,24 @@ namespace Asce.Game.Entities.Characters
             foreach (AbilityContainer ability in _abilities)
             {
                 if (ability == null) continue;
-                ability.Cooldown.ToComplete();
+
+            }
+        }
+
+        private void Update()
+        {
+            foreach (AbilityContainer container in _abilities)
+            {
+                if (container == null) continue;
+                container.Cooldown.Update(Time.deltaTime);
+                if (container.AbilityInstance != null)
+                {
+                    if (!container.AbilityInstance.gameObject.activeInHierarchy)
+                    {
+                        container.AbilityInstance = null;
+                        container.Cooldown.SetBaseTime(container.Information.Cooldown);
+                    }
+                }
             }
         }
 
@@ -79,6 +86,17 @@ namespace Asce.Game.Entities.Characters
             if (container == null) return;
             if (!container.Cooldown.IsComplete) return;
 
+            if (container.Information.IsReactive && container.IsValidInstance)
+            {
+                this.Reactive(container, position);
+                return;
+            }
+
+            this.SpawnAbility(container, position);
+        }
+
+        private void SpawnAbility(AbilityContainer container, Vector2 position)
+        {
             string abilityName = container.Name;
             CharacterAbility ability = AbilityController.Instance.Spawn(abilityName, _owner.gameObject) as CharacterAbility;
             if (ability == null) return;
@@ -87,7 +105,23 @@ namespace Asce.Game.Entities.Characters
             ability.SetPosition(position);
             ability.gameObject.SetActive(true);
             ability.OnActive();
-            container.Cooldown.Reset();
+            if (!container.Information.IsReactive)
+            {
+                container.Cooldown.SetBaseTime(container.Information.Cooldown);
+                return;
+            } 
+            
+            if (container.AbilityInstance == null || !container.AbilityInstance.gameObject.activeInHierarchy)
+            {
+                container.AbilityInstance = ability;
+                container.Cooldown.SetBaseTime(container.Information.ReactiveCooldown);
+            }
+        }
+
+        private void Reactive(AbilityContainer container, Vector2 position)
+        {
+            container.AbilityInstance.Reactive(position);
+            container.Cooldown.SetBaseTime(container.Information.ReactiveCooldown);
         }
 
         CharacterAbilitiesSaveData ISaveable<CharacterAbilitiesSaveData>.Save()

@@ -15,32 +15,31 @@ namespace Asce.Game.Abilities
 
         [SerializeField, Readonly] private string _id;
         [SerializeField] private string _name;
-        [SerializeField] private int _level = 0;
-        [SerializeField] private Cooldown _cooldown = new(10f);
 
-        [Space]
-        [SerializeField] private Ability _abilityPrefab;
+        [Header("Runtime")]
+        [SerializeField, Readonly] private Ability _abilityPrefab;
+        [SerializeField, Readonly] private Ability _abilityInstance;
+        [SerializeField, Readonly] private Cooldown _cooldown = new(10f);
+        [SerializeField] private int _level = 0;
 
         public string Id => _id;
-
-        public string Name
+        public string Name => _name;
+        
+        public Ability AbilityPrefab => _abilityPrefab;
+        public SO_AbilityInformation Information => _abilityPrefab != null ? _abilityPrefab.Information : null;
+        public Ability AbilityInstance
         {
-            get => _name;
-            protected set
-            {
-                if (_name == value) return;
-                _name = value;
-                this.UpdateAbilityReference();
-            }
+            get => _abilityInstance;
+            set => _abilityInstance = value;
         }
+        public Cooldown Cooldown => _cooldown;
         public int Level
         {
             get => _level;
             set => _level = value;
         }
-        public Cooldown Cooldown => _cooldown;
-        public Ability AbilityPrefab => _abilityPrefab;
-        public bool IsValid => _abilityPrefab != null;
+        public bool IsValid => Information != null;
+        public bool IsValidInstance => AbilityInstance != null && AbilityInstance.gameObject.activeInHierarchy;
 
         string IIdentifiable.Id
         {
@@ -49,7 +48,6 @@ namespace Asce.Game.Abilities
         }
 
         public AbilityContainer() : this(string.Empty) { }
-
         public AbilityContainer(string name)
         {
             _id = IdGenerator.NewId(PREFIX_ID);
@@ -58,8 +56,8 @@ namespace Asce.Game.Abilities
         }
 
         /// <summary>
-        /// Updates ability name and prefab reference based on the given name.<br/>
-        /// If GameManager or the ability is missing, prefab will be set to null.
+        ///     Updates ability name and prefab reference based on the given name.<br/>
+        ///     If GameManager or the ability is missing, prefab will be set to null.
         /// </summary>
         private void UpdateAbilityReference()
         {
@@ -75,8 +73,6 @@ namespace Asce.Game.Abilities
             {
                 _cooldown.BaseTime = _abilityPrefab.Information.Cooldown;
                 _cooldown.ToComplete();
-
-                _level = 0;
             }
         }
 
@@ -87,6 +83,7 @@ namespace Asce.Game.Abilities
                 id = _id,
                 name = _name,
                 cooldown = _cooldown.CurrentTime,
+                abilityInstanceId = _abilityInstance != null ? _abilityInstance.Id : string.Empty
             };
         }
 
@@ -97,6 +94,7 @@ namespace Asce.Game.Abilities
             _name = data.name;
             this.UpdateAbilityReference();
             _cooldown.CurrentTime = data.cooldown;
+            _abilityInstance = ComponentUtils.FindComponentById<Ability>(data.abilityInstanceId);
         }
     }
 }

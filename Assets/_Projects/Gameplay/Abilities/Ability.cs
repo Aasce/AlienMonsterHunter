@@ -67,6 +67,7 @@ namespace Asce.Game.Abilities
         }
 
         public virtual void OnActive() { }
+        public virtual void Reactive(Vector2 position) { }
 
         public virtual void OnDespawn()
         {

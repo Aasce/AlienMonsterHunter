@@ -21,6 +21,10 @@ namespace Asce.Game.Abilities
         [SerializeField, Min(0f)] private float _despawnTime = 0f;
 
         [Space]
+        [SerializeField] private bool _isReactive = false;
+        [SerializeField, Min(0f)] private float _reactiveCooldown = 0f;
+
+        [Space]
         [SerializeField]
         private ListObjects<string, CustomValue> _customValues = new((custom) =>
         {
@@ -40,6 +44,10 @@ namespace Asce.Game.Abilities
         public float Cooldown => _cooldown;
         public float UseRangeRadius => _useRangeRadius;
         public float DaspawnTime => _despawnTime;
+
+        public bool IsReactive => _isReactive;
+        public float ReactiveCooldown => _reactiveCooldown;
+
         public SO_LevelingInformation Leveling => _leveling;
 
         public ReadOnlyCollection<CustomValue> Customs => _customValues.List;

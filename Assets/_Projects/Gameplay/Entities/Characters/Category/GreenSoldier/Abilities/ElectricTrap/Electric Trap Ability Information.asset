@@ -19,9 +19,11 @@ MonoBehaviour:
     a {CatchRadius}m radius for {DetentionDuration}s.\n\nThe trap deals no damage."
   _icon: {fileID: 21300000, guid: 43c7fdb62ffe76443a547541974a0b00, type: 3}
   _isPassive: 0
-  _cooldown: 6
+  _cooldown: 7
   _useRangeRadius: 1.5
   _despawnTime: 2.5
+  _isReactive: 1
+  _reactiveCooldown: 0
   _customValues:
     _list:
     - _name: CatchRadius

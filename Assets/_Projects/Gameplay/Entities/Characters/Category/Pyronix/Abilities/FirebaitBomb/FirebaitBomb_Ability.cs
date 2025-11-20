@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Entities.Machines;
 using Asce.Game.SaveLoads;
 using Asce.SaveLoads;
@@ -31,6 +32,12 @@ namespace Asce.Game.Abilities
         {
             base.OnSpawn();
             Machine.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+        }
+
+        public override void Reactive(Vector2 position)
+        {
+            base.Reactive(position);
+            CombatController.Instance.Killing(Machine, victim: Machine);
         }
 
         public override void SetPosition(Vector2 position)

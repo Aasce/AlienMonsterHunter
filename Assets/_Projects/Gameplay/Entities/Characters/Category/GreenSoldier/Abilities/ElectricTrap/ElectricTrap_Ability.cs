@@ -77,6 +77,15 @@ namespace Asce.Game.Abilities
             _rigidbody.AddTorque(_torque, ForceMode2D.Impulse);
         }
 
+        public override void Reactive(Vector2 position)
+        {
+            base.Reactive(position);
+            if (_catched) return;
+            this.SetCatched(true);
+            this.Catching();
+            this.SpawnVFX();
+        }
+
         public override void SetPosition(Vector2 position)
         {
             base.SetPosition(position);
@@ -154,6 +163,7 @@ namespace Asce.Game.Abilities
                 _rigidbody.linearVelocity = Vector2.zero;
                 _rigidbody.angularVelocity = 0f;
                 _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+                DespawnTime.CurrentTime = 0.5f;
             }
             else
             {
