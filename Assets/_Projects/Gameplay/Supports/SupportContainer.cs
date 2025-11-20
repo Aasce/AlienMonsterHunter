@@ -4,6 +4,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Supports
@@ -22,14 +23,23 @@ namespace Asce.Game.Supports
         [SerializeField, Readonly] private Support _supportPrefab;
         [SerializeField, Readonly] private Support _currentSupport;
 
+        public event Action<int> OnLevelChanged;
+
         public string Id => _id;
         public string SupportKey => _supportKey;
 
         public int Level
         {
             get => _level;
-            set => _level = value;
+            set
+            {
+                int newLevel = Mathf.Clamp(value, 0, MaxLevel);
+                if (_level == newLevel) return;
+                _level = newLevel;
+                OnLevelChanged?.Invoke(_level);
+            }
         }
+        public int MaxLevel => SupportPrefab != null ? SupportPrefab.Information.Leveling.MaxLevel : 0;
         public Cooldown Cooldown => _cooldown;
         public Support SupportPrefab => _supportPrefab;
         public SO_SupportInformation Information => IsValid ? _supportPrefab.Information : null;

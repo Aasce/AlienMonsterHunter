@@ -2,6 +2,7 @@ using Asce.Game.Abilities;
 using Asce.Managers.Attributes;
 using Asce.Managers.UIs;
 using Asce.Managers.Utils;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +18,15 @@ namespace Asce.MainGame.UIs.HUDs
         [SerializeField] private RectTransform _nothingContent;
 
         [Space]
+        [SerializeField] private Image _background;
         [SerializeField] private Image _icon;
         [SerializeField] private Image _cooldownFiler;
         [SerializeField] private TextMeshProUGUI _cooldownText;
+        [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _callKeyText;
 
+        [Header("Config")]
+        [SerializeField] private Color _validInstanceColor = Color.yellow;
 
         public AbilityContainer Container
         {
@@ -33,6 +38,18 @@ namespace Asce.MainGame.UIs.HUDs
                 _container = value;
                 this.Register();
             }
+        }
+
+        private void Update()
+        {
+            if (Container == null || !Container.IsValid) return;
+            if (Container.IsValidInstance)
+            {
+                _background.color = _validInstanceColor;
+                return;
+            }
+
+            _background.color = Color.white;
         }
 
         public void SetKey(KeyCode key)
@@ -57,7 +74,9 @@ namespace Asce.MainGame.UIs.HUDs
             _icon.sprite = _container.AbilityPrefab.Information.Icon;
             float ratio = _container.Cooldown.Ratio;
             this.SetCooldown(ratio);
+            _levelText.text = $"{_container.Level}";
 
+            _container.OnLevelChanged += Ability_LevelChanged;
             _container.Cooldown.OnBaseTimeChanged += AbilityCooldown_OnBaseTimeChanged;
             _container.Cooldown.OnCurrentTimeChanged += AbilityCooldown_OnCurrentTimeChanged;
         }
@@ -88,6 +107,11 @@ namespace Asce.MainGame.UIs.HUDs
                 _cooldownText.gameObject.SetActive(true);
                 _cooldownText.text = _container.Cooldown.CurrentTime.ToString("#");
             }
+        }
+
+        private void Ability_LevelChanged(int newLevel)
+        {
+            _levelText.text = $"{_container.Level}";
         }
 
         private void AbilityCooldown_OnBaseTimeChanged(object sender, float newValue)

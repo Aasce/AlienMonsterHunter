@@ -4,6 +4,7 @@ using Asce.Managers;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using Asce.SaveLoads;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
@@ -22,6 +23,8 @@ namespace Asce.Game.Abilities
         [SerializeField, Readonly] private Cooldown _cooldown = new(10f);
         [SerializeField] private int _level = 0;
 
+        public event Action<int> OnLevelChanged;
+
         public string Id => _id;
         public string Name => _name;
         
@@ -36,8 +39,15 @@ namespace Asce.Game.Abilities
         public int Level
         {
             get => _level;
-            set => _level = value;
+            set
+            {
+                int newLevel = Mathf.Clamp(value, 0, MaxLevel);
+                if (_level == newLevel) return;
+                _level = newLevel;
+                OnLevelChanged?.Invoke(_level);
+            }
         }
+        public int MaxLevel => AbilityPrefab != null ? AbilityPrefab.Information.Leveling.MaxLevel : 0;
         public bool IsValid => Information != null;
         public bool IsValidInstance => AbilityInstance != null && AbilityInstance.gameObject.activeInHierarchy;
 

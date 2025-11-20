@@ -11,18 +11,23 @@ namespace Asce.MainGame.UIs
 {
     public class UISupportItem : UIObject
     {
-        [SerializeField, Readonly] private UISupportsInformation _supportsInformation;
         [SerializeField, Readonly] private SupportContainer _container;
 
         [Header("References")]
+        [SerializeField, Readonly] private UISupportsInformation _supportsInformation;
         [SerializeField] private RectTransform _content;
         [SerializeField] private RectTransform _nothingContent;
 
         [Space]
+        [SerializeField] private Image _background;
         [SerializeField] private Image _icon;
         [SerializeField] private Image _cooldownFiler;
         [SerializeField] private TextMeshProUGUI _cooldownText;
+        [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _callKeyText;
+
+        [Header("Config")]
+        [SerializeField] private Color _validInstanceColor = Color.yellow;
 
         public UISupportsInformation SupportsInformation
         {
@@ -34,12 +39,28 @@ namespace Asce.MainGame.UIs
             }
         }
 
-        public void Set(SupportContainer container)
+        public SupportContainer Container
         {
-            if (_container == container) return;
-            this.Unregister();
-            _container = container;
-            this.Register();
+            get => _container;
+            set
+            {
+                if (_container == value) return;
+                this.Unregister();
+                _container = value;
+                this.Register();
+            }
+        }
+
+        private void Update()
+        {
+            if (Container == null || !Container.IsValid) return;
+            if (Container.CurrentSupportIsValid)
+            {
+                _background.color = _validInstanceColor;
+                return;
+            }
+
+            _background.color = Color.white;
         }
 
         public void SetKey(KeyCode key)
@@ -62,6 +83,10 @@ namespace Asce.MainGame.UIs
 
             this.IsShowContent(true);
             _icon.sprite = _container.Information.Icon;
+            _levelText.text = $"{_container.Level}";
+
+
+            _container.OnLevelChanged += Support_LevelChanged;
             _container.Cooldown.OnCurrentTimeChanged += Cooldown_OnCurrentTimeChanged;
             _container.Cooldown.OnBaseTimeChanged += Cooldown_OnBaseTimeChanged;
         }
@@ -89,6 +114,11 @@ namespace Asce.MainGame.UIs
                 _cooldownText.gameObject.SetActive(true);
                 _cooldownText.text = _container.Cooldown.CurrentTime.ToString("#");
             }
+        }
+
+        private void Support_LevelChanged(int newLevel)
+        {
+            _levelText.text = $"{_container.Level}";
         }
 
         private void Cooldown_OnBaseTimeChanged(object sender, float newValue)

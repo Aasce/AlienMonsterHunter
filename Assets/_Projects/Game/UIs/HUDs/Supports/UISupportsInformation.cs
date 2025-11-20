@@ -60,8 +60,8 @@ namespace Asce.MainGame.UIs
                 if (uiItem == null) continue;
 
                 if (isCreated) uiItem.SupportsInformation = this;
-                uiItem.Set(container);
                 uiItem.SetKey(callKey);
+                uiItem.Container = container;
                 uiItem.RectTransform.SetAsLastSibling();
                 uiItem.Show();
             }
