@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ab59f8fcaa3074b81f3f6b71890e16, type: 3}
   m_Name: Barrage Gun Information
   m_EditorClassIdentifier: 
-  _name: Barrage Gun
+  _name: Barrage
   _description: 
   _icon: {fileID: 21300000, guid: f435f21de80ba9c4d9a06ea26777de5f, type: 3}
   _type: 5

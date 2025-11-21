@@ -34,11 +34,13 @@ namespace Asce.PrepareGame.UIs
 
         public virtual void Set(T item)
         {
+            this.Unregister();
             Item = item;
-            this.InternalSet(item);
+            this.Register();
         }
 
-        protected abstract void InternalSet(T item);
+        protected virtual void Register() { }
+        protected virtual void Unregister() { }
 
         protected virtual void DiscardButton_OnClick() { }
 

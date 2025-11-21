@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       propertyPath: m_Name
-      value: Default Gun
+      value: Frontier Gun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -236,10 +236,12 @@ MonoBehaviour:
     m_Bits: 704
   _damage: 14
   _penetration: 0
+  _shootSpeed: 1
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _magazineSize: 10
+  _startAmmo: 10
   _remainingAmmo: 0
   _currentAmmo: 0
   _reloadCooldown:
@@ -249,9 +251,12 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 5
   _minBulletSpreadAngle: 0
+  _isFiring: 0
+  _isFireRequested: 0
+  _requestedDirection: {x: 0, y: 0}
   _distance: 20
   _scope: {fileID: 7330807665932599717}
-  _bulletLineVFXName: Default Gun Bullet Line
+  _bulletLineVFXName: Frontier Gun Bullet Line
 --- !u!114 &3598601906339135542
 MonoBehaviour:
   m_ObjectHideFlags: 0

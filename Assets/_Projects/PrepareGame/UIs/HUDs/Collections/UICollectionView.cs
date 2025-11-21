@@ -12,8 +12,8 @@ namespace Asce.PrepareGame.UIs.Collections
         [Space]
         [SerializeField] protected Pool<UICollectionItem<T>> _pool = new();
 
-        public abstract IEnumerable<T> Collection { get; }
         public UICollectionDetails<T> Details => _details;
+        public abstract IEnumerable<T> GetCollection();
 
         public override void Show()
         {
@@ -25,8 +25,8 @@ namespace Asce.PrepareGame.UIs.Collections
         public virtual void ResetCollection()
         {
             _pool.Clear(onClear: (item) => item.Hide());
-
-            foreach (T item in Collection)
+            IEnumerable<T> collection = GetCollection();
+            foreach (T item in collection)
             {
                 if (item == null) continue;
                 UICollectionItem<T> uiItem = _pool.Activate(out bool isCreated);

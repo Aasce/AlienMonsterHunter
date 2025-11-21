@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2ab59f8fcaa3074b81f3f6b71890e16, type: 3}
-  m_Name: Default Gun Information
+  m_Name: Frontier Gun Information
   m_EditorClassIdentifier: 
-  _name: Default Gun
+  _name: Frontier
   _description: 
   _icon: {fileID: 21300000, guid: afea298293b40f04794206e64debc435, type: 3}
   _type: 2
@@ -27,3 +27,5 @@ MonoBehaviour:
   _maxSpreadDistance: 15
   _maxBulletSpreadAngle: 5
   _minBulletSpreadAngle: 0
+  _customValues:
+    _list: []

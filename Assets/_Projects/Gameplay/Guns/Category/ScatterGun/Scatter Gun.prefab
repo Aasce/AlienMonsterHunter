@@ -201,10 +201,12 @@ MonoBehaviour:
     m_Bits: 704
   _damage: 3
   _penetration: 0
+  _shootSpeed: 1
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _magazineSize: 10
+  _startAmmo: 10
   _remainingAmmo: 0
   _currentAmmo: 0
   _reloadCooldown:
@@ -214,10 +216,13 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
+  _isFiring: 0
+  _isFireRequested: 0
+  _requestedDirection: {x: 0, y: 0}
   _distance: 9
-  _bulletPerShoot: 7
   _spreadAngle: 25
-  _bulletLineVFXName: ScatterGun Bullet Line
+  _bulletPerShoot: 7
+  _bulletLineVFXName: Scatter Gun Bullet Line
 --- !u!114 &-2456159739219276791
 MonoBehaviour:
   m_ObjectHideFlags: 0

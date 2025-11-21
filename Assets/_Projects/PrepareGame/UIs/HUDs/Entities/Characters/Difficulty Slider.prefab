@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912858694402047740, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_Name
-      value: Difficult Slider
+      value: Difficulty Slider
       objectReference: {fileID: 0}
     - target: {fileID: 2007801170700583209, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -126,11 +126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_text
-      value: 'Difficult:'
+      value: 'Difficulty:'
       objectReference: {fileID: 0}
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_fontSize
-      value: 18.35
+      value: 15.9
       objectReference: {fileID: 0}
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_RaycastTarget
@@ -139,6 +139,18 @@ PrefabInstance:
     - target: {fileID: 7825906218917805343, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692279403700348258, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692279403700348258, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692279403700348258, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.68422425
       objectReference: {fileID: 0}
     - target: {fileID: 8692279403700348258, guid: ea7422f2346c9334a854dad690bde9e6, type: 3}
       propertyPath: m_RaycastTarget

@@ -1,4 +1,5 @@
 using Asce.Game.Entities.Characters;
+using Asce.Game.Players;
 using Asce.PrepareGame.Picks;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
+        public CharacterProgress Progress => PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
+
         public override void Initialize()
         {
             base.Initialize();
@@ -22,18 +25,34 @@ namespace Asce.PrepareGame.UIs
             PickController.Instance.OnPickCharacter += PickController_OnPickCharacter;
         }
 
-        protected override void InternalSet(Character item) 
+        private void OnDestroy()
+        {
+            if (PlayerManager.Instance == null) return;
+            this.Unregister();
+        }
+
+        protected override void Register() 
 		{
-		    if (item == null || item.Information == null)
+            base.Register();
+            if (Item == null || Item.Information == null)
             {
                 this.ShowContent(false);
                 return;
             }
 
             this.ShowContent(true);
-            if (_icon != null) _icon.sprite = item.Information.Icon;
-            if (_nameText != null) _nameText.text = item.Information.Name;
-            if (_levelText != null) _levelText.text = $"lv.NaN";
+            _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
+            _levelText.text = $"lv. {Progress.Level}";
+
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
+        }
+
+        protected override void Unregister()
+        {
+            base.Unregister();
+            if (Item == null || Item.Information == null) return;
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
         protected override void DiscardButton_OnClick()
@@ -51,6 +70,11 @@ namespace Asce.PrepareGame.UIs
         private void PickController_OnPickCharacter(Character character)
         {
             this.Set(character);
+        }
+
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _levelText.text = $"lv. {newLevel}";
         }
 
     }

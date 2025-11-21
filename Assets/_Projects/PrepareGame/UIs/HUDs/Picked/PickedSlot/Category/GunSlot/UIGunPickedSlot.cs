@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using Asce.Game.Players;
 using Asce.PrepareGame.Picks;
 using System;
 using TMPro;
@@ -15,6 +16,8 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
+        public GunProgress Progress => PlayerManager.Instance.Progress.GunsProgress.Get(Item.Information.Name);
+
         public override void Initialize()
         {
             base.Initialize();
@@ -23,18 +26,26 @@ namespace Asce.PrepareGame.UIs
             PickController.Instance.OnPickGun += PickController_OnPickGun;
         }
 
-        protected override void InternalSet(Gun item)
+        private void OnDestroy()
         {
-            if (item == null || item.Information == null)
+            if (PlayerManager.Instance == null) return;
+            this.Unregister();
+        }
+
+        protected override void Register()
+        {
+            if (Item == null || Item.Information == null)
             {
                 this.ShowContent(false);
                 return;
             }
 
             this.ShowContent(true);
-            if (_icon != null) _icon.sprite = item.Information.Icon;
-            if (_nameText != null) _nameText.text = item.Information.Name;
-            if (_levelText != null) _levelText.text = $"lv.NaN";
+            _icon.sprite = Item.Information.Icon;
+            _nameText.text = Item.Information.Name;
+            _levelText.text = $"lv. {Progress.Level}";
+
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
         protected override void DiscardButton_OnClick()
@@ -52,5 +63,10 @@ namespace Asce.PrepareGame.UIs
         {
             this.Set(gun);
         }
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _levelText.text = $"lv. {newLevel}";
+        }
+
     }
 }

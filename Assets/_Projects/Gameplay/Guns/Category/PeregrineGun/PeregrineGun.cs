@@ -35,6 +35,12 @@ namespace Asce.Game.Guns
             _damageLosePerHit = Information.GetCustomValue("DamageLost");
         }
 
+        public override void OnDeactive()
+        {
+            base.OnDeactive();
+            Scope.CloseScope();
+        }
+
         protected override void Leveling_OnLevelSetted(int newLevel)
         {
             _damageLosePerHit = Information.GetCustomValue("DamageLost");
@@ -56,7 +62,7 @@ namespace Asce.Game.Guns
         public override void AltFire(Vector2 direction)
         {
             base.AltFire(direction);
-            _scope.Toggle();
+            Scope.Toggle();
         }
 
         protected override void Shooting(Vector2 direction)

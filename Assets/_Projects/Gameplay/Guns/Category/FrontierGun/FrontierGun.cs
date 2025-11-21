@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Asce.Game.Guns
 {
-    public class DefaultGun : Gun
+    public class FrontierGun : Gun
     {
         [SerializeField] private float _distance = 20f;
         private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[16];
@@ -26,10 +26,16 @@ namespace Asce.Game.Guns
             }
         }
 
+        public override void OnDeactive()
+        {
+            base.OnDeactive();
+            Scope.CloseScope();
+        }
+
         public override void AltFire(Vector2 direction)
         {
             base.AltFire(direction);
-            _scope.Toggle();
+            Scope.Toggle();
         }
 
         protected override void Shooting(Vector2 direction)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d856d635a80d3b54ea7412371360ab5a, type: 3}
-  m_Name: Default Gun Leveling
+  m_Name: Frontier Gun Leveling
   m_EditorClassIdentifier: 
   _maxLevel: 10
   _levelingMode: 1

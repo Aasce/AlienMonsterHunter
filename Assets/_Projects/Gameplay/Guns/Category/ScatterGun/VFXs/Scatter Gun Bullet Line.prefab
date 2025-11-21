@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 7713071723103945668}
   - component: {fileID: 3655543663594814725}
   m_Layer: 0
-  m_Name: ScatterGun Bullet Line
+  m_Name: Scatter Gun Bullet Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f04fe548fc4cc24b80d1848c55bfaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: ScatterGun Bullet Line
+  _name: Scatter Gun Bullet Line
   _despawnCooldown:
     _baseTime: 0.08
     _currentTime: 0.08
