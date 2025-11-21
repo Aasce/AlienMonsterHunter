@@ -38,3 +38,5 @@ MonoBehaviour:
       _path: progress/guns
     - _name: SupportsProgress
       _path: progress/supports
+    - _name: Currencies
+      _path: resources/currencies

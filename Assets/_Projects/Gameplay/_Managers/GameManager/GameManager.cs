@@ -4,9 +4,11 @@ using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
 using Asce.Game.Interactions;
+using Asce.Game.Items;
 using Asce.Game.Supports;
 using Asce.Managers;
 using Asce.Managers.Utils;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Managers
@@ -23,6 +25,9 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllSupports _allSupports;
         [SerializeField] private SO_AllEffects _allEffects;
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
+        [SerializeField] private SO_AllItems _allItems;
+
+        public event Action OnQuitGame;
 
         public GameServices GameServices => _gameServices;
 
@@ -33,6 +38,7 @@ namespace Asce.Game.Managers
         public SO_AllSupports AllSupports => _allSupports;
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
+        public SO_AllItems AllItems => _allItems;
 
         private void OnValidate()
         {
@@ -61,10 +67,13 @@ namespace Asce.Game.Managers
             if (AllInteractiveObjects == null)
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Interactive Objects is not assigned", this);
 
+            if (AllItems == null)
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Items is not assigned", this);
         }
 
         public void QuitGame()
         {
+            OnQuitGame?.Invoke();
             Application.Quit();
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

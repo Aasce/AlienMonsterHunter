@@ -31,6 +31,7 @@ namespace Asce.PrepareGame.Manager
         {
             Player.Initialize();
             UIController.Initialize();
+
             PlayerManager.Instance.RegisterPlayer(Player);
         }
 
@@ -54,20 +55,21 @@ namespace Asce.PrepareGame.Manager
                 .ToList()
             );
 
-            this.BeforeChangeScene();
+            this.SaveAll();
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
         public void BackToMainMenu()
         {
-            this.BeforeChangeScene();
+            this.SaveAll();
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
         }
 
-        private void BeforeChangeScene()
+        private void SaveAll()
         {
             PrepareGameSaveLoadController.Instance.SaveLastPick();
             PlayerManager.Instance.Progress.SaveAll();
+            PlayerManager.Instance.Currencies.SaveAll();
         }
     }
 }

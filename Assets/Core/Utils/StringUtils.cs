@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -129,6 +130,51 @@ namespace Asce.Managers.Utils
             result = result.Trim('_');
 
             return result;
+        }
+
+        /// <summary>
+        ///     Convert an integer to a string with a custom thousands separator.
+        /// </summary>
+        /// <param name="value"> The integer to format. </param>
+        /// <param name="sep"> Thousands separator string. Default is a single space. </param>
+        /// <returns>
+        ///     Formatted string with separator every 3 digits from the right.
+        /// </returns>
+        public static string ToThousandsSeparatedString(this int value, string sep = " ")
+        {
+            if (string.IsNullOrEmpty(sep)) return value.ToString();
+
+            bool negative = value < 0;
+            int abs = negative ? -value : value;
+
+            string digits = abs.ToString(); // Convert number to raw digits
+            int groups = (digits.Length - 1) / 3; // Number of separators needed
+
+            // Total output length
+            int outputLength = digits.Length + groups * sep.Length + (negative ? 1 : 0);
+            return String.Create(outputLength, (digits, sep, negative), static (span, state) =>
+            {
+                var (digits, sep, negative) = state;
+
+                int write = span.Length - 1;
+                int count = 0;
+
+                // Write digits right-to-left
+                for (int i = digits.Length - 1; i >= 0; i--)
+                {
+                    span[write--] = digits[i];
+                    count++;
+                    if (count == 3 && i != 0) // Every 3 digits, insert separator (except at the start)
+                    {
+                        for (int s = sep.Length - 1; s >= 0; s--)
+                            span[write--] = sep[s];
+
+                        count = 0;
+                    }
+                }
+
+                if (negative) span[0] = '-'; // Add minus sign if needed
+            });
         }
     }
 }
