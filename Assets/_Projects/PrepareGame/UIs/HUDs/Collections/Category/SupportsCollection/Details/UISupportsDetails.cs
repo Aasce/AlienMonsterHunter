@@ -1,5 +1,7 @@
 using Asce.Game.Players;
 using Asce.Game.Supports;
+using Asce.Game.UIs.Panels;
+using Asce.PrepareGame.Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,16 +87,23 @@ namespace Asce.PrepareGame.UIs
 
         private void UnlockButton_OnClick()
         {
-            PlayerManager.Instance.Progress.SupportsProgress.Unlock(Item.Information.Name);
-            this.SetLockedState();
+            UIUnlockSupportPanel unlockPanel = PrepareGameManager.Instance.UIController.PanelController.GetPanelByName("Unlock Support") as UIUnlockSupportPanel;
+            if (unlockPanel == null) return;
+
+            unlockPanel.Icon.sprite = Item.Information.Icon;
+            unlockPanel.NameText.text = Item.Information.Name;
+            unlockPanel.ItemProgress = Progress;
+            unlockPanel.OnUnlock += (condition) =>
+            {
+                Progress.Unlock(condition);
+                this.SetLockedState();
+            };
+            unlockPanel.Show();
         }
 
         private void UpgradeButton_OnClick()
         {
-            SupportProgress progress = Progress;
-            if (progress == null) return;
-
-            PlayerManager.Instance.Progress.SupportsProgress.SetLevel(Item.Information.Name, progress.Level + 1);
+            Progress.Level = Progress.Level + 1;
         }
 
         private void Progress_OnLevelChanged(int newLevel)

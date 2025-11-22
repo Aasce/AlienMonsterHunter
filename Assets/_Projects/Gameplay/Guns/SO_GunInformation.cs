@@ -1,4 +1,5 @@
 using Asce.Game.Levelings;
+using Asce.Game.Progress;
 using Asce.Managers;
 using Asce.Managers.Attributes;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ namespace Asce.Game.Guns
         [SerializeField, SpritePreview] private Sprite _icon;
         [SerializeField] private GunType _type = GunType.Pistol;
         [SerializeField] private SO_LevelingInformation _leveling;
+        [SerializeField] private SO_ProgressInformation _progress;
 
         [Header("Shoot")]
         [SerializeField, Min(0f)] private float _damage = 10f;
@@ -50,6 +52,7 @@ namespace Asce.Game.Guns
         public Sprite Icon => _icon;
         public GunType Type => _type;
         public SO_LevelingInformation Leveling => _leveling;
+        public SO_ProgressInformation Progress => _progress;
 
         public float Damage => _damage;
         public float Penetration => _penetration;

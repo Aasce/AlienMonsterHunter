@@ -147,8 +147,8 @@ namespace Asce.MainGame.Players
 
         private void GameStateController_OnEndGame()
         {
-            PlayerManager.Instance.Progress.CharactersProgress.SetLevel(
-                Character.Information.Name,
+            var progress = PlayerManager.Instance.Progress.CharactersProgress.Get(Character.Information.Name); 
+            if (progress != null) progress.SetLevel (
                 Character.Leveling.CurrentLevel,
                 Character.Leveling.CurrentExp
             );

@@ -1,4 +1,5 @@
 using Asce.Game.Levelings;
+using Asce.Game.Progress;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Asce.Game.Entities.Characters
         [Header("Character")]
         [SerializeField] private CharacterRoleType _role = CharacterRoleType.Special;
         [SerializeField, Range(0, 10)] private int _difficulty = 5;
+        [SerializeField] private SO_ProgressInformation _progress;
 
         [Space]
         [SerializeField] private List<string> _abilityNames = new();
@@ -20,6 +22,7 @@ namespace Asce.Game.Entities.Characters
 
         public CharacterRoleType Role => _role;
         public int Difficulty => _difficulty;
+        public SO_ProgressInformation Progress => _progress;
 
         public ReadOnlyCollection<string> AbilitiesName => _abilityNamesReadonly ??= _abilityNames.AsReadOnly();
     }

@@ -8,7 +8,7 @@ namespace Asce.Game.Players
     {
         protected override IEnumerable<Character> Collection => GameManager.Instance.AllCharacters.Characters;
 
-        protected override CharacterProgress CreateProgressInstance(string name) => new (name);
+        protected override CharacterProgress CreateProgressInstance(Character item) => new (item.Information.Name, item.Information.Progress);
         protected override string GetInformationName(Character item) => item == null? string.Empty : item.Information.Name;
 
         public void ApplyTo(Character character)
@@ -20,34 +20,6 @@ namespace Asce.Game.Players
 
             character.Leveling.SetLevel(characterProgress.Level);
             character.Leveling.SetExp(characterProgress.Exp);
-        }
-
-
-        public void SetLevel(string name, int level, int exp)
-        {
-            CharacterProgress characterProgress = Get(name);
-            if (characterProgress == null) return;
-            if (!characterProgress.IsUnlocked) return;
-
-            characterProgress.Level = level;
-            characterProgress.Exp = exp;
-            this.SaveProgress(characterProgress);
-        }
-
-        protected override void SaveProgress(CharacterProgress characterProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.SaveCharacterProgress(characterProgress);
-        }
-
-        protected override void LoadProgress(CharacterProgress characterProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.LoadCharacterProgress(characterProgress);
         }
     }
 }

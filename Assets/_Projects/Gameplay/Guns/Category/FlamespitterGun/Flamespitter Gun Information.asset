@@ -17,6 +17,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 96d379b7aac589544ab7b1413853b30e, type: 3}
   _type: 3
   _leveling: {fileID: 11400000, guid: 7fec850b7e2821944b23c89068e9e1e2, type: 2}
+  _progress: {fileID: 11400000, guid: 1f082328b8ce521409ac1b4e6a1f5934, type: 2}
   _damage: 0.05
   _penetration: 0
   _shootSpeed: 0.125

@@ -1,3 +1,4 @@
+using Asce.Game.Progress;
 using Asce.Managers;
 using Asce.SaveLoads;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Asce.Game.Players
 {
-    public abstract class PlayerCollectionProgress<T, TProgress> : GameComponent where TProgress : PlayerItemProgress
+    public abstract class PlayerCollectionProgress<T, TProgress> : GameComponent where TProgress : ItemProgress
     {
         [SerializeField] protected List<TProgress> _itemProgress = new();
         protected Dictionary<string, TProgress> _itemsProgressDictionary;
@@ -15,10 +16,8 @@ namespace Asce.Game.Players
         protected abstract IEnumerable<T> Collection { get; }
         public ReadOnlyCollection<TProgress> AllProgresses => _itemsProgressReadonly ??= _itemProgress.AsReadOnly();
 
-        protected abstract TProgress CreateProgressInstance(string name);
+        protected abstract TProgress CreateProgressInstance(T item);
         protected abstract string GetInformationName(T item);
-        protected abstract void SaveProgress(TProgress itemProgress);
-        protected abstract void LoadProgress(TProgress itemProgress);
 
         public virtual void Initialize()
         {
@@ -27,8 +26,8 @@ namespace Asce.Game.Players
 
             foreach (T item in Collection)
             {
-                TProgress itemProgress = CreateProgressInstance(GetInformationName(item));
-                this.LoadProgress(itemProgress);
+                TProgress itemProgress = CreateProgressInstance(item);
+                itemProgress.LoadProgress();
                 _itemProgress.Add(itemProgress);
             }
 
@@ -47,16 +46,6 @@ namespace Asce.Game.Players
                 return progress;
             }
             return null;
-        }
-
-        public virtual void Unlock(string name)
-        {
-            TProgress itemProgress = Get(name);
-            if (itemProgress == null) return;
-            if (itemProgress.IsUnlocked) return;
-
-            itemProgress.IsUnlocked = true;
-            this.SaveProgress(itemProgress);
         }
     }
 }

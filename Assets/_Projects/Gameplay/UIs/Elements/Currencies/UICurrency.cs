@@ -52,7 +52,7 @@ namespace Asce.Game.UIs
 
         private void Currency_OnQuantityChanged(int newQuantity)
         {
-
+            _quantityText.text = _currency.Quantity.ToThousandsSeparatedString(sep: ",");
         }
 
     }

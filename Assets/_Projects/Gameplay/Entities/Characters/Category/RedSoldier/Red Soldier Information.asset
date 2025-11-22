@@ -19,6 +19,7 @@ MonoBehaviour:
   _leveling: {fileID: 11400000, guid: c053e3aab74c5c548a5fd7d3c0a8c891, type: 2}
   _role: 1
   _difficulty: 3
+  _progress: {fileID: 11400000, guid: 0ad67582059a94447b20709185b1aa4c, type: 2}
   _abilityNames:
   - Horizon Breaker
   - Aerial Vanguard

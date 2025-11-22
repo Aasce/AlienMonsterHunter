@@ -15,12 +15,10 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private Button _playbutton;
         [SerializeField] private UITabs _tabs;
         [SerializeField] private UIPicked _picked;
-        [SerializeField] private UICurrencies _currencies;
 
         public Button PlayButton => _playbutton;
         public UITabs Tabs => _tabs;
         public UIPicked Picked => _picked;
-        public UICurrencies Currencies => _currencies;
 
         protected override void RefReset()
         {
@@ -32,7 +30,6 @@ namespace Asce.PrepareGame.UIs
         {
             base.Initialize();
             if (PlayButton != null) PlayButton.onClick.AddListener(PlayButton_OnClick);
-            Currencies.Set(PlayerManager.Instance.Currencies.AllCurrencies);
         }
 
 

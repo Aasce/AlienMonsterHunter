@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Asce.Game.UIs.Panels
 {
-    public class UIWindowPanel : UIPanel
+    public abstract class UIWindowPanel : UIPanel
     {
         [SerializeField] protected UIClickBlock _clickBlock;
         [SerializeField] protected Button _closeButton;

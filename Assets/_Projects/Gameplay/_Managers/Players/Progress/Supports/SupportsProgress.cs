@@ -9,7 +9,7 @@ namespace Asce.Game.Players
     {
         protected override IEnumerable<Support> Collection => GameManager.Instance.AllSupports.Supports;
 
-        protected override SupportProgress CreateProgressInstance(string name) => new(name);
+        protected override SupportProgress CreateProgressInstance(Support item) => new(item.Information.Name, item.Information.Progress);
         protected override string GetInformationName(Support item) => item == null ? string.Empty : item.Information.Key;
 
 
@@ -24,30 +24,5 @@ namespace Asce.Game.Players
             supportContainer.Level = supportProgress.Level;
         }
 
-        public void SetLevel(string name, int level)
-        {
-            SupportProgress supportProgress = Get(name);
-            if (supportProgress == null) return;
-            if (!supportProgress.IsUnlocked) return;
-
-            supportProgress.Level = level;
-            this.SaveProgress(supportProgress);
-        }
-
-        protected override void SaveProgress(SupportProgress supportProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.SaveSupportProgress(supportProgress);
-        }
-
-        protected override void LoadProgress(SupportProgress supportProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.LoadSupportProgress(supportProgress);
-        }
     }
 }

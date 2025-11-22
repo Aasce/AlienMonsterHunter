@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Asce.Game.UIs.Panels
 {
-    public class UIPanel : UIObject
+    public abstract class UIPanel : UIObject
     {
         [SerializeField, Readonly] protected string _name = string.Empty;
 

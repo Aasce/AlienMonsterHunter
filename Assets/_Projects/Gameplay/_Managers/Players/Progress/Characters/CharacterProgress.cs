@@ -1,5 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
+using Asce.Game.Progress;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace Asce.Game.Players
 {
     [System.Serializable]
-    public class CharacterProgress : PlayerItemProgress, ISaveable<CharacterProgressSaveData>, ILoadable<CharacterProgressSaveData>
+    public class CharacterProgress : ItemProgress, ISaveable<CharacterProgressSaveData>, ILoadable<CharacterProgressSaveData>
     {
         [SerializeField] private int _level = 0;
         [SerializeField] private int _exp = 0;
@@ -44,7 +45,14 @@ namespace Asce.Game.Players
 
         public bool IsMaxLevel => _level >= MaxLevel;
 
-        public CharacterProgress(string name) : base(name) { }
+        public CharacterProgress(string name, SO_ProgressInformation progress) : base(name, progress) { }
+
+        public void SetLevel(int currentLevel, int exp)
+        {
+            _level = currentLevel;
+            _exp = exp;
+            this.SaveProgress();
+        }
 
         public int ExpToLevelUp(int currentLevel)
         {
@@ -54,6 +62,21 @@ namespace Asce.Game.Players
             return characterPrefab.Information.Leveling.ExpToLevelUp(currentLevel);
         }
 
+        public override void SaveProgress()
+        {
+            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
+            if (playerProgressController == null) return;
+
+            playerProgressController.SaveCharacterProgress(this);
+        }
+
+        public override void LoadProgress()
+        {
+            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
+            if (playerProgressController == null) return;
+
+            playerProgressController.LoadCharacterProgress(this);
+        }
 
         CharacterProgressSaveData ISaveable<CharacterProgressSaveData>.Save()
         {

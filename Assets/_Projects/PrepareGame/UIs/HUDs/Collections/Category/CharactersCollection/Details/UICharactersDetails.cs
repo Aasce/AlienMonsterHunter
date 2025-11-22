@@ -1,5 +1,7 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
+using Asce.Game.UIs.Panels;
+using Asce.PrepareGame.Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +28,8 @@ namespace Asce.PrepareGame.UIs
 
         [Header("Abilitites")]
         [SerializeField] private UIAbilities _abilities;
+
+        public CharacterProgress Progress => PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
 
         private void Start()
         {
@@ -83,8 +87,18 @@ namespace Asce.PrepareGame.UIs
 
         private void InviteButton_OnClick()
         {
-            PlayerManager.Instance.Progress.CharactersProgress.Unlock(Item.Information.Name);
-            this.SetInviteContent();
+            UIUnlockCharacterPanel unlockPanel = PrepareGameManager.Instance.UIController.PanelController.GetPanelByName("Unlock Character") as UIUnlockCharacterPanel;
+            if (unlockPanel == null) return;
+
+            unlockPanel.Icon.sprite = Item.Information.Icon;
+            unlockPanel.NameText.text = Item.Information.Name;
+            unlockPanel.ItemProgress = Progress;
+            unlockPanel.OnUnlock += (condition) =>
+            {
+                Progress.Unlock(condition);
+                this.SetInviteContent();
+            };
+            unlockPanel.Show();
         }
 
     }

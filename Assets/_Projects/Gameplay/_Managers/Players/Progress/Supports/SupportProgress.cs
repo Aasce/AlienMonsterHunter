@@ -3,11 +3,12 @@ using Asce.Game.Managers;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
+using Asce.Game.Progress;
 
 namespace Asce.Game.Players
 {
     [System.Serializable]
-    public class SupportProgress : PlayerItemProgress, ISaveable<SupportProgressSaveData>, ILoadable<SupportProgressSaveData>
+    public class SupportProgress : ItemProgress, ISaveable<SupportProgressSaveData>, ILoadable<SupportProgressSaveData>
     {
         [SerializeField] private int _level = 0;
 
@@ -22,6 +23,7 @@ namespace Asce.Game.Players
                 if (_level == newLevel) return;
                 _level = newLevel;
                 OnLevelChanged?.Invoke(_level);
+                this.SaveProgress();
             }
         }
 
@@ -37,7 +39,24 @@ namespace Asce.Game.Players
 
         public bool IsMaxLevel => _level >= MaxLevel;
 
-        public SupportProgress(string name) : base(name) { }
+        public SupportProgress(string name, SO_ProgressInformation progress) : base(name, progress) { }
+
+
+        public override void SaveProgress()
+        {
+            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
+            if (playerProgressController == null) return;
+
+            playerProgressController.SaveSupportProgress(this);
+        }
+
+        public override void LoadProgress()
+        {
+            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
+            if (playerProgressController == null) return;
+
+            playerProgressController.LoadSupportProgress(this);
+        }
 
         SupportProgressSaveData ISaveable<SupportProgressSaveData>.Save()
         {

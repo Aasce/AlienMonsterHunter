@@ -9,7 +9,7 @@ namespace Asce.Game.Players
     {
         protected override IEnumerable<Gun> Collection => GameManager.Instance.AllGuns.Guns;
 
-        protected override GunProgress CreateProgressInstance(string name) => new(name);
+        protected override GunProgress CreateProgressInstance(Gun item) => new (item.Information.Name, item.Information.Progress);
         protected override string GetInformationName(Gun item) => item == null ? string.Empty : item.Information.Name;
 
 
@@ -21,32 +21,6 @@ namespace Asce.Game.Players
             if (!gunProgress.IsUnlocked) return;
 
             gun.Leveling.SetLevel(gunProgress.Level);
-        }
-
-        public void SetLevel(string name, int level)
-        {
-            GunProgress gunProgress = Get(name);
-            if (gunProgress == null) return;
-            if (!gunProgress.IsUnlocked) return;
-
-            gunProgress.Level = level;
-            this.SaveProgress(gunProgress);
-        }
-
-        protected override void SaveProgress(GunProgress gunProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.SaveGunProgress(gunProgress);
-        }
-
-        protected override void LoadProgress(GunProgress gunProgress)
-        {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
-            playerProgressController.LoadGunProgress(gunProgress);
         }
     }
 }
