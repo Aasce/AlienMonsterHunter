@@ -28,6 +28,9 @@ namespace Asce.Game.Entities
 
         private void Entity_OnDead(DamageContainer container)
         {
+            if (container == null) return;
+            if (container.Sender is Enemies.Enemy) return;
+
             ExpOrb_InteractiveObject expOrb = InteractionController.Instance.Spawn(_expOrbName) as ExpOrb_InteractiveObject;
             if (expOrb == null) return;
             expOrb.transform.position = _entity.transform.position;

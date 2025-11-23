@@ -38,7 +38,7 @@ namespace Asce.MainGame.UIs.HUDs
             _icon.sprite = Effect.Information.Icon;
             this.SetDuration(Effect.Duration.Ratio);
 
-            _stackText.gameObject.SetActive(Effect.Information.IsStackable);
+            _stackText.gameObject.SetActive(Effect.Information.ApplyType == EffectApplyType.Stacking);
             this.SetStack(Effect.Stack);
 
             Effect.Duration.OnBaseTimeChanged += Duration_OnBaseTimeChanged;
@@ -77,7 +77,7 @@ namespace Asce.MainGame.UIs.HUDs
 
         private void SetStack(int stack)
         {
-            if (Effect.Information.IsStackable && stack > 1)
+            if (Effect.Information.ApplyType == EffectApplyType.Stacking && stack > 1)
             {
                 _stackText.gameObject.SetActive(true);
                 _stackText.text = stack.ToString();

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d531bdcaf419c1548b1855538faeab31, type: 3}
+  m_Name: Thermal Contagion Effect Information
+  m_EditorClassIdentifier: 
+  _name: Thermal Contagion
+  _description: 
+  _icon: {fileID: 695775810, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+  _type: 2
+  _applyType: 1
+  _customValues:
+    _list:
+    - _name: IgniteInterval
+      _value: 1
+    - _name: MaxStrengthAddPerStack
+      _value: 4

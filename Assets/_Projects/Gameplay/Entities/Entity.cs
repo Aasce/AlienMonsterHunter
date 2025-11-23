@@ -167,8 +167,8 @@ namespace Asce.Game.Entities
         {
             if (_isDeath) return;
             _isDeath = true;
-            Effects.Clear();
             OnDead?.Invoke(container);
+            Effects.Clear();
         }
 
         EntitySaveData ISaveable<EntitySaveData>.Save()

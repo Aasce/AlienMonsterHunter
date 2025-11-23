@@ -792,6 +792,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3936801705012791288, guid: 378bff244db90014f8df2ca4f4a4d692, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936801705012791288, guid: 378bff244db90014f8df2ca4f4a4d692, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5986236170429469551, guid: 378bff244db90014f8df2ca4f4a4d692, type: 3}
       propertyPath: m_Name
       value: Unlock Character Panel

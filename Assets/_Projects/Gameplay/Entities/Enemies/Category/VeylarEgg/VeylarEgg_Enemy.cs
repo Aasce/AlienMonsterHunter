@@ -1,3 +1,4 @@
+using Asce.Game.Combats;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Utils;
@@ -79,7 +80,7 @@ namespace Asce.Game.Entities.Enemies
             veylar.Layable = false;
             veylar.gameObject.SetActive(true);
 
-            EnemyController.Instance.Despawn(this);
+            CombatController.Instance.Killing(this, this);
         }
 
         protected override void OnBeforeSave(EnemySaveData data)
