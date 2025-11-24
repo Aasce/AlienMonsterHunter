@@ -19,8 +19,6 @@ MonoBehaviour:
     _list:
     - _name: Damage
       _value: 5
-    - _name: Width
-      _value: 2.5
     - _name: Distance
       _value: 25
     - _name: RechargeTime

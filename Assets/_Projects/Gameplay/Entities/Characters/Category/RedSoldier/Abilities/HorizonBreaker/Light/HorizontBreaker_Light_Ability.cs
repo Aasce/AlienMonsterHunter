@@ -1,60 +1,79 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Game.Entities.Machines;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Game.Stats;
 using Asce.Managers.Utils;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class HorizontBreaker_Light_Ability : Ability
+    public class HorizontBreaker_Light_Ability : Ability, ISendDamageAbility
     {
+        [Header("References")]
         [SerializeField] private LineRenderer _lineRenderer;
         [SerializeField] private LineRenderer _lineFOV;
+        [SerializeField] private ParticleSystem _endLineParticle;
 
         [Header("Attack Settings")]
         [SerializeField] private LayerMask _targetLayer;
         [SerializeField] private float _damage = 10f;
         [SerializeField] private Cooldown _dealDamageCooldown = new(0.25f);
 
-        [Space]
+        [Header("Runtime")]
         [SerializeField, Min(0f)] private float _width = 2f;
         [SerializeField, Min(0f)] private float _distance = 15f;
         [SerializeField] private Vector2 _direction;
 
-        public LayerMask TargetLayer => _targetLayer;
-        public float Damage
-        {
-            get => _damage;
-            set => _damage = value;
-        }
+        private readonly RaycastHit2D[] _raycastHitsCache = new RaycastHit2D[24];
+        private ISendDamageable _ownerSender;
 
-        public float Width
-        {
-            get => _width;
-            set => _width = value;
-        }
+        private ContactFilter2D _filter;
+        private Vector2 _boxSize;
 
-        public float Distance
-        {
-            get => _distance;
-            set => _distance = value;
-        }
+        public event Action<DamageContainer> OnSendDamage;
 
-        public Vector2 Direction
+        public float Damage => _damage;
+
+        public override void Initialize()
         {
-            get => _direction;
-            set => _direction = value;
+            base.Initialize();
+            _width = Information.GetCustomValue("Width");
+            _filter = new ContactFilter2D
+            {
+                useTriggers = true,
+                useLayerMask = true,
+                layerMask = _targetLayer
+            };
         }
 
         public override void OnActive()
         {
             base.OnActive();
-            Vector2 endPosition = (Vector2)transform.position + _direction.normalized * _distance;
+            _boxSize = new Vector2(_width, 0.1f);
+            _ownerSender = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
             this.SetLine(startPosition: transform.position, _direction.normalized);
             this.SetLineWidth();
             this.Fire();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _width = Information.GetCustomValue("Width");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Width", out LevelModification widthModification))
+            {
+                _width += widthModification.Value;
+            }
         }
 
         private void Update()
@@ -72,58 +91,68 @@ namespace Asce.Game.Abilities
 
         private void Fire()
         {
-            RaycastHit2D[] hits = Physics2D.BoxCastAll(
+            int hitCount = Physics2D.BoxCast(
                 transform.position,
-                new Vector2(_width, 0.1f),
+                _boxSize,
                 0f,
                 _direction,
-                _distance,
-                _targetLayer
+                _filter,
+                _raycastHitsCache,
+                _distance
             );
 
-            foreach (RaycastHit2D hit in hits)
+            for (int i = 0; i < hitCount; i++)
             {
-                if (hit.collider == null) continue;
+                var hit = _raycastHitsCache[i];
+
+                if (!hit.collider) continue;
                 if (!hit.collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
-                CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
-                {
-                    Damage = _damage
-                });
+                this.SendDamage(target);
             }
+        }
+
+        private void SendDamage(ITargetable target)
+        {
+            DamageContainer container = new (_ownerSender, target as ITakeDamageable)
+            {
+                Damage = _damage
+            };
+            CombatController.Instance.DamageDealing(container);
+            OnSendDamage?.Invoke(container);
+        }
+
+        public void Set(float damage, float distance, Vector2 direction)
+        {
+            _damage = damage;
+            _distance = distance;
+            _direction = direction.normalized;
+        }
+
+
+        private void SetLine(Vector2 startPosition, Vector2 direction)
+        {
+            Vector2 endPosition = startPosition + direction * _distance;
+
+            _lineRenderer.positionCount = 2;
+            _lineRenderer.SetPosition(0, startPosition);
+            _lineRenderer.SetPosition(1, endPosition);
+
+            _lineFOV.positionCount = 2;
+            _lineFOV.SetPosition(0, startPosition);
+            _lineFOV.SetPosition(1, endPosition);
+
+            _endLineParticle.transform.position = endPosition;
         }
 
         private void SetLineWidth()
         {
-            if (_lineRenderer != null)
-            {
-                _lineRenderer.startWidth = _width * 1.5f;
-                _lineRenderer.endWidth = _width * 1.5f;
-            }
-            if (_lineFOV != null)
-            {
-                _lineFOV.startWidth = _width * 2f;
-                _lineFOV.endWidth = _width * 2f;
-            }
-        }
+            _lineRenderer.startWidth = _width * 1.25f;
+            _lineRenderer.endWidth = _width * 1.5f;
 
-        private void SetLine(Vector2 startPosition, Vector2 direction)
-        {
-            if (_lineRenderer != null)
-            {
-                Vector2 endPosition = startPosition + direction * _distance;
-                _lineRenderer.positionCount = 2;
-                _lineRenderer.SetPosition(0, startPosition);
-                _lineRenderer.SetPosition(1, endPosition);
-            }
-            if (_lineFOV != null)
-            {
-                Vector2 endPosition = startPosition + direction * _distance;
-                _lineFOV.positionCount = 2;
-                _lineFOV.SetPosition(0, startPosition);
-                _lineFOV.SetPosition(1, endPosition);
-            }
+            _lineFOV.startWidth = _width * 2.5f;
+            _lineFOV.endWidth = _width * 2.5f;
         }
 
         protected override void OnBeforeSave(AbilitySaveData data)
@@ -144,5 +173,36 @@ namespace Asce.Game.Abilities
             _width = data.GetCustom<float>("Width");
             this.SetLineWidth();
         }
+
+        protected override IEnumerator LoadOwner(AbilitySaveData data)
+        {
+            yield return base.LoadOwner(data);
+            _ownerSender = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            if (!Application.isPlaying) return;
+            Vector2 startPos = transform.position;
+            Vector2 direction = _direction.normalized;
+            float width = _width;
+            float distance = _distance;
+            
+            Vector2 perp = Vector3.Cross(Vector3.forward, direction) * (width * 0.5f);
+
+            Vector2 startA = startPos + perp;
+            Vector2 startB = startPos - perp;
+            Vector2 endA = startA + (direction * distance);
+            Vector2 endB = startB + (direction * distance);
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(startA, endA);
+            Gizmos.DrawLine(startB, endB);
+            Gizmos.DrawLine(startA, startB);
+            Gizmos.DrawLine(endA, endB);
+        }
+#endif
+
     }
 }

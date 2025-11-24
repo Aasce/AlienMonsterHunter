@@ -22,6 +22,6 @@ MonoBehaviour:
     - _name: ViewRadius
       _value: 5
     - _name: IgniteDuration
-      _value: 2.6
+      _value: 4
     - _name: IgniteStrength
       _value: 3

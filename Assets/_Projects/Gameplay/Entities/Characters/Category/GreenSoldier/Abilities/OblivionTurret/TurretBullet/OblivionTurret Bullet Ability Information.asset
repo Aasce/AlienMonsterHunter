@@ -20,6 +20,10 @@ MonoBehaviour:
   _cooldown: 0
   _useRangeRadius: Infinity
   _despawnTime: 10
+  _isReactive: 0
+  _reactiveCooldown: 0
   _customValues:
-    _list: []
+    _list:
+    - _name: ExplosionRadius
+      _value: 2.8
   _leveling: {fileID: 11400000, guid: da1a34a385018214fa97d2636409827d, type: 2}

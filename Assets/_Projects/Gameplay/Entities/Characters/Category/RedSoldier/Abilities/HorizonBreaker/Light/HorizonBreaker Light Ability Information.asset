@@ -20,6 +20,10 @@ MonoBehaviour:
   _cooldown: 0
   _useRangeRadius: Infinity
   _despawnTime: 1000
+  _isReactive: 0
+  _reactiveCooldown: 0
   _customValues:
-    _list: []
+    _list:
+    - _name: Width
+      _value: 2
   _leveling: {fileID: 11400000, guid: 0abae3c50e4fb0c45ba9d25ae6a3b637, type: 2}

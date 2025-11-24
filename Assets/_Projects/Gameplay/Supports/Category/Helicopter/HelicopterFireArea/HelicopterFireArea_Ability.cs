@@ -4,6 +4,7 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,12 +17,20 @@ namespace Asce.Game.Abilities
         [SerializeField, Readonly] private Cooldown _updateCooldown = new(0.5f);
 
         [SerializeField, Readonly] private float _igniteDamage = 5f;
+        private Entity _ownerEntity;
 
         public override void Initialize()
         {
             base.Initialize();
             _igniteDamage = Information.GetCustomValue("IgniteDamage");
         }
+
+        public override void OnActive()
+        {
+            base.OnActive();
+            _ownerEntity = Owner != null ? Owner.GetComponent<Entity>() : null;
+        }
+
         protected override void Leveling_OnLevelSetted(int newLevel)
         {
             _igniteDamage = Information.GetCustomValue("IgniteDamage");
@@ -89,21 +98,17 @@ namespace Asce.Game.Abilities
             {
                 if (target is not Entity entity) continue;
                 Effect effect = entity.Effects.Get("Helicopter Ignite");
-                if (!target.IsTargetable) EffectController.Instance.RemoveEffect(effect);
+                if (!target.IsTargetable)
+                {
+                    EffectController.Instance.RemoveEffect(effect);
+                    continue;
+                }
                 
-                if (effect != null)
+                EffectController.Instance.AddEffect("Helicopter Ignite", _ownerEntity, entity, new EffectData()
                 {
-                    effect.Duration.Reset();
-                }
-                else
-                {
-                    Entity ownerEntity = Owner == null ? null : Owner.GetComponent<Entity>();
-                    EffectController.Instance.AddEffect("Helicopter Ignite", ownerEntity, entity, new EffectData()
-                    {
-                        Strength = _igniteDamage,
-                        Duration = 10f
-                    });
-                }
+                    Strength = _igniteDamage,
+                    Duration = DespawnTime.CurrentTime,
+                });
             }
         }
 
@@ -120,6 +125,12 @@ namespace Asce.Game.Abilities
             base.OnAfterLoad(data);
             if (data == null) return;
             _igniteDamage = data.GetCustom<float>("IgniteDamage");
+        }
+
+        protected override IEnumerator LoadOwner(AbilitySaveData data)
+        {
+            yield return base.LoadOwner(data);
+            _ownerEntity = Owner != null ? Owner.GetComponent<Entity>() : null;
         }
     }
 }

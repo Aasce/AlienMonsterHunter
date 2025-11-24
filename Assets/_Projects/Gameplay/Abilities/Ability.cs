@@ -20,6 +20,9 @@ namespace Asce.Game.Abilities
         [SerializeField, Readonly] protected GameObject _owner;
         [SerializeField, Readonly] protected Cooldown _despawnTime = new (10f);
 
+        public event Action OnSpawnEvent;
+        public event Action OnDespawnEvent;
+
         public string Id => _id;
         public SO_AbilityInformation Information => _information;
         public Leveling Leveling => _leveling;
@@ -63,7 +66,7 @@ namespace Asce.Game.Abilities
 
         public virtual void OnSpawn()
         {
-
+            OnSpawnEvent?.Invoke();
         }
 
         public virtual void OnActive() { }
@@ -71,7 +74,7 @@ namespace Asce.Game.Abilities
 
         public virtual void OnDespawn()
         {
-
+            OnDespawnEvent?.Invoke();
         }
 
         protected virtual void LevelTo(int newLevel)
@@ -124,14 +127,14 @@ namespace Asce.Game.Abilities
             StartCoroutine(LoadOwner(data));
             this.OnAfterLoad(data);
 
-            IEnumerator LoadOwner(AbilitySaveData data)
-            {
-                yield return null;
-                this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
-            }
         }
 
         protected virtual void OnBeforeSave(AbilitySaveData data) { }
         protected virtual void OnAfterLoad(AbilitySaveData data) { }
+        protected virtual IEnumerator LoadOwner(AbilitySaveData data)
+        {
+            yield return null;
+            this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
+        }
     }
 }

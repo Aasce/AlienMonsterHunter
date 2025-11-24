@@ -21,5 +21,6 @@ MonoBehaviour:
   _difficulty: 3
   _progress: {fileID: 11400000, guid: 51b1b531d08594f459e5b6cb28843090, type: 2}
   _abilityNames:
-  - Sentinel Turret
   - Blaster Drone
+  - Sentinel Turret
+  - 

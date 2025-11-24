@@ -21,6 +21,6 @@ MonoBehaviour:
   _difficulty: 3
   _progress: {fileID: 11400000, guid: bf53d6a6f0ef6834d9fe0c12bf194109, type: 2}
   _abilityNames:
-  - Hell Flamethrower
   - Firebait Bomb
   - ThermalContagion
+  - Hell Flamethrower

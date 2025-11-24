@@ -27,10 +27,13 @@ namespace Asce.Game.Entities.Machines
 
         [Header("Attack Settings")]
         [SerializeField, Readonly] private float _damage = 10f;
-        [SerializeField, Readonly, Min(0)] private int _maxAmmo = 2;
-        [SerializeField, Readonly, Min(0)] private int _currentAmmo = 2;
+        [SerializeField, Readonly] private int _maxAmmo = 2;
         [SerializeField, Readonly] private Cooldown _attackCooldown = new(1f);
         [SerializeField] private string _bulletAbilityName = "Oblivion Turret Bullet";
+
+        [Header("Runtime")]
+        [SerializeField, Readonly] private int _currentAmmo = 2;
+
 
         public event Action<int> OnCurrentAmmoChanged;
 
@@ -186,10 +189,8 @@ namespace Asce.Game.Entities.Machines
             Vector2 direction = target.transform.position - transform.position;
 
             bullet.Leveling.SetLevel(Leveling.CurrentLevel);
-            bullet.DamageDeal = _damage;
-            bullet.ExplosionRadius = Information.Stats.GetCustomStat("ExplosionRadius");
+            bullet.Set(_damage, shootPos, direction);
             bullet.gameObject.SetActive(true);
-            bullet.Fire(shootPos, direction);
             bullet.OnActive();
         }
 

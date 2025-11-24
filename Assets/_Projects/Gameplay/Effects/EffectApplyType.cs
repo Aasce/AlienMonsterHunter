@@ -6,6 +6,6 @@ namespace Asce.Game.Effects
     {
         Default = 0,
         Stacking = 1,
-        ResetDuration = 2,
+        Reapply = 2,
     }
 }

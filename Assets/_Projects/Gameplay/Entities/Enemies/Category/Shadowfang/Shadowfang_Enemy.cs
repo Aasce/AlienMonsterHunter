@@ -41,9 +41,8 @@ namespace Asce.Game.Entities.Enemies
             Vector2 fireDirection = (Vector2)TargetDetection.CurrentTarget.transform.position - firePosition;
 
             bullet.Leveling.SetLevel(Leveling.CurrentLevel);
-            bullet.DamageDeal = Stats.AttackDamage.FinalValue;
+            bullet.Set(Stats.AttackDamage.FinalValue, firePosition, fireDirection);
             bullet.gameObject.SetActive(true);
-            bullet.Fire(firePosition, fireDirection);
             bullet.OnActive();
         }
     }

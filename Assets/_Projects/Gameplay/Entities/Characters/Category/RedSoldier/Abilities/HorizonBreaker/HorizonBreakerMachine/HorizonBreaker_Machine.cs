@@ -110,10 +110,7 @@ namespace Asce.Game.Entities.Machines
             HorizontBreaker_Light_Ability light = AbilityController.Instance.Spawn(_lightAbilityName, gameObject) as HorizontBreaker_Light_Ability;
             if (light == null) return;
             light.transform.position = BarrielPosition;
-            light.Direction = transform.up;
-            light.Damage = _damage;
-            light.Distance = _distance;
-            light.Width = Information.Stats.GetCustomStat("Width");
+            light.Set(_damage, _distance, transform.up);
             light.gameObject.SetActive(true);
             light.OnActive();
         }
@@ -137,30 +134,5 @@ namespace Asce.Game.Entities.Machines
             _rechargeCooldown.CurrentTime = data.GetCustom<float>("RechargeCooldown");
             _fired = data.GetCustom<bool>("Fired");
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
-        {
-            if (Information == null) return;
-            if (Information.Stats == null) return;
-
-            float width = Information.Stats.GetCustomStat("Width");
-            float distance = Information.Stats.GetCustomStat("Distance");
-
-            Gizmos.color = Color.cyan;
-            Vector2 direction = transform.up;
-            Vector2 perp = Vector3.Cross(Vector3.forward, direction) * (width * 0.5f);
-
-            Vector2 startA = BarrielPosition + perp;
-            Vector2 startB = BarrielPosition - perp;
-            Vector2 endA = startA + (direction * distance);
-            Vector2 endB = startB + (direction * distance);
-
-            Gizmos.DrawLine(startA, endA);
-            Gizmos.DrawLine(startB, endB);
-            Gizmos.DrawLine(startA, startB);
-            Gizmos.DrawLine(endA, endB);
-        }
-#endif
     }
 }

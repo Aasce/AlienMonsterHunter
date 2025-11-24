@@ -73,6 +73,15 @@ namespace Asce.Game.Effects
             OnApplied?.Invoke();
         }
 
+        public virtual void Reapply(EffectData data)
+        {
+            float largestDuration = Mathf.Max(Duration.BaseTime, data.Duration);
+            Duration.SetBaseTime(largestDuration);
+
+            float largestStrength = Mathf.Max(Strength, data.Strength);
+            Strength = largestStrength;
+        }
+
         public virtual void Unapply()
         {
             this.InternalUnapply();

@@ -52,6 +52,11 @@ namespace Asce.Game.Entities.Machines
             _healAmount = Information.Stats.GetCustomStat("HealAmount");
             HealRadius = Information.Stats.GetCustomStat("HealRadius");
             _healCooldown.SetBaseTime(Information.Stats.GetCustomStat("HealInterval"));
+            _agent.speed = Stats.Speed.FinalValue;
+            Stats.Speed.OnFinalValueChanged += (oldValue, newValue) =>
+            {
+                _agent.speed = newValue;
+            };
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)

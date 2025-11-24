@@ -12,7 +12,7 @@ using UnityEngine.VFX;
 
 namespace Asce.Game.Abilities
 {
-    public class ThermalContagion_Ability : CharacterAbility
+    public class ThermalContagion_Ability : CharacterAbility, ISendDamageAbility
     {
         [Header("References")]
         [SerializeField, Readonly] private Rigidbody2D _rigidbody;
@@ -27,13 +27,16 @@ namespace Asce.Game.Abilities
         [SerializeField, Min(0f)] private float _igniteDuration = 5f;
         [SerializeField, Min(0f)] private float _igniteStrength = 3f;
 
-        [SerializeField] private string _contagionEffectName = "Thermal Contagion";
+        [SerializeField] private string _igniteEffectName = "Ignite";
         [SerializeField] private string _contagionVFXName = "Thermal Contagion Contagion";
 
         [Header("Runtime")]
         [SerializeField] private bool _isDealing = false;
 
+        public event Action<DamageContainer> OnSendDamage;
+
         public Rigidbody2D Rigidbody => _rigidbody;
+        public float Damage => _damage;
         public bool IsDealing
         {
             get => _isDealing;
@@ -94,23 +97,12 @@ namespace Asce.Game.Abilities
             if (target is Entity targetEntity)
             {
                 Entity ownerEntity = Owner != null ? Owner.GetComponent<Entity>() : null;
-                if (targetEntity.Effects.Contains(_contagionEffectName))
+                if (targetEntity.Effects.Contains(_igniteEffectName))
                 {
                     this.Contagion(target);
                 }
-                else 
-                {
-                    EffectController.Instance.AddEffect(_contagionEffectName, ownerEntity, targetEntity, new EffectData()
-                    {
-                        Duration = _igniteDuration,
-                        Strength = _igniteStrength,
-                    });
-                }
 
-                CombatController.Instance.DamageDealing(new DamageContainer(ownerEntity, targetEntity)
-                {
-                    Damage = _damage * 1.5f
-                });
+                this.SendDamage(ownerEntity, targetEntity);
             }
 
             this.IsDealing = true;
@@ -162,25 +154,31 @@ namespace Asce.Game.Abilities
             foreach (Collider2D collider in colliders)
             {
                 if (!collider.enabled) continue;
+                if (collider.transform == collideTarget.transform) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
                 Entity targetEntity = target as Entity;
                 if (targetEntity == null) continue;
 
-                this.SpawnVFX(position, target, () =>
-                {
-                    CombatController.Instance.DamageDealing(new DamageContainer(ownerEntity, targetEntity)
-                    {
-                        Damage = _damage
-                    });
-                    EffectController.Instance.AddEffect(_contagionEffectName, ownerEntity, targetEntity, new EffectData()
-                    {
-                        Duration = _igniteDuration,
-                        Strength = _igniteStrength,
-                    });
-                });
+                this.SpawnVFX(position, target, () => this.SendDamage(ownerEntity, targetEntity));
             }
+        }
+
+        private void SendDamage(Entity ownerEntity, Entity targetEntity)
+        {
+            float damageScale = targetEntity.Effects.Contains(_igniteEffectName) ? 1.5f : 1f; 
+            EffectController.Instance.AddEffect(_igniteEffectName, ownerEntity, targetEntity, new EffectData()
+            {
+                Duration = _igniteDuration,
+                Strength = _igniteStrength,
+            });
+            DamageContainer container = new(ownerEntity, targetEntity)
+            {
+                Damage = _damage * damageScale
+            };
+            CombatController.Instance.DamageDealing(container);
+            OnSendDamage?.Invoke(container);
         }
 
         private void SpawnVFX(Vector2 position, ITargetable target, Action onVFXReachingDestination)

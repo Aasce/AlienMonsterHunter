@@ -17,7 +17,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 21300000, guid: d084719efd042bb4983ea6795040d5b2, type: 3}
   _isPassive: 0
-  _cooldown: 1
+  _cooldown: 3
   _useRangeRadius: 2
   _despawnTime: 0.8
   _isReactive: 0
@@ -25,11 +25,11 @@ MonoBehaviour:
   _customValues:
     _list:
     - _name: Damage
-      _value: 10
+      _value: 8
     - _name: ContagionRadius
-      _value: 6
+      _value: 7
     - _name: IgniteDuration
-      _value: 6
+      _value: 4
     - _name: IgniteStrength
-      _value: 6
+      _value: 3
   _leveling: {fileID: 11400000, guid: a2b9062ba0a9726468c4d27d9235bec9, type: 2}

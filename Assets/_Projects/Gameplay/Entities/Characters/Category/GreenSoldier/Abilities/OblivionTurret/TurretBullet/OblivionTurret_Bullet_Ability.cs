@@ -2,53 +2,42 @@ using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Entities.Machines;
+using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
+using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
 using System;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class OblivionTurret_Bullet_Ability : Ability
+    public class OblivionTurret_Bullet_Ability : Ability, ISendDamageAbility
     {
-        [SerializeField] private Rigidbody2D _rigidbody;
+        [Header("References")]
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
 
         [Space]
         [SerializeField] private LayerMask _victimLayer;
-        [SerializeField, Min(0f)] private float _damageDeal = 0f;
-        [SerializeField, Min(0f)] private float _explosionRadius = 2f;
-        [SerializeField] private bool _isDealing = false;
-
-        [Space]
         [SerializeField] private LayerMask _collideLayer;
         [SerializeField, Min(0f)] private float _force = 0f;
 
         [Space]
         [SerializeField] private string _explosionVFXName = string.Empty;
 
-        public Rigidbody2D Rigidbody => _rigidbody;
-        public float DamageDeal
-        {
-            get => _damageDeal;
-            set => _damageDeal = value;
-        }
-        public float ExplosionRadius
-        {
-            get => _explosionRadius;
-            set => _explosionRadius = Mathf.Max(0f, value);
-        }
+        [Header("Runtime")]
+        [SerializeField, Readonly] private bool _isDealing = false;
+        [SerializeField, Readonly] private float _damage = 0f;
+        [SerializeField, Readonly] private float _explosionRadius = 2f;
+        [SerializeField, Readonly] private Vector2 _direction;
 
-        public bool IsDealing
-        {
-            get => _isDealing;
-            set => _isDealing = value;
-        }
-        public float Force
-        {
-            get => _force;
-            set => _force = value;
-        }
+
+        public event Action<DamageContainer> OnSendDamage;
+
+
+        public Rigidbody2D Rigidbody => _rigidbody;
+        public float Damage => _damage;
+        public float ExplosionRadius => _explosionRadius;
 
         protected override void RefReset()
         {
@@ -56,39 +45,26 @@ namespace Asce.Game.Abilities
             this.LoadComponent(out _rigidbody);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public override void Initialize()
         {
-            if (this.IsDealing) return;
-            if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _collideLayer)) return;
-            if (collision.TryGetComponent(out ITargetable targetable))
-                if (!targetable.IsTargetable) return;
-
-            ISendDamageable ownerSender = Owner.GetComponent<ISendDamageable>();
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius, _victimLayer);
-            foreach (Collider2D collider in colliders)
-            {
-                if (!collider.enabled) continue;
-                if (!collider.TryGetComponent(out ITargetable target)) continue;
-                if (!target.IsTargetable) continue;
-
-                float damage = DamageDeal;
-                if (target is Character) damage *= 0.25f;
-                else if (target is Machine) damage *= 0.5f;
-
-                CombatController.Instance.DamageDealing(new DamageContainer(ownerSender, target as ITakeDamageable)
-                {
-                    Damage = damage
-                });
-            }
-
-            this.SpawnVFX();
-            this.IsDealing = true;
-            this.DespawnTime.ToComplete();
+            base.Initialize();
+            _explosionRadius = Information.GetCustomValue("ExplosionRadius");
         }
+
         public override void OnSpawn()
         {
             base.OnSpawn();
-            IsDealing = false;
+            _isDealing = false;
+        }
+
+        public override void OnActive()
+        {
+            base.OnActive();
+            if (Rigidbody == null) return;
+            Rigidbody.AddForce(_direction * _force, ForceMode2D.Impulse);
+
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         public override void OnDespawn()
@@ -97,16 +73,69 @@ namespace Asce.Game.Abilities
             Rigidbody.linearVelocity = Vector2.zero;
             Rigidbody.angularVelocity = 0f;
             Rigidbody.gravityScale = 0f;
+            _direction = Vector2.zero;
         }
 
-        public void Fire(Vector2 position, Vector2 direction)
+        protected override void Leveling_OnLevelSetted(int newLevel)
         {
-            if (Rigidbody == null) return;
-            transform.position = position;
-            Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
+            _explosionRadius = Information.GetCustomValue("ExplosionRadius");
+            base.Leveling_OnLevelSetted(newLevel);
+        }
 
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("ExplosionRadius", out LevelModification explosionRadiusModification))
+            {
+                _explosionRadius += explosionRadiusModification.Value;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (_isDealing) return;
+            if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _collideLayer)) return;
+            if (collision.TryGetComponent(out ITargetable targetable))
+                if (!targetable.IsTargetable) return;
+
+            ISendDamageable owner = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius, _victimLayer);
+            foreach (Collider2D collider in colliders)
+            {
+                if (!collider.enabled) continue;
+                if (!collider.TryGetComponent(out ITargetable target)) continue;
+                if (!target.IsTargetable) continue;
+
+                this.SendDamage(owner, target);
+            }
+
+            this.SpawnVFX();
+            _isDealing = true;
+            this.DespawnTime.ToComplete();
+        }
+
+        private void SendDamage(ISendDamageable owner, ITargetable target)
+        {
+            float damage = Damage;
+            if (target is Character) damage *= 0.25f;
+            else if (target is Machine) damage *= 0.5f;
+
+            DamageContainer container = new(owner, target as ITakeDamageable)
+            {
+                Damage = damage
+            };
+            CombatController.Instance.DamageDealing(container);
+            OnSendDamage?.Invoke(container);
+        }
+
+        public void Set(float damage, Vector2 position, Vector2 direction)
+        {
+            _damage = damage;
+            transform.position = position;
+            _direction = direction.normalized;
         }
 
         private void SpawnVFX()

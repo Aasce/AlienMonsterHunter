@@ -5,19 +5,21 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class HellFlamethrower_Fire_Ability : Ability
+    public class HellFlamethrower_Fire_Ability : Ability, ISendDamageAbility
     {
+        [Header("References")]
         [SerializeField, Readonly] private Rigidbody2D _rigidbody;
         [SerializeField] private ParticleSystem _fireVFX;
 
         [Space]
         [SerializeField] private LayerMask _victimLayer;
-        [SerializeField, Min(0f)] private float _damageDeal = 0f;
+        [SerializeField, Min(0f)] private float _damage = 0f;
         [SerializeField, Min(0f)] private Cooldown _damageInterval = new(0.5f);
         [SerializeField, Min(0f)] private float _igniteDuration = 5f;
         [SerializeField, Min(0f)] private float _igniteStrength = 3f;
@@ -28,22 +30,15 @@ namespace Asce.Game.Abilities
 
         [Header("Runtime")]
         [SerializeField, Readonly] private float _currentRadius = 0f;
+        [SerializeField, Readonly] private Vector2 _direction;
         private ISendDamageable _ownerSender;
         private readonly Collider2D[] _overlapResults = new Collider2D[16];
         private ContactFilter2D _contactFilter;
 
-        public Rigidbody2D Rigidbody => _rigidbody;
-        public float DamageDeal
-        {
-            get => _damageDeal;
-            set => _damageDeal = value;
-        }
+        public event Action<DamageContainer> OnSendDamage;
 
-        public float Force
-        {
-            get => _force;
-            set => _force = value;
-        }
+        public Rigidbody2D Rigidbody => _rigidbody;
+        public float Damage => _damage;
 
         public float CurrentRadius
         {
@@ -103,8 +98,13 @@ namespace Asce.Game.Abilities
         public override void OnActive()
         {
             base.OnActive();
-            if (Owner == null) return;
             _ownerSender = Owner.GetComponent<ISendDamageable>();
+
+            if (Rigidbody == null) return;
+            Rigidbody.AddForce(_direction * _force, ForceMode2D.Impulse);
+
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
@@ -151,27 +151,30 @@ namespace Asce.Game.Abilities
                 if (!collider.enabled) continue;
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
-
-                CombatController.Instance.DamageDealing(new DamageContainer(_ownerSender, target as ITakeDamageable)
-                {
-                    Damage = DamageDeal
-                });
-                EffectController.Instance.AddEffect("Ignite", _ownerSender as Entity, target as Entity, new EffectData()
-                {
-                    Duration = _igniteDuration,
-                    Strength = _igniteStrength,
-                });
+                SendDamage(target);
             }
         }
 
-        public void Fire(Vector2 position, Vector2 direction)
+        private void SendDamage(ITargetable target)
         {
-            if (Rigidbody == null) return;
-            transform.position = position;
-            Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
+            DamageContainer container = new (_ownerSender, target as ITakeDamageable)
+            {
+                Damage = Damage
+            };
+            EffectController.Instance.AddEffect("Ignite", _ownerSender as Entity, target as Entity, new EffectData()
+            {
+                Duration = _igniteDuration,
+                Strength = _igniteStrength,
+            });
+            CombatController.Instance.DamageDealing(container);
+            OnSendDamage?.Invoke(container);
+        }
 
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        public void Set(float damage, Vector2 position, Vector2 direction)
+        {
+            _damage = damage;
+            transform.position = position;
+            _direction = direction.normalized;
         }
 
         protected override void OnBeforeSave(AbilitySaveData data)
@@ -194,17 +197,13 @@ namespace Asce.Game.Abilities
             Rigidbody.linearVelocity = data.GetCustom<Vector2>("LinearVelocity");
             CurrentRadius = data.GetCustom<float>("CurrentRadius");
 
-            StartCoroutine(LoadOwner(data));
-
-            IEnumerator LoadOwner(AbilitySaveData data)
-            {
-                yield return null;
-                this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
-                if (Owner == null) yield break;
-                _ownerSender = Owner.GetComponent<ISendDamageable>();
-            }
-
             this.LoadVFX();
+        }
+
+        protected override IEnumerator LoadOwner(AbilitySaveData data)
+        {
+            yield return base.LoadOwner(data);
+            _ownerSender = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
         }
 
         private void LoadVFX()

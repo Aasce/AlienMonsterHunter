@@ -5,17 +5,15 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Managers.Attributes;
 using Asce.Managers.Utils;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Abilities
 {
-    public class ShadowfangBullet_Ability : Ability
+    public class ShadowfangBullet_Ability : Ability, ISendDamageAbility
     {
-        [SerializeField] private Rigidbody2D _rigidbody;
-
-        [Space]
-        [SerializeField, Min(0f)] private float _damageDeal = 0f;
-        [SerializeField] private bool _isDealing = false;
+        [Header("References")]
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
 
         [Header("Toxic Effects")]
         [SerializeField, Readonly] private float _toxicDuration = 0f;
@@ -25,23 +23,15 @@ namespace Asce.Game.Abilities
         [SerializeField] private LayerMask _layer;
         [SerializeField, Min(0f)] private float _force = 0f;
 
-        public Rigidbody2D Rigidbody => _rigidbody;
-        public float DamageDeal
-        {
-            get => _damageDeal;
-            set => _damageDeal = value; 
-        }
+        [Header("Runtime")]
+        [SerializeField, Readonly] private bool _isDealing = false;
+        [SerializeField, Readonly] private float _damage = 0f;
+        [SerializeField, Readonly] private Vector2 _direction;
 
-        public bool IsDealing
-        {
-            get => _isDealing;
-            set => _isDealing = value;
-        }
-        public float Force
-        {
-            get => _force;
-            set => _force = value;
-        }
+        public event Action<DamageContainer> OnSendDamage;
+
+        public Rigidbody2D Rigidbody => _rigidbody;
+        public float Damage => _damage;
 
         public override void Initialize()
         {
@@ -53,6 +43,31 @@ namespace Asce.Game.Abilities
         public override void ResetStatus()
         {
             base.ResetStatus();
+        }
+
+        public override void OnSpawn()
+        {
+            base.OnSpawn();
+            _isDealing = false;
+        }
+
+        public override void OnActive()
+        {
+            base.OnActive();
+            if (Rigidbody == null) return;
+            Rigidbody.AddForce(_direction * _force, ForceMode2D.Impulse);
+
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+
+        public override void OnDespawn()
+        {
+            base.OnDespawn();
+            Rigidbody.linearVelocity = Vector2.zero;
+            Rigidbody.angularVelocity = 0f;
+            Rigidbody.gravityScale = 0f;
+            _direction = Vector2.zero;
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
@@ -81,47 +96,38 @@ namespace Asce.Game.Abilities
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (this.IsDealing) return;
+            if (_isDealing) return;
             if (!LayerUtils.IsInLayerMask(collision.gameObject.layer, _layer)) return;
             if (!collision.TryGetComponent(out ITargetable target)) return;
             if (!target.IsTargetable) return;
+            this.SendDamage(target);
 
-            CombatController.Instance.DamageDealing(new DamageContainer(Owner.GetComponent<ISendDamageable>(), target as ITakeDamageable)
-            {
-                Damage = DamageDeal
-            });
+            _isDealing = true;
+            this.DespawnTime.ToComplete();
+        }
+
+        private void SendDamage(ITargetable target)
+        {
+            ISendDamageable owner = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
             EffectController.Instance.AddEffect("Toxic", Owner.GetComponent<Entity>(), target as Entity, new EffectData()
             {
                 Duration = _toxicDuration,
                 Strength = _toxicStrength,
             });
 
-            this.IsDealing = true;
-            this.DespawnTime.ToComplete();
+            DamageContainer container = new(owner, target as ITakeDamageable)
+            {
+                Damage = Damage
+            };
+            CombatController.Instance.DamageDealing(container);
+            OnSendDamage?.Invoke(container);
         }
 
-        public override void OnSpawn()
+        public void Set(float damage, Vector2 position, Vector2 direction)
         {
-            base.OnSpawn();
-            IsDealing = false;
-        }
-
-        public override void OnDespawn()
-        {
-            base.OnDespawn();
-            Rigidbody.linearVelocity = Vector2.zero;
-            Rigidbody.angularVelocity = 0f;
-            Rigidbody.gravityScale = 0f;
-        }
-
-        public void Fire(Vector2 position, Vector2 direction)
-        {
-            if (Rigidbody == null) return;
+            _damage = damage; 
             transform.position = position;
-            Rigidbody.AddForce(direction.normalized * Force, ForceMode2D.Impulse);
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            _direction = direction.normalized;
         }
 
         protected override void OnBeforeSave(AbilitySaveData data)

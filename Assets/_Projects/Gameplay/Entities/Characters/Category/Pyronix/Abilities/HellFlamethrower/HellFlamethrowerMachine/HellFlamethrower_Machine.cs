@@ -54,7 +54,7 @@ namespace Asce.Game.Entities.Machines
             TargetDetection.ResetTarget();
             _isOverheat = false;
             _currentAttack = 0;
-            _attackCooldown.Reset();
+            _attackCooldown.ToComplete();
             _overheatRecoveryCooldown.ToComplete();
         }
 
@@ -159,9 +159,8 @@ namespace Asce.Game.Entities.Machines
             Vector2 direction = _weapon.transform.up;
 
             fire.Leveling.SetLevel(Leveling.CurrentLevel);
-            fire.DamageDeal = _damage;
             fire.gameObject.SetActive(true);
-            fire.Fire(shootPos, direction);
+            fire.Set(_damage, shootPos, direction);
             fire.OnActive();
         }
 

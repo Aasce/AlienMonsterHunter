@@ -44,7 +44,7 @@ namespace Asce.Game.Effects
             return effectPrefab.Information.ApplyType switch
             {
                 EffectApplyType.Stacking => HandleStackingEffect(effectName, sender, receiver, data, effectPrefab, onBeforeApply),
-                EffectApplyType.ResetDuration => HandleResetDurationEffect(effectName, sender, receiver, data, onBeforeApply),
+                EffectApplyType.Reapply => HandleReapplyEffect(effectName, sender, receiver, data, onBeforeApply),
                 _ => AddNewEffect(effectName, sender, receiver, data, onBeforeApply),
             };
         }
@@ -125,13 +125,13 @@ namespace Asce.Game.Effects
             return existStackEffect;
         }
 
-        private Effect HandleResetDurationEffect(string effectName, Entity sender, Entity receiver, EffectData data, Action<Effect> onBeforeApply = null)
+        private Effect HandleReapplyEffect(string effectName, Entity sender, Entity receiver, EffectData data, Action<Effect> onBeforeApply = null)
         {
             Effect existEffect = receiver.Effects.Effects.FirstOrDefault(e => e.Information.Name == effectName);
             if (existEffect == null)
                 return AddNewEffect(effectName, sender, receiver, data, onBeforeApply);
 
-            existEffect.Duration.Reset();
+            existEffect.Reapply(data);
             return existEffect;
         }
 

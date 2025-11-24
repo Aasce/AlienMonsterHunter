@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,5 +10,24 @@ namespace Asce.Game.VFXs
 
 
         public List<ParticleSystem> ParticleSystems => _particleSystems;
+
+        public void StopEmitting()
+        {
+            foreach (ParticleSystem particle in _particleSystems)
+            {
+                if (particle == null) Console.WriteLine();
+                particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+        }
+
+        public void ClearEmitting()
+        {
+            foreach (ParticleSystem particle in _particleSystems)
+            {
+                if (particle == null) Console.WriteLine();
+                particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
+
+        }
     }
 }

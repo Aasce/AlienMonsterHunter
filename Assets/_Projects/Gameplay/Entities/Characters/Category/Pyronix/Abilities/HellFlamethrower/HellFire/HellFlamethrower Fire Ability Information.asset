@@ -20,10 +20,12 @@ MonoBehaviour:
   _cooldown: 0
   _useRangeRadius: Infinity
   _despawnTime: 2.5
+  _isReactive: 0
+  _reactiveCooldown: 0
   _customValues:
     _list:
     - _name: IgniteDuration
-      _value: 2.6
+      _value: 4
     - _name: IgniteStrength
       _value: 3
   _leveling: {fileID: 11400000, guid: 53e5f79b40bd9594295affc31ec1cb8b, type: 2}

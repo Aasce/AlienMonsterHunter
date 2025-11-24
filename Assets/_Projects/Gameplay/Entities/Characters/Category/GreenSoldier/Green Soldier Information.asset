@@ -21,6 +21,6 @@ MonoBehaviour:
   _difficulty: 6
   _progress: {fileID: 11400000, guid: 4cae9e67f5737d043a1ce9db828a0f14, type: 2}
   _abilityNames:
-  - Oblivion Turret
-  - Electro Reactor
   - Electric Trap
+  - Electro Reactor
+  - Oblivion Turret

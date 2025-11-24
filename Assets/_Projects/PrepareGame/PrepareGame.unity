@@ -2254,7 +2254,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 6964533e000000002797e9f8
+  m_ApplyToSortingLayers: 6964533e000000002797e9f84340fce7
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2849,14 +2849,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 854774654}
-  - component: {fileID: 854774655}
+  - component: {fileID: 854774657}
+  - component: {fileID: 854774656}
   m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &854774654
 Transform:
   m_ObjectHideFlags: 0
@@ -2872,8 +2873,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1836896086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &854774655
-EdgeCollider2D:
+--- !u!114 &854774656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854774653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!60 &854774657
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2907,27 +2924,29 @@ EdgeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 14, y: 7}
-  - {x: 12, y: 7}
-  - {x: 12, y: 8.5}
-  - {x: -2, y: 8.5}
-  - {x: -2, y: -5}
-  - {x: 0, y: -5}
-  - {x: 0, y: -9}
-  - {x: 10, y: -9}
-  - {x: 10, y: -7}
-  - {x: 14, y: -7}
-  - {x: 14, y: -4}
-  - {x: 16, y: -4}
-  - {x: 16, y: 4}
-  - {x: 14, y: 4}
-  - {x: 14, y: 7}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: -32, y: 25}
+      - {x: -32, y: 12}
+      - {x: -18, y: 10}
+      - {x: 18, y: 10}
+      - {x: 18, y: -10}
+      - {x: -18, y: -10}
+      - {x: -18, y: 10}
+      - {x: -32, y: 12}
+      - {x: -32, y: -25}
+      - {x: 48, y: -25}
+      - {x: 48, y: 25}
+  m_UseDelaunayMesh: 0
 --- !u!224 &862630701 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2866979258449671601, guid: 31507719179ed914dbb5af59da22c0ea, type: 3}

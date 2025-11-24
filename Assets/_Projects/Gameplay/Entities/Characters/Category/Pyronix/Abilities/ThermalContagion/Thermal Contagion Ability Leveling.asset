@@ -18,7 +18,7 @@ MonoBehaviour:
   _uniformGrowth:
     _modifications:
     - _targetKey: Damage
-      _deltaValue: 2
+      _deltaValue: 2.2
       _type: 0
   _specificLevelChanges:
   - Level: 5
@@ -28,13 +28,13 @@ MonoBehaviour:
         _deltaValue: 0.2
         _type: 0
       - _targetKey: ContagionRadius
-        _deltaValue: 2
+        _deltaValue: 1
         _type: 0
       - _targetKey: IgniteDuration
         _deltaValue: 1
         _type: 0
       - _targetKey: IgniteStrength
-        _deltaValue: 2
+        _deltaValue: 3
         _type: 0
   - Level: 10
     ModificationGroup:
@@ -49,5 +49,5 @@ MonoBehaviour:
         _deltaValue: 1
         _type: 0
       - _targetKey: IgniteStrength
-        _deltaValue: 2
+        _deltaValue: 3
         _type: 0

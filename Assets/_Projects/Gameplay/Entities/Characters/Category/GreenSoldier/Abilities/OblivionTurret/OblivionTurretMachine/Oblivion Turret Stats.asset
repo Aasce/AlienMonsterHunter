@@ -19,8 +19,6 @@ MonoBehaviour:
     _list:
     - _name: Damage
       _value: 30
-    - _name: ExplosionRadius
-      _value: 2.5
     - _name: MaxAmmo
       _value: 3
     - _name: AttackSpeed
