@@ -1,22 +1,17 @@
-using Asce.Game.UIs.Panels;
-using Asce.MainGame.Managers;
+using Asce.Game.Managers;
+using Asce.Game.UIs.HUDs;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.MainGame.UIs.Panels
+namespace Asce.ResultGame
 {
-
-    public class UIGameVictoryPanel : UIPanel
+    public class UIResultGameHUDController : UIHUDController
     {
+        [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private Button _backMenuButton;
         [SerializeField] private Button _playAgainButton;
         [SerializeField] private Button _nextGameButton;
-
-        protected override void Reset()
-        {
-            base.Reset();
-            _name = "Game Victory";
-        }
 
         public override void Initialize()
         {
@@ -28,17 +23,19 @@ namespace Asce.MainGame.UIs.Panels
 
         private void BackMenuButton_OnClick()
         {
-            MainGameManager.Instance.BackToMainMenu();
-        }
+            ResultGameManager.Instance.BackToMainMenu();
 
-        private void PlayAgainButton_OnClick()
-        {
-            MainGameManager.Instance.BackToMainMenu();
         }
 
         private void NextGameButton_OnClick()
         {
-            MainGameManager.Instance.BackToMainMenu();
+            ResultGameManager.Instance.PlayNewGame();
+
+        }
+
+        private void PlayAgainButton_OnClick()
+        {
+            ResultGameManager.Instance.PlayGame();
         }
 
     }

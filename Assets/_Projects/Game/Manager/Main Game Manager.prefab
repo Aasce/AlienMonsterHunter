@@ -55,6 +55,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _uiController: {fileID: 0}
   _mainMenuSceneName: Menu
+  _resultGameSceneName: ResultGame
 --- !u!1001 &2076454797518180066
 PrefabInstance:
   m_ObjectHideFlags: 0

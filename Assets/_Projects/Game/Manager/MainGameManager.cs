@@ -22,6 +22,7 @@ namespace Asce.MainGame.Managers
 
         [Space]
         [SerializeField] private string _mainMenuSceneName;
+        [SerializeField] private string _resultGameSceneName;
 
         public GameStateController GameStateController => _gameStateController;
         public MainGameSaveLoadController SaveLoadController => _saveLoadController;
@@ -90,6 +91,13 @@ namespace Asce.MainGame.Managers
             SaveLoadController.SaveCurrentGame();
             GameStateController.GameState = MainGameState.Exiting; 
             SceneLoader.Instance.Load(_mainMenuSceneName, delay: 0.5f);
+        }
+
+        public void ToResultGame()
+        {
+            SaveLoadController.SaveCurrentGame();
+            GameStateController.GameState = MainGameState.Exiting; 
+            SceneLoader.Instance.Load(_resultGameSceneName, delay: 0.5f);
         }
 
     }
