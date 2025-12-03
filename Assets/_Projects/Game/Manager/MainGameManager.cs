@@ -16,6 +16,8 @@ namespace Asce.MainGame.Managers
         [SerializeField, Readonly] private MainGameSaveLoadController _saveLoadController;
         [SerializeField, Readonly] private NewGameController _newGameController;
         [SerializeField, Readonly] private SpawnerController _spawnerController;
+        [SerializeField, Readonly] private PlayTimeController _playTimeController;
+        [SerializeField, Readonly] private ResultController _resultController;
 
         [SerializeField] private MainGamePlayer _player;
         [SerializeField] private UIMainGameController _uiController;
@@ -28,6 +30,9 @@ namespace Asce.MainGame.Managers
         public MainGameSaveLoadController SaveLoadController => _saveLoadController;
         public NewGameController NewGameController => _newGameController;
         public SpawnerController SpawnerController => _spawnerController;
+        public PlayTimeController PlayTimeController => _playTimeController;
+        public ResultController ResultController => _resultController;
+
         public MainGamePlayer Player => _player;
         public UIMainGameController UIController => _uiController;
 
@@ -39,19 +44,21 @@ namespace Asce.MainGame.Managers
             this.LoadComponent(out _saveLoadController);
             this.LoadComponent(out _newGameController);
             this.LoadComponent(out _spawnerController);
+            this.LoadComponent(out _playTimeController);
+            this.LoadComponent(out _resultController);
         }
 
         protected override void Awake()
         {
             base.Awake();
-            GameStateController.GameState = MainGameState.Initialize;
+
         }
 
         private void Start()
         {
             this.Initialize();
 
-            bool isNewGame = Shared.Get<bool>("NewGame");
+            bool isNewGame = GameManager.Instance.Shared.Get<bool>("NewGame");
             if (isNewGame)
             {
                 GameStateController.GameState = MainGameState.Creating;
@@ -66,6 +73,7 @@ namespace Asce.MainGame.Managers
 
             UIController.AssignUI();
             CameraController.Instance.SetToTarget();
+            ResultController.OnReady();
             GameStateController.GameState = MainGameState.Playing;
         }
 
@@ -75,6 +83,8 @@ namespace Asce.MainGame.Managers
             GameStateController.Initialize();
             NewGameController.Initialize();
             SpawnerController.Initialize();
+            PlayTimeController.Initialize();
+            ResultController.Initialize();
             Player.Initialize();
             UIController.Initialze();
             PlayerManager.Instance.RegisterPlayer(Player);

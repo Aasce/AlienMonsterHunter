@@ -1,3 +1,5 @@
+using Asce.Game.Managers;
+using Asce.Game.Progress;
 using Asce.Game.UIs.Panels;
 using Asce.Managers;
 using Asce.Managers.Utils;
@@ -28,5 +30,18 @@ namespace Asce.ResultGame
             HUDController.Initialize();
             PanelController.Initialize();
         }
+
+        public void AssignUI()
+        {
+            ResultShareData resultData = ResultGameManager.Instance.ResultData;
+            if (resultData == null)
+            {
+                HUDController.Title.Set(GameResultType.Unknown);
+                return;
+            }
+
+            HUDController.Title.Set(resultData.FinalResult);
+        }
+
     }
 }

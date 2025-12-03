@@ -98,7 +98,7 @@ namespace Asce.Game.Abilities
         public override void OnActive()
         {
             base.OnActive();
-            _ownerSender = Owner.GetComponent<ISendDamageable>();
+            _ownerSender = Owner != null ? Owner.GetComponent<ISendDamageable>() : null;
 
             if (Rigidbody == null) return;
             Rigidbody.AddForce(_direction * _force, ForceMode2D.Impulse);

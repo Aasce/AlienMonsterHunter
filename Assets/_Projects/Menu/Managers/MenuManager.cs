@@ -19,7 +19,7 @@ namespace Asce.Menu
         private void Start()
         {
             this.Initialize();
-            Shared.Remove("NewGame");
+            GameManager.Instance.Shared.Remove("NewGame");
         }
 
         private void Initialize()
@@ -29,7 +29,7 @@ namespace Asce.Menu
 
         public void PlayGame()
         {
-            Shared.SetOrAdd("NewGame", false);
+            GameManager.Instance.Shared.SetOrAdd("NewGame", false);
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
@@ -37,7 +37,7 @@ namespace Asce.Menu
         {
             SaveLoadCurrentGameController currentGameController = SaveLoadManager.Instance.GetController("Current Game") as SaveLoadCurrentGameController;
             if (currentGameController != null) currentGameController.ClearCurrentGame();
-            Shared.SetOrAdd("NewGame", true);
+            GameManager.Instance.Shared.SetOrAdd("NewGame", true);
             SceneLoader.Instance.Load(_prepareGameSceneName, delay: 0.5f);
         }
     }

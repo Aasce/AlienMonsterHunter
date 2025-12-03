@@ -1,5 +1,6 @@
 using Asce.Game.Managers;
 using Asce.Game.Players;
+using Asce.Game.Progress;
 using Asce.Managers;
 using Asce.SaveLoads;
 using UnityEngine;
@@ -10,17 +11,25 @@ namespace Asce.ResultGame
     {
         [SerializeField] private UIResultGameController _uiController;
 
+        [SerializeField] private ResultShareData _resultData;
+
         [Space]
         [SerializeField] private string _mainMenuSceneName;
         [SerializeField] private string _prepareGameSceneName;
         [SerializeField] private string _mainGameSceneName;
 
         public UIResultGameController UIController => _uiController;
+        public ResultShareData ResultData => _resultData;
 
         private void Start()
         {
             this.Initialize();
-            Shared.Remove("NewGame");
+
+            if (!GameManager.Instance.Shared.TryGet<ResultShareData>("ResultGame", out _resultData))
+            {
+                Debug.Log("[ResultGameManager] ResultShareData is null");
+            }
+            UIController.AssignUI();
         }
 
         private void Initialize()
@@ -31,7 +40,7 @@ namespace Asce.ResultGame
         public void PlayGame()
         {
             this.SaveAll();
-            Shared.SetOrAdd("NewGame", false);
+            GameManager.Instance.Shared.SetOrAdd("NewGame", false);
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
         }
 
@@ -40,7 +49,7 @@ namespace Asce.ResultGame
             this.SaveAll();
             SaveLoadCurrentGameController currentGameController = SaveLoadManager.Instance.GetController("Current Game") as SaveLoadCurrentGameController;
             if (currentGameController != null) currentGameController.ClearCurrentGame();
-            Shared.SetOrAdd("NewGame", true);
+            GameManager.Instance.Shared.SetOrAdd("NewGame", true);
             SceneLoader.Instance.Load(_prepareGameSceneName, delay: 0.5f);
         }
 

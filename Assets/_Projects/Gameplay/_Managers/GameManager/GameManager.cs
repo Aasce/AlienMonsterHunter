@@ -27,6 +27,8 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
         [SerializeField] private SO_AllItems _allItems;
 
+        public Shared _shared = new();
+
         public event Action OnQuitGame;
 
         public GameServices GameServices => _gameServices;
@@ -39,6 +41,8 @@ namespace Asce.Game.Managers
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
         public SO_AllItems AllItems => _allItems;
+
+        public Shared Shared => _shared;
 
         private void OnValidate()
         {

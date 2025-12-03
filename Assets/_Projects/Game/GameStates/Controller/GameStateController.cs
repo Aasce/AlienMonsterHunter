@@ -1,3 +1,4 @@
+using Asce.Game.Managers;
 using Asce.Managers;
 using Asce.Managers.Utils;
 using System;
@@ -8,6 +9,7 @@ namespace Asce.MainGame.Managers
     public class GameStateController : GameComponent
     {
         [SerializeField] private MainGameState _gameState = MainGameState.None;
+        [SerializeField] private GameResultType _gameResultType = GameResultType.Unknown;
 
         [Space]
         [SerializeField] private WinCondition _winCondition;
@@ -32,6 +34,7 @@ namespace Asce.MainGame.Managers
                 OnGameStateChanged?.Invoke(new ValueChangedEventArgs<MainGameState>(oldValue, _gameState));
             }
         }
+        public GameResultType GameResultType => _gameResultType;
 
         public bool IsPlaying => GameState == MainGameState.Playing || GameState == MainGameState.Pausing;
 
@@ -43,36 +46,38 @@ namespace Asce.MainGame.Managers
 
         private void Update()
         {
+            if (GameState != MainGameState.Playing) return;
+
             _checkCooldown.Update(Time.deltaTime);
-            if (_checkCooldown.IsComplete)
+            if (!_checkCooldown.IsComplete) return;
+            _checkCooldown.Reset();
+
+            if (_winCondition != null)
             {
-                _checkCooldown.Reset();
-
-                if (_winCondition != null)
+                _winCondition.OnCheck();
+                if (_winCondition.IsSatisfied())
                 {
-                    _winCondition.OnCheck();
-                    if (_winCondition.IsSatisfied())
-                    {
-                        this.ToVictory();
-                        return;
-                    }
-                }
-
-                if (_loseCondition != null)
-                {
-                    _loseCondition.OnCheck();
-                    if (_loseCondition.IsSatisfied())
-                    {
-                        this.ToDefeat();
-                        return;
-                    }
+                    this.ToVictory();
+                    return;
                 }
             }
+
+            if (_loseCondition != null)
+            {
+                _loseCondition.OnCheck();
+                if (_loseCondition.IsSatisfied())
+                {
+                    this.ToDefeat();
+                    return;
+                }
+            }
+            
         }
 
         public void ToVictory()
         {
             GameState = MainGameState.Completed;
+            _gameResultType = GameResultType.Victory;
             OnVictory?.Invoke();
             OnEndGame?.Invoke();
         }
@@ -80,6 +85,7 @@ namespace Asce.MainGame.Managers
         public void ToDefeat()
         {
             GameState = MainGameState.Failed;
+            _gameResultType = GameResultType.Defeat;
             OnDefeat?.Invoke();
             OnEndGame?.Invoke();
         }

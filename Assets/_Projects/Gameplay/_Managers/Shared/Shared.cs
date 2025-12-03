@@ -3,83 +3,65 @@ using UnityEngine;
 
 namespace Asce.Managers
 {
-    public static class Shared
+    public class Shared
     {
-        private static readonly Dictionary<string, object> _data = new();
+        private readonly Dictionary<string, object> _data = new();
 
-        public static Dictionary<string, object> Data => _data;
+        public Dictionary<string, object> Data => _data;
 
 
-        public static T Get<T>(string key)
+        public T Get<T>(string key)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                Debug.LogWarning($"[Shared-Get] Key is null or empty");
-                return default;
-            }
-
-            if (!Data.TryGetValue(key, out object value))
-            {
-                return default;
-            }
-
+            if (string.IsNullOrEmpty(key)) return default;
+            if (!Data.TryGetValue(key, out object value)) return default;
             if (value is not T tValue) return default;
             return tValue;
         }
 
-        public static void Add(string key, object value)
-        {
-            if (string.IsNullOrEmpty(key))
-            {
-                Debug.LogWarning($"[Shared-Add] Key is null or empty");
-                return;
-            }
 
+        public bool TryGet<T> (string key, out T value)
+        {
+            value = default;
+            if (string.IsNullOrEmpty(key)) return false;
+            if (!Data.TryGetValue(key, out object objValue)) return false;
+            if (objValue is not T tValue) return false;
+            value = tValue;
+            return true;
+        }
+
+
+        public void Add(string key, object value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
             if (Data.ContainsKey(key)) return;
-            
 
-            _data.Add(key, value);
+            Data.Add(key, value);
         }
 
-        public static void Remove(string key)
+        public void Remove(string key)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                Debug.LogWarning($"[Shared-Remove] Key is null or empty");
-                return;
-            }
-
+            if (string.IsNullOrEmpty(key)) return;
             if (!Data.ContainsKey(key)) return;
-            _data.Remove(key);
+            Data.Remove(key);
         }
 
-        public static void Set(string key, object value)
+        public void Set(string key, object value)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                Debug.LogWarning($"[Shared-Set] Key is null or empty");
-                return;
-            }
-
-            if (!Data.ContainsKey(key))  return;
+            if (string.IsNullOrEmpty(key)) return;
+            if (!Data.ContainsKey(key)) return;
             Data[key] = value;
         }
 
-        public static void SetOrAdd(string key, object value)
+        public void SetOrAdd(string key, object value)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                Debug.LogWarning($"[Shared-SetOrAdd] Key is null or empty");
-                return;
-            }
-
-            if (Data.ContainsKey(key)) Set(key, value);
-            else Add(key, value);
+            if (string.IsNullOrEmpty(key)) return;
+            if (Data.ContainsKey(key)) this.Set(key, value);
+            else this.Add(key, value);
         }
 
-        public static void Clear()
+        public void Clear()
         {
-            _data.Clear();
+            Data.Clear();
         }
     }
 }

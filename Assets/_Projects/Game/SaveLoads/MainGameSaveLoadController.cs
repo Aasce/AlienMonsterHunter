@@ -51,7 +51,7 @@ namespace Asce.MainGame
         {
             CurrentGameConfigData configData = new CurrentGameConfigData();
             configData.hasSave = MainGameManager.Instance.GameStateController.IsPlaying;
-            configData.playTime = Time.time;
+            configData.playTime = MainGameManager.Instance.PlayTimeController.ElapsedTime;
             SaveLoadManager.Instance.Save("CurrentGameConfig", configData);
         }
 
@@ -142,6 +142,7 @@ namespace Asce.MainGame
         {
             CurrentGameConfigData configData = SaveLoadManager.Instance.Load<CurrentGameConfigData>("CurrentGameConfig");
             if (configData == null) return;
+			MainGameManager.Instance.PlayTimeController.SetElapsedTime(configData.playTime);
 
             _isLoadeds["GameConfig"] = true;
         }

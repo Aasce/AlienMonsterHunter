@@ -27,8 +27,8 @@ namespace Asce.MainGame.Managers
 
         private void CreateCharacterForPlayer()
         {
-            string characterName = Shared.Get<string>("character");
-            string gunName = Shared.Get<string>("gun");
+            string characterName = GameManager.Instance.Shared.Get<string>("character");
+            string gunName = GameManager.Instance.Shared.Get<string>("gun");
 
             Gun gunPrefab = GameManager.Instance.AllGuns.Get(gunName);
             Gun gunInstance = Instantiate(gunPrefab);
@@ -50,7 +50,7 @@ namespace Asce.MainGame.Managers
 
         private void CreateSupportForPlayer()
         {
-            List<string> supportNames = Shared.Get<List<string>>("supports");
+            List<string> supportNames = GameManager.Instance.Shared.Get<List<string>>("supports");
             if (supportNames == null) return;
             MainGameManager.Instance.Player.SupportCaller.Initialize(supportNames);
         }

@@ -24,7 +24,7 @@ namespace Asce.PrepareGame.Manager
         private void Start()
         {
             this.Initialze();
-            Shared.SetOrAdd("NewGame", true);
+            GameManager.Instance.Shared.SetOrAdd("NewGame", true);
         }
 
         private void Initialze()
@@ -47,9 +47,9 @@ namespace Asce.PrepareGame.Manager
             if (PickController.Instance.CharacterPrefab == null) return;
             if (PickController.Instance.GunPrefab  == null) return;
 
-            Shared.SetOrAdd("character", $"{PickController.Instance.CharacterPrefab.Information.Name}");
-            Shared.SetOrAdd("gun", $"{PickController.Instance.GunPrefab.Information.Name}");
-            Shared.SetOrAdd("supports", PickController.Instance.SupportPrefabs
+            GameManager.Instance.Shared.SetOrAdd("character", $"{PickController.Instance.CharacterPrefab.Information.Name}");
+            GameManager.Instance.Shared.SetOrAdd("gun", $"{PickController.Instance.GunPrefab.Information.Name}");
+            GameManager.Instance.Shared.SetOrAdd("supports", PickController.Instance.SupportPrefabs
                 .Where(s => s != null && s.Information != null)
                 .Select(s => s.Information.Name)
                 .ToList()
