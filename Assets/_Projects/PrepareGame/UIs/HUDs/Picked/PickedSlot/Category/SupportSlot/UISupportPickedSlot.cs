@@ -1,6 +1,6 @@
 using Asce.Game.Players;
 using Asce.Game.Supports;
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using Asce.PrepareGame.Picks;
 using TMPro;
 using UnityEngine;

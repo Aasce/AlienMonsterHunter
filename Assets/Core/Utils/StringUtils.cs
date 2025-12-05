@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     ///     Utility class for applying Unity rich text formatting to strings.

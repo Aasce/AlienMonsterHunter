@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     ///     Utility class for handling input across different platforms.

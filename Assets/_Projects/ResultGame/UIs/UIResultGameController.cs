@@ -1,8 +1,8 @@
 using Asce.Game.Managers;
 using Asce.Game.Progress;
 using Asce.Game.UIs.Panels;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.ResultGame

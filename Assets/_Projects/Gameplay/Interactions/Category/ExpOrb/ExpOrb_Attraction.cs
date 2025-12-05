@@ -1,7 +1,7 @@
 using Asce.Game.Entities.Characters;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Interactions

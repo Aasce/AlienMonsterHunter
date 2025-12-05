@@ -1,15 +1,15 @@
 using Asce.Game.Interactions;
 using Asce.Game.Managers;
 using Asce.MainGame.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using TMPro;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.ToolTips
 {
-    public class UIInteractionTipBoard : UIObject
+    public class UIInteractionTipBoard : UIComponent
     {
         [Header("References")]
         [SerializeField] private TextMeshProUGUI _text;

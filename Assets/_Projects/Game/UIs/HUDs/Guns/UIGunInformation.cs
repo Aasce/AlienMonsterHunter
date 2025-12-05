@@ -1,13 +1,13 @@
 using Asce.Game.Guns;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs
 {
-    public class UIGunInformation : UIObject
+    public class UIGunInformation : UIComponent
     {
         [SerializeField] private Image _gunIcon;
         [SerializeField] private TextMeshProUGUI _magazineText;

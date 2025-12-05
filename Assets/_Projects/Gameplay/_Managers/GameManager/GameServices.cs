@@ -1,7 +1,7 @@
 using Asce.Game.Players;
 using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     public class GameServices : GameComponent
     {

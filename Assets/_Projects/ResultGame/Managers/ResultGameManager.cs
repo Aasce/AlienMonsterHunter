@@ -1,7 +1,7 @@
 using Asce.Game.Managers;
 using Asce.Game.Players;
 using Asce.Game.Progress;
-using Asce.Managers;
+using Asce.Core;
 using Asce.SaveLoads;
 using UnityEngine;
 
@@ -37,11 +37,13 @@ namespace Asce.ResultGame
             UIController.Initialize();
         }
 
-        public void PlayGame()
+        public void PlayAgain()
         {
             this.SaveAll();
-            GameManager.Instance.Shared.SetOrAdd("NewGame", false);
-            SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);
+            SaveLoadCurrentGameController currentGameController = SaveLoadManager.Instance.GetController("Current Game") as SaveLoadCurrentGameController;
+            if (currentGameController != null) currentGameController.ClearCurrentGame();
+            GameManager.Instance.Shared.SetOrAdd("NewGame", true);
+            SceneLoader.Instance.Load(_prepareGameSceneName, delay: 0.5f);
         }
 
         public void PlayNewGame()

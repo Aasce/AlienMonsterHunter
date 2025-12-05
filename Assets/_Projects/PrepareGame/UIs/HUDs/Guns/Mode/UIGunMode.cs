@@ -1,9 +1,9 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIGunMode : UIObject
+    public class UIGunMode : UIComponent
     {
         public void Set(object nothing)
         {

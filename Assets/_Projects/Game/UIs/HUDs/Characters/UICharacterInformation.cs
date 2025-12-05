@@ -1,13 +1,13 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.UIs;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UICharacterInformation : UIObject
+    public class UICharacterInformation : UIComponent
     {
         [SerializeField] private Image _avatar;
 

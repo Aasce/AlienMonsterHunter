@@ -1,5 +1,5 @@
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Players

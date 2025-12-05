@@ -1,7 +1,7 @@
 using Asce.Game.Players;
 using Asce.Game.UIs;
 using Asce.Game.UIs.HUDs;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using Asce.PrepareGame.Manager;
 using UnityEngine;
 using UnityEngine.UI;

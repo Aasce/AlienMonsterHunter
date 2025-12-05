@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     ///     Utility class for working with Color values beyond what Unity provides.

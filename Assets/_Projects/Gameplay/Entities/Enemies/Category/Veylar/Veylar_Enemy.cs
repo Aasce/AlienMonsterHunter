@@ -4,8 +4,8 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using System;
 using UnityEngine;
 

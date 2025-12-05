@@ -1,7 +1,7 @@
 using Asce.Game.Abilities;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System;
 using TMPro;
 using UnityEngine;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UIAbility : UIObject
+    public class UIAbility : UIComponent
     {
         [SerializeField, Readonly] private AbilityContainer _container;
 

@@ -2,8 +2,8 @@ using Asce.Game.Abilities;
 using Asce.Game.FOVs;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Machines

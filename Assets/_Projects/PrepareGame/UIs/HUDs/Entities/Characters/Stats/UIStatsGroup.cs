@@ -1,11 +1,11 @@
 using Asce.Game.Entities;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIStatsGroup : UIObject
+    public class UIStatsGroup : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _healthText;
         [SerializeField] private TextMeshProUGUI _armorText;

@@ -1,13 +1,13 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UILevelProgess : UIObject
+    public class UILevelProgess : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _progessText;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     ///     A generic object pool for Unity components.

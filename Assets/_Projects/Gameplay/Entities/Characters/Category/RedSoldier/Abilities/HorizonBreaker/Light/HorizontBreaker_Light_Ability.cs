@@ -2,7 +2,7 @@ using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using System;
 using System.Collections;
 using UnityEngine;

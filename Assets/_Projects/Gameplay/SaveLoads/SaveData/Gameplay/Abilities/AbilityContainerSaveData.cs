@@ -8,7 +8,10 @@ namespace Asce.Game.SaveLoads
     {
         public string id;
         public string name;
+        public int level;
         public float cooldown;
+        public float remainCooldown;
+
         public string abilityInstanceId;
 
         public override void CopyFrom(SaveData other)
@@ -18,7 +21,9 @@ namespace Asce.Game.SaveLoads
             {
                 id = abilityData.id;
                 name = abilityData.name;
+                level = abilityData.level;
                 cooldown = abilityData.cooldown;
+                remainCooldown = abilityData.remainCooldown;
                 abilityInstanceId = abilityData.abilityInstanceId;
             }
         }

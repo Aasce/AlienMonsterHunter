@@ -1,8 +1,8 @@
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using System.Collections;
@@ -106,6 +106,7 @@ namespace Asce.Game.Abilities
                 id = this.Id,
                 name = Information.Name,
                 ownerId = this.Owner.GetId(),
+                level = (Leveling as ISaveable<LevelingSaveData>).Save(),
                 baseDespawnTime = this.DespawnTime.BaseTime,
                 despawnTime = this.DespawnTime.CurrentTime,
                 position = this.transform.position,
@@ -118,12 +119,14 @@ namespace Asce.Game.Abilities
         void ILoadable<AbilitySaveData>.Load(AbilitySaveData data)
         {
             if (data == null) return;
-            this._id = data.id;
-            this._despawnTime.BaseTime = data.baseDespawnTime;
-            this._despawnTime.CurrentTime = data.despawnTime;
-            this.transform.position = data.position;
-            this.transform.eulerAngles = new Vector3(0f, 0f, data.rotation);
-            this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
+            _id = data.id;
+
+            (Leveling as ILoadable<LevelingSaveData>).Load(data.level);
+
+            _despawnTime.BaseTime = data.baseDespawnTime;
+            _despawnTime.CurrentTime = data.despawnTime;
+            transform.position = data.position;
+            transform.eulerAngles = new Vector3(0f, 0f, data.rotation);
             StartCoroutine(LoadOwner(data));
             this.OnAfterLoad(data);
 
@@ -134,7 +137,7 @@ namespace Asce.Game.Abilities
         protected virtual IEnumerator LoadOwner(AbilitySaveData data)
         {
             yield return null;
-            this._owner = ComponentUtils.FindGameObjectById(data.ownerId);
+            _owner = ComponentUtils.FindGameObjectById(data.ownerId);
         }
     }
 }

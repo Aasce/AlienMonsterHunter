@@ -1,11 +1,11 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.Game.UIs
 {
-    public class UITintColor : UIObject
+    public class UITintColor : UIComponent
     {
         [SerializeField] private Color _tintColor = Color.white;
 

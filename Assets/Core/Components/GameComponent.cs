@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     public abstract class GameComponent : MonoBehaviour
     {

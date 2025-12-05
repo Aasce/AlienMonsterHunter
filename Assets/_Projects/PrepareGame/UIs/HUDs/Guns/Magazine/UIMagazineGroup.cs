@@ -1,11 +1,11 @@
 using Asce.Game.Guns;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIMagazineGroup : UIObject
+    public class UIMagazineGroup : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _damageText;
         [SerializeField] private TextMeshProUGUI _penetrationText;

@@ -8,6 +8,9 @@ namespace Asce.Game.SaveLoads
     {
         public string id;
         public string nameId;
+        
+        public LevelingSaveData level;
+
         public Vector2 position;
         public float rotation;
         public Vector2 callPosition;
@@ -19,6 +22,10 @@ namespace Asce.Game.SaveLoads
             {
                 id = supportData.id;
                 nameId = supportData.nameId;
+
+                level = new();
+                level.CopyFrom(supportData.level);
+
                 position = supportData.position;
                 rotation = supportData.rotation;
                 callPosition = supportData.callPosition;

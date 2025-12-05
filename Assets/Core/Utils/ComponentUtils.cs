@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     public static class ComponentUtils
     {

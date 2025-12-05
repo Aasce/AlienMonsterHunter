@@ -1,11 +1,11 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.Game.UIs
 {
-    public class UITabs : UIObject
+    public class UITabs : UIComponent
     {
         [SerializeField] private List<TabView> _tabViews = new();
 

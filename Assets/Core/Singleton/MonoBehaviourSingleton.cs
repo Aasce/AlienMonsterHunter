@@ -1,7 +1,7 @@
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     /// <summary>
     ///     A generic singleton base class for <see cref="MonoBehaviour"/> components.

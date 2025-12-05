@@ -1,14 +1,14 @@
 using Asce.Game.Items;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.Game.UIs
 {
-    public class UICurrency : UIObject
+    public class UICurrency : UIComponent
     {
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _quantityText;

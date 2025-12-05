@@ -1,6 +1,6 @@
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Managers;
+using Asce.Core;
 using Asce.PrepareGame.Picks;
 using Asce.PrepareGame.Players;
 using Asce.PrepareGame.UIs;

@@ -1,6 +1,6 @@
 using Asce.Game.UIs.HUDs;
 using Asce.Game.UIs.Panels;
-using Asce.Managers;
+using Asce.Core;
 using Asce.SaveLoads;
 using UnityEngine;
 using UnityEngine.UI;

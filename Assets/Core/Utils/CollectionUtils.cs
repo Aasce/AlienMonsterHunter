@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     /// Provides extension methods for collections, such as retrieving a random element.

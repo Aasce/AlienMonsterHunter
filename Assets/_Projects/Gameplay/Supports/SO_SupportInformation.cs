@@ -1,6 +1,6 @@
 using Asce.Game.Levelings;
 using Asce.Game.Progress;
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Supports

@@ -1,21 +1,25 @@
 using Asce.Game.Managers;
 using Asce.Game.Progress;
-using Asce.Managers;
+using Asce.Core;
 using UnityEngine;
 
 namespace Asce.MainGame.Managers
 {
-    public class ResultController : GameComponent
+    public class ResultController : ControllerComponent
     {
         [SerializeField] private ResultShareData _resultData = new();
 
-        public void Initialize()
+        public override string ControllerName => "Result";
+
+        public override void Initialize()
         {
+            base.Initialize();
             MainGameManager.Instance.GameStateController.OnEndGame += GameStateController_OnEndGame;
         }
 
-        public void OnReady()
+        public override void Ready()
         {
+            base.Ready();
             _resultData.StartCharacterLevel = MainGameManager.Instance.Player.Character.Leveling.CurrentLevel;
             _resultData.StartCharacterExp = MainGameManager.Instance.Player.Character.Leveling.CurrentExp;
         }

@@ -7,20 +7,29 @@ using Asce.Game.Managers;
 using Asce.Game.SaveLoads;
 using Asce.Game.Supports;
 using Asce.MainGame.Managers;
-using Asce.Managers;
+using Asce.Core;
 using Asce.SaveLoads;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.MainGame
 {
-    public class MainGameSaveLoadController : GameComponent
+    public class MainGameSaveLoadController : ControllerComponent
     {
         private readonly Dictionary<string, bool> _isLoadeds = new();
+
+        public override string ControllerName => "Save Load";
+
+
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
 
         public void SaveCurrentGame()
         {
             this.SaveGameConfig();
+            this.SaveWinLoseCondition();
             this.SaveEnemies();
             this.SaveSpawners();
             this.SaveCharacter();
@@ -33,6 +42,7 @@ namespace Asce.MainGame
         public void LoadCurrentGame()
         {
             this.LoadGameConfig();
+            this.LoadWinLoseCondition();
             this.LoadEnemies();
             this.LoadSpawners();
             this.LoadCharacter();
@@ -52,7 +62,27 @@ namespace Asce.MainGame
             CurrentGameConfigData configData = new CurrentGameConfigData();
             configData.hasSave = MainGameManager.Instance.GameStateController.IsPlaying;
             configData.playTime = MainGameManager.Instance.PlayTimeController.ElapsedTime;
+
             SaveLoadManager.Instance.Save("CurrentGameConfig", configData);
+        }
+
+        public void SaveWinLoseCondition()
+        {
+            AllGameStateConditionsSaveData allData = new();
+
+            foreach (WinCondition winCondition in MainGameManager.Instance.GameStateController.WinConditions)
+            {
+                GameStateConditionSaveData saveData = (winCondition as ISaveable<GameStateConditionSaveData>).Save();
+                allData.winConditions.Add(saveData);
+            }
+
+            foreach (LoseCondition loseCondition in MainGameManager.Instance.GameStateController.LoseConditions)
+            {
+                GameStateConditionSaveData saveData = (loseCondition as ISaveable<GameStateConditionSaveData>).Save();
+                allData.loseConditions.Add(saveData);
+            }
+
+            SaveLoadManager.Instance.Save("CurrentGameWinLoseCondition", allData);
         }
 
         public void SaveEnemies()
@@ -145,6 +175,28 @@ namespace Asce.MainGame
 			MainGameManager.Instance.PlayTimeController.SetElapsedTime(configData.playTime);
 
             _isLoadeds["GameConfig"] = true;
+        }
+
+        private void LoadWinLoseCondition()
+        {
+            AllGameStateConditionsSaveData allData = SaveLoadManager.Instance.Load<AllGameStateConditionsSaveData>("CurrentGameWinLoseCondition");
+            if (allData == null) return;
+
+            foreach (GameStateConditionSaveData winConditionData in allData.winConditions)
+            {
+                WinCondition winCondition = MainGameManager.Instance.GameStateController.WinConditions.Find((condition) => condition.ConditionName == winConditionData.name);
+                if (winCondition is not ILoadable<GameStateConditionSaveData> loadable) continue;
+                loadable.Load(winConditionData);
+            }
+
+            foreach (GameStateConditionSaveData loseConditionData in allData.loseConditions)
+            {
+                LoseCondition loseCondition = MainGameManager.Instance.GameStateController.LoseConditions.Find((condition) => condition.ConditionName == loseConditionData.name);
+                if (loseCondition is not ILoadable<GameStateConditionSaveData> loadable) continue;
+                loadable.Load(loseConditionData);
+            }
+
+            _isLoadeds["WinLoseCondition"] = true;
         }
 
         private void LoadEnemies()

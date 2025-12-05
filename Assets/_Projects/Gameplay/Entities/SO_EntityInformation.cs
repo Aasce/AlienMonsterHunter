@@ -1,5 +1,5 @@
 using Asce.Game.Levelings;
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Entities

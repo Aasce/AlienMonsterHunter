@@ -1,12 +1,12 @@
 using Asce.Game.Abilities;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIAbilityDetails : UIObject
+    public class UIAbilityDetails : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;

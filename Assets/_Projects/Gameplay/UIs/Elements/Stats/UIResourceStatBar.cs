@@ -1,5 +1,5 @@
 using Asce.Game.Stats;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Asce.Game.UIs
 {
-    public class UIResourceStatBar : UIObject
+    public class UIResourceStatBar : UIComponent
     {
         [SerializeField] private Slider _slider;
         [SerializeField] private TextMeshProUGUI _text;

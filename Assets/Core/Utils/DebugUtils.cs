@@ -1,4 +1,4 @@
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     using UnityEngine;
 

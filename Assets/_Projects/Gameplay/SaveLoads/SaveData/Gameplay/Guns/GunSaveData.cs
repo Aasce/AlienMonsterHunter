@@ -8,6 +8,7 @@ namespace Asce.Game.SaveLoads
     {
         public string id;
         public string name;
+        public LevelingSaveData level;
         
         public float damage;
         public float penetration;
@@ -27,6 +28,9 @@ namespace Asce.Game.SaveLoads
             {
                 id = gunData.id;
                 name = gunData.name;
+
+                level = new();
+                level.CopyFrom(gunData.level);
 
                 damage = gunData.damage;
                 penetration = gunData.penetration;

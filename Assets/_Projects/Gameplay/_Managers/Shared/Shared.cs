@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     public class Shared
     {

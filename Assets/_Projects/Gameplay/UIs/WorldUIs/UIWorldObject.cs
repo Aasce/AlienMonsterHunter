@@ -1,8 +1,8 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 
 namespace Asce.Game.UIs.Worlds
 {
-    public class UIWorldObject : UIObject
+    public class UIWorldObject : UIComponent
     {
 
     }

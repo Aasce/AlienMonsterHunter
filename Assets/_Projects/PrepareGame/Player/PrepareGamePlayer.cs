@@ -1,8 +1,8 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Managers;
-using Asce.Managers.UIs;
+using Asce.Core;
+using Asce.Core.UIs;
 using System;
 using UnityEngine;
 

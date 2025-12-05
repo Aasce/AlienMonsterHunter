@@ -6,8 +6,8 @@ using Asce.Game.Guns;
 using Asce.Game.Interactions;
 using Asce.Game.Items;
 using Asce.Game.Supports;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using System;
 using UnityEngine;
 

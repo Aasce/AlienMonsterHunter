@@ -1,7 +1,7 @@
-using Asce.Managers;
+using Asce.Core;
 using UnityEngine;
 
-namespace Asce.MainGame.Managers
+namespace Asce.Game.Managers
 {
     public abstract class WinCondition : GameStateCondition
     {

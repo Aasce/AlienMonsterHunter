@@ -1,18 +1,21 @@
 using Asce.Game.Spawners;
-using Asce.Managers;
+using Asce.Core;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.MainGame.Managers
 {
-    public class SpawnerController : GameComponent
+    public class SpawnerController : ControllerComponent
     {
         [SerializeField] private List<BaseSpawner> _spawners = new();
 
         public List<BaseSpawner> Spawners => _spawners;
 
-        public void Initialize()
+        public override string ControllerName => "Spawner";
+
+        public override void Initialize()
         {
+            base.Initialize();
             foreach (BaseSpawner spawner in _spawners) 
             {
                 spawner.Initialize();

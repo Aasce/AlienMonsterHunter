@@ -3,7 +3,7 @@ using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Guns

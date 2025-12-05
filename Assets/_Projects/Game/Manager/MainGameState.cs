@@ -6,6 +6,7 @@ namespace Asce.MainGame.Managers
         Initialize = 1,
         Creating = 2,
         Loading = 3,
+        Ready = 4,
 
         Playing = 5,
         Pausing = 6,

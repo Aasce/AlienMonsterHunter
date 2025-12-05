@@ -40,7 +40,7 @@ namespace Asce.ResultGame
 
         private void PlayAgainButton_OnClick()
         {
-            ResultGameManager.Instance.PlayGame();
+            ResultGameManager.Instance.PlayAgain();
         }
 
     }

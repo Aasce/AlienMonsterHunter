@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     [System.Serializable]
     public class ListObjects<TKey, TValue> 

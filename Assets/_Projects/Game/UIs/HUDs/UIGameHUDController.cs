@@ -1,6 +1,6 @@
 using Asce.Game.UIs;
 using Asce.Game.UIs.HUDs;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.HUDs

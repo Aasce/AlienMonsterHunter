@@ -1,6 +1,5 @@
 using Asce.Game.VFXs;
-using Asce.Managers;
-using System.ComponentModel;
+using Asce.Core;
 using UnityEngine;
 
 namespace Asce.Game.Combats
@@ -39,10 +38,11 @@ namespace Asce.Game.Combats
             this.ShowDamageText(container.Receiver, finalDamage);
         }
 
-        public void Healing(ITakeDamageable receiver, float healAmount)
+        public void Healing(IHealable receiver, float healAmount)
         {
             if (receiver == null || healAmount <= 0f) return;
             receiver.Health.CurrentValue += healAmount;
+            receiver.HealingCallback(healAmount);
             this.ShowHealText(receiver, healAmount);
         }
 
@@ -86,7 +86,7 @@ namespace Asce.Game.Combats
             PopupTextController.Instance.EnqueuePopupText((receiver as MonoBehaviour).transform, data);
         }
 
-        private void ShowHealText(ITakeDamageable receiver, float healAmount)
+        private void ShowHealText(IHealable receiver, float healAmount)
         {
             float size = Mathf.Lerp(100f, 200f, Mathf.InverseLerp(10f, 100f, healAmount));
 

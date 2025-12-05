@@ -1,7 +1,7 @@
 using Asce.Game.Entities;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
-using Asce.Managers;
+using Asce.Core;
 using UnityEngine;
 
 namespace Asce.Game.Guns

@@ -9,18 +9,26 @@ namespace Asce.Game.SaveLoads
         public string id;
         public string supportKey;
         public string currentSupportId;
+
+        public int level;
+
         public float cooldown;
+        public float remainCooldown;
 
 
         public override void CopyFrom(SaveData other)
         {
             base.CopyFrom(other);
-            if (other is SupportContainerSaveData abilityData)
+            if (other is SupportContainerSaveData supportContainerData)
             {
-                id = abilityData.id;
-                supportKey = abilityData.supportKey;
-                currentSupportId = abilityData.currentSupportId;
-                cooldown = abilityData.cooldown;
+                id = supportContainerData.id;
+                supportKey = supportContainerData.supportKey;
+                currentSupportId = supportContainerData.currentSupportId;
+
+                level = supportContainerData.level;
+
+                cooldown = supportContainerData.cooldown;
+                remainCooldown = supportContainerData.remainCooldown;
             }
         }
     }

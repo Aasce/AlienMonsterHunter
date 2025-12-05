@@ -1,14 +1,14 @@
 using Asce.Game.Abilities;
 using Asce.Game.Entities.Characters;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UICharacterAbilities : UIObject
+    public class UICharacterAbilities : UIComponent
     {
         [Header("References")]
         [SerializeField] private Pool<UIAbility> _pools = new();

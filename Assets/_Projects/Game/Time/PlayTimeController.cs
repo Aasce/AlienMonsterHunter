@@ -1,12 +1,12 @@
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using System;
 using UnityEngine;
 
 namespace Asce.MainGame
 {
-    public class PlayTimeController : GameComponent
+    public class PlaytimeController : ControllerComponent
     {
 		[SerializeField] private float _elapsedTime = 0f;
 		[SerializeField] private bool _isCounting = true;
@@ -18,6 +18,8 @@ namespace Asce.MainGame
 		public event Action OnResumed;
 		public event Action<float> OnElapsedTimeChanged;
 
+		public override string ControllerName => "Playtime";
+
 		/// <summary> Total elapsed play time in seconds. </summary>
 		public float ElapsedTime 
 		{ 
@@ -25,10 +27,11 @@ namespace Asce.MainGame
 			private set => _elapsedTime = value; 
 		}
 
-		public void Initialize() 
-		{
-			
-		}
+        public override void Initialize()
+        {
+            base.Initialize();
+
+        }
 
 		private void Update()
 		{

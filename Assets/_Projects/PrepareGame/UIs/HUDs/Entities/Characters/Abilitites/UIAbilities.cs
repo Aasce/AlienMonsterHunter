@@ -1,14 +1,14 @@
 using Asce.Game.Abilities;
 using Asce.Game.Managers;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIAbilities : UIObject
+    public class UIAbilities : UIComponent
     {
         [Header("Reference")]
         [SerializeField] private Pool<UIAbilityInformation> _pools = new();

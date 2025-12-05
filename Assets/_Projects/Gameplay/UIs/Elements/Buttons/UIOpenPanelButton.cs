@@ -1,13 +1,13 @@
 using Asce.Game.UIs.Panels;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.Game.UIs
 {
     [RequireComponent(typeof(Button))]
-    public class UIOpenPanelButton : UIObject
+    public class UIOpenPanelButton : UIComponent
     {
         [SerializeField] private Button _button;
         [SerializeField] private UIPanelController _panelController;

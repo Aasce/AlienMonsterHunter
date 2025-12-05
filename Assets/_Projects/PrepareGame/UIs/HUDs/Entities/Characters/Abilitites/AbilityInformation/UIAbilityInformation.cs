@@ -1,12 +1,12 @@
 using Asce.Game.Abilities;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIAbilityInformation : UIObject, IPointerClickHandler
+    public class UIAbilityInformation : UIComponent, IPointerClickHandler
     {
         [SerializeField] private Image _icon;
 

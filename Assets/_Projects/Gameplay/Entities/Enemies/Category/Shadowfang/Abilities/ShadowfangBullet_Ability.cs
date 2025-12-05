@@ -3,8 +3,8 @@ using Asce.Game.Effects;
 using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using System;
 using UnityEngine;
 

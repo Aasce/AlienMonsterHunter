@@ -2,16 +2,18 @@ using Asce.Game.Combats;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities
 {
-    public abstract class Entity : GameComponent, IIdentifiable, ITakeDamageable, ISendDamageable, ITargetable, ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
+    public abstract class Entity : GameComponent, IIdentifiable, ITargetable, 
+        ITakeDamageable, ISendDamageable, IHealable, 
+        ISaveable<EntitySaveData>, ILoadable<EntitySaveData>
     {
         public const string PREFIX_ID = "entity";
 
@@ -33,6 +35,7 @@ namespace Asce.Game.Entities
         public event Action<DamageContainer> OnAfterSendDamage;
         public event Action<DamageContainer> OnDead;
         public event Action<DamageContainer> OnKill;
+        public event Action<float> OnHealing;
 
         public string Id => _id;
         public SO_EntityInformation Information => _information;
@@ -53,6 +56,7 @@ namespace Asce.Game.Entities
         }
 
         ResourceStat ITakeDamageable.Health => Stats.Health;
+        ResourceStat IHealable.Health => Stats.Health;
         Stat ITakeDamageable.Armor => Stats.Armor;
        
 
@@ -169,6 +173,11 @@ namespace Asce.Game.Entities
             _isDeath = true;
             OnDead?.Invoke(container);
             Effects.Clear();
+        }
+
+        void IHealable.HealingCallback(float healAmount)
+        {
+            OnHealing?.Invoke(healAmount);
         }
 
         EntitySaveData ISaveable<EntitySaveData>.Save()

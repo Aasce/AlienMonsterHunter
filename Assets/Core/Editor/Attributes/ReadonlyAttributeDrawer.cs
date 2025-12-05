@@ -1,4 +1,4 @@
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using UnityEditor;
 using UnityEngine;
 

@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System.IO;
 using UnityEngine;
 
-namespace Asce.Managers.SaveLoads
+namespace Asce.Core.SaveLoads
 {
     public static class SaveLoadSystem
     {

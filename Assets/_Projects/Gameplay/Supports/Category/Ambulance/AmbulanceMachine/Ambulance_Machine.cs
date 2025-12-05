@@ -3,7 +3,7 @@ using Asce.Game.FOVs;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.VFXs;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -120,7 +120,7 @@ namespace Asce.Game.Entities.Machines
             {
                 if (!collider.enabled) continue;
                 if (collider.transform == transform) continue;
-                if (!collider.TryGetComponent(out ITakeDamageable healee)) continue;
+                if (!collider.TryGetComponent(out IHealable healee)) continue;
                 if (healee is Machine) continue;
 
                 CombatController.Instance.Healing(healee, _healAmount);

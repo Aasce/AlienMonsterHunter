@@ -1,4 +1,4 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public class UIPicked : UIObject
+    public class UIPicked : UIComponent
     {
         [SerializeField] private Button _loadLastPickButton;
 

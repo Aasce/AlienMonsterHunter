@@ -2,7 +2,7 @@ using Asce.Game.Combats;
 using Asce.Game.Entities;
 using Asce.Game.Entities.Machines;
 using Asce.Game.Stats;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Abilities

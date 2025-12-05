@@ -3,8 +3,8 @@ using Asce.Game.Effects;
 using Asce.Game.Entities;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -15,6 +15,7 @@ namespace Asce.Game.Guns
         [SerializeField] VisualEffect _flameEffect;
 
         [Header("Flame Settings")]
+        [SerializeField] private float _maxDamage = 10f;
         [SerializeField] private float _fireRadius = 10f;
         [SerializeField] private float _fireAngle = 30f;
         [SerializeField] private LayerMask _targetLayer;
@@ -29,6 +30,7 @@ namespace Asce.Game.Guns
         public override void Initialize()
         {
             base.Initialize();
+            _maxDamage = Information.GetCustomValue("MaxDamage");
             _igniteDuration = Information.GetCustomValue("IgniteDuration");
             _igniteStrength = Information.GetCustomValue("IgniteStrength");
             _contactFilter = new ContactFilter2D
@@ -57,6 +59,7 @@ namespace Asce.Game.Guns
 
         protected override void Leveling_OnLevelSetted(int newLevel)
         {
+            _maxDamage = Information.GetCustomValue("MaxDamage");
             _igniteDuration = Information.GetCustomValue("IgniteDuration");
             _igniteStrength = Information.GetCustomValue("IgniteStrength");
             base.Leveling_OnLevelSetted(newLevel);
@@ -68,6 +71,11 @@ namespace Asce.Game.Guns
 
             LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
             if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("MaxDamage", out LevelModification maxDamageModification))
+            {
+                _maxDamage += maxDamageModification.Value;
+            }
 
             if (modificationGroup.TryGetModification("IgniteDuration", out LevelModification igniteDurationModification))
             {
@@ -107,10 +115,10 @@ namespace Asce.Game.Guns
                 if (!collider.TryGetComponent(out ITargetable target)) continue;
                 if (!target.IsTargetable) continue;
 
+                float damage = (target as ITakeDamageable).Health.FinalValue * Damage;
                 CombatController.Instance.DamageDealing(new DamageContainer(Owner as ISendDamageable, target as ITakeDamageable)
                 {
-                    Damage = (target as ITakeDamageable).Health.FinalValue * Damage,
-                    DamageType = DamageType.TrueDamage,
+                    Damage = Mathf.Min(damage, _maxDamage),
                 });
 
                 EffectController.Instance.AddEffect("Ignite", Owner as Entity, target as Entity, new EffectData()
@@ -141,6 +149,7 @@ namespace Asce.Game.Guns
         protected override void OnBeforeSave(GunSaveData data)
         {
             base.OnBeforeSave(data);
+            data.SetCustom("MaxDamage", _maxDamage);
             data.SetCustom("IgniteDuration", _igniteDuration);
             data.SetCustom("IgniteStrength", _igniteStrength);
 
@@ -149,6 +158,7 @@ namespace Asce.Game.Guns
         protected override void OnAfterLoad(GunSaveData data)
         {
             base.OnAfterLoad(data);
+            _maxDamage = data.GetCustom<float>("MaxDamage");
             _igniteDuration = data.GetCustom<float>("IgniteDuration");
             _igniteStrength = data.GetCustom<float>("IgniteStrength");
         }

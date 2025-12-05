@@ -4,23 +4,25 @@ using Asce.MainGame.Managers;
 using Asce.MainGame.UIs.HUDs;
 using Asce.MainGame.UIs.Panels;
 using Asce.MainGame.UIs.ToolTips;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs
 {
-    public class UIMainGameController : GameComponent
+    public class UIMainGameController : ControllerComponent
     {
         [SerializeField, Readonly] private UIGameHUDController _hud;
         [SerializeField, Readonly] private UIPanelController _panel;
         [SerializeField, Readonly] private UIWorldTooltipController _worldTooltip;
 
+        public override string ControllerName => "UI";
 
         public UIGameHUDController HUDController => _hud;
         public UIPanelController PanelController => _panel;
         public UIWorldTooltipController WorldTooltipController => _worldTooltip;
+
 
         protected override void RefReset()
         {
@@ -35,15 +37,17 @@ namespace Asce.MainGame.UIs
             if (_worldTooltip == null) Debug.LogError($"[{typeof(UIMainGameController).ToString().ColorWrap(Color.red)}]] UITooltipController is not assigned", this);
         }
 
-        public void Initialze()
+        public override void Initialize()
         {
+            base.Initialize();
             HUDController.Initialize();
             PanelController.Initialize();
             WorldTooltipController.Initialize();
         }
 
-        public void AssignUI()
+        public override void Ready()
         {
+            base.Ready();
             this.SetSettings(MainGameManager.Instance.Player.Settings);
             HUDController.SupportsInformation.Caller = MainGameManager.Instance.Player.SupportCaller;
             HUDController.CharacterInformation.Character = MainGameManager.Instance.Player.Character;

@@ -1,8 +1,8 @@
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using UnityEngine;
 
@@ -84,6 +84,7 @@ namespace Asce.Game.Supports
             {
                 id = this.Id,
                 nameId = this.Information.Key,
+                level = (Leveling as ISaveable<LevelingSaveData>).Save(),
                 position = transform.position,
                 rotation = transform.eulerAngles.z,
                 callPosition = this.CallPosition
@@ -96,6 +97,9 @@ namespace Asce.Game.Supports
         {
             if (data == null) return;
             _id = data.id;
+
+            (Leveling as ILoadable<LevelingSaveData>).Load(data.level);
+
             transform.position = data.position;
             transform.eulerAngles = new Vector3(0f, 0f, data.rotation);
             _callPosition = data.callPosition;

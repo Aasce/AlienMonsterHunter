@@ -1,13 +1,13 @@
 using Asce.Game.Levelings;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UIExpLeveling : UIObject
+    public class UIExpLeveling : UIComponent
     {
         [Header("References")]
         [SerializeField] private TextMeshProUGUI _levelText;

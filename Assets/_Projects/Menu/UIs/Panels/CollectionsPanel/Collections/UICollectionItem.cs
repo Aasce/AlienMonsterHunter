@@ -1,11 +1,11 @@
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Asce.Menu.UIs
 {
-    public abstract class UICollectionItem<T> : UIObject, IPointerClickHandler where T : MonoBehaviour
+    public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler where T : MonoBehaviour
     {
         [SerializeField, Readonly] protected T _item;
 

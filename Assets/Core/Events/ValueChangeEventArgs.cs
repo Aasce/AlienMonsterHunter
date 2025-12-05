@@ -1,6 +1,6 @@
 using System;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     /// <summary>
     ///     Provides data for events that signal a change from one value to another.

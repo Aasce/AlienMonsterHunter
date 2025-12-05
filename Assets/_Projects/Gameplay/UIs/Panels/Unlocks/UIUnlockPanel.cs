@@ -1,7 +1,7 @@
 using Asce.Game.Players;
 using Asce.Game.Progress;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using System;
 using TMPro;
 using UnityEngine;

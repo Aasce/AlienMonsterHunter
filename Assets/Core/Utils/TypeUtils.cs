@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
 	/// <summary>
 	///     Provides utility methods for working with <see cref="Type"/> objects,

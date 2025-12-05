@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     /// <summary>
     ///     A generic singleton class for <see cref="MonoBehaviour"/> components that persist across scenes.

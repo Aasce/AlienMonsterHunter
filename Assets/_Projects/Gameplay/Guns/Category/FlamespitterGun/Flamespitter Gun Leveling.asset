@@ -17,6 +17,9 @@ MonoBehaviour:
   _levelChanges: []
   _uniformGrowth:
     _modifications:
+    - _targetKey: MaxDamage
+      _deltaValue: 10
+      _type: 0
     - _targetKey: Damage
       _deltaValue: 0.008
       _type: 0
@@ -36,6 +39,9 @@ MonoBehaviour:
   - Level: 5
     ModificationGroup:
       _modifications:
+      - _targetKey: MaxDamage
+        _deltaValue: 15
+        _type: 0
       - _targetKey: MagazineSize
         _deltaValue: 6
         _type: 0
@@ -60,6 +66,9 @@ MonoBehaviour:
   - Level: 10
     ModificationGroup:
       _modifications:
+      - _targetKey: MaxDamage
+        _deltaValue: 15
+        _type: 0
       - _targetKey: MagazineSize
         _deltaValue: 6
         _type: 0

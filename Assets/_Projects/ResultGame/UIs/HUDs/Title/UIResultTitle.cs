@@ -1,12 +1,12 @@
 using Asce.Game.Managers;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 namespace Asce.ResultGame.UIs.HUDs
 {
-    public class UIResultTitle : UIObject
+    public class UIResultTitle : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _resultText;
 

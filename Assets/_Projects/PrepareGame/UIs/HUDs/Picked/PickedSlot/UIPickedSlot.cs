@@ -1,4 +1,4 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using Asce.PrepareGame.Manager;
 using Asce.PrepareGame.UIs.Collections;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs
 {
-    public abstract class UIPickedSlot<T> : UIObject, IPointerClickHandler where T : UnityEngine.Object
+    public abstract class UIPickedSlot<T> : UIComponent, IPointerClickHandler where T : UnityEngine.Object
     {
         [SerializeField] protected T _item;
 

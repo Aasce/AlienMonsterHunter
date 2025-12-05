@@ -1,6 +1,6 @@
 using Asce.Game.Progress;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using System;
 using TMPro;
 using UnityEngine;
@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Asce.Game.UIs.Panels
 {
-    public class UIUnlockCondition : UIObject
+    public class UIUnlockCondition : UIComponent
     {
         [SerializeField] private UITintColor _tintColor;
         [SerializeField] private TextMeshProUGUI _conditionText;

@@ -3,18 +3,21 @@ using Asce.Game.Enviroments;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Managers;
+using Asce.Core;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.MainGame.Managers
 {
-    public class NewGameController : GameComponent
+    public class NewGameController : ControllerComponent
     {
+        public override string ControllerName => "New Game";
 
-        public virtual void Initialize()
+
+        public override void Initialize()
         {
+            base.Initialize();
 
         }
 

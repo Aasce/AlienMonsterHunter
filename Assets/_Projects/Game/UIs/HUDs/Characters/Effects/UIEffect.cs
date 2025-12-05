@@ -1,6 +1,6 @@
 using Asce.Game.Effects;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using System;
 using TMPro;
 using UnityEngine;
@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UIEffect : UIObject
+    public class UIEffect : UIComponent
     {
         [SerializeField] private Image _icon;
         [SerializeField] private Image _durationFilter;

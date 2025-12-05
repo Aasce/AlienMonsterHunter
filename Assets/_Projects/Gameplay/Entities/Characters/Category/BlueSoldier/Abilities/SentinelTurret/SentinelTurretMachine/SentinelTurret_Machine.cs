@@ -6,7 +6,7 @@ using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
 using Asce.Game.Stats;
 using Asce.Game.VFXs;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Machines

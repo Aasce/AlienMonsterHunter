@@ -1,6 +1,6 @@
 using Asce.Game.Combats;
 using Asce.Game.Entities;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Abilities

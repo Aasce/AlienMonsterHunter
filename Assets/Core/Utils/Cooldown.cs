@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     /// <summary>
     ///     Represents a countdown timer used for cooldowns.

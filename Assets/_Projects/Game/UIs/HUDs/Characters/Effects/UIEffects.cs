@@ -1,13 +1,13 @@
 using Asce.Game.Effects;
 using Asce.Game.Entities;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UIEffects : UIObject
+    public class UIEffects : UIComponent
     {
         [SerializeField] private Pool<UIEffect> _pool = new();
 

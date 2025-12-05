@@ -1,11 +1,11 @@
 using Asce.MainGame.Managers;
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.HUDs
 {
-    public class UIPlaytime : UIObject
+    public class UIPlaytime : UIComponent
     {
         [SerializeField] private TextMeshProUGUI _playtimeText;
 

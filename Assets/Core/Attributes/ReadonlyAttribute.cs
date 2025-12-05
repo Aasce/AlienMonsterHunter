@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Asce.Managers.Attributes
+namespace Asce.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class ReadonlyAttribute : PropertyAttribute

@@ -16,6 +16,8 @@ MonoBehaviour:
     _list:
     - _name: CurrentGameConfig
       _path: current/game_config.json
+    - _name: CurrentGameWinLoseCondition
+      _path: current/winlose_conditions.json
     - _name: CurrentGameCharacter
       _path: current/character.json
     - _name: CurrentGameEnemies

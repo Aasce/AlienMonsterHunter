@@ -1,5 +1,5 @@
 using Asce.Game.Progress;
-using Asce.Managers;
+using Asce.Core;
 using Asce.SaveLoads;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

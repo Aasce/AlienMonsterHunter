@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Asce.Managers.UIs
+namespace Asce.Core.UIs
 {
     public class UIManager : DontDestroyOnLoadSingleton<UIManager>
     {

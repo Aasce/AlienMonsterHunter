@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Asce.Managers.Utils
+namespace Asce.Core.Utils
 {
     public static class EnumUtils
     {

@@ -1,11 +1,11 @@
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Asce.PrepareGame.UIs.Collections
 {
-    public abstract class UICollectionItem<T> : UIObject, IPointerClickHandler
+    public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler
     {
         [SerializeField, Readonly] private UICollectionView<T> _collection;
         [SerializeField, Readonly] private T _item;

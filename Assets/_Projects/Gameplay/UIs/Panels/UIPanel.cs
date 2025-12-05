@@ -1,10 +1,10 @@
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
 using UnityEngine;
 
 namespace Asce.Game.UIs.Panels
 {
-    public abstract class UIPanel : UIObject
+    public abstract class UIPanel : UIComponent
     {
         [SerializeField, Readonly] protected string _name = string.Empty;
 

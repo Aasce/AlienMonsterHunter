@@ -1,6 +1,6 @@
 using Asce.Game.Levelings;
-using Asce.Managers;
-using Asce.Managers.Attributes;
+using Asce.Core;
+using Asce.Core.Attributes;
 using System.Collections.ObjectModel;
 using UnityEngine;
 

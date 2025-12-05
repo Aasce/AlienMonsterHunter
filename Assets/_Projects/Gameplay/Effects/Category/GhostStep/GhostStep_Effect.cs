@@ -1,6 +1,6 @@
 using Asce.Game.Entities;
 using Asce.Game.SaveLoads;
-using Asce.Managers.Attributes;
+using Asce.Core.Attributes;
 using UnityEngine;
 
 namespace Asce.Game.Effects

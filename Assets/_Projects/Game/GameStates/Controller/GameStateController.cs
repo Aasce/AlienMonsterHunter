@@ -1,19 +1,20 @@
 using Asce.Game.Managers;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Asce.MainGame.Managers
 {
-    public class GameStateController : GameComponent
+    public class GameStateController : ControllerComponent
     {
         [SerializeField] private MainGameState _gameState = MainGameState.None;
         [SerializeField] private GameResultType _gameResultType = GameResultType.Unknown;
 
         [Space]
-        [SerializeField] private WinCondition _winCondition;
-        [SerializeField] private LoseCondition _loseCondition;
+        [SerializeField] private List<WinCondition> _winConditions = new();
+        [SerializeField] private List<LoseCondition> _loseConditions = new();
 
         [Space]
         [SerializeField] private Cooldown _checkCooldown = new(1f);
@@ -23,6 +24,7 @@ namespace Asce.MainGame.Managers
         public event Action OnDefeat;
         public event Action OnEndGame;
 
+        public override string ControllerName => "Game State";
         public MainGameState GameState
         {
             get => _gameState;
@@ -35,13 +37,21 @@ namespace Asce.MainGame.Managers
             }
         }
         public GameResultType GameResultType => _gameResultType;
+        public List<WinCondition> WinConditions => _winConditions;
+        public List<LoseCondition> LoseConditions => _loseConditions;
 
         public bool IsPlaying => GameState == MainGameState.Playing || GameState == MainGameState.Pausing;
-
-        public virtual void Initialize()
+        public override void Initialize()
         {
-            if (_winCondition != null) _winCondition.Initialize();
-            if (_loseCondition != null) _loseCondition.Initialize();
+            base.Initialize();
+            foreach (var winCondition in _winConditions)
+            {
+                if (winCondition != null) winCondition.Initialize();
+            }
+            foreach (var loseCondition in _loseConditions)
+            {
+                if (loseCondition != null) loseCondition.Initialize();
+            }
         }
 
         private void Update()
@@ -51,27 +61,27 @@ namespace Asce.MainGame.Managers
             _checkCooldown.Update(Time.deltaTime);
             if (!_checkCooldown.IsComplete) return;
             _checkCooldown.Reset();
-
-            if (_winCondition != null)
+            foreach (var winCondition in _winConditions)
             {
-                _winCondition.OnCheck();
-                if (_winCondition.IsSatisfied())
+                if (winCondition == null) continue;
+                winCondition.OnCheck();
+                if (winCondition.IsSatisfied())
                 {
                     this.ToVictory();
                     return;
                 }
             }
 
-            if (_loseCondition != null)
+            foreach (var loseCondition in _loseConditions)
             {
-                _loseCondition.OnCheck();
-                if (_loseCondition.IsSatisfied())
+                if (loseCondition == null) continue;
+                loseCondition.OnCheck();
+                if (loseCondition.IsSatisfied())
                 {
                     this.ToDefeat();
                     return;
                 }
             }
-            
         }
 
         public void ToVictory()

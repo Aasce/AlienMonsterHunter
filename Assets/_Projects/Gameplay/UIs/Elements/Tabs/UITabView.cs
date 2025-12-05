@@ -1,9 +1,9 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using UnityEngine;
 
 namespace Asce.Game.UIs
 {
-    public class UITabView : UIObject
+    public class UITabView : UIComponent
     {
 
     }

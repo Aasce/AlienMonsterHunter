@@ -1,9 +1,9 @@
-using Asce.Managers.UIs;
+using Asce.Core.UIs;
 using UnityEngine;
 
 namespace Asce.PrepareGame.UIs
 {
-    public abstract class UICollectionDetails<T> : UIObject
+    public abstract class UICollectionDetails<T> : UIComponent
     {
         private T _item;
 

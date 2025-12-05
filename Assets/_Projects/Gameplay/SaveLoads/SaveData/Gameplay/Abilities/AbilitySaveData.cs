@@ -9,6 +9,9 @@ namespace Asce.Game.SaveLoads
         public string id;
         public string name;
         public string ownerId;
+
+        public LevelingSaveData level;
+
         public float baseDespawnTime;
         public float despawnTime;
         public Vector2 position;
@@ -22,6 +25,10 @@ namespace Asce.Game.SaveLoads
                 id = abilityData.id;
                 name = abilityData.name;
                 ownerId = abilityData.ownerId;
+
+                level = new();
+                level.CopyFrom(abilityData.level);
+
                 baseDespawnTime = abilityData.baseDespawnTime;
                 despawnTime = abilityData.despawnTime;
                 position = abilityData.position;

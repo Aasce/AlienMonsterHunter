@@ -1,8 +1,8 @@
 using Asce.Game.Managers;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
@@ -92,7 +92,9 @@ namespace Asce.Game.Abilities
             {
                 id = _id,
                 name = _name,
-                cooldown = _cooldown.CurrentTime,
+                level = _level,
+                cooldown = _cooldown.BaseTime,
+                remainCooldown = _cooldown.CurrentTime,
                 abilityInstanceId = _abilityInstance != null ? _abilityInstance.Id : string.Empty
             };
         }
@@ -103,7 +105,11 @@ namespace Asce.Game.Abilities
             _id = data.id;
             _name = data.name;
             this.UpdateAbilityReference();
-            _cooldown.CurrentTime = data.cooldown;
+
+            _level = data.level;
+
+            _cooldown.BaseTime = data.cooldown;
+            _cooldown.CurrentTime = data.remainCooldown;
             _abilityInstance = ComponentUtils.FindComponentById<Ability>(data.abilityInstanceId);
         }
     }

@@ -1,5 +1,5 @@
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Enemies

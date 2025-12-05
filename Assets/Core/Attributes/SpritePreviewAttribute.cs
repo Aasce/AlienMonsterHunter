@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asce.Managers.Attributes
+namespace Asce.Core.Attributes
 {
     public class SpritePreviewAttribute : PropertyAttribute
     {

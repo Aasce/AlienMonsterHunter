@@ -1,6 +1,6 @@
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
+using Asce.Core;
+using Asce.Core.Attributes;
 using Asce.SaveLoads;
 using UnityEngine;
 

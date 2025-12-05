@@ -1,7 +1,7 @@
 using Asce.Game.Entities;
 using Asce.Game.Managers;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,14 +1,14 @@
 using Asce.Game.Supports;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs
 {
-    public class UISupportsInformation : UIObject
+    public class UISupportsInformation : UIComponent
     {
         [SerializeField] private Pool<UISupportItem> _pool = new();
         [SerializeField, Readonly] private SupportCaller _caller;

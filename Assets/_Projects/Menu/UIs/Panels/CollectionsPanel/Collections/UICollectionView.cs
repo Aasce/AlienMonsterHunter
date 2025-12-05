@@ -1,5 +1,5 @@
 using Asce.Game.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 

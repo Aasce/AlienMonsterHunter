@@ -1,13 +1,13 @@
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
-using Asce.Managers;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
+using Asce.Core;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.Game.UIs.Panels
 {
-    public class UIPanelController : UIObject, ICanvasController
+    public class UIPanelController : UIComponent, ICanvasController
     {
         [SerializeField, Readonly] private Canvas _canvas;
         [SerializeField, Readonly] private ListObjects<string, UIPanel> _panels = new((panel) =>

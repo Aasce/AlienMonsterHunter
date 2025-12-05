@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Asce.Managers
+namespace Asce.Core
 {
     /// <summary>
     ///     A generic singleton base class.

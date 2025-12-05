@@ -1,6 +1,6 @@
 using Asce.Game.Entities.Enemies;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using UnityEngine;
 using UnityEngine.AI;
 

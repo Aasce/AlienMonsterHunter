@@ -1,13 +1,13 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Interactions;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.ToolTips
 {
-    public class UIInteractionTip : UIObject
+    public class UIInteractionTip : UIComponent
     {
         [SerializeField, Readonly] private CharacterInteraction _interaction;
         [SerializeField, Readonly] private UIInteractionTipBoard _board;

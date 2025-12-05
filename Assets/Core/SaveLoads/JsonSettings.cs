@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Asce.Managers.SaveLoads
+namespace Asce.Core.SaveLoads
 {
     /// <summary>
     ///     Provides pre-configured JsonSerializerSettings for the game.

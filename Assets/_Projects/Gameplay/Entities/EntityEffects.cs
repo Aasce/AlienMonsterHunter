@@ -1,8 +1,8 @@
 using Asce.Game.Effects;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using System.Collections.Generic;
@@ -131,7 +131,7 @@ namespace Asce.Game.Entities
                 if (container.EffectStat is ISaveable<EffectStatSaveData> saveable)
                 {
                     EffectStatSaveData effectData = saveable.Save();
-                    data.effectStats.Add(new(container.Name, effectData));
+                    data.effectStats.Add(new EffectStatContainerSaveData(container.Name, effectData));
                 }
             }
             return data;

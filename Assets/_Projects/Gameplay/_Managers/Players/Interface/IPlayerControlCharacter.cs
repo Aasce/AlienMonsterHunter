@@ -1,5 +1,5 @@
 using Asce.Game.Entities.Characters;
-using Asce.Managers;
+using Asce.Core;
 using System;
 using UnityEngine;
 

@@ -1,8 +1,8 @@
 using Asce.Game.Managers;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
@@ -97,7 +97,11 @@ namespace Asce.Game.Supports
                 id = _id,
                 supportKey = _supportKey,
                 currentSupportId = _currentSupport != null ? _currentSupport.Id : string.Empty,
-                cooldown = _cooldown.CurrentTime,
+
+                level = _level,
+
+                cooldown = _cooldown.BaseTime,
+                remainCooldown = _cooldown.CurrentTime,
             };
         }
 
@@ -107,7 +111,11 @@ namespace Asce.Game.Supports
             _id = data.id;
             _supportKey = data.supportKey;
             this.UpdateSupportReference();
-            _cooldown.CurrentTime = data.cooldown;
+
+            _level = data.level;
+
+            _cooldown.BaseTime = data.cooldown;
+            _cooldown.CurrentTime = data.remainCooldown;
             _currentSupport = ComponentUtils.FindComponentById<Support>(data.currentSupportId);
         }
     }

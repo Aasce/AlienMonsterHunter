@@ -1,5 +1,7 @@
-using Asce.MainGame.Players;
-using Asce.Managers;
+using Asce.Core;
+using Asce.Game.Managers;
+using Asce.Game.Players;
+using Asce.Game.SaveLoads;
 using UnityEngine;
 
 namespace Asce.MainGame.Managers
@@ -9,12 +11,17 @@ namespace Asce.MainGame.Managers
         [SerializeField] private int _maxLives = 3;
         [SerializeField] private int _currentLives = 3;
 
+        public override string ConditionName => "Player Lives";
+
         public override void Initialize()
         {
             base.Initialize();
             _currentLives = _maxLives;
-            if (MainGameManager.Instance.Player.Character != null) MainGameManager.Instance.Player.Character.OnDead += Character_OnDead;
-            MainGameManager.Instance.Player.OnCharacterChanged += Player_OnCharacterChanged;
+            if (PlayerManager.Instance.Player is IPlayerControlCharacter controllCharacter)
+            {
+                if (controllCharacter.Character != null) controllCharacter.Character.OnDead += Character_OnDead;
+                controllCharacter.OnCharacterChanged += Player_OnCharacterChanged;
+            }
         }
 
         public override bool IsSatisfied()
@@ -38,6 +45,21 @@ namespace Asce.MainGame.Managers
             {
                 eventArgs.NewValue.OnDead += Character_OnDead;
             }
+        }
+
+
+        protected override void OnBeforeSave(GameStateConditionSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("MaxLives", _maxLives);
+            data.SetCustom("CurrentLives", _currentLives);
+        }
+
+        protected override void OnAfterLoad(GameStateConditionSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _maxLives = data.GetCustom<int>("MaxLives");
+            _currentLives = data.GetCustom<int>("CurrentLives");
         }
     }
 }

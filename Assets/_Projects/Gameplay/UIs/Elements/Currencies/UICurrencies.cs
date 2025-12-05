@@ -1,13 +1,13 @@
 using Asce.Game.Items;
 using Asce.Game.Players;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.UIs
 {
-    public class UICurrencies : UIObject
+    public class UICurrencies : UIComponent
     {
         [SerializeField] private Pool<UICurrency> _pool = new();
 

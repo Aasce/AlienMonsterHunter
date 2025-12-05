@@ -1,12 +1,12 @@
 using Asce.Game.UIs;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using UnityEngine;
 
 namespace Asce.MainGame.UIs.ToolTips
 {
-    public class UIWorldTooltipController : UIObject, ICanvasController
+    public class UIWorldTooltipController : UIComponent, ICanvasController
     {
         [SerializeField, Readonly] private Canvas _canvas;
         [SerializeField] UIInteractionTip _interactionTip;

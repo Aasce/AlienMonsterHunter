@@ -1,6 +1,6 @@
 using Asce.Game.UIs.Panels;
-using Asce.Managers;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Utils;
 using Asce.Menu.UIs.HUDs;
 using UnityEngine;
 

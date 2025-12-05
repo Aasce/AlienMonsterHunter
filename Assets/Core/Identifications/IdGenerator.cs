@@ -1,4 +1,4 @@
-namespace Asce.Managers
+namespace Asce.Core
 {
     public static class IdGenerator
     {

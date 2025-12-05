@@ -1,7 +1,7 @@
 using Asce.Game.Supports;
-using Asce.Managers.Attributes;
-using Asce.Managers.UIs;
-using Asce.Managers.Utils;
+using Asce.Core.Attributes;
+using Asce.Core.UIs;
+using Asce.Core.Utils;
 using System;
 using TMPro;
 using UnityEngine;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Asce.MainGame.UIs
 {
-    public class UISupportItem : UIObject
+    public class UISupportItem : UIComponent
     {
         [SerializeField, Readonly] private SupportContainer _container;
 

@@ -1,8 +1,8 @@
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
-using Asce.Managers;
-using Asce.Managers.Attributes;
-using Asce.Managers.Utils;
+using Asce.Core;
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
 using Asce.SaveLoads;
 using System;
 using UnityEngine;
@@ -376,8 +376,11 @@ namespace Asce.Game.Guns
             {
                 id = Id,
                 name = Information.Name,
+                level = (Leveling as ISaveable<LevelingSaveData>).Save(),
+
                 damage = Damage,
                 penetration = Penetration,
+
                 shootSpeed = ShootSpeed,
                 currentAmmo = CurrentAmmo,
                 remainingAmmo = RemainingAmmo,
@@ -403,6 +406,8 @@ namespace Asce.Game.Guns
             StartAmmo = data.startAmmo;
             ReloadCooldown.SetBaseTime(data.reloadSpeed);
             ReloadCooldown.ToComplete();
+
+            (Leveling as ILoadable<LevelingSaveData>).Load(data.level);
 
             this.OnAfterLoad(data);
         }

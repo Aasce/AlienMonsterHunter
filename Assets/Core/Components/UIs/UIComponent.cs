@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Asce.Managers.UIs
+namespace Asce.Core.UIs
 {
     /// <summary>
     ///     Base class for UI components.
     /// </summary>
-    public abstract class UIObject : MonoBehaviour
+    public abstract class UIComponent : GameComponent
     {
         /// <summary>
         ///     Invoked when the UI object is hidden.
@@ -27,9 +27,6 @@ namespace Asce.Managers.UIs
         ///     Gets whether the UI object is currently visible.
         /// </summary>
         public bool IsShow => gameObject.activeSelf;
-
-        protected virtual void Reset() { this.RefReset(); }
-        protected virtual void RefReset() { }
 
         /// <summary>
         ///     Sets the visibility of the UI object.
