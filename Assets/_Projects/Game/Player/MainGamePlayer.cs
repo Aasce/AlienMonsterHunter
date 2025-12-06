@@ -63,7 +63,7 @@ namespace Asce.MainGame.Players
 
             if (isReviveAtSpawnPoint)
             {
-                Vector2 spawnPoint = EnviromentController.Instance.CharacterSpawnPoint;
+                Vector2 spawnPoint = EnviromentController.Instance.SpawnPoints.CharacterSpawnPoint;
                 Character.transform.position = spawnPoint;
                 CameraController.Instance.SetToTarget();
             }

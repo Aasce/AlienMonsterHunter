@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: LineFireLauncher Missile Ability Information
+  m_EditorClassIdentifier: 
+  _id: Line Fire Launcher Missile
+  _name: Line Fire Launcher Missile
+  _description: 
+  _icon: {fileID: 21300000, guid: 14ec82b1db571e040a4bb61aa6b79078, type: 3}
+  _isPassive: 0
+  _cooldown: 0
+  _useRangeRadius: Infinity
+  _despawnTime: 5
+  _isReactive: 0
+  _reactiveCooldown: 0
+  _customValues:
+    _list:
+    - _name: ExplosionRadius
+      _value: 3
+  _leveling: {fileID: 11400000, guid: e38586e93ac94834c9d15883d67b0eb2, type: 2}

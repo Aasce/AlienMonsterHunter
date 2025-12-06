@@ -1,13 +1,15 @@
+using Asce.Core;
+using Asce.Core.Attributes;
 using Asce.Game.Enviroments;
 using Asce.Game.Players;
 using Asce.Game.SaveLoads;
-using Asce.Core;
-using Asce.Core.Attributes;
 using Asce.SaveLoads;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Asce.Game.Supports
 {
@@ -51,6 +53,23 @@ namespace Asce.Game.Supports
             }
 
             this.OnSupportChanged?.Invoke();
+            StartCoroutine(WaitSpawnSupportOnStart());
+        }
+
+        private IEnumerator WaitSpawnSupportOnStart()
+        {
+            yield return null;
+            this.SpawnSupportOnStart();
+        }
+        private void SpawnSupportOnStart()
+        {
+            foreach (SupportContainer container in _supports)
+            {
+                if (!container.IsValid) continue;
+                if (!container.SupportPrefab.Information.SpawnOnStart) continue;
+                this.NewCall(container, Vector2.zero);
+                container.Cooldown.ToComplete();
+            }
         }
 
         public void OnLoad()
@@ -102,7 +121,7 @@ namespace Asce.Game.Supports
             Support spawnSupport = SupportController.Instance.Spawn(container.SupportKey);
             if (spawnSupport == null) return;
 
-            spawnSupport.transform.position = EnviromentController.Instance.SupportSpawnPoint;
+            this.SetSupportPosition(spawnSupport, spawnSupport.Information.SpawnPointType);
             spawnSupport.CallPosition = position;
             spawnSupport.Leveling.SetLevel(container.Level);
             spawnSupport.gameObject.SetActive(true);
@@ -110,6 +129,19 @@ namespace Asce.Game.Supports
             container.CurrentSupport = spawnSupport;
 
             container.Cooldown.SetBaseTime(container.Information.CooldownOnRecall);
+        }
+
+        private void SetSupportPosition(Support support, SpawnPointType type)
+        {
+            switch (type)
+            {
+                case SpawnPointType.SpawnPoint:
+                    support.transform.position = EnviromentController.Instance.SpawnPoints.SupportSpawnPoint;
+                    return;
+                case SpawnPointType.SpawnHolder:
+                    support.transform.position = EnviromentController.Instance.SpawnPoints.GetEmptyHolder();
+                    return;
+            }
         }
 
         SupportCallerSaveData ISaveable<SupportCallerSaveData>.Save()

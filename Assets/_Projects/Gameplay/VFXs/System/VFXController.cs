@@ -32,6 +32,7 @@ namespace Asce.Game.VFXs
                 vfx.gameObject.SetActive(true);
             }
             vfx.transform.SetPositionAndRotation(position, Quaternion.Euler(0f, 0f, angle));
+            vfx.Spawn();
             return vfx;
         }
 

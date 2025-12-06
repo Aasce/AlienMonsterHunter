@@ -21,6 +21,10 @@ namespace Asce.Game.Supports
         [SerializeField, Min(0f)] private float _cooldown = 0f;
         [SerializeField, Min(0f)] private float _cooldownOnRecall = 0f;
 
+        [Space]
+        [SerializeField] private bool _spawnOnStart = false;
+        [SerializeField] private SpawnPointType _spawnPointType = SpawnPointType.SpawnPoint;
+
         public string Key => _key;
         public string Name => _name;
         public string Description => _description;
@@ -30,5 +34,9 @@ namespace Asce.Game.Supports
 
         public float Cooldown => _cooldown;
         public float CooldownOnRecall => _cooldownOnRecall;
+
+        public bool SpawnOnStart => _spawnOnStart;
+        public SpawnPointType SpawnPointType => _spawnPointType;
+
     }
 }
