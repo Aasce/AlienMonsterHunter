@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs
+namespace Asce.MainMenu.UIs.Panels
 {
     public class UICollectionsPanel : UIFullScreenPanel
     {

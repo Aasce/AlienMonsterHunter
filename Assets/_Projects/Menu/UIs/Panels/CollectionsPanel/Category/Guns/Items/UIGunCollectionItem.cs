@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs.Guns
+namespace Asce.MainMenu.UIs.Guns
 {
     public class UIGunCollectionItem : UICollectionItem<Gun>
     {

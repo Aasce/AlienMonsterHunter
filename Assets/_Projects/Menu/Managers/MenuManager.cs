@@ -1,10 +1,10 @@
 using Asce.Game.Managers;
 using Asce.Core;
-using Asce.Menu.UIs;
+using Asce.MainMenu.UIs;
 using Asce.SaveLoads;
 using UnityEngine;
 
-namespace Asce.Menu
+namespace Asce.MainMenu
 {
     public class MenuManager : MonoBehaviourSingleton<MenuManager>
     {

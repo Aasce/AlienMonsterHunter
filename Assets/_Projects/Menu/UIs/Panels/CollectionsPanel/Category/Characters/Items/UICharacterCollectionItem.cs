@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs.Characters
+namespace Asce.MainMenu.UIs.Characters
 {
     public class UICharacterCollectionItem : UICollectionItem<Character>
     {

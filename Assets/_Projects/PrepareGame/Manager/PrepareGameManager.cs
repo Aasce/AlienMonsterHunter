@@ -1,6 +1,7 @@
+using Asce.Core;
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Core;
+using Asce.Game.Progress;
 using Asce.PrepareGame.Picks;
 using Asce.PrepareGame.Players;
 using Asce.PrepareGame.UIs;
@@ -44,16 +45,11 @@ namespace Asce.PrepareGame.Manager
 
         public void PlayGame()
         {
-            if (PickController.Instance.CharacterPrefab == null) return;
-            if (PickController.Instance.GunPrefab  == null) return;
+            PickLoadoutShareData loadoutData = PickController.Instance.CreateLoadoutData();
+            if (string.IsNullOrEmpty(loadoutData.CharacterName)) return;
+            if (string.IsNullOrEmpty(loadoutData.GunName)) return;
 
-            GameManager.Instance.Shared.SetOrAdd("character", $"{PickController.Instance.CharacterPrefab.Information.Name}");
-            GameManager.Instance.Shared.SetOrAdd("gun", $"{PickController.Instance.GunPrefab.Information.Name}");
-            GameManager.Instance.Shared.SetOrAdd("supports", PickController.Instance.SupportPrefabs
-                .Where(s => s != null && s.Information != null)
-                .Select(s => s.Information.Name)
-                .ToList()
-            );
+            GameManager.Instance.Shared.SetOrAdd("Loadout", loadoutData);
 
             this.SaveAll();
             SceneLoader.Instance.Load(_mainGameSceneName, delay: 0.5f);

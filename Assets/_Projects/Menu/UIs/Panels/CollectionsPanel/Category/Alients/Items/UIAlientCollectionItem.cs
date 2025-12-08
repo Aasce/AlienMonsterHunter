@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs.Alients
+namespace Asce.MainMenu.UIs.Alients
 {
     public class UIAlientCollectionItem : UICollectionItem<Enemy>
     {

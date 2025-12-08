@@ -1,10 +1,10 @@
 using Asce.Game.UIs.Panels;
 using Asce.Core;
 using Asce.Core.Utils;
-using Asce.Menu.UIs.HUDs;
+using Asce.MainMenu.UIs.HUDs;
 using UnityEngine;
 
-namespace Asce.Menu.UIs
+namespace Asce.MainMenu.UIs
 {
     public class UIMainMenuController : GameComponent, IHasPanelController
     {

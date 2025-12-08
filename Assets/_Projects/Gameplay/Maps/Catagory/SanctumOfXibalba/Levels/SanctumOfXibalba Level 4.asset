@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4e807cde0700649a9817df96e05369, type: 3}
+  m_Name: SanctumOfXibalba Level 4
+  m_EditorClassIdentifier: 
+  _level: 4
+  _description: 
+  _icon: {fileID: 21300000, guid: 9f04beef9efa8e649b92380e238d219c, type: 3}
+  _enemies:
+  - _name: Red Eye Larval
+    _level: 1
+    _quantity: 50
+  - _name: Shadowfang
+    _level: 1
+    _quantity: 10
+  _winConditions: []
+  _loseConditions: []

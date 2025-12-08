@@ -93,8 +93,9 @@ MonoBehaviour:
   _allCharacters: {fileID: 11400000, guid: 4156b936b137d3c4696be2ce45c3fedc, type: 2}
   _allEnemies: {fileID: 11400000, guid: 6c760d0226e618e43bd7adf73adbfd9d, type: 2}
   _allGuns: {fileID: 11400000, guid: acdf6f8430385e54286a7b7752183beb, type: 2}
-  _allAbilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}
   _allSupports: {fileID: 11400000, guid: 731767ec3eeef1946abfd117f5d94729, type: 2}
+  _allMaps: {fileID: 11400000, guid: ee7e79fd1d2e62d4e8504dce21c1e804, type: 2}
+  _allAbilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}
   _allEffects: {fileID: 11400000, guid: 328f8bd727c7e85499487bb3e4335871, type: 2}
   _allInteractiveObjects: {fileID: 11400000, guid: 11dd1259f21f74046b04efd8f2e92c79, type: 2}
   _allItems: {fileID: 11400000, guid: d9bba1683b7a4bf468e2b86f59ca67fa, type: 2}

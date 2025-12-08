@@ -1,10 +1,11 @@
+using Asce.Core;
+using Asce.Core.Utils;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
 using Asce.Game.Players;
+using Asce.Game.Progress;
 using Asce.Game.Supports;
-using Asce.Core;
-using Asce.Core.Utils;
 using Asce.PrepareGame.Manager;
 using Asce.PrepareGame.Players;
 using Asce.PrepareGame.SaveLoads;
@@ -189,6 +190,26 @@ namespace Asce.PrepareGame.Picks
 
             Destroy(_gunInstance.gameObject);
             _gunInstance = null;
+        }
+
+        public PickLoadoutShareData CreateLoadoutData()
+        {
+            PickLoadoutShareData loadoutShareData = new ();
+            if (_characterPrefab != null)
+                loadoutShareData.CharacterName = _characterPrefab.Information.Name;
+
+            if (_gunPrefab != null)
+                loadoutShareData.GunName = _gunPrefab.Information.Name;
+
+            foreach (Support support in SupportPrefabs)
+            {
+                if (support == null) 
+                    loadoutShareData.SupportNames.Add(string.Empty);
+                else 
+                    loadoutShareData.SupportNames.Add(support.Information.Key);
+            }
+
+            return loadoutShareData;
         }
 
         LastPickSaveData ISaveable<LastPickSaveData>.Save()

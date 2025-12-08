@@ -3,7 +3,7 @@ using Asce.Game.UIs.Panels;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs.Panels
+namespace Asce.MainMenu.UIs.Panels
 {
     public class UIMenuSettingsPanel : UISettingsPanel
     {

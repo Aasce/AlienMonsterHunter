@@ -3,7 +3,7 @@ using Asce.Core.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Asce.Menu.UIs
+namespace Asce.MainMenu.UIs
 {
     public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler where T : MonoBehaviour
     {

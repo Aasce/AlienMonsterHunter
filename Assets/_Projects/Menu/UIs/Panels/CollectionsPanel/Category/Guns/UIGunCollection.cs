@@ -3,7 +3,7 @@ using Asce.Game.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Menu.UIs.Characters
+namespace Asce.MainMenu.UIs.Characters
 {
     public class UIGunCollection : UICollectionView<Gun>
     {

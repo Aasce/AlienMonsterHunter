@@ -3,7 +3,7 @@ using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.Menu.UIs
+namespace Asce.MainMenu.UIs
 {
     public abstract class UICollectionView<T> : UITabView where T : MonoBehaviour
     {

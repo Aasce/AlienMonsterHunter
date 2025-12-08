@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Menu.UIs.Supports
+namespace Asce.MainMenu.UIs.Supports
 {
     public class UISupportCollectionItem : UICollectionItem<Support>
     {

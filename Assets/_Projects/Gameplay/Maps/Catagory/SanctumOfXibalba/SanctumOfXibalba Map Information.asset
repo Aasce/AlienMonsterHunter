@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865da253357ba8246a1ea2544c4c875d, type: 3}
+  m_Name: SanctumOfXibalba Map Information
+  m_EditorClassIdentifier: 
+  _name: Sanctum of Xibalba
+  _description: Sanctum of Xibalba - Jungle
+  _icon: {fileID: 21300000, guid: 9f04beef9efa8e649b92380e238d219c, type: 3}
+  _fullMap: {fileID: 21300000, guid: 84b0bf573943e3344963d4841b209c94, type: 3}
+  _thumbnail: {fileID: 21300000, guid: 84b0bf573943e3344963d4841b209c94, type: 3}
+  _levels:
+    _list:
+    - {fileID: 11400000, guid: 210c60f318ac67c41abfdd0dc187f23c, type: 2}
+    - {fileID: 11400000, guid: 38fe8b4d162431f43b6157f80d811491, type: 2}
+    - {fileID: 11400000, guid: 8c1f868529cf088459abd66241d73c5e, type: 2}
+    - {fileID: 11400000, guid: be3180c3137f0224fa20639ac51db65b, type: 2}

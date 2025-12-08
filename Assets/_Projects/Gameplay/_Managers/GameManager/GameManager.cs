@@ -10,6 +10,7 @@ using Asce.Core;
 using Asce.Core.Utils;
 using System;
 using UnityEngine;
+using Asce.Game.Maps;
 
 namespace Asce.Game.Managers
 {
@@ -21,8 +22,9 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllCharacters _allCharacters;
         [SerializeField] private SO_AllEnemies _allEnemies;
         [SerializeField] private SO_AllGuns _allGuns;
-        [SerializeField] private SO_AllAbilities _allAbilities;
         [SerializeField] private SO_AllSupports _allSupports;
+        [SerializeField] private SO_AllMaps _allMaps;
+        [SerializeField] private SO_AllAbilities _allAbilities;
         [SerializeField] private SO_AllEffects _allEffects;
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
         [SerializeField] private SO_AllItems _allItems;
@@ -36,8 +38,9 @@ namespace Asce.Game.Managers
         public SO_AllCharacters AllCharacters => _allCharacters;
         public SO_AllEnemies AllEnemies => _allEnemies;
         public SO_AllGuns AllGuns => _allGuns;
-        public SO_AllAbilities AllAbilities => _allAbilities;
         public SO_AllSupports AllSupports => _allSupports;
+        public SO_AllMaps AllMaps => _allMaps;
+        public SO_AllAbilities AllAbilities => _allAbilities;
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
         public SO_AllItems AllItems => _allItems;
@@ -59,11 +62,14 @@ namespace Asce.Game.Managers
             if (AllGuns == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Guns is not assigned", this);
 
+            if (AllSupports == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Supports is not assigned", this);
+
+            if (AllMaps == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Maps is not assigned", this);
+
             if (AllAbilities == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Abilities is not assigned", this);
-
-            if (_allSupports == null) 
-                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Supports is not assigned", this);
 
             if (AllEffects == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Effects is not assigned", this);

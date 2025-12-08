@@ -1,10 +1,10 @@
+using Asce.Core;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Enviroments;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
 using Asce.Game.Players;
-using Asce.Core;
-using System;
+using Asce.Game.Progress;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,16 +23,14 @@ namespace Asce.MainGame.Managers
 
         public void CreateNewGame()
         {
-            this.CreateCharacterForPlayer();
-            this.CreateSupportForPlayer();
+            PickLoadoutShareData loadoutData  = GameManager.Instance.Shared.Get<PickLoadoutShareData>("Loadout");
+            this.CreateCharacterForPlayer(loadoutData.CharacterName, loadoutData.GunName);
+            this.CreateSupportForPlayer(loadoutData.SupportNames);
             this.CreateSpawners();
         }
 
-        private void CreateCharacterForPlayer()
+        private void CreateCharacterForPlayer(string characterName, string gunName)
         {
-            string characterName = GameManager.Instance.Shared.Get<string>("character");
-            string gunName = GameManager.Instance.Shared.Get<string>("gun");
-
             Gun gunPrefab = GameManager.Instance.AllGuns.Get(gunName);
             Gun gunInstance = Instantiate(gunPrefab);
             gunInstance.name = gunPrefab.name;
@@ -51,9 +49,8 @@ namespace Asce.MainGame.Managers
             PlayerManager.Instance.Progress.GunsProgress.ApplyTo(MainGameManager.Instance.Player.Character.Gun);
         }
 
-        private void CreateSupportForPlayer()
+        private void CreateSupportForPlayer(List<string> supportNames)
         {
-            List<string> supportNames = GameManager.Instance.Shared.Get<List<string>>("supports");
             if (supportNames == null) return;
             MainGameManager.Instance.Player.SupportCaller.Initialize(supportNames);
         }
