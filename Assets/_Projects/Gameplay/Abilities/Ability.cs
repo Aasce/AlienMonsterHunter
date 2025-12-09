@@ -52,7 +52,7 @@ namespace Asce.Game.Abilities
         public virtual void Initialize()
         {
             if (string.IsNullOrEmpty(this._id)) this._id = IdGenerator.NewId(PREFIX_ID);
-            DespawnTime.SetBaseTime(Information.DaspawnTime);
+            DespawnTime.SetBaseTime(Information.DespawnTime);
             Leveling.Initialize(Information.Leveling);
 
             Leveling.OnLevelSetted += Leveling_OnLevelSetted;
@@ -90,7 +90,7 @@ namespace Asce.Game.Abilities
 
         protected virtual void Leveling_OnLevelSetted(int newLevel)
         {
-            DespawnTime.SetBaseTime(Information.DaspawnTime);
+            DespawnTime.SetBaseTime(Information.DespawnTime);
             for (int i = 1; i <= newLevel; i++)
             {
                 this.LevelTo(i);

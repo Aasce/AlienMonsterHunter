@@ -12,6 +12,7 @@ namespace Asce.Game.Abilities
         [SerializeField] private string _id;
         [SerializeField] private string _name;
         [SerializeField, TextArea(3, 10)] private string _description;
+        [SerializeField, TextArea(2, 5)] private string _sideNote;
         [SerializeField, SpritePreview] private Sprite _icon;
 
         [Space]
@@ -37,13 +38,14 @@ namespace Asce.Game.Abilities
         public string Id => _id;
         public string Name => _name;
         public string Description => _description;
+        public string SideNote => _sideNote;
         public Sprite Icon => _icon;
 
         public bool IsPassive => _isPassive;
         public bool IsActive => !_isPassive;
         public float Cooldown => _cooldown;
         public float UseRangeRadius => _useRangeRadius;
-        public float DaspawnTime => _despawnTime;
+        public float DespawnTime => _despawnTime;
 
         public bool IsReactive => _isReactive;
         public float ReactiveCooldown => _reactiveCooldown;

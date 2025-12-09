@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _key: Helicopter
   _name: Helicopter
-  _description: 'Summons a Helicopter that flies in a straight path from the base
-    toward the target location.
+  _description: '<b>Call</b>: Call a Helicopter that flies in a straight path from
+    the base toward the target location.
 
-    As it moves, it drops a trail of fire along
-    its flight path. All enemies standing within the burning area are inflicted with
-    flames, taking {Damage} damage every {DamageInterval} seconds.
+    As it moves, it drops a trail of fire
+    along its flight path. All enemies standing within the burning area are inflicted
+    with flames, taking <color=orange>{IgniteDamage} damage</color> every <color=white>1s</color>.'
+  _sideNote: 'The Helicopter has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+    Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>8 View Radius</color>.
 
-
-    The Helicopter
-    has {Health} Health, {Armor} Armor, {ViewRadius} View Radius, and {Speed} Speed.
-
-    The
-    Fire Area lasts for {DespawnTime} seconds.'
+    It
+    can see through all objects.'
   _icon: {fileID: 21300000, guid: a5103566a6c401f4198f7908c73918c7, type: 3}
   _leveling: {fileID: 11400000, guid: dbe6bf53ef3729c46974c3c27e1498df, type: 2}
   _progress: {fileID: 11400000, guid: f2bab49be70a0984fb0aeb3dd0be3966, type: 2}
   _cooldown: 18
   _cooldownOnRecall: 0
+  _spawnOnStart: 0
+  _spawnPointType: 0

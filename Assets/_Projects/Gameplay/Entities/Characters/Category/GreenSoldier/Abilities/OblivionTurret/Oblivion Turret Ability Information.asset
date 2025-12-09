@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Oblivion Turret
   _name: Oblivion Turret
-  _description: 'Deploys a forward-facing Turret that lasts for {DespawnTime} seconds.
+  _description: 'Deploys a forward-facing Turret that lasts for <color=white>{DespawnTime}s</color>.
 
     It
-    holds {MaxAmmo} rounds of ammunition and will automatically deactivate 5 seconds
-    after running out.
+    holds <b><color=white>{MaxAmmo} Ammo</color></b>, upon detecting an enemy, the
+    Turret rotates to face its target.
 
+    After a short reloading phase, it fires
+    two homing missiles toward the enemy. The missiles explode upon hitting an enemy
+    or terrain, dealing <color=orange>{Damage} damage</color> to all targets within
+    <color=white>{ExplosionRadius}m</color>.'
+  _sideNote: 'The Turret has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+    Armor</color>, <color=white>{ViewRadius} View Radius</color>.
 
-    Upon detecting an enemy, the Turret rotates to face
-    its target.
-
-    After a short reloading phase, it fires two homing missiles
-    toward the enemy. The missiles explode upon hitting an enemy or terrain, dealing
-    {Damage} damage to all targets within {ExplosionRadius} radius.
-
-
-    The Turret
-    has {Health} Health, {Armor} Armor, and a {ViewRadius} View Radius. It cannot
+    It cannot
     move.'
   _icon: {fileID: 21300000, guid: 6acb43eb2d2a5e44383f97e5cb751e3d, type: 3}
   _isPassive: 0

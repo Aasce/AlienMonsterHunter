@@ -1,7 +1,10 @@
+using Asce.Game;
+using Asce.Game.Abilities;
 using Asce.Game.Players;
 using Asce.Game.Supports;
 using Asce.Game.UIs.Panels;
 using Asce.PrepareGame.Manager;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +30,8 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _callCDText;
         [SerializeField] private TextMeshProUGUI _recallCDText;
         [SerializeField] private TextMeshProUGUI _descriptionText;
+        [SerializeField] private Transform _descriptionDivider;
+        [SerializeField] private TextMeshProUGUI _sideNotesText;
 
         protected SupportProgress Progress => PlayerManager.Instance.Progress.SupportsProgress.Get(Item.Information.Name);
 
@@ -52,10 +57,10 @@ namespace Asce.PrepareGame.UIs
             _nameText.text = Item.Information.Name;
             _icon.sprite = Item.Information.Icon;
 
-            _callCDText.text = $"Call CD: {Item.Information.Cooldown:#.#}s";
-            _recallCDText.text = $"Recall CD: {Item.Information.CooldownOnRecall:#.#}s";
-            _descriptionText.text = Item.Information.Description;
+            _callCDText.text = Item.Information.Cooldown > 0 ? $"Call CD: {Item.Information.Cooldown:0.#}s" : string.Empty;
+            _recallCDText.text = Item.Information.CooldownOnRecall > 0 ? $"Recall CD: {Item.Information.CooldownOnRecall:0.#}s" : string.Empty;
 
+            this.SetDescription();
             this.SetLockedState();
             Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
@@ -66,6 +71,40 @@ namespace Asce.PrepareGame.UIs
             if (Item.Information == null) return;
 
             Progress.OnLevelChanged -= Progress_OnLevelChanged;
+        }
+
+        private void SetDescription()
+        {
+            Dictionary<string, string> values = new()
+            {
+                { "Cooldown", $"{Item.Information.Cooldown:0.#}" },
+                { "CooldownOnRecall", $"{Item.Information.CooldownOnRecall:0.#}" }
+            };
+            if (Item is IControlMachineAbility controlMachineAbility)
+            {
+                values.Add("Health", $"{controlMachineAbility.Machine.Information.Stats.MaxHealth:0.#}");
+                values.Add("Armor", $"{controlMachineAbility.Machine.Information.Stats.Armor:0.#}");
+                values.Add("Speed", $"{controlMachineAbility.Machine.Information.Stats.Speed:0.#}");
+                foreach (var custom in controlMachineAbility.Machine.Information.Stats.CustomStats)
+                {
+                    values.Add(custom.Name, $"{custom.Value:0.#}");
+                }
+            }
+
+            string description = Item.Information.Description.GetDescription(values);
+            _descriptionText.text = description;
+
+            if (string.IsNullOrEmpty(Item.Information.SideNote))
+            {
+                _descriptionDivider.gameObject.SetActive(false);
+                _sideNotesText.text = string.Empty;
+                return;
+            }
+
+            _descriptionDivider.gameObject.SetActive(true);
+
+            string sideNotes = Item.Information.SideNote.GetDescription(values);
+            _sideNotesText.text = sideNotes;
         }
 
         private void SetLockedState()

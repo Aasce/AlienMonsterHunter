@@ -14,11 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _key: Line Fire Launcher
   _name: Line Fire Launcher
-  _description: 
+  _description: 'The Launcher is deployed at the base at <i><color=white>Start of
+    the Game</color></i> and is <color=#ff99dd>Untargetable</color>.
+
+
+    <b>Recall</b>:
+    Fires <b><color=white>5 Missiles</color></b> that spread out toward the designated
+    location. Each missile explodes upon hitting an enemy, dealing <color=orange>{Damage}
+    damage</color> to all enemies within a <color=white>{ExplosionRadius}m</color>
+    radius.'
+  _sideNote: '<color=#ff99dd>Untargetable</color> prevents enemies from seeing or
+    attacking.
+
+    It cannot move.
+
+    Missiles travel through terrain and obstacle.'
   _icon: {fileID: 21300000, guid: f143f61f530ad5e4fba8e9f8e0a0d706, type: 3}
   _leveling: {fileID: 11400000, guid: 6a2107b15c1611d47a5c8e6466b4962d, type: 2}
   _progress: {fileID: 11400000, guid: fb706b0ee23ebf747b27471b3ae18ef5, type: 2}
-  _cooldown: 5
-  _cooldownOnRecall: 5
+  _cooldown: 0
+  _cooldownOnRecall: 15
   _spawnOnStart: 1
   _spawnPointType: 1

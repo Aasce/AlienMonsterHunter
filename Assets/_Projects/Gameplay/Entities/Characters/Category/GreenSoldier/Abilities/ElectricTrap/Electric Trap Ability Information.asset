@@ -15,8 +15,11 @@ MonoBehaviour:
   _id: Electric Trap
   _name: Electric Trap
   _description: "Throws an electric trap that bounces off walls upon impact. \nAfter
-    2 seconds, it detonates, creating an energy field that detains all enemies within
-    a {CatchRadius}m radius for {DetentionDuration}s.\n\nThe trap deals no damage."
+    <color=white>2s</color> or <b>Reactive</b>, it detonates, creating an energy
+    field that causes the <color=#ff99dd>Detention</color> of all enemies within
+    a {CatchRadius}m radius for <color=white>{DetentionDuration}s</color>."
+  _sideNote: "<color=#ff99dd>Detention</color> prevents the target from moving or
+    attacking. \nThe trap deals no damage."
   _icon: {fileID: 21300000, guid: 43c7fdb62ffe76443a547541974a0b00, type: 3}
   _isPassive: 0
   _cooldown: 7

@@ -20,7 +20,7 @@ namespace Asce.Game.Abilities
         [SerializeField] private Vector2 _distanceRange = new(5f, 10f);
 
         [Tooltip("X = MinForce, Y = MaxForce")]
-        [SerializeField] private Vector2 _forceRange = new(8f, 18f);
+        [SerializeField] private float _force = 26f;
         [SerializeField] private float _torque = 10f;
 
         [Header("Catch")]
@@ -61,19 +61,8 @@ namespace Asce.Game.Abilities
         {
             base.OnActive();
 
-            float force;
-            float distance = _moveDirection.magnitude;
-
-            if (distance <= _distanceRange.x) force = _forceRange.x;
-            else if (distance >= _distanceRange.y) force = _forceRange.y;
-            else
-            {
-                float t = Mathf.InverseLerp(_distanceRange.x, _distanceRange.y, distance);
-                force = Mathf.Lerp(_forceRange.x, _forceRange.y, t);
-            }
-
             // Apply movement
-            _rigidbody.AddForce(_moveDirection.normalized * force, ForceMode2D.Impulse);
+            _rigidbody.AddForce(_moveDirection.normalized * _force, ForceMode2D.Impulse);
             _rigidbody.AddTorque(_torque, ForceMode2D.Impulse);
         }
 

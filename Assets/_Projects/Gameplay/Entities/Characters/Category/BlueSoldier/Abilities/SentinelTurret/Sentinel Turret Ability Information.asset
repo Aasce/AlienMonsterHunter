@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Sentinel Turret
   _name: Sentinel Turret
-  _description: 'Deploy a Turret that exists for {DespawnTime} seconds. The turret
-    locks onto a target and fires toward the target {AttackSpeed} per seconds, dealing
-    {Damage} damage to the first target hit.
+  _description: Deploy a Turret that exists for <color=white>{DespawnTime}s</color>.
+    The turret locks onto a target and fires toward the target every {AttackSpeed}s,
+    dealing <color=orange>{Damage} damage</color> and <color=#ff99dd>Slow by 0.4</color>
+    in <color=white>3s</color> to the first target hit.
+  _sideNote: '<color=#ff99dd>Slow</color> reduct target''s <color=#80ffff>Speed</color>.
 
-
-    The turret has {Health} Health,
-    {Armor} Armor, {ViewRadius} View Radius.
+    The
+    Turret has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
+    <color=white>{ViewRadius} View Radius</color>.
 
     It cannot move.'
   _icon: {fileID: 21300000, guid: 83912b7be7f789a47945b88bc72d2385, type: 3}
@@ -28,6 +30,8 @@ MonoBehaviour:
   _cooldown: 10
   _useRangeRadius: 6
   _despawnTime: 30
+  _isReactive: 0
+  _reactiveCooldown: 0
   _customValues:
     _list: []
   _leveling: {fileID: 11400000, guid: 6bdfd8f9b0bc8bf4eb5145744753f490, type: 2}
