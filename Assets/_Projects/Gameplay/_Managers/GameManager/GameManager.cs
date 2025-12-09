@@ -1,3 +1,5 @@
+using Asce.Core;
+using Asce.Core.Utils;
 using Asce.Game.Abilities;
 using Asce.Game.Effects;
 using Asce.Game.Entities.Characters;
@@ -5,12 +7,11 @@ using Asce.Game.Entities.Enemies;
 using Asce.Game.Guns;
 using Asce.Game.Interactions;
 using Asce.Game.Items;
+using Asce.Game.Maps;
+using Asce.Game.Spawners;
 using Asce.Game.Supports;
-using Asce.Core;
-using Asce.Core.Utils;
 using System;
 using UnityEngine;
-using Asce.Game.Maps;
 
 namespace Asce.Game.Managers
 {
@@ -24,6 +25,7 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllGuns _allGuns;
         [SerializeField] private SO_AllSupports _allSupports;
         [SerializeField] private SO_AllMaps _allMaps;
+        [SerializeField] private SO_AllSpawners _allSpawners;
         [SerializeField] private SO_AllAbilities _allAbilities;
         [SerializeField] private SO_AllEffects _allEffects;
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
@@ -40,6 +42,7 @@ namespace Asce.Game.Managers
         public SO_AllGuns AllGuns => _allGuns;
         public SO_AllSupports AllSupports => _allSupports;
         public SO_AllMaps AllMaps => _allMaps;
+        public SO_AllSpawners AllSpawners => _allSpawners;
         public SO_AllAbilities AllAbilities => _allAbilities;
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
@@ -67,6 +70,9 @@ namespace Asce.Game.Managers
 
             if (AllMaps == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Maps is not assigned", this);
+
+            if (AllSpawners == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Spawners is not assigned", this);
 
             if (AllAbilities == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Abilities is not assigned", this);

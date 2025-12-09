@@ -32,6 +32,8 @@ MonoBehaviour:
       _path: current/interactive_objects.json
     - _name: PrepareGameLastPick
       _path: prepare/last_pick.json
+    - _name: MainMenuLastPick
+      _path: menu/last_pick.json
   _saveFolders:
     _list:
     - _name: CharactersProgress

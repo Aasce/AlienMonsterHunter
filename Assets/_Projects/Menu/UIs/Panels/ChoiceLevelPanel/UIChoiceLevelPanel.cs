@@ -3,6 +3,7 @@ using Asce.Core.Utils;
 using Asce.Game.Managers;
 using Asce.Game.Maps;
 using Asce.Game.UIs.Panels;
+using Asce.MainMenu.Picks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -89,6 +90,7 @@ namespace Asce.MainMenu.UIs.Panels
             }
 
             this.ChoiceLevel(level);
+            PickController.Instance.PickMap(_currentMap, level);
         }
 
         public void ChoiceLevel(int level)
@@ -99,6 +101,7 @@ namespace Asce.MainMenu.UIs.Panels
 
             _details.Set(levelInformation);
             _details.Show();
+            PickController.Instance.PickMap(_currentMap, level);
         }
 
 

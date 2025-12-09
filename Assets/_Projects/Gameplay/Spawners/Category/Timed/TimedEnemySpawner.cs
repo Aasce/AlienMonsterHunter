@@ -1,6 +1,7 @@
+using Asce.Core.Utils;
 using Asce.Game.Entities.Enemies;
 using Asce.Game.Managers;
-using Asce.Core.Utils;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,9 +9,20 @@ namespace Asce.Game.Spawners
 {
     public class TimedEnemySpawner : BaseSpawner
     {
+        [Header("Enemies")]
+        [SerializeField] private List<string> _enemyNames = new();
+
         [Header("Spawn Settings")]
         [SerializeField] private Cooldown _spawnCooldown = new(5f);
         [SerializeField] private Vector2Int _levelRange = new(0, 10);
+
+        public List<string> Enemies => _enemyNames;
+
+        protected override void Reset()
+        {
+            base.Reset();
+            _name = "Timed";
+        }
 
         public override void Initialize()
         {

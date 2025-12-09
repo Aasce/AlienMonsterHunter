@@ -13,7 +13,7 @@ namespace Asce.Game.Maps
         [SerializeField] private string _description;
         [SerializeField, SpritePreview] private Sprite _icon;
 
-        [Space]
+        [Header("Spawners")]
         [SerializeField] private List<MapLevelEnemy> _enemies = new();
         private ReadOnlyCollection<MapLevelEnemy> _enemiesReadonly;
 

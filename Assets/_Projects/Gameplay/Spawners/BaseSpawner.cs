@@ -1,21 +1,21 @@
 using Asce.Core;
+using Asce.Core.Attributes;
 using Asce.Core.Utils;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Spawners
 {
     public abstract class BaseSpawner : GameComponent
     {
+        [SerializeField, Readonly] protected string _name;
+
+        [Header("References")]
         [SerializeField] protected SpawnArea _spawnArea;
 
-        [Header("Enemies")]
-        [SerializeField] private List<string> _enemyNames = new();
-
-        [Header("Spawner Info")]
+        [Header("Runtime")]
         [SerializeField] protected bool _active = true;
 
-        public List<string> Enemies => _enemyNames;
+        public string Name => _name;
         public bool Active
         {
             get => _active;

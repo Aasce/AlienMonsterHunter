@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b4e807cde0700649a9817df96e05369, type: 3}
-  m_Name: SanctumOfXibalba Level 3
+  m_Name: SanctumOfXibalba Level 7
   m_EditorClassIdentifier: 
-  _level: 3
+  _level: 7
   _description: 
   _icon: {fileID: 21300000, guid: 9f04beef9efa8e649b92380e238d219c, type: 3}
   _enemies:
   - _name: Red Eye Larval
-    _level: 1
-    _quantity: 70
+    _level: 5
+    _quantity: 90
   - _name: Shadowfang
-    _level: 0
+    _level: 4
+    _quantity: 50
+  - _name: Phantom
+    _level: 1
     _quantity: 30
   _winConditions: []
   _loseConditions: []

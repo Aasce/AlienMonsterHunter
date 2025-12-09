@@ -18,6 +18,6 @@ MonoBehaviour:
   _enemies:
   - _name: Red Eye Larval
     _level: 1
-    _quantity: 40
+    _quantity: 80
   _winConditions: []
   _loseConditions: []

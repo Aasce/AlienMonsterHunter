@@ -16,6 +16,6 @@ namespace Asce.Game.Maps
         });
 
         public ReadOnlyCollection<Map> Maps => _maps.List;
-        public Map GetMap(string name) => _maps.Get(name);
+        public Map Get(string name) => _maps.Get(name);
     }
 }

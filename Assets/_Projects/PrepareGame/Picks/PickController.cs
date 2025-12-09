@@ -7,7 +7,6 @@ using Asce.Game.Players;
 using Asce.Game.Progress;
 using Asce.Game.Supports;
 using Asce.PrepareGame.Manager;
-using Asce.PrepareGame.Players;
 using Asce.PrepareGame.SaveLoads;
 using Asce.SaveLoads;
 using System;
@@ -214,9 +213,12 @@ namespace Asce.PrepareGame.Picks
 
         LastPickSaveData ISaveable<LastPickSaveData>.Save()
         {
-            LastPickSaveData lastPickData = new();
-            lastPickData.characterName = CharacterPrefab != null ? CharacterPrefab.Information.Name : string.Empty;
-            lastPickData.gunName = GunPrefab != null ? GunPrefab.Information.Name : string.Empty;
+            LastPickSaveData lastPickData = new()
+            {
+                characterName = CharacterPrefab != null ? CharacterPrefab.Information.Name : string.Empty,
+                gunName = GunPrefab != null ? GunPrefab.Information.Name : string.Empty
+            };
+
             for (int i = 0; i < _supportPrefabs.Count; i++)
             {
                 Support support = _supportPrefabs[i];

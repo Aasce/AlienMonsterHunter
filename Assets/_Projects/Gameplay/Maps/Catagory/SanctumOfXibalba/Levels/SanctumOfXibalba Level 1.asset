@@ -17,7 +17,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 9f04beef9efa8e649b92380e238d219c, type: 3}
   _enemies:
   - _name: Red Eye Larval
-    _levelRange: {x: 0, y: 0}
-    _quantity: 40
+    _level: 0
+    _quantity: 60
   _winConditions: []
   _loseConditions: []

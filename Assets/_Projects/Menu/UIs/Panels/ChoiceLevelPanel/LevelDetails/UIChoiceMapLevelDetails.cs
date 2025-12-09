@@ -76,7 +76,7 @@ namespace Asce.MainMenu.UIs.Panels
 
         private void PlayButton_OnClick()
         {
-            MenuManager.Instance.PlayNewGame();
+            MainMenuManager.Instance.PlayNewGame();
         }
 
 

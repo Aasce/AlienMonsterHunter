@@ -25,11 +25,11 @@ namespace Asce.MainMenu.UIs.HUDs
                 return;
             }
 
-            UIConfirmPanel confirmPanel = MenuManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
+            UIConfirmPanel confirmPanel = MainMenuManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
             if (confirmPanel == null)
             {
                 // No Confirm Panel -> play Current Game (Because Current Game Save exits).
-                MenuManager.Instance.PlayGame();
+                MainMenuManager.Instance.PlayGame();
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace Asce.MainMenu.UIs.HUDs
                 description: "Do you want to continue your previous game or start a new one?",
 
                 yesText: "Continue",
-                onYes: () => MenuManager.Instance.PlayGame(),
+                onYes: () => MainMenuManager.Instance.PlayGame(),
 
                 noText: "New Game",
                 onNo: () => OpenChoiceLevelPanel()
@@ -49,7 +49,7 @@ namespace Asce.MainMenu.UIs.HUDs
 
         private void OpenChoiceLevelPanel()
         {
-            UIPanel choiceLevelPanel = MenuManager.Instance.UIController.PanelController.GetPanelByName("Choice Level");
+            UIPanel choiceLevelPanel = MainMenuManager.Instance.UIController.PanelController.GetPanelByName("Choice Level");
             if (choiceLevelPanel == null) return;
             choiceLevelPanel.Show();
         }

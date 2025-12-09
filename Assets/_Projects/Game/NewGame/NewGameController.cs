@@ -3,8 +3,11 @@ using Asce.Game.Entities.Characters;
 using Asce.Game.Enviroments;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
+using Asce.Game.Maps;
 using Asce.Game.Players;
 using Asce.Game.Progress;
+using Asce.Game.Spawners;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,10 +26,31 @@ namespace Asce.MainGame.Managers
 
         public void CreateNewGame()
         {
-            PickLoadoutShareData loadoutData  = GameManager.Instance.Shared.Get<PickLoadoutShareData>("Loadout");
+            this.CreateLoadout();
+            this.CreateMapLevel();
+        }
+
+        private void CreateLoadout()
+        {
+            if (!GameManager.Instance.Shared.TryGet("Loadout", out PickLoadoutShareData loadoutData))
+            {
+                Debug.LogError("[NewGameController] Loadout Share Data is null", this);
+            }
+
             this.CreateCharacterForPlayer(loadoutData.CharacterName, loadoutData.GunName);
             this.CreateSupportForPlayer(loadoutData.SupportNames);
-            this.CreateSpawners();
+        }
+
+        private void CreateMapLevel()
+        {
+            if (!GameManager.Instance.Shared.TryGet("MapLevel", out PickMapLevelShareData mapLevelData))
+            {
+                Debug.LogError("[NewGameController] Map Level Share Data is null", this);
+            }
+
+            Map mapPrefab = GameManager.Instance.AllMaps.Get(mapLevelData.MapName);
+            SO_MapLevelInformation levelInformation = mapPrefab.Information.GetLevel(mapLevelData.Level);
+            this.CreateSpawners(levelInformation);
         }
 
         private void CreateCharacterForPlayer(string characterName, string gunName)
@@ -55,8 +79,21 @@ namespace Asce.MainGame.Managers
             MainGameManager.Instance.Player.SupportCaller.Initialize(supportNames);
         }
 
-        private void CreateSpawners()
+        private void CreateSpawners(SO_MapLevelInformation levelInformation)
         {
+            InitialEnemySpawner initialSpawnerPrefab = GameManager.Instance.AllSpawners.Get<InitialEnemySpawner>("Initial");
+            if (initialSpawnerPrefab == null) return;
+
+            InitialEnemySpawner initialSpawner = Instantiate(initialSpawnerPrefab);
+            initialSpawner.transform.SetParent(MainGameManager.Instance.SpawnerController.transform);
+            MainGameManager.Instance.SpawnerController.Spawners.Add(initialSpawner);
+
+            foreach (MapLevelEnemy enemy in levelInformation.Enemies)
+            {
+                EnemySpawnContainer container = new (enemy.Name, enemy.Quantity, enemy.Level);
+                initialSpawner.Enemies.Add(container);
+            }
+
             MainGameManager.Instance.SpawnerController.OnCreate();
             MainGameManager.Instance.SpawnerController.StartSpawn();
         }

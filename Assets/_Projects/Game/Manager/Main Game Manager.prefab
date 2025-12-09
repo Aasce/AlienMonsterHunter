@@ -547,10 +547,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6990074712704327660}
     m_Modifications:
-    - target: {fileID: 2403492272091506187, guid: fae92f350cc670e4f980b4b333f17191, type: 3}
-      propertyPath: _spawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5505308365273073932, guid: fae92f350cc670e4f980b4b333f17191, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -593,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551806566063511981, guid: fae92f350cc670e4f980b4b333f17191, type: 3}
       propertyPath: m_Name
-      value: Spawner Controller
+      value: Spawners Controller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

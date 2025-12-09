@@ -34,5 +34,6 @@ namespace Asce.Game.Maps
 
         public ReadOnlyCollection<SO_MapLevelInformation> Levels => _levels.List;
         public SO_MapLevelInformation GetLevel(int level) => _levels.Get(level);
+        public bool IsLevelValid(int level) => this.GetLevel(level) != null;
     }
 }
