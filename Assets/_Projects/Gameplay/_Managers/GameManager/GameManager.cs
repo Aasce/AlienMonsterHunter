@@ -26,6 +26,7 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllSupports _allSupports;
         [SerializeField] private SO_AllMaps _allMaps;
         [SerializeField] private SO_AllSpawners _allSpawners;
+        [SerializeField] private SO_AllWinLoseConditions _allWinLoseConditions;
         [SerializeField] private SO_AllAbilities _allAbilities;
         [SerializeField] private SO_AllEffects _allEffects;
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
@@ -43,6 +44,7 @@ namespace Asce.Game.Managers
         public SO_AllSupports AllSupports => _allSupports;
         public SO_AllMaps AllMaps => _allMaps;
         public SO_AllSpawners AllSpawners => _allSpawners;
+        public SO_AllWinLoseConditions AllWinLoseConditions => _allWinLoseConditions;
         public SO_AllAbilities AllAbilities => _allAbilities;
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
@@ -73,6 +75,9 @@ namespace Asce.Game.Managers
 
             if (AllSpawners == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Spawners is not assigned", this);
+
+            if (AllWinLoseConditions == null) 
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Win Lose Conditions is not assigned", this);
 
             if (AllAbilities == null) 
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Abilities is not assigned", this);

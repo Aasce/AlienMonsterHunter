@@ -26,8 +26,8 @@ namespace Asce.MainGame.Managers
 
         public void CreateNewGame()
         {
-            this.CreateLoadout();
             this.CreateMapLevel();
+            this.CreateLoadout();
         }
 
         private void CreateLoadout()
@@ -50,6 +50,7 @@ namespace Asce.MainGame.Managers
 
             Map mapPrefab = GameManager.Instance.AllMaps.Get(mapLevelData.MapName);
             SO_MapLevelInformation levelInformation = mapPrefab.Information.GetLevel(mapLevelData.Level);
+            this.CreateWinLoseCondition(levelInformation);
             this.CreateSpawners(levelInformation);
         }
 
@@ -77,6 +78,33 @@ namespace Asce.MainGame.Managers
         {
             if (supportNames == null) return;
             MainGameManager.Instance.Player.SupportCaller.Initialize(supportNames);
+        }
+
+        private void CreateWinLoseCondition(SO_MapLevelInformation levelInformation)
+        {
+            foreach (MapLevelGameStateCondition winCondition in levelInformation.WinConditions)
+            {
+                GameStateCondition conditionPrefab = GameManager.Instance.AllWinLoseConditions.Get(winCondition.ConditionName);
+                if (conditionPrefab == null) continue;
+
+                GameStateCondition condition = Instantiate(conditionPrefab);
+                condition.transform.SetParent(MainGameManager.Instance.GameStateController.transform);
+
+                condition.SetData(winCondition);
+                MainGameManager.Instance.GameStateController.WinConditions.Add(condition);
+            }
+
+            foreach (MapLevelGameStateCondition loseCondition in levelInformation.LoseConditions)
+            {
+                GameStateCondition conditionPrefab = GameManager.Instance.AllWinLoseConditions.Get(loseCondition.ConditionName);
+                if (conditionPrefab == null) continue;
+
+                GameStateCondition condition = Instantiate(conditionPrefab);
+                condition.transform.SetParent(MainGameManager.Instance.GameStateController.transform);
+
+                condition.SetData(loseCondition);
+                MainGameManager.Instance.GameStateController.LoseConditions.Add(condition);
+            }
         }
 
         private void CreateSpawners(SO_MapLevelInformation levelInformation)

@@ -18,18 +18,18 @@ namespace Asce.Game.Maps
         private ReadOnlyCollection<MapLevelEnemy> _enemiesReadonly;
 
         [Space]
-        [SerializeField] private List<MapLevelWinCondition> _winConditions = new();
-        [SerializeField] private List<MapLevelLoseCondition> _loseConditions = new();
-        private ReadOnlyCollection<MapLevelWinCondition> _winConditionsReadonly;
-        private ReadOnlyCollection<MapLevelLoseCondition> _loseConditionsReadonly;
+        [SerializeField] private List<MapLevelGameStateCondition> _winConditions = new();
+        [SerializeField] private List<MapLevelGameStateCondition> _loseConditions = new();
+        private ReadOnlyCollection<MapLevelGameStateCondition> _winConditionsReadonly;
+        private ReadOnlyCollection<MapLevelGameStateCondition> _loseConditionsReadonly;
 
         public int Level => _level;
         public string Description => _description;
         public Sprite Icon => _icon;
 
         public ReadOnlyCollection<MapLevelEnemy> Enemies => _enemiesReadonly ??= _enemies.AsReadOnly();
-        public ReadOnlyCollection<MapLevelWinCondition> WinConditions => _winConditionsReadonly ??= _winConditions.AsReadOnly();
-        public ReadOnlyCollection<MapLevelLoseCondition> LoseConditions => _loseConditionsReadonly ??= _loseConditions.AsReadOnly();
+        public ReadOnlyCollection<MapLevelGameStateCondition> WinConditions => _winConditionsReadonly ??= _winConditions.AsReadOnly();
+        public ReadOnlyCollection<MapLevelGameStateCondition> LoseConditions => _loseConditionsReadonly ??= _loseConditions.AsReadOnly();
 
         public int TotalEnemiesQuantity => _enemies.Sum((enemy) => enemy?.Quantity ?? 0);
     }

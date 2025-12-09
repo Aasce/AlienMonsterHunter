@@ -22,5 +22,18 @@ MonoBehaviour:
   - _name: Shadowfang
     _level: 0
     _quantity: 30
-  _winConditions: []
-  _loseConditions: []
+  _winConditions:
+  - _conditionName: All Enemies Defeated
+    _customValues:
+      _list: []
+  _loseConditions:
+  - _conditionName: Overtime
+    _customValues:
+      _list:
+      - _name: Time
+        _value: 1200
+  - _conditionName: Player Lives
+    _customValues:
+      _list:
+      - _name: MaxLives
+        _value: 3

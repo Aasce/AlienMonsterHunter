@@ -70,13 +70,13 @@ namespace Asce.MainGame
         {
             AllGameStateConditionsSaveData allData = new();
 
-            foreach (WinCondition winCondition in MainGameManager.Instance.GameStateController.WinConditions)
+            foreach (GameStateCondition winCondition in MainGameManager.Instance.GameStateController.WinConditions)
             {
                 GameStateConditionSaveData saveData = (winCondition as ISaveable<GameStateConditionSaveData>).Save();
                 allData.winConditions.Add(saveData);
             }
 
-            foreach (LoseCondition loseCondition in MainGameManager.Instance.GameStateController.LoseConditions)
+            foreach (GameStateCondition loseCondition in MainGameManager.Instance.GameStateController.LoseConditions)
             {
                 GameStateConditionSaveData saveData = (loseCondition as ISaveable<GameStateConditionSaveData>).Save();
                 allData.loseConditions.Add(saveData);
@@ -184,14 +184,14 @@ namespace Asce.MainGame
 
             foreach (GameStateConditionSaveData winConditionData in allData.winConditions)
             {
-                WinCondition winCondition = MainGameManager.Instance.GameStateController.WinConditions.Find((condition) => condition.ConditionName == winConditionData.name);
+                GameStateCondition winCondition = MainGameManager.Instance.GameStateController.WinConditions.Find((condition) => condition.ConditionName == winConditionData.name);
                 if (winCondition is not ILoadable<GameStateConditionSaveData> loadable) continue;
                 loadable.Load(winConditionData);
             }
 
             foreach (GameStateConditionSaveData loseConditionData in allData.loseConditions)
             {
-                LoseCondition loseCondition = MainGameManager.Instance.GameStateController.LoseConditions.Find((condition) => condition.ConditionName == loseConditionData.name);
+                GameStateCondition loseCondition = MainGameManager.Instance.GameStateController.LoseConditions.Find((condition) => condition.ConditionName == loseConditionData.name);
                 if (loseCondition is not ILoadable<GameStateConditionSaveData> loadable) continue;
                 loadable.Load(loseConditionData);
             }

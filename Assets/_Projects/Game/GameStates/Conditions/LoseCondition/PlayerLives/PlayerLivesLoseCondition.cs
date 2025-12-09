@@ -1,27 +1,34 @@
 using Asce.Core;
 using Asce.Game.Managers;
+using Asce.Game.Maps;
 using Asce.Game.Players;
 using Asce.Game.SaveLoads;
 using UnityEngine;
 
 namespace Asce.MainGame.Managers
 {
-    public class PlayerLivesLoseCondition : LoseCondition
+    public class PlayerLivesLoseCondition : GameStateCondition
     {
         [SerializeField] private int _maxLives = 3;
         [SerializeField] private int _currentLives = 3;
 
         public override string ConditionName => "Player Lives";
 
-        public override void Initialize()
+        public override void Ready()
         {
-            base.Initialize();
+            base.Ready();
             _currentLives = _maxLives;
             if (PlayerManager.Instance.Player is IPlayerControlCharacter controllCharacter)
             {
                 if (controllCharacter.Character != null) controllCharacter.Character.OnDead += Character_OnDead;
                 controllCharacter.OnCharacterChanged += Player_OnCharacterChanged;
             }
+        }
+
+        public override void SetData(MapLevelGameStateCondition data)
+        {
+            base.SetData(data);
+            _maxLives = Mathf.RoundToInt(data.Get("MaxLives"));
         }
 
         public override bool IsSatisfied()

@@ -13,8 +13,8 @@ namespace Asce.MainGame.Managers
         [SerializeField] private GameResultType _gameResultType = GameResultType.Unknown;
 
         [Space]
-        [SerializeField] private List<WinCondition> _winConditions = new();
-        [SerializeField] private List<LoseCondition> _loseConditions = new();
+        [SerializeField] private List<GameStateCondition> _winConditions = new();
+        [SerializeField] private List<GameStateCondition> _loseConditions = new();
 
         [Space]
         [SerializeField] private Cooldown _checkCooldown = new(1f);
@@ -37,8 +37,8 @@ namespace Asce.MainGame.Managers
             }
         }
         public GameResultType GameResultType => _gameResultType;
-        public List<WinCondition> WinConditions => _winConditions;
-        public List<LoseCondition> LoseConditions => _loseConditions;
+        public List<GameStateCondition> WinConditions => _winConditions;
+        public List<GameStateCondition> LoseConditions => _loseConditions;
 
         public bool IsPlaying => GameState == MainGameState.Playing || GameState == MainGameState.Pausing;
         public override void Initialize()
@@ -51,6 +51,18 @@ namespace Asce.MainGame.Managers
             foreach (var loseCondition in _loseConditions)
             {
                 if (loseCondition != null) loseCondition.Initialize();
+            }
+        }
+        public override void Ready()
+        {
+            base.Ready();
+            foreach (var winCondition in _winConditions)
+            {
+                if (winCondition != null) winCondition.Ready();
+            }
+            foreach (var loseCondition in _loseConditions)
+            {
+                if (loseCondition != null) loseCondition.Ready();
             }
         }
 

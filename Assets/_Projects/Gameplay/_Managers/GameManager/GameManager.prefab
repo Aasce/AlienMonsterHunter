@@ -96,6 +96,7 @@ MonoBehaviour:
   _allSupports: {fileID: 11400000, guid: 731767ec3eeef1946abfd117f5d94729, type: 2}
   _allMaps: {fileID: 11400000, guid: ee7e79fd1d2e62d4e8504dce21c1e804, type: 2}
   _allSpawners: {fileID: 11400000, guid: 1d2c387e841fdd94b975f1a62b27b75b, type: 2}
+  _allWinLoseConditions: {fileID: 11400000, guid: cbe712a7d29b11a45aa251ac96e85d39, type: 2}
   _allAbilities: {fileID: 11400000, guid: 5983ba197a5b5cb49baeb379c96d25f4, type: 2}
   _allEffects: {fileID: 11400000, guid: 328f8bd727c7e85499487bb3e4335871, type: 2}
   _allInteractiveObjects: {fileID: 11400000, guid: 11dd1259f21f74046b04efd8f2e92c79, type: 2}

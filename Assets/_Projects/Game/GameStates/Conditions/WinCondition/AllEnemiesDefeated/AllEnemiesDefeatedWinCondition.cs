@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Asce.MainGame.Managers
 {
-    public class AllEnemiesDefeatedWinCondition : WinCondition
+    public class AllEnemiesDefeatedWinCondition : GameStateCondition
     {
         [SerializeField, Readonly] private int _enemiesCount = 0;
 

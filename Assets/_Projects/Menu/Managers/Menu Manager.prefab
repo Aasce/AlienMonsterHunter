@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd42be44b3931744b2f9510657eb876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiController: {fileID: 0}
+  _mainGameSceneName: Game
+  _prepareGameSceneName: PrepareGame
