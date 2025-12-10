@@ -9,6 +9,7 @@ namespace Asce.ResultGame
 {
     public class ResultGameManager : MonoBehaviourSingleton<ResultGameManager>
     {
+        [SerializeField] private AwardController _awardController;
         [SerializeField] private UIResultGameController _uiController;
 
         [SerializeField] private ResultShareData _resultData;
@@ -18,6 +19,7 @@ namespace Asce.ResultGame
         [SerializeField] private string _prepareGameSceneName;
         [SerializeField] private string _mainGameSceneName;
 
+        public AwardController AwardController => _awardController;
         public UIResultGameController UIController => _uiController;
         public ResultShareData ResultData => _resultData;
 
@@ -25,15 +27,17 @@ namespace Asce.ResultGame
         {
             this.Initialize();
 
-            if (!GameManager.Instance.Shared.TryGet<ResultShareData>("ResultGame", out _resultData))
+            if (!GameManager.Instance.Shared.TryGet("ResultGame", out _resultData))
             {
                 Debug.Log("[ResultGameManager] ResultShareData is null");
             }
+            AwardController.Ready();
             UIController.AssignUI();
         }
 
         private void Initialize()
         {
+            AwardController.Initialize();
             UIController.Initialize();
         }
 

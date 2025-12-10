@@ -8041,6 +8041,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 520397265935423825, guid: 31507719179ed914dbb5af59da22c0ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520397265935423825, guid: 31507719179ed914dbb5af59da22c0ea, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520397265935423825, guid: 31507719179ed914dbb5af59da22c0ea, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 979150043379049068, guid: 31507719179ed914dbb5af59da22c0ea, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

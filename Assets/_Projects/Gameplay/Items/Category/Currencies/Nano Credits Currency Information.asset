@@ -15,3 +15,4 @@ MonoBehaviour:
   _name: Nano Credits
   _description: Nano Credits Description
   _icon: {fileID: 21300000, guid: 2928dd9d3c9230d48859cae4164ecb1a, type: 3}
+  _type: 8

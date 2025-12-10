@@ -10,8 +10,13 @@ namespace Asce.Game.Items
         [SerializeField, TextArea(3, 10)] private string _description = "Item Description";
         [SerializeField, SpritePreview] private Sprite _icon = null;
 
+        [Space]
+        [SerializeField] private ItemType _type = ItemType.Default;
+
         public string Name => _name;
         public string Description => _description;
         public Sprite Icon => _icon;
+
+        public ItemType Type => _type;
     }
 }

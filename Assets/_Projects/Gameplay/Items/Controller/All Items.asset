@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0677510aefb6386438d4f01636a62d94, type: 3}
   m_Name: All Items
   m_EditorClassIdentifier: 
-  _currencies:
+  _items:
     _list:
     - {fileID: 11400000, guid: 65d4ef648103a3741a16bd267bb98170, type: 2}
     - {fileID: 11400000, guid: aba6f5b9d722c894e92966d58bbe1d94, type: 2}
+    - {fileID: 11400000, guid: 9cd0cf63dfc9c1a498250b9fd1c71561, type: 2}
+    - {fileID: 11400000, guid: 9dacc16ae8e209d46a4bf45bdfd58c80, type: 2}

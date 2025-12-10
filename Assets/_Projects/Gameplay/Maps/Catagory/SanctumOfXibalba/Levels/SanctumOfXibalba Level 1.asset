@@ -34,3 +34,12 @@ MonoBehaviour:
       _list:
       - _name: MaxLives
         _value: 3
+  _firstWinAwards:
+  - _itemName: Credits
+    _quantity: 500
+  _winAwards:
+  - _itemName: Credits
+    _quantity: 100
+  _playAwards:
+  - _itemName: Credits
+    _quantity: 25
