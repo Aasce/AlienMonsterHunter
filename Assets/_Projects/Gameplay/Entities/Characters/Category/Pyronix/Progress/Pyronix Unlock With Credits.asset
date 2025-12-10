@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pyronix Unlock With Credits
   m_EditorClassIdentifier: 
   _name: Credits
-  _description: Use Credits to unlock this character.
+  _description: Use 1800 Credits to unlock this character.
   _currencyName: Credits
-  _cost: 1200
+  _cost: 1800

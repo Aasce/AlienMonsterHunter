@@ -1,5 +1,6 @@
 using Asce.Core;
 using Asce.Core.Utils;
+using Asce.Game.Combats;
 using Asce.Game.Entities.Characters;
 using Asce.Game.Guns;
 using Asce.Game.Managers;
@@ -128,6 +129,7 @@ namespace Asce.PrepareGame.Picks
                 {
                     _gunInstance.transform.SetParent(null); // detach before destroy
                 }
+                CombatController.Instance.Killing(oldCharacter, oldCharacter);
                 Destroy(oldCharacter.gameObject);
 
                 newCharacter.transform.SetPositionAndRotation(position, rotation);

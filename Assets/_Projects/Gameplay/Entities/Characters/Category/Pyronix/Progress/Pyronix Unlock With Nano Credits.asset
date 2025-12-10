@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pyronix Unlock With Nano Credits
   m_EditorClassIdentifier: 
   _name: Nano Credits
-  _description: Use Nano Credits to unlock this character.
+  _description: Use 200 Nano Credits to unlock this character.
   _currencyName: Nano Credits
-  _cost: 1200
+  _cost: 200

@@ -218,7 +218,7 @@ MonoBehaviour:
   _flameEffect: {fileID: 5957914451058396424}
   _maxDamage: 10
   _fireRadius: 10
-  _fireAngle: 20
+  _fireAngle: 36
   _targetLayer:
     serializedVersion: 2
     m_Bits: 512

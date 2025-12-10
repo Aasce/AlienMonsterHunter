@@ -12,7 +12,7 @@ namespace Asce.Game.Guns
 {
     public class FlamespitterGun : Gun
     {
-        [SerializeField] VisualEffect _flameEffect;
+        [SerializeField] private VisualEffect _flameEffect;
 
         [Header("Flame Settings")]
         [SerializeField] private float _maxDamage = 10f;
@@ -172,8 +172,8 @@ namespace Asce.Game.Guns
             // Helper to draw spread edge lines for a given angle and distance
             void DrawSpreadEdges(float angleDegrees, float distance, Color col)
             {
-                float angleLeft = -angleDegrees;
-                float angleRight = angleDegrees;
+                float angleLeft = -angleDegrees * 0.5f;
+                float angleRight = angleDegrees * 0.5f;
 
                 Vector3 leftDir = Quaternion.Euler(0f, 0f, angleLeft) * forward;
                 Vector3 rightDir = Quaternion.Euler(0f, 0f, angleRight) * forward;

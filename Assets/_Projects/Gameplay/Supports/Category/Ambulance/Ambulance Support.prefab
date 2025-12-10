@@ -48,9 +48,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3439229621910625131, guid: 7bd775e699b2e0f4b850dfeaafcf01fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148408611081456209, guid: 7bd775e699b2e0f4b850dfeaafcf01fc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148408611081456209, guid: 7bd775e699b2e0f4b850dfeaafcf01fc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5265602496493724803, guid: 7bd775e699b2e0f4b850dfeaafcf01fc, type: 3}
       propertyPath: m_Name
       value: Ambulance Machine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855204952522559745, guid: 7bd775e699b2e0f4b850dfeaafcf01fc, type: 3}
+      propertyPath: _offset.x
+      value: -2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

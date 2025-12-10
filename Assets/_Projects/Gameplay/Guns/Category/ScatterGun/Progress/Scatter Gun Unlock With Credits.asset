@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b3ffea14024e74995fa45131081440, type: 3}
-  m_Name: Blue Soldier Progress
+  m_Script: {fileID: 11500000, guid: 4d85f41cf093a284089816291e1da144, type: 3}
+  m_Name: Scatter Gun Unlock With Credits
   m_EditorClassIdentifier: 
-  _unlockConditions:
-  - {fileID: 11400000, guid: 0ee3bd944545ed64397ca8063a27ccc1, type: 2}
-  - {fileID: 11400000, guid: 1dbab7188087b3147a8a10408795caa9, type: 2}
+  _name: Credits
+  _description: Use 1000 Credits to unlock this weapon.
+  _currencyName: Credits
+  _cost: 1000

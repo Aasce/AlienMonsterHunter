@@ -15,9 +15,9 @@ MonoBehaviour:
   _id: Hell Flamethrower
   _name: Hell Flamethrower
   _description: 'Deploys a Flamethrower that lasts for <color=white>{DespawnTime}s</color>,
-    continuously spewing flames forward until it overheats. The flames burn enemies
-    for <color=orange>{Damage} damage</color> and <color=#ff99dd>Ignite</color> them.
-    When detecting an enemy, the Flamethrower automatically adjusts its aim.
+    continuously spewing flames forward until it overheats. The flames burn <b>all
+    entities</b> for <color=orange>{Damage} damage</color> and <color=#ff99dd>Ignite</color>
+    them. When detecting an enemy, the Flamethrower automatically adjusts its aim.
 
 
     While
