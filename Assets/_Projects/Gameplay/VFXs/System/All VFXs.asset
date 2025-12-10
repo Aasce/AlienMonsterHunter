@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vfxs:
   - {fileID: 110753174408773563, guid: 02c6123dc961a9f4eab59a69e110c5d2, type: 3}
+  - {fileID: 2448104697950641472, guid: fd3602cfc1672184e81c30b66c8e24ff, type: 3}
   - {fileID: 9143130519721206676, guid: aacf3c2595a88ec43827652e0c62d547, type: 3}
   - {fileID: 7546869456429147753, guid: 2a8fb41ec6ee603408ea6045b2f169d4, type: 3}
   - {fileID: 6925130673013795917, guid: f68e84010e7a7864b80507e220a025ba, type: 3}

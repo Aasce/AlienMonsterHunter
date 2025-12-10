@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6246501c650de743833e4e90fb9bd30, type: 3}
+  m_Name: Ironwave Projector Ability Information
+  m_EditorClassIdentifier: 
+  _id: Ironwave Projector
+  _name: Ironwave Projector
+  _description: Deploys a Turret that lasts for <color=white>{DespawnTime}s</color>.
+    It grants the Character and other Machines <color=yellow>{ArmorAmount} Armor</color>
+    within a <color=white>{BuffRadius}m</color> radius, and the buff lingers for
+    <color=white>3s</color> after leaving the area.
+  _sideNote: 'The Turret has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+    Armor</color>.
+
+    It cannot move.'
+  _icon: {fileID: 21300000, guid: 897829ad7f3f3504590cb99e0c4d18cc, type: 3}
+  _isPassive: 0
+  _cooldown: 12
+  _useRangeRadius: 6
+  _despawnTime: 20
+  _isReactive: 0
+  _reactiveCooldown: 0
+  _customValues:
+    _list: []
+  _leveling: {fileID: 11400000, guid: fde8ba06066371942bfd589f37c4e8d0, type: 2}
