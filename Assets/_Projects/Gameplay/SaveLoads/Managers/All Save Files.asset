@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveFiles:
     _list:
+    - _name: SoundSettings
+      _path: settings/sound_settings.json
     - _name: CurrentGameConfig
       _path: current/game_config.json
     - _name: CurrentGameWinLoseCondition

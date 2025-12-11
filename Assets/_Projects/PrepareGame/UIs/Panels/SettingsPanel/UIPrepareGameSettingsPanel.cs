@@ -10,18 +10,21 @@ namespace Asce.PrepareGame.UIs.Panels
         [Header("Prepare Game")]
         [SerializeField] private Button _backMenuButton;
 
-
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-            if (_backMenuButton != null) _backMenuButton.onClick.AddListener(() =>
+            base.Initialize();
+            _backMenuButton.onClick.AddListener(() =>
             {
                 UIConfirmPanel confirmPanel = PrepareGameManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
                 if (confirmPanel == null) return;
                 confirmPanel.Show(
                     title: "Back to Menu?",
                     description: "Are you sure you want to back to menu?",
-                    onYes: () => PrepareGameManager.Instance.BackToMainMenu(),
+                    onYes: () =>
+                    {
+                        this.Hide();
+                        PrepareGameManager.Instance.BackToMainMenu();
+                    },
                     onNo: () => { }
                 );
             });

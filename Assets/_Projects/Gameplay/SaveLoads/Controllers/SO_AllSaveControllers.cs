@@ -1,4 +1,5 @@
 using Asce.Core;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Asce.SaveLoads
@@ -10,9 +11,10 @@ namespace Asce.SaveLoads
         private ListObjects<string, SaveLoadController> _controllers = new((controller) =>
         {
             if (controller == null) return null;
-            return controller.Name;
+            return controller.ControllerName;
         });
 
+        public ReadOnlyCollection<SaveLoadController> Controllers => _controllers.List;
         public SaveLoadController Get(string name) => _controllers.Get(name);
     }
 }

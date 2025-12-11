@@ -14,6 +14,18 @@ namespace Asce.SaveLoads
 		public SO_AllSaveFiles AllSaveFiles => _allSaveFiles;
         public SaveLoadController GetController(string name) => _allSaveControllers.Get(name);
 
+
+        protected override void Awake()
+        {
+            base.Awake();
+            foreach (var controller in _allSaveControllers.Controllers)
+            {
+                if (controller == null) continue;
+                controller.Load();
+            }
+        }
+
+
         /// <summary> Save an object to the specified save file. </summary>
         public void Save<T>(string saveName, T data)
         {

@@ -9,7 +9,7 @@ namespace Asce.Game.Managers
 		
 		private void Start() 
 		{
-			SceneLoader.Instance.Load(_targetSceneName, showLoadingScene: true, delay: 2f, additiveLoadingScene: true);
+			SceneLoader.Instance.Load(_targetSceneName, showLoadingScene: true, delay: 2f);
 		}
     }
 }

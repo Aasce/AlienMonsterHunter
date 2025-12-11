@@ -101,3 +101,4 @@ MonoBehaviour:
   _allEffects: {fileID: 11400000, guid: 328f8bd727c7e85499487bb3e4335871, type: 2}
   _allInteractiveObjects: {fileID: 11400000, guid: 11dd1259f21f74046b04efd8f2e92c79, type: 2}
   _allItems: {fileID: 11400000, guid: d9bba1683b7a4bf468e2b86f59ca67fa, type: 2}
+  _allSounds: {fileID: 11400000, guid: 81785ec51d067544c9f6f146b5153815, type: 2}

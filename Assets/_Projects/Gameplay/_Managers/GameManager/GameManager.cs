@@ -8,6 +8,7 @@ using Asce.Game.Guns;
 using Asce.Game.Interactions;
 using Asce.Game.Items;
 using Asce.Game.Maps;
+using Asce.Game.Sounds;
 using Asce.Game.Spawners;
 using Asce.Game.Supports;
 using System;
@@ -31,6 +32,7 @@ namespace Asce.Game.Managers
         [SerializeField] private SO_AllEffects _allEffects;
         [SerializeField] private SO_AllInteractiveObjects _allInteractiveObjects;
         [SerializeField] private SO_AllItems _allItems;
+        [SerializeField] private SO_AllSounds _allSounds;
 
         public Shared _shared = new();
 
@@ -49,6 +51,7 @@ namespace Asce.Game.Managers
         public SO_AllEffects AllEffects => _allEffects;
         public SO_AllInteractiveObjects AllInteractiveObjects => _allInteractiveObjects;
         public SO_AllItems AllItems => _allItems;
+        public SO_AllSounds AllSounds => _allSounds;
 
         public Shared Shared => _shared;
 
@@ -90,6 +93,9 @@ namespace Asce.Game.Managers
 
             if (AllItems == null)
                 Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Items is not assigned", this);
+
+            if (AllSounds == null)
+                Debug.LogError($"[{typeof(GameManager).ToString().ColorWrap(Color.red)}]] All Sounds is not assigned", this);
         }
 
         public void QuitGame()

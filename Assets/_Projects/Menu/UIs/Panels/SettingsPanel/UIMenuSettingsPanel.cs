@@ -11,17 +11,21 @@ namespace Asce.MainMenu.UIs.Panels
         [SerializeField] private Button _quitButton;
 
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-            if (_quitButton != null) _quitButton.onClick.AddListener(() =>
+            base.Initialize();
+            _quitButton.onClick.AddListener(() =>
             {
                 UIConfirmPanel confirmPanel = MainMenuManager.Instance.UIController.PanelController.GetPanelByName("Confirm") as UIConfirmPanel;
                 if (confirmPanel == null) return;
                 confirmPanel.Show(
                     title: "Quit Game",
                     description: "Are you sure you want to quit the game?",
-                    onYes: () => GameManager.Instance.QuitGame(),
+                    onYes: () =>
+                    {
+                        this.Hide();
+                        GameManager.Instance.QuitGame();
+                    },
                     onNo: () => { }
                 );
             });
