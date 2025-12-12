@@ -10,6 +10,7 @@ using Asce.Core.UIs;
 using Asce.Core.Utils;
 using System;
 using UnityEngine;
+using Asce.Game.Sounds;
 
 namespace Asce.MainGame.Players
 {
@@ -50,6 +51,8 @@ namespace Asce.MainGame.Players
             {
                 CameraController.Instance.Target = Character.transform;
                 CameraController.Instance.SetToTarget();
+
+                ListenerController.Instance.Target = Character.transform;
             }
 
             OnCharacterChanged += MainGamePlayer_OnCharacterChanged;
@@ -142,6 +145,8 @@ namespace Asce.MainGame.Players
             {
                 CameraController.Instance.Target = Character.transform;
                 CameraController.Instance.SetToTarget();
+
+                ListenerController.Instance.Target = Character.transform;
             }
         }
 

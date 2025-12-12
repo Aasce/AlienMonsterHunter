@@ -13,5 +13,10 @@ namespace Asce.Core
         {
 
         }
+
+        protected virtual void OnApplicationQuit()
+        {
+            ApplicationState.isQuitting = true;
+        }
     }
 }

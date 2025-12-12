@@ -57,7 +57,7 @@ namespace Asce.Game.Sounds
             return source;
         }
 
-        protected void StopSFX(AudioSource source)
+        public void StopSFX(AudioSource source)
         {
             if (source == null) return;
             if (source.clip == null) return;
