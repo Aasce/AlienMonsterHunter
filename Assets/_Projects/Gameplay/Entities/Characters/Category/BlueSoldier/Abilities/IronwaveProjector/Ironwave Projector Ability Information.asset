@@ -24,7 +24,7 @@ MonoBehaviour:
     It cannot move.'
   _icon: {fileID: 21300000, guid: 897829ad7f3f3504590cb99e0c4d18cc, type: 3}
   _isPassive: 0
-  _cooldown: 12
+  _cooldown: 16
   _useRangeRadius: 6
   _despawnTime: 20
   _isReactive: 0

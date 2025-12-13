@@ -20,8 +20,9 @@ namespace Asce.Game.Abilities
         [SerializeField, Readonly] protected GameObject _owner;
         [SerializeField, Readonly] protected Cooldown _despawnTime = new (10f);
 
-        public event Action OnSpawnEvent;
-        public event Action OnDespawnEvent;
+        public event Action OnSpawn;
+        public event Action OnDespawn;
+        public event Action<Vector2> OnReactive;
 
         public string Id => _id;
         public SO_AbilityInformation Information => _information;
@@ -64,17 +65,20 @@ namespace Asce.Game.Abilities
             this.DespawnTime.Reset();
         }
 
-        public virtual void OnSpawn()
+        public virtual void Spawn()
         {
-            OnSpawnEvent?.Invoke();
+            OnSpawn?.Invoke();
         }
 
         public virtual void OnActive() { }
-        public virtual void Reactive(Vector2 position) { }
-
-        public virtual void OnDespawn()
+        public virtual void Reactive(Vector2 position) 
         {
-            OnDespawnEvent?.Invoke();
+            OnReactive?.Invoke(position);
+        }
+
+        public virtual void Despawn()
+        {
+            OnDespawn?.Invoke();
         }
 
         protected virtual void LevelTo(int newLevel)

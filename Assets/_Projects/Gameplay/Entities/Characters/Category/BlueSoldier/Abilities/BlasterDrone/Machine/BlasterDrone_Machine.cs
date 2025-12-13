@@ -1,0 +1,211 @@
+using Asce.Core.Attributes;
+using Asce.Core.Utils;
+using Asce.Game.Abilities;
+using Asce.Game.AIs;
+using Asce.Game.FOVs;
+using Asce.Game.Levelings;
+using Asce.Game.SaveLoads;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Asce.Game.Entities.Machines
+{
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+    public class BlasterDrone_Machine : Machine, IMachineFireable
+    {
+        [Header("Reference")]
+        [SerializeField, Readonly] private FieldOfView _fov;
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
+        [SerializeField, Readonly] private MultiTargetDetection _targetDetection;
+
+        [Header("Attack")]
+        [SerializeField, Readonly] private Cooldown _attackCooldown = new(1f);
+        [SerializeField, Readonly] private float _damage = 10;
+        [SerializeField] private string _bulletAbilityName = "Blue Soldier Drone Bullet";
+
+        [Header("Movement")]
+        [SerializeField] private float _moveCheckDistance = 0.5f;
+        private Vector2 _moveDirection = Vector2.right;
+
+
+        public event Action<Vector2, Vector2> OnFired;
+
+        public Vector2 MoveDirection
+        {
+            get => _moveDirection;
+            set => _moveDirection = value.normalized;
+        }
+
+        public MultiTargetDetection TargetDetection => _targetDetection;
+        public Cooldown AttackCooldown => _attackCooldown;
+
+        protected override void RefReset()
+        {
+            base.RefReset();
+            this.LoadComponent(out _fov);
+            this.LoadComponent(out _rigidbody);
+            if (this.LoadComponent(out _targetDetection))
+            {
+                _targetDetection.Origin = transform;
+                _targetDetection.ForwardReference = transform;
+            }
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = TargetDetection.ViewRadius;
+        }
+
+        public override void ResetStatus()
+        {
+            base.ResetStatus();
+            TargetDetection.ResetTarget();
+        }
+
+        protected override void Leveling_OnLevelSetted(int newLevel)
+        {
+            _damage = Information.Stats.GetCustomStat("Damage");
+            _attackCooldown.SetBaseTime(Information.Stats.GetCustomStat("AttackSpeed"));
+            _targetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+            base.Leveling_OnLevelSetted(newLevel);
+        }
+
+        protected override void LevelTo(int newLevel)
+        {
+            base.LevelTo(newLevel);
+            LevelModificationGroup modificationGroup = Information.Leveling.GetLevelModifications(newLevel);
+            if (modificationGroup == null) return;
+
+            if (modificationGroup.TryGetModification("Damage", out LevelModification damageModification))
+            {
+                _damage += damageModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("AttackSpeed", out LevelModification attackSpeedModification))
+            {
+                _attackCooldown.BaseTime += attackSpeedModification.Value;
+            }
+
+            if (modificationGroup.TryGetModification("ViewRadius", out LevelModification viewRadiusModification))
+            {
+                _targetDetection.ViewRadius += viewRadiusModification.Value;
+                _fov.ViewRadius = _targetDetection.ViewRadius;
+            }
+
+        }
+
+        private void Update()
+        {
+            TargetDetection.UpdateDetection();
+            this.AttackVisibleTargets();
+        }
+
+        private void FixedUpdate()
+        {
+            this.MoveHandle();
+        }
+
+        private void LateUpdate()
+        {
+            _fov.DrawFieldOfView();
+        }
+
+        /// <summary>
+        ///     Handles drone movement, wall reflection, and rotation toward movement direction.
+        /// </summary>
+        private void MoveHandle()
+        {
+            if (Effects.Unmoveable.IsAffect) return;
+            float speed = Stats.Speed.FinalValue;
+            if (speed <= 0f) return;
+
+            // Move forward
+            Vector2 currentPosition = _rigidbody.position;
+            Vector2 nextPosition = currentPosition + _moveDirection * speed * Time.fixedDeltaTime;
+            _rigidbody.MovePosition(nextPosition);
+
+            // Rotate drone to face move direction
+            if (_moveDirection.sqrMagnitude > 0.001f)
+            {
+                float angle = Mathf.Atan2(_moveDirection.y, _moveDirection.x) * Mathf.Rad2Deg - 90f;
+                _rigidbody.MoveRotation(angle);
+            }
+
+            // Check for wall collision ahead
+            RaycastHit2D hit = Physics2D.Raycast(currentPosition, _moveDirection, _moveCheckDistance, TargetDetection.ObstacleLayer);
+            if (hit.collider != null)
+            {
+                _moveDirection = Vector2.Reflect(_moveDirection, hit.normal).normalized;
+            }
+        }
+
+        /// <summary>
+        ///     Attacks all visible enemies detected by MultiTargetDetection.
+        /// </summary>
+        private void AttackVisibleTargets()
+        {
+            _attackCooldown.Update(Time.deltaTime);
+            if (!_attackCooldown.IsComplete) return;
+
+            if (!TargetDetection.HasTarget) return;
+            List<ITargetable> targets = new(TargetDetection.VisibleTargets);
+            StartCoroutine(this.Attacking(targets));
+
+            _attackCooldown.Reset();
+        }
+
+        private IEnumerator Attacking(List<ITargetable> targets)
+        {
+            int count = targets.Count;
+            float delay = _attackCooldown.BaseTime * 0.5f / count;
+            foreach (ITargetable target in targets)
+            {
+                if (target == null) continue;
+                Vector2 direction = target.transform.position - transform.position;
+                this.Fire(transform.position, direction);
+                yield return new WaitForSeconds(delay);
+            }
+        }
+
+        public void Fire(Vector2 position, Vector2 direction)
+        {
+            BlasterDrone_Bullet_Ability bullet =
+                AbilityController.Instance.Spawn(_bulletAbilityName, gameObject) as BlasterDrone_Bullet_Ability;
+            if (bullet == null) return;
+
+            bullet.DamageDeal = _damage;
+            bullet.gameObject.SetActive(true);
+            bullet.Fire(position, direction);
+            bullet.OnActive();
+            OnFired?.Invoke(position, direction);
+        }
+
+        protected override void OnBeforeSave(MachineSaveData data)
+        {
+            base.OnBeforeSave(data);
+            data.SetCustom("Damage", _damage);
+            data.SetCustom("MoveDirection", _moveDirection);
+            data.SetCustom("AttackSpeed", _attackCooldown.BaseTime);
+            data.SetCustom("AttackCooldown", _attackCooldown.CurrentTime);
+            data.SetCustom("ViewRadius", _targetDetection.ViewRadius);
+        }
+
+        protected override void OnAfterLoad(MachineSaveData data)
+        {
+            base.OnAfterLoad(data);
+            _damage = data.GetCustom<float>("Damage");
+            _moveDirection = data.GetCustom<Vector2>("MoveDirection");
+            _attackCooldown.BaseTime = data.GetCustom<float>("AttackSpeed");
+            _attackCooldown.CurrentTime = data.GetCustom<float>("AttackCooldown");
+            _targetDetection.ViewRadius = data.GetCustom<float>("ViewRadius");
+            _fov.ViewRadius = _targetDetection.ViewRadius;
+        }
+    }
+}

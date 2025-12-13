@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181957074753497278}
   m_Layer: 8
-  m_Name: SFX
+  m_Name: SFXs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -51,15 +51,15 @@ namespace Asce.Game.Abilities
             this.DespawnTime.ToComplete();
         }
 
-        public override void OnSpawn()
+        public override void Spawn()
         {
-            base.OnSpawn();
+            base.Spawn();
             IsDealing = false;
         }
 
-        public override void OnDespawn()
+        public override void Despawn()
         {
-            base.OnDespawn();
+            base.Despawn();
             Rigidbody.linearVelocity = Vector2.zero;
             Rigidbody.angularVelocity = 0f;
             Rigidbody.gravityScale = 0f;

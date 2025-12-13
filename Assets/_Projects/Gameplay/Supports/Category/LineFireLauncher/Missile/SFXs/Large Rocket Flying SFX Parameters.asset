@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Large Rocket Flying SFX Parameters
   m_EditorClassIdentifier: 
   _name: Large Rocket Flying
-  _clip: {fileID: 8300000, guid: 32b182451b9b56041964a3667ef24128, type: 3}
+  _clip: {fileID: 8300000, guid: 8030eb49700ab184ba7ed8fdd7213cfe, type: 3}
   _isMusic: 0
   _loop: 0
   _playOnAwake: 1

@@ -26,9 +26,9 @@ namespace Asce.Game.Abilities
             Machine.ResetStatus();
         }
 
-        public override void OnSpawn()
+        public override void Spawn()
         {
-            base.OnSpawn();
+            base.Spawn();
             Machine.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
         }
 

@@ -138,6 +138,68 @@ MonoBehaviour:
   _addCameraSize: 2
   _multiViewRadius: 1.2
   _multiViewAngle: 0.6
+--- !u!1 &8131381776668500173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5548648052495051123}
+  - component: {fileID: 5823604108228450870}
+  - component: {fileID: 1188193625173553067}
+  m_Layer: 0
+  m_Name: Fired
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5548648052495051123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131381776668500173}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 191017222860209317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5823604108228450870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131381776668500173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa75536e20916bb4e923f44e4c73861a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 381989227653380984}
+  _sfxPlayer: {fileID: 1188193625173553067}
+--- !u!114 &1188193625173553067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131381776668500173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: Frontier Gun Shot
+  _delay: 0
 --- !u!1001 &5734358826137668681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,6 +261,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9119269995354451847}
+    - targetCorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5548648052495051123}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
@@ -210,6 +275,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3492267353821495355}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+--- !u!4 &191017222860209317 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 5734358826137668681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1314846359681334500 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

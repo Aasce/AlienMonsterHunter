@@ -80,9 +80,9 @@ namespace Asce.Game.Abilities
             _targets.Remove(target);
         }
 
-        public override void OnDespawn()
+        public override void Despawn()
         {
-            base.OnDespawn();
+            base.Despawn();
             foreach (ITargetable target in _targets)
             {
                 if (target is not Entity entity) continue;

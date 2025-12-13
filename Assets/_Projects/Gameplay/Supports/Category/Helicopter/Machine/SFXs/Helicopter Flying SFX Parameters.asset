@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Helicopter Flying SFX Parameters
   m_EditorClassIdentifier: 
   _name: Helicopter Flying
-  _clip: {fileID: 8300000, guid: 112e6aa9ca3760f4a8c74a3cea0cfc46, type: 3}
+  _clip: {fileID: 8300000, guid: 2fd491c9554293940a1e20b7ecaad759, type: 3}
   _isMusic: 0
   _loop: 1
   _playOnAwake: 1
   _priority: 160
-  _volume: 1.2
+  _volume: 1.5
   _pitch: 1
   _spatialBlend: 1
   _volumeRolloff: 1
   _minDistance: 12
-  _maxDistance: 36
+  _maxDistance: 42
   _stereoPan: 0
   _reverbZoneMix: 1
   _dopplerLevel: 1.3

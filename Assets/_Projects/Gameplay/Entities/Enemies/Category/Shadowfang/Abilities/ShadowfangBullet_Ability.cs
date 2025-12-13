@@ -45,9 +45,9 @@ namespace Asce.Game.Abilities
             base.ResetStatus();
         }
 
-        public override void OnSpawn()
+        public override void Spawn()
         {
-            base.OnSpawn();
+            base.Spawn();
             _isDealing = false;
         }
 
@@ -61,9 +61,9 @@ namespace Asce.Game.Abilities
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
-        public override void OnDespawn()
+        public override void Despawn()
         {
-            base.OnDespawn();
+            base.Despawn();
             Rigidbody.linearVelocity = Vector2.zero;
             Rigidbody.angularVelocity = 0f;
             Rigidbody.gravityScale = 0f;

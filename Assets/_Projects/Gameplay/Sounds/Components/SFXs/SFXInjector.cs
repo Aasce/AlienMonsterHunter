@@ -7,7 +7,7 @@ namespace Asce.Game.Sounds
 {
     public class SFXInjector : GameComponent
     {
-        [SerializeField] private SFXEnableTrigger _trigger;
+        [SerializeField] private SFXPlayerComponent _player;
 
         [Space]
         [SerializeField] private List<SFXControlComponent> _controls = new();
@@ -15,12 +15,12 @@ namespace Asce.Game.Sounds
         protected override void RefReset()
         {
             base.RefReset();
-            this.LoadComponent(out _trigger);
+            this.LoadComponent(out _player);
         }
 
         private void Awake()
         {
-            _trigger.OnSFXPlayed += Trigger_OnSFXPlayed;
+            _player.OnSFXPlayed += Trigger_OnSFXPlayed;
         }
 
         private void Trigger_OnSFXPlayed(AudioSource source)

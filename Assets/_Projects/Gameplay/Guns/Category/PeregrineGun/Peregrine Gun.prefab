@@ -51,6 +51,68 @@ MonoBehaviour:
   _addCameraSize: 5
   _multiViewRadius: 1.5
   _multiViewAngle: 0.4
+--- !u!1 &3534371318326483342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4137863295436860938}
+  - component: {fileID: 4044948495002027034}
+  - component: {fileID: 9173214084644304902}
+  m_Layer: 0
+  m_Name: Fired
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4137863295436860938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534371318326483342}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2451639754865482914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4044948495002027034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534371318326483342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa75536e20916bb4e923f44e4c73861a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 9093752812891934648}
+  _sfxPlayer: {fileID: 9173214084644304902}
+--- !u!114 &9173214084644304902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534371318326483342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: Peregrine Gun Shot
+  _delay: 0
 --- !u!1 &7390942045878036759
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +269,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 690491795646664589}
+    - targetCorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4137863295436860938}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
@@ -229,6 +294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bc4cad03849574babf90cd398d00ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2451639754865482914 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 8014103313289325646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3646822461094141155 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
@@ -270,6 +340,9 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
+  _isFiring: 0
+  _isFireRequested: 0
+  _requestedDirection: {x: 0, y: 0}
   _distance: 60
   _damageLosePerHit: 0.9
   _scope: {fileID: 6212127389268486996}

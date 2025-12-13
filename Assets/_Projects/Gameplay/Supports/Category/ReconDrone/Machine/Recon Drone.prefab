@@ -5302,7 +5302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8780b5b61400fc40b79a9c56fe325c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trigger: {fileID: 812071028760800005}
+  _player: {fileID: 812071028760800005}
   _controls:
   - {fileID: 365196933212907263}
 --- !u!114 &365196933212907263

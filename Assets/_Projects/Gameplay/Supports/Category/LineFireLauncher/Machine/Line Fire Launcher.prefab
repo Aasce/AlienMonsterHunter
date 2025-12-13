@@ -303,6 +303,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6921592362965217183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8670593155364229046}
+  - component: {fileID: 6150371545703034143}
+  - component: {fileID: 3040728040890407109}
+  m_Layer: 8
+  m_Name: Launching
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8670593155364229046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921592362965217183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2562022141418869122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6150371545703034143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921592362965217183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54999b1387fca4f4092cee487f2b8d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _machine: {fileID: 2092025651376447828}
+  _sfxPlayer: {fileID: 3040728040890407109}
+--- !u!114 &3040728040890407109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921592362965217183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: LineFireLauncher Launcher Launching
+  _delay: 0
 --- !u!1001 &1127787261346986300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -367,19 +429,27 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 4057205914216575131}
-    - targetCorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: 2
       addedObject: {fileID: 4499162517330511878}
+    - targetCorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 4057205914216575131}
     - targetCorrespondingSourceObject: {fileID: 2328935080028939639, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7699661619102299473}
+    - targetCorrespondingSourceObject: {fileID: 3181957074753497278, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8670593155364229046}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: 1
       addedObject: {fileID: 2092025651376447828}
   m_SourcePrefab: {fileID: 100100000, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+--- !u!4 &2562022141418869122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3181957074753497278, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 1127787261346986300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2580023039482755528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -409,12 +479,12 @@ MonoBehaviour:
   _turret: {fileID: 3630226333832739645}
   _barrelL: {fileID: 2503114874164728627}
   _barrelR: {fileID: 3876536746640154114}
-  _fireCooldown:
-    _baseTime: 0.2
-    _currentTime: 0.2
   _damage: 10
   _numOfRocket: 5
   _missileAbilityName: Line Fire Launcher Missile
+  _fireCooldown:
+    _baseTime: 0.2
+    _currentTime: 0.2
   _fireAngle: 16
   _destination: {x: 0, y: 0}
   _isFiring: 0

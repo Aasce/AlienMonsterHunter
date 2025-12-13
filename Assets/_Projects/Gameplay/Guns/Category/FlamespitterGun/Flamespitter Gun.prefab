@@ -1,5 +1,99 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &265811398677730704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823040252813166363}
+  - component: {fileID: 5714137794983935725}
+  - component: {fileID: 3731128328487718012}
+  - component: {fileID: 6879794978243713361}
+  - component: {fileID: 4858819142429811856}
+  m_Layer: 0
+  m_Name: Spraying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1823040252813166363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265811398677730704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6528015208566803120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5714137794983935725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265811398677730704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67e44c18c64d59468a1bc68696d71f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: -8203887641180166326}
+  _sfxPlayer: {fileID: 3731128328487718012}
+--- !u!114 &3731128328487718012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265811398677730704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: Flamespitter Spraying
+  _delay: 0
+--- !u!114 &6879794978243713361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265811398677730704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8780b5b61400fc40b79a9c56fe325c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 3731128328487718012}
+  _controls:
+  - {fileID: 4858819142429811856}
+--- !u!114 &4858819142429811856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265811398677730704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5055e99e033084991aa00320ce62bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _target: {fileID: 5433035310760595112}
+  _isFollowing: 1
 --- !u!1 &9031061223346221718
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +250,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7273302969195129550}
+    - targetCorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1823040252813166363}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
@@ -224,6 +321,16 @@ MonoBehaviour:
     m_Bits: 512
   _igniteDuration: 5
   _igniteStrength: 3
+--- !u!4 &5433035310760595112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 1705178571467094620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6528015208566803120 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 1705178571467094620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9192698808426405346 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7510038510125901758, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}

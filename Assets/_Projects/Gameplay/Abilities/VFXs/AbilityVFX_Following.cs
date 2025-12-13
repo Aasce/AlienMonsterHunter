@@ -27,8 +27,8 @@ namespace Asce.Game.VFXs
 
         private void Awake()
         {
-            _ability.OnSpawnEvent += Ability_OnSpawnEvent;
-            _ability.OnDespawnEvent += Ability_OnDespawnEvent;
+            _ability.OnSpawn += Ability_OnSpawnEvent;
+            _ability.OnDespawn += Ability_OnDespawnEvent;
         }
 
         private void Ability_OnSpawnEvent()

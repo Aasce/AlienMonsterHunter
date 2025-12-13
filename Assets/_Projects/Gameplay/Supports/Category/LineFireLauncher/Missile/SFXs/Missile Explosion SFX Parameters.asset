@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Missile Explosion SFX Parameters
   m_EditorClassIdentifier: 
   _name: Missile Explosion
-  _clip: {fileID: 8300000, guid: 434fddba56d054c439db3bc8667d8c70, type: 3}
+  _clip: {fileID: 8300000, guid: 0dd61b498bf4a2549bca87ac5dd7eb48, type: 3}
   _isMusic: 0
   _loop: 0
   _playOnAwake: 1

@@ -62,6 +62,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1492280563017377727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5913513238264725787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416209940637721556}
+  - component: {fileID: 386802124919629266}
+  - component: {fileID: 441525269975938039}
+  m_Layer: 0
+  m_Name: Fired
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416209940637721556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913513238264725787}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 381551053292446631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386802124919629266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913513238264725787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa75536e20916bb4e923f44e4c73861a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 4331446303938667604}
+  _sfxPlayer: {fileID: 441525269975938039}
+--- !u!114 &441525269975938039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913513238264725787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: Barrage Gun Shot
+  _delay: 0
 --- !u!1 &6134325904273377947
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +283,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 637263530073876902, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 696687074623783478}
+    - targetCorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 416209940637721556}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6749714091201966253, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
       insertIndex: -1
@@ -232,6 +297,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4438035113168320722}
   m_SourcePrefab: {fileID: 100100000, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+--- !u!4 &381551053292446631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562554525834785004, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
+  m_PrefabInstance: {fileID: 5222384977885500235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1492280563017377727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6686726367967278324, guid: 71dae0cc2a074be4fbe5521269c4bd93, type: 3}
@@ -263,10 +333,12 @@ MonoBehaviour:
     m_Bits: 704
   _damage: 10
   _penetration: 0
+  _shootSpeed: 1
   _shootCooldown:
     _baseTime: 0.5
     _currentTime: 0.5
   _magazineSize: 10
+  _startAmmo: 10
   _remainingAmmo: 0
   _currentAmmo: 0
   _reloadCooldown:
@@ -276,6 +348,9 @@ MonoBehaviour:
   _maxSpreadDistance: 10
   _maxBulletSpreadAngle: 10
   _minBulletSpreadAngle: 1
+  _isFiring: 0
+  _isFireRequested: 0
+  _requestedDirection: {x: 0, y: 0}
   _distance: 18
   _barrels:
   - {fileID: 6336134917708506214}

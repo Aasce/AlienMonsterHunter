@@ -209,6 +209,12 @@ namespace Asce.Game.Guns
                     OnFireStart?.Invoke();
                 }
 
+                if (_isFiring && (CurrentAmmo <= 0 || IsReloading))
+                {
+                    _isFiring = false;
+                    OnFireEnd?.Invoke();
+                }
+
                 this.InternalFire(_requestedDirection);
             }
             else

@@ -6,20 +6,17 @@ using Asce.Game.VFXs;
 using Asce.Core.Attributes;
 using Asce.Core.Utils;
 using UnityEngine;
+using System;
 
 namespace Asce.Game.Abilities
 {
-    public class ElectricTrap_Ability : CharacterAbility
+    public class ElectricTrap_Ability : CharacterAbility, ITrapAbility
     {
         [SerializeField, Readonly] private CircleCollider2D _collider;
         [SerializeField, Readonly] private Rigidbody2D _rigidbody;
         [SerializeField, Readonly] private Vector2 _moveDirection;
 
         [Header("Force Settings")]
-        [Tooltip("X = MinDistance, Y = MaxDistance")]
-        [SerializeField] private Vector2 _distanceRange = new(5f, 10f);
-
-        [Tooltip("X = MinForce, Y = MaxForce")]
         [SerializeField] private float _force = 26f;
         [SerializeField] private float _torque = 10f;
 
@@ -32,8 +29,7 @@ namespace Asce.Game.Abilities
         [SerializeField, Readonly] private bool _catched = false;
         [SerializeField, Readonly] private Cooldown _catchCooldown = new(2f);
 
-        [Space]
-        [SerializeField] private string _electricVFXName = "Electric Trap Electric";
+        public event Action OnCatched;
 
 
         protected override void RefReset()
@@ -72,7 +68,6 @@ namespace Asce.Game.Abilities
             if (_catched) return;
             this.SetCatched(true);
             this.Catching();
-            this.SpawnVFX();
         }
 
         public override void SetPosition(Vector2 position)
@@ -118,13 +113,14 @@ namespace Asce.Game.Abilities
             {
                 this.SetCatched(true);
                 this.Catching();
-                this.SpawnVFX();
             }
         }
 
-        private void Catching()
+        public void Catching()
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _catchRadius, _targetLayer);
+            OnCatched?.Invoke();
+
             if (colliders.Length <= 0) return;
 
             Entity ownerEntity = Owner != null ? Owner.GetComponent<Entity>() : null;
@@ -159,11 +155,6 @@ namespace Asce.Game.Abilities
                 _collider.isTrigger = false;
                 _rigidbody.bodyType = RigidbodyType2D.Dynamic;
             }
-        }
-
-        private void SpawnVFX()
-        {
-            VFXController.Instance.Spawn(_electricVFXName, transform.position);
         }
 
         protected override void OnBeforeSave(AbilitySaveData data)

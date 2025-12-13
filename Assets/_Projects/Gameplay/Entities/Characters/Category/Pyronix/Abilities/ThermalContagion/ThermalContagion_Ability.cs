@@ -63,9 +63,9 @@ namespace Asce.Game.Abilities
             base.ResetStatus();
         }
 
-        public override void OnSpawn()
+        public override void Spawn()
         {
-            base.OnSpawn();
+            base.Spawn();
             IsDealing = false;
         }
 

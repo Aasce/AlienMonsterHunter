@@ -4,11 +4,12 @@ using Asce.Game.Abilities;
 using Asce.Game.FOVs;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Entities.Machines
 {
-    public class LineFireLauncher_Machine : Machine
+    public class LineFireLauncher_Machine : Machine, IMachineFireable
     {
         [Header("References")]
         [SerializeField] private FieldOfView _fovSelf;
@@ -21,7 +22,7 @@ namespace Asce.Game.Entities.Machines
         [SerializeField, Readonly] private int _numOfRocket = 3;
 
         [Header("Config")]
-        [SerializeField] private string _missileAbilityName = "Oblivion Turret Bullet";
+        [SerializeField] private string _missileAbilityName;
         [SerializeField] private Cooldown _fireCooldown = new(2f);
         [SerializeField] private float _fireAngle = 5f;
 		
@@ -29,6 +30,9 @@ namespace Asce.Game.Entities.Machines
         [SerializeField, Readonly] private Vector2 _destination;
         [SerializeField, Readonly] private bool _isFiring = false;
         [SerializeField, Readonly] private int _rocketFiredCount = 0;
+
+
+        public event Action<Vector2, Vector2> OnFired;
 
         public FieldOfView FovSelf => _fovSelf;
 		
@@ -88,7 +92,7 @@ namespace Asce.Game.Entities.Machines
             _fireCooldown.Update(Time.deltaTime);
             if (!_fireCooldown.IsComplete) return;
             
-            this.Fire();
+            this.PrepareFire();
             _rocketFiredCount++;
             _fireCooldown.Reset();
 
@@ -108,12 +112,9 @@ namespace Asce.Game.Entities.Machines
             _rocketFiredCount = 0;
             _isFiring = true;
         }
-        private void Fire()
-        {
-            LineFireLauncher_Missile_Ability missile =
-                AbilityController.Instance.Spawn(_missileAbilityName, gameObject) as LineFireLauncher_Missile_Ability;
-            if (missile == null) return;
 
+        private void PrepareFire()
+        {
             // Base direction toward target
             Vector2 baseDir = (Destination - (Vector2)_turret.position).normalized;
             float baseAngle = Mathf.Atan2(baseDir.y, baseDir.x) * Mathf.Rad2Deg;
@@ -135,10 +136,20 @@ namespace Asce.Game.Entities.Machines
             _turret.rotation = Quaternion.Euler(0f, 0f, finalAngle - 90f);
             Vector2 shootPos = GetShootPosition();
 
+            this.Fire(shootPos, direction);
+        }
+
+        public void Fire(Vector2 position, Vector2 direction)
+        {
+            LineFireLauncher_Missile_Ability missile =
+                AbilityController.Instance.Spawn(_missileAbilityName, gameObject) as LineFireLauncher_Missile_Ability;
+            if (missile == null) return;
+
             missile.Leveling.SetLevel(Leveling.CurrentLevel);
-            missile.Set(_damage, shootPos, direction);
+            missile.Set(Damage, position, direction);
             missile.gameObject.SetActive(true);
             missile.OnActive();
+            OnFired?.Invoke(position, direction);
         }
 
 

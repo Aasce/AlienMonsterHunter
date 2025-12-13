@@ -17,5 +17,13 @@ namespace Asce.Game.Sounds
             _source = SoundManager.Instance.PlaySFX(_name, transform.position, _delay);
             if (_source != null) OnSFXPlayed?.Invoke(_source);
         }
+
+        public void Stop()
+        {
+            if (_source == null) return;
+            SoundManager.Instance.StopSFX(_source);
+
+            _source = null;
+        }
     }
 }
