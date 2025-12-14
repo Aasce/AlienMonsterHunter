@@ -33,6 +33,8 @@ namespace Asce.Game.Entities.Enemies
         [Header("VFXs")]
         [SerializeField] private string _explosionVFXName = string.Empty;
 
+        public event Action OnLay;
+
         public bool Layable
         {
             get => _layable;
@@ -180,6 +182,8 @@ namespace Asce.Game.Entities.Enemies
             eggs.transform.position = transform.position;
             eggs.gameObject.SetActive(true);
             eggs.OnActive();
+
+            OnLay?.Invoke();
         }
 
         private void SpawnExplosionVFX(float radius)

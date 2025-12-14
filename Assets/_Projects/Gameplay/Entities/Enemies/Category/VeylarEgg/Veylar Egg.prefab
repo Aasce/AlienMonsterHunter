@@ -143,6 +143,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5984729200655578420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231821312359146924}
+  - component: {fileID: 443851594383263548}
+  m_Layer: 9
+  m_Name: Cracking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1231821312359146924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984729200655578420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6518000452281191833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &443851594383263548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984729200655578420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: VeylarEgg Cracking
+  _delay: 0
 --- !u!1 &7796930637481579671
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +455,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1409084146443345943}
+    - targetCorrespondingSourceObject: {fileID: 4761873995794285598, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231821312359146924}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: 1
@@ -418,6 +468,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1399787314840634900}
+    - targetCorrespondingSourceObject: {fileID: 565365661227262934, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1457063036036944556}
   m_SourcePrefab: {fileID: 100100000, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
 --- !u!195 &86324163763525622 stripped
 NavMeshAgent:
@@ -516,6 +569,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 5025102880806509642}
   _takeDamageVFXName: Veylar Blood Splatter
+--- !u!1 &2286017547982924369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 565365661227262934, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1756691702652029319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1457063036036944556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286017547982924369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5897b7047bcc8344d97b03e277a890e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 5025102880806509642}
+  _hatchSFXPlayer: {fileID: 443851594383263548}
 --- !u!114 &2864796784199680295 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4584885099968071840, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -560,6 +632,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c585d2fdf95dc248a84ba97664539da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6518000452281191833 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4761873995794285598, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1756691702652029319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!58 &7565491745833349623 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 8115208779059476592, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

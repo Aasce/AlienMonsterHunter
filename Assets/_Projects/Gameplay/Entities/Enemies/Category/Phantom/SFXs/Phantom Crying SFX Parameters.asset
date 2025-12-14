@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8718dd13a0829034288cb8aba6526455, type: 3}
-  m_Name: AerialVanguard Flying SFX Parameters
+  m_Name: Phantom Crying SFX Parameters
   m_EditorClassIdentifier: 
-  _name: AerialVanguard Flying
-  _clip: {fileID: 8300000, guid: e6a689ebfab2dfc4d8707a76746e8408, type: 3}
+  _name: Phantom Crying
+  _clip: {fileID: 8300000, guid: 699feddd921dff94d8cd8b337c3882e5, type: 3}
   _isMusic: 0
   _loop: 1
   _playOnAwake: 1
-  _priority: 218
-  _volume: 0.08
+  _priority: 216
+  _volume: 0.25
   _pitch: 1
-  _spatialBlend: 0.95
+  _spatialBlend: 1
   _volumeRolloff: 1
-  _minDistance: 4
-  _maxDistance: 20
+  _minDistance: 7
+  _maxDistance: 8
   _stereoPan: 0
   _reverbZoneMix: 1
-  _dopplerLevel: 1.25
-  _spread: 360
+  _dopplerLevel: 0
+  _spread: 0
   _bypassEffects: 0
   _bypassListenerEffects: 0
   _bypassReverbZones: 0

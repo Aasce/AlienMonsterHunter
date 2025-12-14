@@ -26,9 +26,9 @@ MonoBehaviour:
     It can see through some objects.'
   _icon: {fileID: 21300000, guid: f743911edf37546418a6223df0bac6af, type: 3}
   _isPassive: 0
-  _cooldown: 8
+  _cooldown: 10
   _useRangeRadius: 2
-  _despawnTime: 22
+  _despawnTime: 20
   _isReactive: 0
   _reactiveCooldown: 0
   _customValues:

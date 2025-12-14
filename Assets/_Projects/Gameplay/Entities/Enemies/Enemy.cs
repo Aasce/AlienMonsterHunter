@@ -7,6 +7,7 @@ using Asce.Core.Utils;
 using Asce.SaveLoads;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 namespace Asce.Game.Entities.Enemies
 {
@@ -29,6 +30,8 @@ namespace Asce.Game.Entities.Enemies
         public NavMeshAgent Agent => _agent;
         public SingleTargetDetection TargetDetection => _targetDetection;
         public Cooldown AttackCooldown => _attackCooldown;
+
+        public event Action OnAttacked;
 
         EntityUI IHasEntityUI.UI => this.UI;
 
@@ -155,6 +158,7 @@ namespace Asce.Game.Entities.Enemies
             {
                 this.RotateToTarget();
                 this.Attack();
+                OnAttacked?.Invoke();
                 AttackCooldown.Reset();
             }
         }

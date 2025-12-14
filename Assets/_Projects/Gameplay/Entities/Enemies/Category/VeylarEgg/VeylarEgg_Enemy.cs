@@ -5,6 +5,7 @@ using Asce.Core.Utils;
 using System;
 using System.Collections;
 using UnityEngine;
+using Asce.Core.Attributes;
 
 namespace Asce.Game.Entities.Enemies
 {
@@ -12,9 +13,12 @@ namespace Asce.Game.Entities.Enemies
     public class VeylarEgg_Enemy : Enemy
     {
         [Header("Veylar Egg")]
-        [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField, Readonly] private Rigidbody2D _rigidbody;
         [SerializeField] private Cooldown _hatchCooldown = new(5f);
         [SerializeField] private string _veylarEnemyName = string.Empty;
+
+
+        public event Action OnHatched;
 
         public Rigidbody2D Rigidbody => _rigidbody;
         public Cooldown HatchCooldown => _hatchCooldown;
@@ -66,10 +70,8 @@ namespace Asce.Game.Entities.Enemies
 
         private IEnumerator SpawnVeylar()
         {
-            if (View != null && View.Animator != null)
-            {
-                View.Animator.SetTrigger("Hatch");
-            }
+            View.Animator.SetTrigger("Hatch");
+            OnHatched?.Invoke();
 
             yield return new WaitForSeconds(0.5f);
             Veylar_Enemy veylar = EnemyController.Instance.Spawn(_veylarEnemyName, transform.position) as Veylar_Enemy;

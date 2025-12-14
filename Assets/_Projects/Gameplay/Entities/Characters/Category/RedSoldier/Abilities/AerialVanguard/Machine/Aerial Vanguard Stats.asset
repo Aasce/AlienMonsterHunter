@@ -18,7 +18,7 @@ MonoBehaviour:
   _customStats:
     _list:
     - _name: Damage
-      _value: 8
+      _value: 9
     - _name: AttackSpeed
       _value: 0.32
     - _name: AttackRange

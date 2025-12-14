@@ -406,6 +406,86 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7745006826752135672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4501886696001058314}
+  - component: {fileID: 3274195743487376393}
+  - component: {fileID: 2906274607565202234}
+  - component: {fileID: 7267347774225641908}
+  m_Layer: 9
+  m_Name: Chirping
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4501886696001058314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745006826752135672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5747933871544419992}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3274195743487376393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745006826752135672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9816aff46e76d4e41b7af3abb07b30d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: RedEye Larval Chirping
+  _delay: 0
+  _iStopOnDisable: 1
+--- !u!114 &2906274607565202234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745006826752135672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8780b5b61400fc40b79a9c56fe325c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 3274195743487376393}
+  _controls:
+  - {fileID: 7267347774225641908}
+--- !u!114 &7267347774225641908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745006826752135672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5055e99e033084991aa00320ce62bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _target: {fileID: 6072457178613751100}
+  _isFollowing: 1
 --- !u!1001 &995665286645039750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,6 +632,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7640317672995367660}
+    - targetCorrespondingSourceObject: {fileID: 4761873995794285598, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4501886696001058314}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1035240509648170656, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       insertIndex: 1
@@ -684,6 +767,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a465ae6833342894490e4c6fbe75f800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5747933871544419992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4761873995794285598, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6072457178613751100 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6455034772851875770, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6902053760383945008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5915571698391829430, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

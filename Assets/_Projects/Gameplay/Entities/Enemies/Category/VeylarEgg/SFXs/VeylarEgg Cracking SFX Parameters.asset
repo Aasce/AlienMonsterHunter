@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8718dd13a0829034288cb8aba6526455, type: 3}
-  m_Name: AerialVanguard Flying SFX Parameters
+  m_Name: VeylarEgg Cracking SFX Parameters
   m_EditorClassIdentifier: 
-  _name: AerialVanguard Flying
-  _clip: {fileID: 8300000, guid: e6a689ebfab2dfc4d8707a76746e8408, type: 3}
+  _name: VeylarEgg Cracking
+  _clip: {fileID: 8300000, guid: 6fa046e39404c934fab7fc6c5af6d103, type: 3}
   _isMusic: 0
-  _loop: 1
+  _loop: 0
   _playOnAwake: 1
-  _priority: 218
-  _volume: 0.08
+  _priority: 208
+  _volume: 0.3
   _pitch: 1
-  _spatialBlend: 0.95
+  _spatialBlend: 1
   _volumeRolloff: 1
-  _minDistance: 4
-  _maxDistance: 20
+  _minDistance: 5
+  _maxDistance: 14
   _stereoPan: 0
   _reverbZoneMix: 1
-  _dopplerLevel: 1.25
-  _spread: 360
+  _dopplerLevel: 0
+  _spread: 0
   _bypassEffects: 0
   _bypassListenerEffects: 0
   _bypassReverbZones: 0

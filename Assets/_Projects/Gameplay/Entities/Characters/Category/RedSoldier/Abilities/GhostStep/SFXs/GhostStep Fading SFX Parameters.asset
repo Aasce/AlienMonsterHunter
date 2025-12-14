@@ -15,11 +15,11 @@ MonoBehaviour:
   _name: GhostStep Fading
   _clip: {fileID: 8300000, guid: 3234c2df7988ef74bab4d4e4cb578faf, type: 3}
   _isMusic: 0
-  _loop: 1
+  _loop: 0
   _playOnAwake: 1
   _priority: 128
   _volume: 0.5
-  _pitch: 0.5
+  _pitch: 0.75
   _spatialBlend: 0.95
   _volumeRolloff: 1
   _minDistance: 3
