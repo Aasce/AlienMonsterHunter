@@ -6,16 +6,14 @@ using Asce.Game.Effects;
 using Asce.Game.FOVs;
 using Asce.Game.Levelings;
 using Asce.Game.SaveLoads;
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.VFX;
 
 namespace Asce.Game.Entities.Machines
 {
-    public class HellFlamethrower_Machine : Machine
+    public class HellFlamethrower_Machine : Machine, IMachineRotatable
     {
         [Header("References")]
-        [SerializeField] private VisualEffect _flameEffect;
         [SerializeField] private FieldOfView _fov;
         [SerializeField] private FieldOfView _fovSelf;
         [SerializeField] private Transform _weapon;
@@ -43,13 +41,17 @@ namespace Asce.Game.Entities.Machines
         [SerializeField, Readonly] private int _attackToOverheat = 12;
         [SerializeField, Readonly] private int _currentAttack = 0;
         [SerializeField, Readonly] private bool _isOverheat = false;
-        private bool _isPlayingEffect = false;
+        private bool _isSpraying = false;
+
+        public event Action<float> OnRotated;
+        public event Action<bool> OnSprayStateChanged;
 
         public SingleTargetDetection TargetDetection => _targetDetection;
         public Cooldown OverheatRecoveryCooldown => _overheatRecoveryCooldown;
         public int AttackToOverheat => _attackToOverheat;
         public int CurrentAttack => _currentAttack;
         public bool IsOverheat => _isOverheat;
+        public float Angle => (_weapon != null ? _weapon : transform).eulerAngles.z;
 
         public override void Initialize()
         {
@@ -68,8 +70,6 @@ namespace Asce.Game.Entities.Machines
             _overheatRecoveryCooldown.SetBaseTime(Information.Stats.GetCustomStat("OverheatRecoveryTime"));
             TargetDetection.ViewRadius = Information.Stats.GetCustomStat("ViewRadius");
             _fov.ViewRadius = TargetDetection.ViewRadius;
-
-            _flameEffect.Stop();
         }
 
         public override void ResetStatus()
@@ -80,6 +80,7 @@ namespace Asce.Game.Entities.Machines
             _currentAttack = 0;
             _attackCooldown.ToComplete();
             _overheatRecoveryCooldown.ToComplete();
+            _isSpraying = false;
         }
 
         protected override void Leveling_OnLevelSetted(int newLevel)
@@ -133,11 +134,7 @@ namespace Asce.Game.Entities.Machines
         {
             if (_isOverheat)
             {
-                if (_isPlayingEffect)
-                {
-                    _flameEffect.Stop();
-                    _isPlayingEffect = false;
-                }
+                this.SetSprayingState(false);
                 _overheatRecoveryCooldown.Update(Time.deltaTime);
                 if (_overheatRecoveryCooldown.IsComplete)
                 {
@@ -148,11 +145,7 @@ namespace Asce.Game.Entities.Machines
             }
             else
             {
-                if (!_isPlayingEffect)
-                {
-                    _flameEffect.Play();
-                    _isPlayingEffect = true;
-                }
+                this.SetSprayingState(true);
                 this.HandleAttack();
                 if (_currentAttack >= _attackToOverheat)
                 {
@@ -220,17 +213,18 @@ namespace Asce.Game.Entities.Machines
             }
         }
 
-        public void Rotate(Vector2 direction)
-        {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            this.Rotate(angle);
-        }
-
         public void Rotate(float angle)
         {
             _weapon.rotation = Quaternion.Euler(0f, 0f, angle);
-            _flameEffect.transform.rotation = Quaternion.Euler(0f, 0f, angle);
             _fov.transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
+            OnRotated?.Invoke(angle);
+        }
+
+        private void SetSprayingState(bool state)
+        {
+            if (_isSpraying == state) return;
+            _isSpraying = state;
+            OnSprayStateChanged?.Invoke(_isSpraying);
         }
 
         protected override void OnBeforeSave(MachineSaveData data)

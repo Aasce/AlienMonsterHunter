@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8718dd13a0829034288cb8aba6526455, type: 3}
+  m_Name: GhostStep Fading SFX Parameters
+  m_EditorClassIdentifier: 
+  _name: GhostStep Fading
+  _clip: {fileID: 8300000, guid: 3234c2df7988ef74bab4d4e4cb578faf, type: 3}
+  _isMusic: 0
+  _loop: 1
+  _playOnAwake: 1
+  _priority: 128
+  _volume: 0.5
+  _pitch: 0.5
+  _spatialBlend: 0.95
+  _volumeRolloff: 1
+  _minDistance: 3
+  _maxDistance: 8
+  _stereoPan: 0
+  _reverbZoneMix: 1
+  _dopplerLevel: 1
+  _spread: 360
+  _bypassEffects: 0
+  _bypassListenerEffects: 0
+  _bypassReverbZones: 0

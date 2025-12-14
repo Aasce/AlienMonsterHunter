@@ -20,5 +20,7 @@ namespace Asce.Game.UIs.HUDs
         }
 
         public virtual void Initialize() { }
+        public virtual void Ready() { }
+
     }
 }

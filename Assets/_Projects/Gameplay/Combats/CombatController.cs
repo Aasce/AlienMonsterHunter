@@ -1,5 +1,6 @@
-using Asce.Game.VFXs;
 using Asce.Core;
+using Asce.Game.VFXs;
+using System;
 using UnityEngine;
 
 namespace Asce.Game.Combats
@@ -7,6 +8,9 @@ namespace Asce.Game.Combats
     public class CombatController : MonoBehaviourSingleton<CombatController>
     {
         [SerializeField] private float _armorReductionFactor = 100f;
+
+        public event Action<DamageContainer> OnDamageDealed;
+        public event Action<IHealable, float> OnHealed;
 
         public float ArmorReductionFactor => _armorReductionFactor;
 
@@ -35,6 +39,8 @@ namespace Asce.Game.Combats
                 container.Receiver.DeadCallback(container);
                 if (container.Sender != null) container.Sender.KillCallback(container);
             }
+
+            OnDamageDealed?.Invoke(container);
             this.ShowDamageText(container.Receiver, finalDamage);
         }
 
@@ -43,6 +49,8 @@ namespace Asce.Game.Combats
             if (receiver == null || healAmount <= 0f) return;
             receiver.Health.CurrentValue += healAmount;
             receiver.HealingCallback(healAmount);
+
+            OnHealed?.Invoke(receiver, healAmount);
             this.ShowHealText(receiver, healAmount);
         }
 

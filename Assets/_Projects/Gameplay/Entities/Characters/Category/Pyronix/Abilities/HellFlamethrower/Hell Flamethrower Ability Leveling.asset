@@ -22,11 +22,11 @@ MonoBehaviour:
     ModificationGroup:
       _modifications:
       - _targetKey: DespawnTime
-        _deltaValue: 6.8
+        _deltaValue: 8
         _type: 0
   - Level: 10
     ModificationGroup:
       _modifications:
       - _targetKey: DespawnTime
-        _deltaValue: 4.8
+        _deltaValue: 8
         _type: 0

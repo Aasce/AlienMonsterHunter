@@ -32,7 +32,7 @@ namespace Asce.Game.Abilities
             if (_owner == null) return;
 
             Vector2 direction = position - (Vector2)_owner.transform.position;
-            Machine.Rotate(direction);
+            (Machine as IMachineRotatable).Rotate(direction);
         }
 
         private void Machine_OnDead(Combats.DamageContainer container)

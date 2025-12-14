@@ -21,7 +21,7 @@ namespace Asce.MainGame.Analysis
             MainGameManager.Instance.Player.Character.OnAfterSendDamage += Character_OnAfterSendDamage;
             MainGameManager.Instance.Player.Character.OnHealing += Character_OnHealing;
 
-            MainGameManager.Instance.Player.Character.OnAfterTakeDamage += Character_OnAfterTakeDamage; ;
+            MainGameManager.Instance.Player.Character.OnAfterTakeDamage += Character_OnAfterTakeDamage;
         }
 
         private void Character_OnAfterSendDamage(Game.Combats.DamageContainer container)

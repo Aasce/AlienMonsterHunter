@@ -17,6 +17,9 @@ MonoBehaviour:
   _levelChanges: []
   _uniformGrowth:
     _modifications:
+    - _targetKey: DespawnTime
+      _deltaValue: 0.1
+      _type: 0
     - _targetKey: HealAmount
       _deltaValue: 1
       _type: 0

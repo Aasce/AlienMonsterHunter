@@ -5,16 +5,17 @@ using Asce.Game.Maps;
 using Asce.Game.Players;
 using Asce.Game.Progress;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Asce.ResultGame
 {
     public class AwardController : ControllerComponent
     {
-        [SerializeField] private List<MapLevelAward> _awards = new();
+        [SerializeField] private List<Award> _awards = new();
         public override string ControllerName => "Award";
 
-        public List<MapLevelAward> Awards => _awards;
+        public List<Award> Awards => _awards;
 
         public override void Initialize()
         {
@@ -25,7 +26,7 @@ namespace Asce.ResultGame
         {
             base.Ready();
             _awards.AddRange(GetMapLevelAward());
-            foreach (MapLevelAward award in _awards)
+            foreach (Award award in _awards)
             {
                 if (award == null) continue;
 
@@ -39,9 +40,9 @@ namespace Asce.ResultGame
             }
         }
 
-        private List<MapLevelAward> GetMapLevelAward()
+        private List<Award> GetMapLevelAward()
         {
-            List<MapLevelAward> awards = new();
+            List<Award> awards = new();
             GameResultType type = ResultGameManager.Instance.ResultData.FinalResult;
             PickMapLevelShareData pickMapLevel = GameManager.Instance.Shared.Get<PickMapLevelShareData>("MapLevel");
             if (pickMapLevel == null) return awards;
@@ -57,12 +58,12 @@ namespace Asce.ResultGame
             switch (type)
             {
                 case GameResultType.Victory:
-                    if (isFirstWin) awards.AddRange(levelInformation.FirstWinAwards);
-                    else awards.AddRange(levelInformation.WinAwards);
+                    if (isFirstWin) this.AddMapLevelAward(awards, levelInformation.FirstWinAwards);
+                    else this.AddMapLevelAward(awards, levelInformation.WinAwards);
                     break;
 
                 case GameResultType.Defeat:
-                    awards.AddRange(levelInformation.PlayAwards);
+                    this.AddMapLevelAward(awards, levelInformation.PlayAwards);
                     break;
 
                 default:
@@ -70,6 +71,26 @@ namespace Asce.ResultGame
             }
 
             return awards;
+        }
+
+        private void AddMapLevelAward(List<Award> awards, IEnumerable<MapLevelAward> levelAwards)
+        {
+            if (awards == null || levelAwards == null) return;
+            foreach (MapLevelAward levelAward in levelAwards)
+            {
+                if (levelAward == null) continue;
+
+                Award award = awards.FirstOrDefault(a => a != null && a.ItemName == levelAward.ItemName);
+                if (award == null)
+                {
+                    awards.Add(new Award(levelAward.ItemName, levelAward.Quantity));
+                }
+                else
+                {
+                    award.AddQuantity(levelAward.Quantity);
+                }   
+            }
+
         }
     }
 }

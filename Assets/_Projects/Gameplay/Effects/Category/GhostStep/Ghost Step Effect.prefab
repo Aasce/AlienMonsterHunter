@@ -53,6 +53,7 @@ MonoBehaviour:
     _baseTime: 0
     _currentTime: 0
   _strength: 0
+  _stack: 0
   _speedStatId: 
   _untargetableStatId: 
 --- !u!114 &-8700546551536786346
@@ -69,5 +70,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effect: {fileID: 49206295708472459}
   _vfxName: Ghost Step Effect VFX
-  _despawnTimeAdding: 1
+  _despawnTimeAdding: 0.1
   _vfxObject: {fileID: 0}

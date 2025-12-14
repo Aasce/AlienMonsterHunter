@@ -31,16 +31,9 @@ namespace Asce.ResultGame
             PanelController.Initialize();
         }
 
-        public void AssignUI()
+        public void Ready()
         {
-            ResultShareData resultData = ResultGameManager.Instance.ResultData;
-            if (resultData == null)
-            {
-                HUDController.Title.Set(GameResultType.Unknown);
-                return;
-            }
-
-            HUDController.Title.Set(resultData.FinalResult);
+            HUDController.Ready();
         }
 
     }

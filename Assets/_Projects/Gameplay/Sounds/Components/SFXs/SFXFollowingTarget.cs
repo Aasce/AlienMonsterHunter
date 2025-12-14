@@ -10,12 +10,6 @@ namespace Asce.Game.Sounds
         [Space]
         [SerializeField] private bool _isFollowing = true;
 
-        public override AudioSource Source
-        {
-            get => _source;
-            set => _source = value;
-        }
-
         public Transform Target
         {
             get => _target;

@@ -24,7 +24,7 @@ MonoBehaviour:
   _isPassive: 0
   _cooldown: 10
   _useRangeRadius: 1.8
-  _despawnTime: 1
+  _despawnTime: 2.5
   _isReactive: 0
   _reactiveCooldown: 0
   _customValues:

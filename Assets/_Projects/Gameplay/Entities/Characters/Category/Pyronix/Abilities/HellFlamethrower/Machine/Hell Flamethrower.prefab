@@ -568,6 +568,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8612561732694516754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8719039403051434770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3831772206274445546}
+  - component: {fileID: 5808321286443545407}
+  m_Layer: 8
+  m_Name: Spraying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3831772206274445546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719039403051434770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5187641787950812587}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5808321286443545407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719039403051434770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: Hell Flamethrower Spraying
+  _delay: 0
 --- !u!1001 &4753035015174923430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1085,6 +1132,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2328935080028939639, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5491215282621868428}
+    - targetCorrespondingSourceObject: {fileID: 3181957074753497278, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3831772206274445546}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3199985385991913716, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: 1
@@ -1095,6 +1145,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1148935409875242304, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4585557305161807061}
+    - targetCorrespondingSourceObject: {fileID: 5078304403383379615, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4131444275628915029}
   m_SourcePrefab: {fileID: 100100000, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
 --- !u!114 &36654321969514260 stripped
 MonoBehaviour:
@@ -1117,6 +1170,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5260994487999399181, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
   m_PrefabInstance: {fileID: 7770575921076954389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3291959063634051978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5078304403383379615, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 7770575921076954389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4131444275628915029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291959063634051978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dd01c0e145d6446a9b7a4adea651ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _machine: {fileID: 6644710616123814808}
+  _sfxPlayer: {fileID: 5808321286443545407}
 --- !u!114 &4704843696197874417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3070425576698468324, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -1153,7 +1225,6 @@ MonoBehaviour:
   _stats: {fileID: 4704843696197874417}
   _effects: {fileID: 6470336758382304629}
   _ui: {fileID: 5091790326864412050}
-  _flameEffect: {fileID: 8824102080314904138}
   _fov: {fileID: 3904914656449378977}
   _fovSelf: {fileID: 2538435539633895861}
   _weapon: {fileID: 7459919729310042645}
@@ -1163,8 +1234,8 @@ MonoBehaviour:
   _attackCooldown:
     _baseTime: 0.2
     _currentTime: 0.2
-  _fireRadius: 15
-  _fireAngle: 32
+  _fireRadius: 14
+  _fireAngle: 26
   _targetLayer:
     serializedVersion: 2
     m_Bits: 768
@@ -1201,6 +1272,11 @@ MonoBehaviour:
   _detectCooldown:
     _baseTime: 0.1
     _currentTime: 0.1
+--- !u!4 &5187641787950812587 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3181957074753497278, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
+  m_PrefabInstance: {fileID: 7770575921076954389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5441663077838536802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2328935080028939639, guid: 1acfdb7fd99e6d74baf5620d785751e2, type: 3}
@@ -1251,5 +1327,34 @@ MonoBehaviour:
   - {fileID: 4361507238448624828}
   - {fileID: 4858490189834432600}
   - {fileID: 4914000824423690626}
-  _normalColor: {r: 1, g: 1, b: 1, a: 1}
-  _overheatColor: {r: 8, g: 2.4713554, b: 0.22400045, a: 1}
+  _overheatGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 0.9576299, b: 0.4433962, a: 1}
+    key2: {r: 1, g: 0.5607299, b: 0.34528297, a: 0}
+    key3: {r: 1, g: 0.570165, b: 0.54509807, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19969
+    ctime2: 40169
+    ctime3: 64379
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 65535
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  _flameEffect: {fileID: 8824102080314904138}

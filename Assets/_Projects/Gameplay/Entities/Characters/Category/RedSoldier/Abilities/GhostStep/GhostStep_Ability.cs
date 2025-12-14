@@ -46,6 +46,12 @@ namespace Asce.Game.Abilities
             });
         }
 
+        private void Update()
+        {
+            if (_ownerEntity == null) return;
+            transform.position = _ownerEntity.transform.position;
+        }
+
         protected override void Leveling_OnLevelSetted(int newLevel)
         {
             _healAmount = Information.GetCustomValue("HealAmount");

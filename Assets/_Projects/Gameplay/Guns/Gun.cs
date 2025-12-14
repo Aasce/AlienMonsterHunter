@@ -187,6 +187,7 @@ namespace Asce.Game.Guns
         {
             _isFireRequested = false;
             _isFiring = false;
+            OnFireEnd?.Invoke();
         }
 
         protected virtual void Update()

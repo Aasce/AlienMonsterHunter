@@ -31,14 +31,20 @@ namespace Asce.ResultGame
             {
                 Debug.Log("[ResultGameManager] ResultShareData is null");
             }
-            AwardController.Ready();
-            UIController.AssignUI();
+
+            this.Ready();
         }
 
         private void Initialize()
         {
             AwardController.Initialize();
             UIController.Initialize();
+        }
+
+        private void Ready()
+        {
+            AwardController.Ready();
+            UIController.Ready();
         }
 
         public void PlayAgain()

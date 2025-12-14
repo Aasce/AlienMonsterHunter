@@ -37,6 +37,8 @@ MonoBehaviour:
   _firstWinAwards:
   - _itemName: Credits
     _quantity: 500
+  - _itemName: Nano Credits
+    _quantity: 5
   _winAwards:
   - _itemName: Credits
     _quantity: 100
