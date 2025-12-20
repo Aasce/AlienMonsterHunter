@@ -161,6 +161,8 @@ GameObject:
   - component: {fileID: 5436523003561521883}
   - component: {fileID: 4260653047276141331}
   - component: {fileID: 4213358343830447721}
+  - component: {fileID: 4962086048814637462}
+  - component: {fileID: 2886536945408594628}
   m_Layer: 5
   m_Name: Rect Button
   m_TagString: Untagged
@@ -253,3 +255,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4962086048814637462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056678235495407688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3205fbb58930c4994da66254232273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 4213358343830447721}
+  _sfxSuccessPlayer: {fileID: 2886536945408594628}
+  _sfxFailPlayer: {fileID: 0}
+--- !u!114 &2886536945408594628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056678235495407688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: UI Button Click
+  _delay: 0

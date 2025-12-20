@@ -1,4 +1,5 @@
 using Asce.Game.Guns;
+using Asce.Game.Players;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,24 +12,22 @@ namespace Asce.MainMenu.UIs.Guns
         [SerializeField] protected TextMeshProUGUI _nameText;
         [SerializeField] protected Image _icon;
 
-        [Header("Purchased")]
-        [SerializeField] protected RectTransform _purchasedContent;
-        
         [Space]
-        [SerializeField] protected RectTransform _buyContent;
-        [SerializeField] protected TextMeshProUGUI _buyCostText;
-        [SerializeField] protected Button _buyButton;
+        [SerializeField] protected TextMeshProUGUI _levelText;
 
-        protected bool IsPurchased => false;
+        public GunProgress Progress => PlayerManager.Instance.Progress.GunsProgress.Get(Item.Information.Name);
+        public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
+
 
         protected override void Start()
         {
             base.Start();
-            _buyButton.onClick.AddListener(BuyButton_OnClick);
         }
 
-        public override void InternalSet(Gun item)
+
+        protected override void Register()
         {
+            base.Register();
             if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
@@ -38,33 +37,37 @@ namespace Asce.MainMenu.UIs.Guns
             this.IsShowContent(true);
             _nameText.text = Item.Information.Name;
             _icon.sprite = Item.Information.Icon;
-            // _typeText.text = Item.Information.GunType;
-            // _difficultSlider.value = Item.Information.Difficulty;
-            this.ShowJoinContent();
+            this.SetLockedState();
+
+            Progress.OnUnlocked += SetLockedState;
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
-
-        protected void ShowJoinContent()
+        protected override void Unregister()
         {
-            bool isPurchased = this.IsPurchased;
-            _purchasedContent.gameObject.SetActive(isPurchased);
-            _buyContent.gameObject.SetActive(!isPurchased);
+            base.Unregister();
+            if (Item == null || Item.Information == null) return;
 
-            if (isPurchased)
-            {
-
-            }
-            else
-            {
-                float cost = 100f; // Item.Information.Cost;
-                _buyCostText.text = $"${cost}";
-            }
+            Progress.OnUnlocked -= SetLockedState;
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        private void BuyButton_OnClick()
+        protected override void SetLockState()
         {
-            if (IsPurchased) return;
+            base.SetLockState();
+            _levelText.gameObject.SetActive(false);
         }
 
+        protected override void SetUnlockState()
+        {
+            base.SetUnlockState();
+            _levelText.gameObject.SetActive(true);
+            _levelText.text = $"lv. {Progress.Level}";
+        }
+
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+            _levelText.text = $"lv. {newLevel}";
+        }
     }
 }

@@ -2,6 +2,7 @@ using Asce.Core.Attributes;
 using Asce.Core.Utils;
 using Asce.Game.Managers;
 using Asce.Game.Maps;
+using Asce.Game.UIs;
 using Asce.Game.UIs.Panels;
 using Asce.MainMenu.Picks;
 using System.Collections.Generic;
@@ -59,7 +60,11 @@ namespace Asce.MainMenu.UIs.Panels
 
         protected virtual void Refresh()
         {
-            _mapPool.Clear(onClear: (item) => item.Hide());
+            _mapPool.Clear(onClear: (item) =>
+            {
+                item.ResetStatus();
+                item.Hide();
+            });
             foreach (Map item in Maps)
             {
                 UIChoiceMapItem uiMap = _mapPool.Activate(out bool isCreated);
@@ -77,7 +82,11 @@ namespace Asce.MainMenu.UIs.Panels
             if (map == null) return;
             _currentMap = map;
 
-            _levelPool.Clear(onClear: (item) => item.Hide());
+            _levelPool.Clear(onClear: (item) =>
+            {
+                item.ResetStatus();
+                item.Hide();
+            });
             foreach (SO_MapLevelInformation item in _currentMap.Information.Levels)
             {
                 UIMapLevelItem uiLevel = _levelPool.Activate(out bool isCreated);
@@ -89,6 +98,9 @@ namespace Asce.MainMenu.UIs.Panels
                 uiLevel.Show();
             }
 
+            UIChoiceMapItem uiMap = _mapPool.Activities.FirstOrDefault(item => item.Item == _currentMap);
+            if (uiMap is IUIHighlightable highlightable) highlightable.Highlight();
+            
             this.ChoiceLevel(level);
             PickController.Instance.PickMap(_currentMap, level);
         }
@@ -98,6 +110,9 @@ namespace Asce.MainMenu.UIs.Panels
             if (_currentMap == null) return;
             SO_MapLevelInformation levelInformation = _currentMap.Information.Levels.FirstOrDefault(i => i.Level == level);
             if (levelInformation == null) return;
+
+            UIMapLevelItem uiLevel = _levelPool.Activities.FirstOrDefault(item => item.Item == levelInformation);
+            if (uiLevel is IUIHighlightable highlightable) highlightable.Highlight();
 
             _details.Set(levelInformation);
             _details.Show();

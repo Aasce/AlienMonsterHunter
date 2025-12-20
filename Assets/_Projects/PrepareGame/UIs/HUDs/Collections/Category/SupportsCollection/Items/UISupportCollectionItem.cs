@@ -10,12 +10,12 @@ namespace Asce.PrepareGame.UIs.Collections
     public class UISupportCollectionItem : UICollectionItem<Support>
     {
         [Header("Support")]
-        [SerializeField] private UITintColor _tintColor;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
         public SupportProgress Progress => PlayerManager.Instance.Progress.SupportsProgress.Get(Item.Information.Name);
+        public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
 
         protected void OnDestroy()
         {
@@ -50,21 +50,17 @@ namespace Asce.PrepareGame.UIs.Collections
             Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        protected virtual void SetLockedState()
+        protected override void SetLockState()
         {
-            SupportProgress progress = Progress;
-            bool isUnlocked = progress != null && progress.IsUnlocked;
-            if (isUnlocked)
-            {
-                _tintColor.TintColor = Color.white;
-                _levelText.gameObject.SetActive(true);
-                _levelText.text = $"lv. {progress.Level}";
-            }
-            else
-            {
-                _tintColor.TintColor = Color.gray;
-                _levelText.gameObject.SetActive(false);
-            }
+            base.SetLockState();
+            _levelText.gameObject.SetActive(false);
+        }
+
+        protected override void SetUnlockState()
+        {
+            base.SetUnlockState();
+            _levelText.gameObject.SetActive(true);
+            _levelText.text = $"lv. {Progress.Level}";
         }
 
         private void Progress_OnLevelChanged(int newLevel)

@@ -1,4 +1,6 @@
 using Asce.Game.Entities.Characters;
+using Asce.Game.Players;
+using Asce.Game.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,27 +15,23 @@ namespace Asce.MainMenu.UIs.Characters
 
         [Space]
         [SerializeField] protected TextMeshProUGUI _roleText;
-        [SerializeField] protected Slider _difficultSlider;
+        [SerializeField] protected Slider _difficultySlider;
 
-        [Header("Invite or Join")]
-        [SerializeField] protected RectTransform _joinedContent;
-        // [SerializeField] protected UILevelProgess _levelProgess;
-        
         [Space]
-        [SerializeField] protected RectTransform _inviteContent;
-        [SerializeField] protected TextMeshProUGUI _inviteCostText;
-        [SerializeField] protected Button _inviteButton;
+        [SerializeField] protected UILevelProgess _levelProgess;
 
-        protected bool IsJoined => false;
+        public CharacterProgress Progress => PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
+        public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
 
         protected override void Start()
         {
             base.Start();
-            _inviteButton.onClick.AddListener(InviteButton_OnClick);
         }
 
-        public override void InternalSet(Character item)
+
+        protected override void Register()
         {
+            base.Register();
             if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
@@ -43,32 +41,37 @@ namespace Asce.MainMenu.UIs.Characters
             this.IsShowContent(true);
             _nameText.text = Item.Information.Name;
             _icon.sprite = Item.Information.Icon;
-            // _roleText.text = Item.Information.Role;
-            // _difficultSlider.value = Item.Information.Difficulty;
-            this.ShowJoinContent();
+            _roleText.text = Item.Information.Role.ToString();
+            _difficultySlider.value = Item.Information.Difficulty;
+            this.SetLockedState();
+
+            Progress.OnUnlocked += SetLockedState;
+            Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
-
-        protected void ShowJoinContent()
+        protected override void Unregister()
         {
-            bool isJoined = this.IsJoined;
-            _joinedContent.gameObject.SetActive(isJoined);
-            _inviteContent.gameObject.SetActive(!isJoined);
+            base.Unregister();
+            if (Item == null || Item.Information == null) return;
 
-            if (isJoined)
-            {
-
-            }
-            else
-            {
-                float cost = 100f; // Item.Information.InviteCost;
-                _inviteCostText.text = $"${cost}";
-            }
+            Progress.OnUnlocked -= SetLockedState;
+            Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        private void InviteButton_OnClick()
+        protected override void SetLockState()
         {
-            if (IsJoined) return;
+            base.SetLockState();
+        }
+
+        protected override void SetUnlockState()
+        {
+            base.SetUnlockState();
+            _levelProgess.Set(Progress);
+        }
+
+        private void Progress_OnLevelChanged(int newLevel)
+        {
+
         }
 
     }

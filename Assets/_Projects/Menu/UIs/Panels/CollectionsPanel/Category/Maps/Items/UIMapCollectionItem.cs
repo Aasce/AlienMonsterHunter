@@ -11,8 +11,11 @@ namespace Asce.MainMenu.UIs.Maps
         [SerializeField] protected TextMeshProUGUI _nameText;
         [SerializeField] protected Image _thumbnail;
 
-        public override void InternalSet(Map item)
+        public override bool IsUnlocked => true;
+
+        protected override void Register()
         {
+            base.Register();
             if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
@@ -22,6 +25,7 @@ namespace Asce.MainMenu.UIs.Maps
             this.IsShowContent(true);
             _nameText.text = Item.Information.Name;
             _thumbnail.sprite = Item.Information.Thumbnail;
+            this.SetLockedState();
         }
 		
     }

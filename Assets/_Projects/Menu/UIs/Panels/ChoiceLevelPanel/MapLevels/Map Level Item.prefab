@@ -598,10 +598,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20aedbdf0c2d14e45bb254a88b89aeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 8920760759470987956}
   _content: {fileID: 449606552117872449}
   _nothingContent: {fileID: 6914871318772201860}
   _levelText: {fileID: 9197369290469317648}
   _icon: {fileID: 175541802340959167}
+  _highlightColor: {r: 0, g: 0.9372549, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _controller: {fileID: 0}
   _item: {fileID: 0}
 --- !u!1 &6877925648654582247

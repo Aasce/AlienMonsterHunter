@@ -10,12 +10,13 @@ namespace Asce.PrepareGame.UIs.Collections
     public class UIGunCollectionItem : UICollectionItem<Gun>
     {
         [Header("Gun")]
-        [SerializeField] private UITintColor _tintColor;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
 
         public GunProgress Progress => PlayerManager.Instance.Progress.GunsProgress.Get(Item.Information.Name);
+        public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
+
 
         protected void OnDestroy()
         {
@@ -35,9 +36,9 @@ namespace Asce.PrepareGame.UIs.Collections
             this.IsShowContent(true);
             _icon.sprite = Item.Information.Icon;
             _nameText.text = Item.Information.Name;
-            this.SetPurchasedState();
+            this.SetLockedState();
 
-            Progress.OnUnlocked += SetPurchasedState;
+            Progress.OnUnlocked += SetLockedState;
             Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
@@ -46,25 +47,21 @@ namespace Asce.PrepareGame.UIs.Collections
             base.Unregister();
             if (Item == null || Item.Information == null) return;
 
-            Progress.OnUnlocked -= SetPurchasedState;
+            Progress.OnUnlocked -= SetLockedState;
             Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        protected virtual void SetPurchasedState()
+        protected override void SetLockState()
         {
-            GunProgress progress = Progress;
-            bool isPurchased = progress != null && progress.IsUnlocked;
-            if (isPurchased)
-            {
-                _tintColor.TintColor = Color.white;
-                _levelText.gameObject.SetActive(true);
-                _levelText.text = $"lv. {progress.Level}";
-            }
-            else
-            {
-                _tintColor.TintColor = Color.gray;
-                _levelText.gameObject.SetActive(false);
-            }
+            base.SetLockState();
+            _levelText.gameObject.SetActive(false);
+        }
+
+        protected override void SetUnlockState()
+        {
+            base.SetUnlockState();
+            _levelText.gameObject.SetActive(true);
+            _levelText.text = $"lv. {Progress.Level}";
         }
 
         private void Progress_OnLevelChanged(int newLevel)

@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 418998854413577741, guid: 7701a11f378786845843a45103cd59ef, type: 3}
       propertyPath: m_CellSize.y
-      value: 230
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 418998854413577741, guid: 7701a11f378786845843a45103cd59ef, type: 3}
       propertyPath: m_ConstraintCount

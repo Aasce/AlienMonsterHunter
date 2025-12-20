@@ -11,8 +11,11 @@ namespace Asce.MainMenu.UIs.Alients
         [SerializeField] protected TextMeshProUGUI _nameText;
         [SerializeField] protected Image _icon;
 
-        public override void InternalSet(Enemy item)
+        public override bool IsUnlocked => true;
+
+        protected override void Register()
         {
+            base.Register();
             if (Item == null || Item.Information == null)
             {
                 this.IsShowContent(false);
@@ -22,6 +25,7 @@ namespace Asce.MainMenu.UIs.Alients
             this.IsShowContent(true);
             _nameText.text = Item.Information.Name;
             _icon.sprite = Item.Information.Icon;
+            this.SetLockedState();
         }
 		
     }

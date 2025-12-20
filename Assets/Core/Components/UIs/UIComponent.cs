@@ -6,7 +6,7 @@ namespace Asce.Core.UIs
     /// <summary>
     ///     Base class for UI components.
     /// </summary>
-    public abstract class UIComponent : GameComponent
+    public abstract class UIComponent : GameComponent, IUIComponent
     {
         /// <summary>
         ///     Invoked when the UI object is hidden.

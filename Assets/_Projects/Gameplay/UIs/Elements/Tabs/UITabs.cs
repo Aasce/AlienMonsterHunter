@@ -1,4 +1,5 @@
 using Asce.Core.UIs;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ namespace Asce.Game.UIs
         [Space]
         [SerializeField] private bool _isShowFirstTabOnStart = true;
         [SerializeField] private int _currentTabIndex = -1;
+
+        public event Action<int> OnTabChanged;
 
         public List<TabView> TabViews => _tabViews;
         public int CurrentTab => _currentTabIndex;
@@ -51,6 +54,8 @@ namespace Asce.Game.UIs
                 bool isEquals = i == index;
                 SetTabVisibility(tabView, isEquals);
             }
+
+            OnTabChanged?.Invoke(_currentTabIndex);
         }
 
         /// <summary> Show tab by index. </summary>

@@ -1,6 +1,5 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
-using Asce.Game.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,6 @@ namespace Asce.PrepareGame.UIs.Collections
     public class UICharacterCollectionItem : UICollectionItem<Character>
     {
         [Header("Character")]
-        [SerializeField] private UITintColor _tintColor;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
@@ -20,13 +18,7 @@ namespace Asce.PrepareGame.UIs.Collections
         [SerializeField] private Slider _difficultySlider;
 
         public CharacterProgress Progress => PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
-
-        protected void OnDestroy()
-        {
-            if (PlayerManager.Instance == null) return;
-            this.Unregister();
-        }
-
+        public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
 
         protected override void Register()
         {
@@ -57,21 +49,17 @@ namespace Asce.PrepareGame.UIs.Collections
             Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        protected virtual void SetLockedState()
+        protected override void SetLockState()
         {
-            CharacterProgress progress = Progress;
-            bool isUnlocked = progress != null && progress.IsUnlocked;
-            if (isUnlocked)
-            {
-                _tintColor.TintColor = Color.white;
-                _levelText.gameObject.SetActive(true);
-                _levelText.text = $"lv. {progress.Level}";
-            }
-            else
-            {
-                _tintColor.TintColor = Color.gray;
-                _levelText.gameObject.SetActive(false);
-            }
+            base.SetLockState();
+            _levelText.gameObject.SetActive(false);
+        }
+
+        protected override void SetUnlockState()
+        {
+            base.SetUnlockState();
+            _levelText.gameObject.SetActive(true);
+            _levelText.text = $"lv. {Progress.Level}";
         }
 
         private void Progress_OnLevelChanged(int newLevel)

@@ -1,5 +1,6 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
+using Asce.Game.UIs;
 using Asce.Game.UIs.Panels;
 using Asce.PrepareGame.Manager;
 using TMPro;

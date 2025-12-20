@@ -2,6 +2,8 @@ using Asce.Game.UIs;
 using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Asce.PrepareGame.Picks;
 
 namespace Asce.PrepareGame.UIs.Collections
 {
@@ -19,7 +21,8 @@ namespace Asce.PrepareGame.UIs.Collections
         {
             base.Show();
             this.ResetCollection();
-            if (Details != null) Details.Hide();
+
+            Details.Hide();
         }
 
         public virtual void ResetCollection()
@@ -41,7 +44,6 @@ namespace Asce.PrepareGame.UIs.Collections
 
         public virtual void ShowDetails(T item)
         {
-            if (Details == null) return;
             Details.Set(item);
             Details.Show();
         }

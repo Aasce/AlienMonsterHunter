@@ -18,7 +18,7 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: 2d11b12f4e7d4b14f812fb533df3384e, type: 2}
   _leveling: {fileID: 11400000, guid: c053e3aab74c5c548a5fd7d3c0a8c891, type: 2}
   _role: 1
-  _difficulty: 3
+  _difficulty: 5
   _progress: {fileID: 11400000, guid: 0ad67582059a94447b20709185b1aa4c, type: 2}
   _abilityNames:
   - Ghost Step

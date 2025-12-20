@@ -1996,6 +1996,7 @@ GameObject:
   - component: {fileID: 564688395}
   - component: {fileID: 564688394}
   - component: {fileID: 564688393}
+  - component: {fileID: 564688396}
   m_Layer: 5
   m_Name: Tabs
   m_TagString: Untagged
@@ -2093,6 +2094,19 @@ MonoBehaviour:
     _view: {fileID: 862630701}
   _isShowFirstTabOnStart: 1
   _currentTabIndex: -1
+--- !u!114 &564688396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564688391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecfe51f01b1493469c088ff820be1f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content: {fileID: 564688392}
 --- !u!1001 &567641465
 PrefabInstance:
   m_ObjectHideFlags: 0

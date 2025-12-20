@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 418998854413577741, guid: 7701a11f378786845843a45103cd59ef, type: 3}
+      propertyPath: m_CellSize.y
+      value: 380
+      objectReference: {fileID: 0}
     - target: {fileID: 436346359264996641, guid: 7701a11f378786845843a45103cd59ef, type: 3}
       propertyPath: m_Name
       value: Characters View

@@ -18,7 +18,7 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: e9be82cda7ecd7149b2b6a27346a47b8, type: 2}
   _leveling: {fileID: 11400000, guid: ee81313a1d285134d8bd1a28ef3cfec0, type: 2}
   _role: 3
-  _difficulty: 6
+  _difficulty: 7
   _progress: {fileID: 11400000, guid: 4cae9e67f5737d043a1ce9db828a0f14, type: 2}
   _abilityNames:
   - Electric Trap

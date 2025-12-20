@@ -1,11 +1,10 @@
-using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
 using Asce.Core.UIs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.PrepareGame.UIs
+namespace Asce.Game.UIs
 {
     public class UILevelProgess : UIComponent
     {
@@ -13,21 +12,22 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _progessText;
         [SerializeField] private Slider _expSlider;
 
-
         public void Set(CharacterProgress progress)
         {
             _levelText.text = $"Lv. {progress.Level}";
 
-            int expToLevelUp = progress.ExpToLevelUp(progress.Level);
-            _expSlider.maxValue = expToLevelUp;
-            _expSlider.value = progress.Exp;
             if (progress.IsMaxLevel)
             {
                 _progessText.text = "MAX";
+                _expSlider.maxValue = 1000;
+                _expSlider.value = 1000;
             }
             else
             {
-                _progessText.text = $"{progress.Exp}/{expToLevelUp}";
+                int expToLevelUp = progress.ExpToLevelUp(progress.Level);
+                _progessText.text = $"{progress.Exp}/{expToLevelUp}"; 
+                _expSlider.maxValue = expToLevelUp;
+                _expSlider.value = progress.Exp;
             }
         }
     }

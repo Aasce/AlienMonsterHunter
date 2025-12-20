@@ -222,6 +222,9 @@ GameObject:
   - component: {fileID: 787941711079123571}
   - component: {fileID: 3139058966688688544}
   - component: {fileID: 6828188812484109845}
+  - component: {fileID: 4666151006149571989}
+  - component: {fileID: 4153881465445000712}
+  - component: {fileID: 4859361620320850508}
   m_Layer: 5
   m_Name: Text Button
   m_TagString: Untagged
@@ -314,3 +317,48 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4666151006149571989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874312544859635458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3205fbb58930c4994da66254232273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6828188812484109845}
+  _sfxSuccessPlayer: {fileID: 4153881465445000712}
+  _sfxFailPlayer: {fileID: 4859361620320850508}
+--- !u!114 &4153881465445000712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874312544859635458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: UI Button Click
+  _delay: 0
+--- !u!114 &4859361620320850508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874312544859635458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70feb7e5263e2e84484203224c06eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _name: UI Button Fail Click
+  _delay: 0

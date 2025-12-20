@@ -1,19 +1,28 @@
 using Asce.Core.Attributes;
 using Asce.Core.UIs;
+using Asce.Game.Players;
+using Asce.Game.UIs;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Asce.PrepareGame.UIs.Collections
 {
-    public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler
+    public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler, IUIHighlightable
     {
         [SerializeField, Readonly] private UICollectionView<T> _collection;
         [SerializeField, Readonly] private T _item;
 
         [Header("References")]
+        [SerializeField] protected Image _background;
         [SerializeField] protected RectTransform _content;
         [SerializeField] protected RectTransform _nothingContent;
+        [SerializeField] protected UITintColor _tintColor;
 
+        [Header("Hightlight")]
+        [SerializeField] protected Color _highlightColor = Color.yellow;
+        [SerializeField] protected Color _normalColor = Color.white;
+        [SerializeField] protected Color _lockColor = Color.gray;
 
         public UICollectionView<T> Collection
         {
@@ -24,12 +33,25 @@ namespace Asce.PrepareGame.UIs.Collections
         public T Item
         {
             get => _item;
-            set => _item = value;
+            protected set => _item = value;
         }
 
+        public abstract bool IsUnlocked { get; }
+
+
+        protected void OnDestroy()
+        {
+            if (PlayerManager.Instance == null) return;
+            this.Unregister();
+        }
         protected virtual void Start()
         {
 
+        }
+
+        public void ResetStatus()
+        {
+            this.SetHighlight(false);
         }
 
         public void Set(T item)
@@ -37,6 +59,32 @@ namespace Asce.PrepareGame.UIs.Collections
             this.Unregister();
             Item = item;
             this.Register();
+        }
+
+        public void SetHighlight(bool isHighlight)
+        {
+            if (isHighlight)
+            {
+                if (IsUnlocked) _background.color = _highlightColor;
+                else _background.color = Color.Lerp(_highlightColor, _lockColor, 0.5f);
+            }
+            else
+            {
+                if (IsUnlocked) _background.color = _normalColor;
+                else _background.color = _lockColor;
+            }
+        }
+
+        protected virtual void IsShowContent(bool isShow)
+        {
+            _content.gameObject.SetActive(isShow);
+            _nothingContent.gameObject.SetActive(!isShow);
+        }
+
+        protected virtual void SetLockedState()
+        {
+            if (IsUnlocked) this.SetUnlockState();
+            else this.SetLockState();
         }
 
         protected virtual void Register()
@@ -49,18 +97,21 @@ namespace Asce.PrepareGame.UIs.Collections
 
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData)
+        protected virtual void SetLockState()
         {
-            if (Collection != null)
-            {
-                Collection.ItemClick(this);
-            }
+            _tintColor.TintColor = _lockColor;
         }
 
-        protected virtual void IsShowContent(bool isShow)
+        protected virtual void SetUnlockState()
         {
-            _content.gameObject.SetActive(isShow);
-            _nothingContent.gameObject.SetActive(!isShow);
+            _tintColor.TintColor = _normalColor;
+        }
+
+
+        public virtual void OnPointerClick(PointerEventData eventData)
+        {
+            Collection.ItemClick(this);
+            this.Highlight();
         }
     }
 }
