@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Recon Drone
   _description: 
-  _icon: {fileID: 21300000, guid: 9d73d0540573d7f49bac845dc61957e8, type: 3}
+  _icon: {fileID: 21300000, guid: 543391dfa495dd545adb21069925146d, type: 3}
   _stats: {fileID: 11400000, guid: ea89e70593dc2b640b512ffff41b37c7, type: 2}
   _leveling: {fileID: 11400000, guid: ab57b6ffe8973984a82302c57c72f6bc, type: 2}

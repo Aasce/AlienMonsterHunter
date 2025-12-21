@@ -29,7 +29,7 @@ MonoBehaviour:
     It cannot move.
 
     Missiles travel through terrain and obstacle.'
-  _icon: {fileID: 21300000, guid: f143f61f530ad5e4fba8e9f8e0a0d706, type: 3}
+  _icon: {fileID: 21300000, guid: 2a1946d281f4c494eac6f0edbfdcd7af, type: 3}
   _leveling: {fileID: 11400000, guid: 6a2107b15c1611d47a5c8e6466b4962d, type: 2}
   _progress: {fileID: 11400000, guid: fb706b0ee23ebf747b27471b3ae18ef5, type: 2}
   _cooldown: 0

@@ -25,7 +25,7 @@ MonoBehaviour:
 
     It
     can see through all objects.'
-  _icon: {fileID: 21300000, guid: a5103566a6c401f4198f7908c73918c7, type: 3}
+  _icon: {fileID: 21300000, guid: f9530e185cd8c56428f7570694c953d5, type: 3}
   _leveling: {fileID: 11400000, guid: dbe6bf53ef3729c46974c3c27e1498df, type: 2}
   _progress: {fileID: 11400000, guid: f2bab49be70a0984fb0aeb3dd0be3966, type: 2}
   _cooldown: 18

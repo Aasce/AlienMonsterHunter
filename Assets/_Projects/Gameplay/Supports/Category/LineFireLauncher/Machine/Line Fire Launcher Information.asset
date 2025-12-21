@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Line Fire Launcher
   _description: 
-  _icon: {fileID: 21300000, guid: f143f61f530ad5e4fba8e9f8e0a0d706, type: 3}
+  _icon: {fileID: 21300000, guid: 2a1946d281f4c494eac6f0edbfdcd7af, type: 3}
   _stats: {fileID: 11400000, guid: e40e267d6eb457c418e399fd2dc4471a, type: 2}
   _leveling: {fileID: 11400000, guid: 8c1beea66318212448e159114b8ac53d, type: 2}

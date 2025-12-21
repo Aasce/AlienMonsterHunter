@@ -17,12 +17,6 @@ namespace Asce.PrepareGame.UIs.Collections
         public SupportProgress Progress => PlayerManager.Instance.Progress.SupportsProgress.Get(Item.Information.Name);
         public override bool IsUnlocked => Progress != null && Progress.IsUnlocked;
 
-        protected void OnDestroy()
-        {
-            if (PlayerManager.Instance == null) return;
-            this.Unregister();
-        }
-
         protected override void Register()
         {
             base.Register();

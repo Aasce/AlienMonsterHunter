@@ -23,7 +23,7 @@ MonoBehaviour:
     If an Ambulance is already deployed, it will move to the newly designated location.'
   _sideNote: The Ambulance has <color=green>{Health} Health</color>, <color=yellow>{Armor}
     Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>7 View Radius</color>.
-  _icon: {fileID: 21300000, guid: 0bcb20c5caba30d4d928bbc990d45a47, type: 3}
+  _icon: {fileID: 21300000, guid: bf2ec21a028aff945ade31434c6c6816, type: 3}
   _leveling: {fileID: 11400000, guid: 420afabc5f5db48409e0496015e5996c, type: 2}
   _progress: {fileID: 11400000, guid: 8bdc5d2e97d00194c94996ab781372ee, type: 2}
   _cooldown: 15
