@@ -1,6 +1,7 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
 using Asce.Game.UIs;
+using Asce.Game.UIs.Elements;
 using Asce.Game.UIs.Panels;
 using Asce.PrepareGame.Manager;
 using TMPro;
@@ -17,11 +18,11 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private TextMeshProUGUI _roleText;
         [SerializeField] private Slider _difficultySlider;
 
-        [Header("Joined")]
-        [SerializeField] private RectTransform _inviteContent;
-        [SerializeField] private Button _inviteButton;
+        [Header("Locked")]
+        [SerializeField] private RectTransform _lockContent;
+        [SerializeField] private Button _unlockButton;
 
-        [SerializeField] private RectTransform _joinedContent;
+        [SerializeField] private RectTransform _unlockContent;
         [SerializeField] private UILevelProgess _levelProgess;
 
         [Header("Stats")]
@@ -32,9 +33,10 @@ namespace Asce.PrepareGame.UIs
 
         public CharacterProgress Progress => PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
 
+
         private void Start()
         {
-            _inviteButton.onClick.AddListener(InviteButton_OnClick);
+            _unlockButton.onClick.AddListener(UnlockButton_OnClick);
         }
 
         public override void Set(Character character)
@@ -51,12 +53,12 @@ namespace Asce.PrepareGame.UIs
             if (Item == null) return;
             if (Item.Information == null) return;
 
-            this.SetInviteContent();
+            this.SetLockedState();
             _icon.sprite = Item.Information.Icon;
             _nameText.text = Item.Information.Name;
             _roleText.text = Item.Information.Role.ToString();
             _difficultySlider.value = Item.Information.Difficulty;
-            _statGroup.Set(Item.Information.Stats);
+            _statGroup.Set(Item.Information);
             _abilities.Set(Item.Information.AbilitiesName);
         }
 
@@ -69,12 +71,12 @@ namespace Asce.PrepareGame.UIs
 
         }
 
-        private void SetInviteContent()
+        private void SetLockedState()
         {
-            CharacterProgress progress = PlayerManager.Instance.Progress.CharactersProgress.Get(Item.Information.Name);
+            CharacterProgress progress = Progress;
             bool isUnlocked = progress != null && progress.IsUnlocked;
-            _joinedContent.gameObject.SetActive(isUnlocked);
-            _inviteContent.gameObject.SetActive(!isUnlocked);
+            _unlockContent.gameObject.SetActive(isUnlocked);
+            _lockContent.gameObject.SetActive(!isUnlocked);
 
             if (isUnlocked)
             {
@@ -86,7 +88,7 @@ namespace Asce.PrepareGame.UIs
             }
         }
 
-        private void InviteButton_OnClick()
+        private void UnlockButton_OnClick()
         {
             UIUnlockCharacterPanel unlockPanel = PrepareGameManager.Instance.UIController.PanelController.GetPanelByName("Unlock Character") as UIUnlockCharacterPanel;
             if (unlockPanel == null) return;
@@ -97,7 +99,7 @@ namespace Asce.PrepareGame.UIs
             unlockPanel.OnUnlock += (condition) =>
             {
                 Progress.Unlock(condition);
-                this.SetInviteContent();
+                this.SetLockedState();
             };
             unlockPanel.Show();
         }

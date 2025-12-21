@@ -16,7 +16,10 @@ MonoBehaviour:
   _armor: 25
   _speed: 5
   _customStats:
-    _list: []
-  _selfViewRadius: 2
-  _viewRadius: 11
-  _viewAngle: 70
+    _list:
+    - _name: SelfViewRadius
+      _value: 2
+    - _name: ViewRadius
+      _value: 11
+    - _name: ViewAngle
+      _value: 70

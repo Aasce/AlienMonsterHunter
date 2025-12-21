@@ -24,5 +24,8 @@ namespace Asce.Game.UIs
 
             OnHighlightChanged?.Invoke(_currentHighlight);
         }
+
+        public void ClearHighlight() => this.Set(null);
+        
     }
 }

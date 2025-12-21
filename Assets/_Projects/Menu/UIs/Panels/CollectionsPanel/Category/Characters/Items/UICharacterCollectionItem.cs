@@ -1,11 +1,11 @@
 using Asce.Game.Entities.Characters;
 using Asce.Game.Players;
-using Asce.Game.UIs;
+using Asce.Game.UIs.Elements;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.MainMenu.UIs.Characters
+namespace Asce.MainMenu.UIs.Panels.Characters
 {
     public class UICharacterCollectionItem : UICollectionItem<Character>
     {

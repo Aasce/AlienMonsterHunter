@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.MainMenu.UIs.Supports
+namespace Asce.MainMenu.UIs.Panels.Collections
 {
     public class UISupportCollectionItem : UICollectionItem<Support>
     {

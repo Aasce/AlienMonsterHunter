@@ -2,8 +2,6 @@ using Asce.Game.UIs;
 using Asce.Core.Utils;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using Asce.PrepareGame.Picks;
 
 namespace Asce.PrepareGame.UIs.Collections
 {
@@ -33,7 +31,7 @@ namespace Asce.PrepareGame.UIs.Collections
             {
                 if (item == null) continue;
                 UICollectionItem<T> uiItem = _pool.Activate(out bool isCreated);
-                if (item == null) continue;
+                if (uiItem == null) continue;
 
                 if (isCreated) uiItem.Collection = this;
                 uiItem.Set(item);

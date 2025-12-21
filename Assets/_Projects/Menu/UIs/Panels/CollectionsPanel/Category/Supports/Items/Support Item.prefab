@@ -238,16 +238,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05aa543c2d5ce8a42836b05745261298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 0}
   _background: {fileID: 7336084403405135478}
   _content: {fileID: 8531164016054723734}
   _nothingContent: {fileID: 542440242610861879}
   _tintColor: {fileID: 9144188406757709891}
   _unlockContent: {fileID: 4171688424903220665}
   _lockContent: {fileID: 1626673912187462698}
-  _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _highlightColor: {r: 0, g: 1, b: 1, a: 1}
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _collection: {fileID: 0}
+  _item: {fileID: 0}
   _nameText: {fileID: 3557779624935711727}
   _icon: {fileID: 3840558315787909753}
   _levelText: {fileID: 4819795987169743098}

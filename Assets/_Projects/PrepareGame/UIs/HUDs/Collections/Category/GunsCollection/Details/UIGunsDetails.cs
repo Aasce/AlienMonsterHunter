@@ -1,5 +1,6 @@
 using Asce.Game.Guns;
 using Asce.Game.Players;
+using Asce.Game.UIs.Elements;
 using Asce.Game.UIs.Panels;
 using Asce.PrepareGame.Manager;
 using System;
@@ -16,11 +17,11 @@ namespace Asce.PrepareGame.UIs
         [SerializeField] private Image _icon;
 
         [Header("Purchase")]
-        [SerializeField] private RectTransform _buyContent;
-        [SerializeField] private Button _buyButton;
+        [SerializeField] private RectTransform _lockContent;
+        [SerializeField] private Button _unlockButton;
 
         [Space]
-        [SerializeField] private RectTransform _purchasedContent;
+        [SerializeField] private RectTransform _unlockedContent;
         [SerializeField] private TextMeshProUGUI _level;
         [SerializeField] private Button _upgradeButton;
 
@@ -32,9 +33,15 @@ namespace Asce.PrepareGame.UIs
 
         private void Start()
         {
-            _buyButton.onClick.AddListener(BuyButton_OnClick);
+            _unlockButton.onClick.AddListener(UnlockButton_OnClick);
             _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
         }
+		
+		private void OnDestroy()
+		{
+			if (PlayerManager.Instance == null) return;
+			this.Unregister();
+		}
 
         public override void Set(Gun gun)
         {
@@ -54,7 +61,7 @@ namespace Asce.PrepareGame.UIs
             _magazineGroup.Set(Item.Information);
             _gunMode.Set(null);
 
-            this.SetPurchasedState();
+            this.SetLockedState();
             Progress.OnLevelChanged += Progress_OnLevelChanged;
         }
 
@@ -66,14 +73,14 @@ namespace Asce.PrepareGame.UIs
             Progress.OnLevelChanged -= Progress_OnLevelChanged;
         }
 
-        private void SetPurchasedState()
+        private void SetLockedState()
         {
             GunProgress progress = Progress;
-            bool isPurchased = progress != null && progress.IsUnlocked;
-            _purchasedContent.gameObject.SetActive(isPurchased);
-            _buyContent.gameObject.SetActive(!isPurchased);
+            bool isUnlocked = progress != null && progress.IsUnlocked;
+            _unlockedContent.gameObject.SetActive(isUnlocked);
+            _lockContent.gameObject.SetActive(!isUnlocked);
 
-            if (isPurchased)
+            if (isUnlocked)
             {
                 _level.text = $"lv. {progress.Level}";
             }
@@ -83,7 +90,7 @@ namespace Asce.PrepareGame.UIs
             }
         }
 
-        private void BuyButton_OnClick()
+        private void UnlockButton_OnClick()
         {
             UIUnlockGunPanel unlockPanel = PrepareGameManager.Instance.UIController.PanelController.GetPanelByName("Unlock Gun") as UIUnlockGunPanel;
             if (unlockPanel == null) return;
@@ -94,7 +101,7 @@ namespace Asce.PrepareGame.UIs
             unlockPanel.OnUnlock += (condition) =>
             {
                 Progress.Unlock(condition);
-                this.SetPurchasedState();
+                this.SetLockedState();
             };
             unlockPanel.Show();
         }

@@ -176,5 +176,36 @@ namespace Asce.Core.Utils
                 if (negative) span[0] = '-'; // Add minus sign if needed
             });
         }
+
+        /// <summary>
+        ///     Splits a PascalCase or CamelCase string into words by inserting spaces
+        ///     before uppercase letters. Numbers and special characters are preserved.
+        /// </summary>
+        /// <param name="self"> The source string. </param>
+        /// <returns> A human-readable string with spaces between words. </returns>
+        public static string SplitByUppercase(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return self;
+
+            StringBuilder builder = new (self.Length * 2);
+
+            for (int i = 0; i < self.Length; i++)
+            {
+                char current = self[i];
+
+                if (i > 0 
+                    && char.IsUpper(current) 
+                    && (char.IsLower(self[i - 1]) 
+                    || char.IsDigit(self[i - 1])))
+                {
+                    builder.Append(' ');
+                }
+
+                builder.Append(current);
+            }
+
+            return builder.ToString();
+        }
     }
 }

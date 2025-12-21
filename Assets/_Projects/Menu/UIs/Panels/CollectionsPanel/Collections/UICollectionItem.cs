@@ -6,12 +6,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Asce.MainMenu.UIs
+namespace Asce.MainMenu.UIs.Panels
 {
     public abstract class UICollectionItem<T> : UIComponent, IPointerClickHandler, IUIHighlightable where T : MonoBehaviour
     {
-        [SerializeField, Readonly] protected T _item;
-
         [Header("References")]
         [SerializeField] protected Image _background;
         [SerializeField] protected RectTransform _content;
@@ -27,11 +25,23 @@ namespace Asce.MainMenu.UIs
         [SerializeField] protected Color _normalColor = Color.white;
         [SerializeField] protected Color _lockColor = Color.gray;
 
+        // Runtime
+        [SerializeField, Readonly] private UICollectionView<T> _collection;
+        [SerializeField, Readonly] protected T _item;
+
+
+        public UICollectionView<T> Collection
+        {
+            get => _collection;
+            set => _collection = value;
+        }
+
         public T Item
         {
             get => _item;
             protected set => _item = value;
         }
+
         public abstract bool IsUnlocked { get; }
 
 
@@ -109,6 +119,7 @@ namespace Asce.MainMenu.UIs
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
+            Collection.ItemClick(this);
             this.Highlight();
         }
     }

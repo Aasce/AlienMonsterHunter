@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Asce.Game.UIs
+namespace Asce.Game.UIs.Elements
 {
     public class UILevelProgess : UIComponent
     {

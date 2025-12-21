@@ -3,10 +3,10 @@ using Asce.Game.Maps;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Asce.MainMenu.UIs.Maps
+namespace Asce.MainMenu.UIs.Panels.Collections
 {
     public class UIMapCollection : UICollectionView<Map>
     {
-        protected override IEnumerable<Map> Items => GameManager.Instance.AllMaps.Maps;
+        public override IEnumerable<Map> GetCollection() => GameManager.Instance.AllMaps.Maps;
     }
 }

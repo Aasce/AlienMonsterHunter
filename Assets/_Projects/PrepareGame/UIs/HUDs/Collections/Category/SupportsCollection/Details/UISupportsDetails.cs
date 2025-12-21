@@ -41,6 +41,12 @@ namespace Asce.PrepareGame.UIs
             _upgradeButton.onClick.AddListener(UpgradeButton_OnClick);
         }
 
+		private void OnDestroy()
+		{
+			if (PlayerManager.Instance == null) return;
+			this.Unregister();
+		}
+		
         public override void Set(Support support)
         {
             if (Item == support) return;
