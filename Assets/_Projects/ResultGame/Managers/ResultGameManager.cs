@@ -74,7 +74,7 @@ namespace Asce.ResultGame
         private void SaveAll()
         {
             PlayerManager.Instance.Progress.SaveAll();
-            PlayerManager.Instance.Currencies.SaveAll();
+            PlayerManager.Instance.Items.SaveAll();
         }
     }
 }

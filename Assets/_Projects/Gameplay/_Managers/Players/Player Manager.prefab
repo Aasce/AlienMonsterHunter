@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3672929951666991886}
   - component: {fileID: 7058479447911738475}
   m_Layer: 0
-  m_Name: Currencies
+  m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963c33bad381c544b7cbcdd254468a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curencies: []
+  _items: []
 --- !u!1 &2472306051843444719
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _currencies: {fileID: 7058479447911738475}
+  _items: {fileID: 7058479447911738475}
   _progress: {fileID: 6699790918567726608}
 --- !u!1001 &22587167100108884
 PrefabInstance:

@@ -1,4 +1,5 @@
 using Asce.Game.Managers;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asce.Game.Progress
@@ -15,6 +16,9 @@ namespace Asce.Game.Progress
 
         [SerializeField] private int _endCharacterLevel = 0;
         [SerializeField] private int _endCharacterExp = 0;
+
+        [Space]
+        [SerializeField] private Dictionary<string, int> _spoils = new();
 
         public GameResultType FinalResult
         {
@@ -52,5 +56,6 @@ namespace Asce.Game.Progress
             set => _endCharacterExp = value;
         }
 
+        public Dictionary<string, int> Spoils => _spoils;
     }
 }

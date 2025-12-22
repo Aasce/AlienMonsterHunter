@@ -65,7 +65,7 @@ namespace Asce.PrepareGame.Manager
         {
             PrepareGameSaveLoadController.Instance.SaveLastPick();
             PlayerManager.Instance.Progress.SaveAll();
-            PlayerManager.Instance.Currencies.SaveAll();
+            PlayerManager.Instance.Items.SaveAll();
         }
     }
 }

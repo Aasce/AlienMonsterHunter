@@ -25,7 +25,13 @@ namespace Asce.ResultGame
         public override void Ready()
         {
             base.Ready();
-            _awards.AddRange(GetMapLevelAward());
+
+            foreach (Award award in GetMapLevelAward())
+                AddOrMergeAward(_awards, award);
+
+            foreach (Award award in GetSpoilsAward())
+                AddOrMergeAward(_awards, award);
+
             foreach (Award award in _awards)
             {
                 if (award == null) continue;
@@ -33,10 +39,7 @@ namespace Asce.ResultGame
                 SO_ItemInformation itemInformation = GameManager.Instance.AllItems.Get(award.ItemName);
                 if (itemInformation == null) continue;
 
-                if (itemInformation.Type == ItemType.Currency)
-                {
-                    PlayerManager.Instance.Currencies.Add(itemInformation.Name, award.Quantity);
-                }
+                PlayerManager.Instance.Items.Add(itemInformation.Name, award.Quantity);
             }
         }
 
@@ -73,6 +76,24 @@ namespace Asce.ResultGame
             return awards;
         }
 
+        private List<Award> GetSpoilsAward()
+        {
+            List<Award> awards = new();
+            foreach (var spoil in ResultGameManager.Instance.ResultData.Spoils)
+            {
+                Award award = awards.FirstOrDefault(a => a != null && a.ItemName == spoil.Key);
+                if (award == null)
+                {
+                    awards.Add(new Award(spoil.Key, spoil.Value));
+                }
+                else
+                {
+                    award.AddQuantity(spoil.Value);
+                }
+            }
+            return awards;
+        }
+
         private void AddMapLevelAward(List<Award> awards, IEnumerable<MapLevelAward> levelAwards)
         {
             if (awards == null || levelAwards == null) return;
@@ -92,5 +113,21 @@ namespace Asce.ResultGame
             }
 
         }
+
+        private void AddOrMergeAward(List<Award> target, Award source)
+        {
+            if (target == null || source == null) return;
+
+            Award existing = target.FirstOrDefault(a => a.ItemName == source.ItemName);
+            if (existing == null)
+            {
+                target.Add(source);
+            }
+            else
+            {
+                existing.AddQuantity(source.Quantity);
+            }
+        }
+
     }
 }

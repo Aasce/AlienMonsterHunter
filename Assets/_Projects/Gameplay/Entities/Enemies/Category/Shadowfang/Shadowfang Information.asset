@@ -17,3 +17,4 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 210f591cd7f173b4aa14e3bf9b5154a0, type: 3}
   _stats: {fileID: 11400000, guid: 8dbc6f985973f8b42b13ab3edcbc379c, type: 2}
   _leveling: {fileID: 11400000, guid: d0dc4a9cef1d4d640a9aaaa8e788a223, type: 2}
+  _droppedSpoils: {fileID: 11400000, guid: ead0be1159b4d1e4aa2d4ff74818794e, type: 2}

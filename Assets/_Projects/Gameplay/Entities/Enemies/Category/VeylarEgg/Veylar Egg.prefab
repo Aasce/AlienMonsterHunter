@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: avoidancePriority
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2192480310481607389, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 5025102880806509642}
     - target: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _animator
       value: 
@@ -477,6 +481,17 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
   m_PrefabInstance: {fileID: 1756691702652029319}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &435799071047291738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2192480310481607389, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 1756691702652029319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0fbb2719c16f942b18402988a07689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &817682861487012106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1385415373530656909, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
@@ -517,6 +532,7 @@ MonoBehaviour:
   _view: {fileID: 4547059529840165809}
   _stats: {fileID: 7868425259011323074}
   _effects: {fileID: 2864796784199680295}
+  _spoils: {fileID: 435799071047291738}
   _ui: {fileID: 5366409310128341553}
   _agent: {fileID: 86324163763525622}
   _targetDetection: {fileID: 817682861487012106}

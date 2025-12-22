@@ -15,6 +15,7 @@ namespace Asce.Game.Entities.Enemies
     public abstract class Enemy : Entity, IHasAgent, IHasEntityUI, ISaveable<EnemySaveData>, ILoadable<EnemySaveData>
     {
         [Header("Enemy")]
+        [SerializeField, Readonly] protected EnemySpoils _spoils;
         [SerializeField, Readonly] protected EnemyUI _ui;
         [SerializeField, Readonly] protected NavMeshAgent _agent;
         [SerializeField, Readonly] private SingleTargetDetection _targetDetection;
@@ -26,6 +27,7 @@ namespace Asce.Game.Entities.Enemies
         public new EnemyView View => base.View as EnemyView;
         public new EnemyStats Stats => base.Stats as EnemyStats;
 
+        public EnemySpoils Spoils => _spoils;
         public EnemyUI UI => _ui;
         public NavMeshAgent Agent => _agent;
         public SingleTargetDetection TargetDetection => _targetDetection;
@@ -38,6 +40,10 @@ namespace Asce.Game.Entities.Enemies
         protected override void RefReset()
         {
             base.RefReset();
+            if (this.LoadComponent(out _spoils))
+            {
+                _spoils.Owner = this;
+            }
             if (this.LoadComponent(out _ui))
             {
                 _ui.Owner = this;
@@ -49,6 +55,7 @@ namespace Asce.Game.Entities.Enemies
         public override void Initialize()
         {
             base.Initialize();
+            Spoils.Initialize();
             UI.Initialize();
             Agent.speed = Stats.Speed.FinalValue;
             AttackCooldown.BaseTime = Stats.AttackSpeed.FinalValue;

@@ -59,7 +59,7 @@ namespace Asce.MainMenu
         {
             MainMenuSaveLoadController.Instance.SaveLastPick();
             PlayerManager.Instance.Progress.SaveAll();
-            PlayerManager.Instance.Currencies.SaveAll();
+            PlayerManager.Instance.Items.SaveAll();
         }
 
     }

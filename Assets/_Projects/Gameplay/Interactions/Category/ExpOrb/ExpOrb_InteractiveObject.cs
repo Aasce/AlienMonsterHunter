@@ -15,11 +15,10 @@ namespace Asce.Game.Interactions
         [Space]
         [SerializeField] private Cooldown _despawnCooldown = new(60f);
         [SerializeField] private LayerMask _interactLayer;
+
+        [Header("Runtime")]
+        [SerializeField, Readonly] private int _expAmount = 0;
         private bool _isValid = true;
-
-
-        [Space]
-        [SerializeField, Min(0)] private int _expAmount = 0;
 
         public Rigidbody2D Rigidbody => _rigidbody;
         public int ExpAmount

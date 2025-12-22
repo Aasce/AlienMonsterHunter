@@ -7,7 +7,7 @@ namespace Asce.Game.Players
     public class PlayerManager : DontDestroyOnLoadSingleton<PlayerManager>
     {
         [SerializeField] private Player _player;
-        [SerializeField] private PlayerCurrencies _currencies;
+        [SerializeField] private PlayerItems _items;
         [SerializeField] private PlayerProgress _progress;
 
         public Player Player
@@ -16,12 +16,12 @@ namespace Asce.Game.Players
             protected set => _player = value;
         }
 
-        public PlayerCurrencies Currencies => _currencies;
+        public PlayerItems Items => _items;
         public PlayerProgress Progress => _progress;
 
         private void Reset()
         {
-            this.LoadComponent(out _currencies);
+            this.LoadComponent(out _items);
             this.LoadComponent(out _progress);
         }
 

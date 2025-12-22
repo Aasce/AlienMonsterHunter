@@ -514,6 +514,10 @@ PrefabInstance:
       propertyPath: _obstacleLayer.m_Bits
       value: 65728
       objectReference: {fileID: 0}
+    - target: {fileID: 2192480310481607389, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 4219010634262668761}
     - target: {fileID: 2844976745216395830, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
       propertyPath: _animator
       value: 
@@ -670,6 +674,7 @@ MonoBehaviour:
   _view: {fileID: 3074325819203815600}
   _stats: {fileID: 8683527855374450627}
   _effects: {fileID: 3634854571261446694}
+  _spoils: {fileID: 1422030774116358235}
   _ui: {fileID: 6902053760383945008}
   _agent: {fileID: 1478019436663364855}
   _targetDetection: {fileID: 2227218842495660555}
@@ -718,6 +723,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 782725079248451543, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
   m_PrefabInstance: {fileID: 995665286645039750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1422030774116358235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2192480310481607389, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}
+  m_PrefabInstance: {fileID: 995665286645039750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0fbb2719c16f942b18402988a07689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &1478019436663364855 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1824989832164351601, guid: 8dbcc303ec277b54a8194325c932eb7e, type: 3}

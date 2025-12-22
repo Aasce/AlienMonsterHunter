@@ -180,5 +180,84 @@ namespace Asce.Core.Utils
             list.Add(element);
         }
 
+        /// <summary>
+        ///     Filters a collection based on include and exclude lists using element comparison.
+        ///     <br/>
+        ///     Include has higher priority than exclude.
+        /// </summary>
+        /// <param name="self">Source collection</param>
+        /// <param name="include"> Keys to include (optional) </param>
+        /// <param name="exclude"> Keys to exclude (optional) </param>
+        /// <returns> Filtered list </returns>
+        public static List<T> FilterByIncludeExclude<T>(
+            this IEnumerable<T> self,
+            ICollection<T> include = null,
+            ICollection<T> exclude = null)
+        {
+            List<T> result = new();
+
+            bool hasInclude = include != null && include.Count > 0;
+            bool hasExclude = exclude != null && exclude.Count > 0;
+
+            foreach (T element in self)
+            {
+                if (hasInclude)
+                {
+                    if (!include.Contains(element)) continue;
+                }
+                else if (hasExclude)
+                {
+                    if (exclude.Contains(element)) continue;
+                }
+
+                result.Add(element);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Filters a collection based on include and exclude lists.
+        ///     <br/>
+        ///     If include list is provided and not empty, only elements matching include will be kept.
+        ///     <br/>
+        ///     Otherwise, all elements will be included except those matching exclude.
+        /// </summary>
+        /// <typeparam name="T"> Element type </typeparam>
+        /// <typeparam name="TKey"> Key type used for filtering </typeparam>
+        /// <param name="self">Source collection</param>
+        /// <param name="keySelector"> Key selector for comparison. </param>
+        /// <param name="include"> Keys to include (optional) </param>
+        /// <param name="exclude"> Keys to exclude (optional) </param>
+        /// <returns> Filtered list </returns>
+        public static List<T> FilterByIncludeExclude<T, TKey>(
+            this IEnumerable<T> self,
+            Func<T, TKey> keySelector,
+            ICollection<TKey> include = null,
+            ICollection<TKey> exclude = null)
+        {
+            List<T> result = new();
+
+            bool hasInclude = include != null && include.Count > 0;
+            bool hasExclude = exclude != null && exclude.Count > 0;
+
+            foreach (T element in self)
+            {
+                TKey key = keySelector(element);
+
+                if (hasInclude)
+                {
+                    if (!include.Contains(key)) continue;
+                }
+                else if (hasExclude)
+                {
+                    if (exclude.Contains(key)) continue;
+                }
+
+                result.Add(element);
+            }
+
+            return result;
+        }
     }
 }

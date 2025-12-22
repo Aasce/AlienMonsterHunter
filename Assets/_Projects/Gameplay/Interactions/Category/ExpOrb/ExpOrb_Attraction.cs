@@ -1,7 +1,7 @@
-using Asce.Game.Entities.Characters;
 using Asce.Core;
 using Asce.Core.Attributes;
 using Asce.Core.Utils;
+using Asce.Game.Entities.Characters;
 using UnityEngine;
 
 namespace Asce.Game.Interactions
@@ -10,20 +10,19 @@ namespace Asce.Game.Interactions
     public class ExpOrb_Attraction : GameComponent
     {
         [Header("Settings")]
-        [SerializeField, Min(0f)] private float _detectRadius = 5f;
+        [SerializeField, Min(0f)] private float _detectRadius = 25f;
         [SerializeField, Min(0f)] private float _moveSpeed = 5f;
         [SerializeField, Min(0f)] private float _stopDistance = 0.2f;
         [SerializeField] private Cooldown _findTargetCooldown = new(1f);
 
         [Space]
         [SerializeField] private LayerMask _targetLayer;
-        [SerializeField] private LayerMask _obstacleLayer;
 
         [Header("References")]
         [SerializeField, Readonly] private ExpOrb_InteractiveObject _expOrb;
-        private readonly RaycastHit2D[] _cacheHits = new RaycastHit2D[10];
-
         private Transform _target;
+        private ContactFilter2D _filter;
+        private Collider2D[] _overlapResults = new Collider2D[8];
 
         public Rigidbody2D Rigidbody => _expOrb.Rigidbody;
 
@@ -33,59 +32,53 @@ namespace Asce.Game.Interactions
             this.LoadComponent(out _expOrb);
         }
 
-        private void FixedUpdate()
+        private void Start()
+        {
+            _filter = new ContactFilter2D()
+            {
+                useLayerMask = true,
+                layerMask = _targetLayer,
+                useTriggers = true,
+            };
+        }
+
+        private void Update()
         {
             if (_target == null || !_target.gameObject.activeInHierarchy)
             {
-                _findTargetCooldown.Update(Time.fixedDeltaTime);
+                _findTargetCooldown.Update(Time.deltaTime);
                 if (_findTargetCooldown.IsComplete)
                 {
-                    FindTarget();
+                    this.FindTarget();
                     _findTargetCooldown.Reset();
                 }
                 return;
             }
 
-            if (!CanSeeTarget())
-            {
-                _target = null;
-                return;
-            }
-
-            MoveTowardTarget();
+            this.MoveTowardTarget();
         }
 
         private void FindTarget()
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _detectRadius, _targetLayer);
-            if (hits.Length == 0) return;
+            int count = Physics2D.OverlapCircle(transform.position, _detectRadius, _filter, _overlapResults);
+            if (count <= 0) return;
 
-            _target = hits[0].transform;
-        }
-
-        private bool CanSeeTarget()
-        {
-            if (_target == null) return false;
-
-            Vector2 dir = (_target.transform.position - transform.position).normalized;
-            float dist = Vector2.Distance(transform.position, _target.transform.position);
-
-            int count = Physics2D.RaycastNonAlloc(transform.position, dir, _cacheHits, dist, _targetLayer | _obstacleLayer);
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
-                RaycastHit2D hit = _cacheHits[i];
-                if (LayerUtils.IsInLayerMask(hit.collider.gameObject.layer, _obstacleLayer))
-                    return false;
-
-                if (hit.collider.TryGetComponent(out Character _))
-                    return true;
+                if (_overlapResults[i].transform.TryGetComponent(out Character character))
+                {
+                    _target = _overlapResults[i].transform;
+                }
             }
-
-            return false;
         }
+
         private void MoveTowardTarget()
         {
-            if (_target == null) return;
+            if (_target == null)
+            {
+                _expOrb.Rigidbody.linearVelocity = Vector2.zero;
+                return;
+            }
 
             Vector2 dir = (_target.transform.position - transform.position);
             float distance = dir.magnitude;

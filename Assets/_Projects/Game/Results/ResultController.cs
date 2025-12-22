@@ -2,6 +2,7 @@ using Asce.Game.Managers;
 using Asce.Game.Progress;
 using Asce.Core;
 using UnityEngine;
+using Asce.Game.Items;
 
 namespace Asce.MainGame.Managers
 {
@@ -36,6 +37,11 @@ namespace Asce.MainGame.Managers
 
             _resultData.EndCharacterLevel = MainGameManager.Instance.Player.Character.Leveling.CurrentLevel;
             _resultData.EndCharacterExp = MainGameManager.Instance.Player.Character.Leveling.CurrentExp;
+
+            foreach (var spoil in SpoilsController.Instance.Spoils)
+            { 
+                _resultData.Spoils.Add(spoil.Key, spoil.Value);
+            }
 
             GameManager.Instance.Shared.SetOrAdd("ResultGame", _resultData);
         }

@@ -5007,7 +5007,7 @@ Transform:
   m_GameObject: {fileID: 6308588707122919636}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.35, y: -0.72, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5026,8 +5026,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f402bf7ba62e5e4ea4ca28579d5d3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 
   _information: {fileID: 11400000, guid: 507ac2965b70c6e4b84efebb8b0d6a8c, type: 2}
   _isInteractable: 0
+  _interactDistance: 1
   _collider: {fileID: 7780491293763387028}
   _rigidbody: {fileID: 2870842909979550712}
   _despawnCooldown:
@@ -5049,8 +5051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a738e0a05a68f40a8275109fb46a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectRadius: 15
-  _moveSpeed: 2
+  _detectRadius: 30
+  _moveSpeed: 5
   _stopDistance: 0.2
   _findTargetCooldown:
     _baseTime: 1
@@ -5058,9 +5060,6 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  _obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
   _expOrb: {fileID: 5365583952029499183}
 --- !u!58 &7780491293763387028
 CircleCollider2D:

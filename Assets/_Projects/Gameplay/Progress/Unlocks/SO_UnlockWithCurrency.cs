@@ -22,13 +22,13 @@ namespace Asce.Game.Progress
         {
             if (!Application.isPlaying) return false;
             if (PlayerManager.Instance == null) return false;
-            return PlayerManager.Instance.Currencies.CanSpend(CurrencyName, Cost);
+            return PlayerManager.Instance.Items.CanSpend(CurrencyName, Cost);
         }
 
         public override void Met()
         {
             if (PlayerManager.Instance == null) return;
-            PlayerManager.Instance.Currencies.TrySpend(CurrencyName, Cost);
+            PlayerManager.Instance.Items.TrySpend(CurrencyName, Cost);
         }
     }
 }
