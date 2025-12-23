@@ -8,6 +8,7 @@ namespace Asce.Game.Maps
     public class MapLevelGameStateCondition
     {
         [SerializeField] private string _conditionName;
+        [SerializeField] private string _description;
 
         [SerializeField]
         private ListObjects<string, CustomValue> _customValues = new((custom) =>
@@ -28,5 +29,6 @@ namespace Asce.Game.Maps
         }
 
         public string ConditionName => _conditionName;
+        public string Description => _description;
     }
 }

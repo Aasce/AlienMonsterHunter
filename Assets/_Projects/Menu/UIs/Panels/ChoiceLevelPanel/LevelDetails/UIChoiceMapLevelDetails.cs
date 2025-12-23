@@ -17,6 +17,8 @@ namespace Asce.MainMenu.UIs.Panels
 
         [Space]
         [SerializeField] private Pool<UIMapLevelEnemyInformationItem> _enemyPool = new();
+        [SerializeField] private Pool<UIMapLevelConditionInformationItem> _questPool = new();
+        [SerializeField] private Pool<UIMapLevelConditionInformationItem> _conditionPool = new();
 
         [Header("Runtime")]
         [SerializeField, Readonly] private SO_MapLevelInformation _level;
@@ -42,6 +44,20 @@ namespace Asce.MainMenu.UIs.Panels
         {
             if (_level == null) return;
 
+            _levelText.text = $"Level {_level.Level}";
+            this.SetLevelEnemies();
+            this.SetLevelQuests();
+            this.SetLevelConditions();
+            this.SetBestPlay();
+        }
+
+        private void Unregister()
+        {
+
+        }
+
+        private void SetLevelEnemies()
+        {
             _enemyPool.Clear(onClear: i => i.Hide());
             foreach (MapLevelEnemy enemy in _level.Enemies)
             {
@@ -52,14 +68,34 @@ namespace Asce.MainMenu.UIs.Panels
                 uiEnemy.RectTransform.SetAsLastSibling();
                 uiEnemy.Show();
             }
-
-            _levelText.text = $"Level {_level.Level}";
-            this.SetBestPlay();
         }
 
-        private void Unregister()
+        private void SetLevelQuests()
         {
+            _questPool.Clear(onClear: i => i.Hide());
+            foreach (MapLevelGameStateCondition condition in _level.WinConditions)
+            {
+                UIMapLevelConditionInformationItem uiQuest = _questPool.Activate();
+                if (uiQuest == null) continue;
+                uiQuest.Set(condition);
 
+                uiQuest.RectTransform.SetAsLastSibling();
+                uiQuest.Show();
+            }
+        }
+
+        private void SetLevelConditions()
+        {
+            _conditionPool.Clear(onClear: i => i.Hide());
+            foreach (MapLevelGameStateCondition condition in _level.LoseConditions)
+            {
+                UIMapLevelConditionInformationItem uiCondition = _conditionPool.Activate();
+                if (uiCondition == null) continue;
+                uiCondition.Set(condition);
+
+                uiCondition.RectTransform.SetAsLastSibling();
+                uiCondition.Show();
+            }
         }
 
         private void SetBestPlay()

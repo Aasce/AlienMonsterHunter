@@ -21,15 +21,18 @@ MonoBehaviour:
     _quantity: 80
   _winConditions:
   - _conditionName: All Enemies Defeated
+    _description: Defeat all enemies in the area to complete the quest.
     _customValues:
       _list: []
   _loseConditions:
   - _conditionName: Overtime
+    _description: Failed if time exceeds 20 minutes.
     _customValues:
       _list:
       - _name: Time
         _value: 1200
   - _conditionName: Player Lives
+    _description: Failed after 3 deaths.
     _customValues:
       _list:
       - _name: MaxLives
