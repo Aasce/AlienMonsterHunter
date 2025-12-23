@@ -49,7 +49,10 @@ namespace Asce.MainGame.Managers
             }
 
             Map mapPrefab = GameManager.Instance.AllMaps.Get(mapLevelData.MapName);
-            SO_MapLevelInformation levelInformation = mapPrefab.Information.GetLevel(mapLevelData.Level);
+            Map map = Instantiate(mapPrefab);
+            EnviromentController.Instance.SetMap(map);
+
+            SO_MapLevelInformation levelInformation = map.Information.GetLevel(mapLevelData.Level);
             this.CreateWinLoseCondition(levelInformation);
             this.CreateSpawners(levelInformation);
         }

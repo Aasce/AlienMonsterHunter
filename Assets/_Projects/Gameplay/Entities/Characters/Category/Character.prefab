@@ -344,25 +344,28 @@ MonoBehaviour:
   _abilities:
   - _id: ability_container_d93368c6897945d89a97c6132715afb4
     _name: 
-    _level: 0
+    _abilityPrefab: {fileID: 0}
+    _abilityInstance: {fileID: 0}
     _cooldown:
       _baseTime: 0
       _currentTime: 0
-    _abilityPrefab: {fileID: 0}
+    _level: 0
   - _id: ability_container_cd32a35d21124f529d01d9b79459533f
     _name: 
-    _level: 0
+    _abilityPrefab: {fileID: 0}
+    _abilityInstance: {fileID: 0}
     _cooldown:
       _baseTime: 0
       _currentTime: 0
-    _abilityPrefab: {fileID: 0}
+    _level: 0
   - _id: ability_container_3af1dd81fca748c8809ced9f6703e851
     _name: 
-    _level: 0
+    _abilityPrefab: {fileID: 0}
+    _abilityInstance: {fileID: 0}
     _cooldown:
       _baseTime: 0
       _currentTime: 0
-    _abilityPrefab: {fileID: 0}
+    _level: 0
 --- !u!1 &4210979867210258495
 GameObject:
   m_ObjectHideFlags: 0

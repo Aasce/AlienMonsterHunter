@@ -10,6 +10,7 @@ namespace Asce.Game.Maps
     {
         [SerializeField] private string _name;
         [SerializeField, TextArea(3, 10)] private string _description;
+        [SerializeField] private Vector2 _mapSize = new (100f, 100f);
 
         [Space]
         [SerializeField, SpritePreview] private Sprite _icon;
@@ -27,6 +28,7 @@ namespace Asce.Game.Maps
 
         public string Name => _name;
         public string Description => _description;
+        public Vector2 MapSize => _mapSize;
 
         public Sprite Icon => _icon;
         public Sprite FullMap => _fullMap;

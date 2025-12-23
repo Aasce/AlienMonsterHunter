@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Sanctum of Xibalba
   _description: Sanctum of Xibalba - Jungle
+  _mapSize: {x: 75, y: 60}
   _icon: {fileID: 21300000, guid: 9f04beef9efa8e649b92380e238d219c, type: 3}
   _fullMap: {fileID: 21300000, guid: 84b0bf573943e3344963d4841b209c94, type: 3}
   _thumbnail: {fileID: 21300000, guid: 84b0bf573943e3344963d4841b209c94, type: 3}
