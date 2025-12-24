@@ -14,22 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Electro Reactor
   _name: Electro Reactor
-  _description: 'Deploys a Reactor that lasts for <color=white>{DespawnTime}s</color>.
+  _description:
+    _text: 'Deploys a Reactor that lasts for <color=white>{DespawnTime}s</color>.
 
-    The
-    Reactor unleashes electric arcs to all enemies within its range, dealing <color=orange>{Damage}
-    damage</color> every <color=white>{AttackSpeed}s</color>.
+      The
+      Reactor unleashes electric arcs to all enemies within its range, dealing <color=orange>{Damage}
+      damage</color> every <color=white>{AttackSpeed}s</color>.
 
 
-    It also establishes
-    energy links with nearby machines within <color=white>{MaxLinkDistance}m</color>
-    - enemies caught along these links take <color=orange>{LinkDamage} damage</color>
-    every <color=white>0.4s</color>.'
-  _sideNote: 'The Reactor has <color=green>{Health} Health</color>, <color=yellow>{Armor}
-    Armor</color>, <color=white>{ViewRadius} View Radius</color>.
+      It also establishes
+      energy links with nearby machines within <color=white>{MaxLinkDistance}m</color>
+      - enemies caught along these links take <color=orange>{LinkDamage} damage</color>
+      every <color=white>0.4s</color>.'
+    _sideNote: 'The Reactor has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+      Armor</color>, <color=white>{ViewRadius} View Radius</color>.
 
-    The links
-    are severed if any connected <b>Unit</b> disappears or is destroyed.'
+      The links
+      are severed if any connected <b>Unit</b> disappears or is destroyed.'
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: b7f3e75bd3df2fa42875e805b0cc5178, type: 3}
   _isPassive: 0
   _cooldown: 5

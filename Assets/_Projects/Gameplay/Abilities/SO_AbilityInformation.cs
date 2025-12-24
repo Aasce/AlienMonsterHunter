@@ -11,8 +11,7 @@ namespace Asce.Game.Abilities
     {
         [SerializeField] private string _id;
         [SerializeField] private string _name;
-        [SerializeField, TextArea(3, 10)] private string _description;
-        [SerializeField, TextArea(2, 5)] private string _sideNote;
+        [SerializeField] private Description _description = new();
         [SerializeField, SpritePreview] private Sprite _icon;
 
         [Space]
@@ -37,8 +36,7 @@ namespace Asce.Game.Abilities
 
         public string Id => _id;
         public string Name => _name;
-        public string Description => _description;
-        public string SideNote => _sideNote;
+        public Description Description => _description;
         public Sprite Icon => _icon;
 
         public bool IsPassive => _isPassive;

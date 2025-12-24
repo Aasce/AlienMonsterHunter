@@ -14,18 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Firebait Bomb
   _name: Firebait Bomb
-  _description: "Rolls a bomb that explodes after <color=white>{DespawnTime}s</color>
-    in the targeted direction, stopping when it hits an obstacle. \nThe bomb lures
-    enemies to chase and attack it; if destroyed or when its duration expires, it
-    explosion, dealing <color=orange>{ExplosionDamage} damage</color> to all enemies
-    in the area and <color=#ff99dd>Ignite</color> them.\n\n<b>Reactive</b> to detonate
-    the bomb early."
-  _sideNote: '<color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength}
-    damage</color> over <color=white>{IgniteDuration}s</color>.
+  _description:
+    _text: "Rolls a bomb that explodes after <color=white>{DespawnTime}s</color>
+      in the targeted direction, stopping when it hits an obstacle. \nThe bomb lures
+      enemies to chase and attack it; if destroyed or when its duration expires,
+      it explosion, dealing <color=orange>{ExplosionDamage} damage</color> to all
+      enemies in the area and <color=#ff99dd>Ignite</color> them.\n\n<b>Reactive</b>
+      to detonate the bomb early."
+    _sideNote: '<color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength}
+      damage</color> over <color=white>{IgniteDuration}s</color>.
 
-    The Bomb has
-    <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>, <color=#80ffff>{Speed}
-    Speed</color>, <color=white>{ViewRadius} View Radius</color>.'
+      The Bomb
+      has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
+      <color=#80ffff>{Speed} Speed</color>, <color=white>{ViewRadius} View Radius</color>.'
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: 63025f45cf3ee0c4cacaf43c9548201a, type: 3}
   _isPassive: 0
   _cooldown: 8

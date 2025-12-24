@@ -14,21 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _key: Line Fire Launcher
   _name: Line Fire Launcher
-  _description: 'The Launcher is deployed at the base at <i><color=white>Start of
-    the Game</color></i> and is <color=#ff99dd>Untargetable</color>.
+  _description:
+    _text: 'The Launcher is deployed at the base at <i><color=white>Start of the
+      Game</color></i> and is <color=#ff99dd>Untargetable</color>.
 
 
-    <b>Recall</b>:
-    Fires <b><color=white>5 Missiles</color></b> that spread out toward the designated
-    location. Each missile explodes upon hitting an enemy, dealing <color=orange>{Damage}
-    damage</color> to all enemies within a <color=white>{ExplosionRadius}m</color>
-    radius.'
-  _sideNote: '<color=#ff99dd>Untargetable</color> prevents enemies from seeing or
-    attacking.
+      <b>Recall</b>:
+      Fires <b><color=white>5 Missiles</color></b> that spread out toward the designated
+      location. Each missile explodes upon hitting an enemy, dealing <color=orange>{Damage}
+      damage</color> to all enemies within a <color=white>{ExplosionRadius}m</color>
+      radius.'
+    _sideNote: '<color=#ff99dd>Untargetable</color> prevents enemies from seeing
+      or attacking.
 
-    It cannot move.
+      It cannot move.
 
-    Missiles travel through terrain and obstacle.'
+      Missiles travel through terrain
+      and obstacle.'
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: 2a1946d281f4c494eac6f0edbfdcd7af, type: 3}
   _leveling: {fileID: 11400000, guid: 6a2107b15c1611d47a5c8e6466b4962d, type: 2}
   _progress: {fileID: 11400000, guid: fb706b0ee23ebf747b27471b3ae18ef5, type: 2}

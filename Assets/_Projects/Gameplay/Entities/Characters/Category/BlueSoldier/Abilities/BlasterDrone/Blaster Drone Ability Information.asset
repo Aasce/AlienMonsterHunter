@@ -14,15 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Blaster Drone
   _name: Blaster Drone
-  _description: Deploy a Drone that exists for <color=white>{DespawnTime}s</color>.
-    This Drone flies straight forward, bouncing back on impact. Fires a barrage of
-    bullets every <color=white>{AttackSpeed}s</color> towards visible targets, each
-    bullet dealing <color=orange>{Damage} damage</color> to the first target hit.
-  _sideNote: 'The Drone has <color=green>{Health} Health</color>, <color=yellow>{Armor}
-    Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>{ViewRadius}
-    View Radius</color>.
+  _description:
+    _text: Deploy a Drone that exists for <color=white>{DespawnTime}s</color>. This
+      Drone flies straight forward, bouncing back on impact. Fires a barrage of bullets
+      every <color=white>{AttackSpeed}s</color> towards visible targets, each bullet
+      dealing <color=orange>{Damage} damage</color> to the first target hit.
+    _sideNote: 'The Drone has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+      Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>{ViewRadius}
+      View Radius</color>.
 
-    It can see through some objects.'
+      It can see through some objects.'
+    _keys: []
+  _detailedDescription:
+    _text: Deploy a Drone that exists for <color=white>{DespawnTime}s</color>. This
+      Drone flies straight forward, bouncing back on impact. Fires a barrage of bullets
+      every <color=white>{AttackSpeed}s</color> towards visible targets, each bullet
+      dealing <color=orange>{Damage} damage</color> to the first target hit.
+    _sideNote: 'The Drone has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+      Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>{ViewRadius}
+      View Radius</color>.
+
+      It can see through some objects.'
+    _keys: []
   _icon: {fileID: 21300000, guid: 1aedf100e335f6d41bc4bc4441e06bb8, type: 3}
   _isPassive: 0
   _cooldown: 16

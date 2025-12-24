@@ -17,6 +17,14 @@ MonoBehaviour:
   _speed: 3.5
   _customStats:
     _list:
+    - _name: AttackDamage
+      _value: 15
+    - _name: AttackRange
+      _value: 2
+    - _name: AttackSpeed
+      _value: 2
+    - _name: ViewRange
+      _value: 12
     - _name: ShowDistance
       _value: 6
     - _name: DecayDuration
@@ -25,7 +33,3 @@ MonoBehaviour:
       _value: 0.1
     - _name: HealAmount
       _value: 0
-  _attackDamage: 15
-  _attackSpeed: 2
-  _attackRange: 2
-  _viewRange: 12

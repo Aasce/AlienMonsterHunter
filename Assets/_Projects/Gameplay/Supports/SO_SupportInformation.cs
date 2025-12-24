@@ -10,8 +10,7 @@ namespace Asce.Game.Supports
     {
         [SerializeField] private string _key = string.Empty;
         [SerializeField] private string _name = string.Empty;
-        [SerializeField, TextArea(3, 10)] private string _description;
-        [SerializeField, TextArea(2, 5)] private string _sideNote;
+        [SerializeField] private Description _description = new();
         [SerializeField, SpritePreview] private Sprite _icon;
 
         [Header("References")]
@@ -28,8 +27,7 @@ namespace Asce.Game.Supports
 
         public string Key => _key;
         public string Name => _name;
-        public string Description => _description;
-        public string SideNote => _sideNote;
+        public Description Description => _description;
         public Sprite Icon => _icon;
         public SO_LevelingInformation Leveling => _leveling;
         public SO_ProgressInformation Progress => _progress;

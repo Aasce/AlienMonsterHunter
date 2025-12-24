@@ -14,17 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Sentinel Turret
   _name: Sentinel Turret
-  _description: Deploy a Turret that exists for <color=white>{DespawnTime}s</color>.
-    The turret locks onto a target and fires toward the target every {AttackSpeed}s,
-    dealing <color=orange>{Damage} damage</color> and <color=#ff99dd>Slow by 0.4</color>
-    in <color=white>3s</color> to the first target hit.
-  _sideNote: '<color=#ff99dd>Slow</color> reduct target''s <color=#80ffff>Speed</color>.
+  _description:
+    _text: Deploy a Turret that exists for <color=white>{DespawnTime}s</color>. The
+      turret locks onto a target and fires toward the target every {AttackSpeed}s,
+      dealing <color=orange>{Damage} damage</color> and <color=#ff99dd>Slow by 0.4</color>
+      in <color=white>3s</color> to the first target hit.
+    _sideNote: '<color=#ff99dd>Slow</color> reduct target''s <color=#80ffff>Speed</color>.
 
-    The
-    Turret has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
-    <color=white>{ViewRadius} View Radius</color>.
+      The
+      Turret has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
+      <color=white>{ViewRadius} View Radius</color>.
 
-    It cannot move.'
+      It cannot move.'
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: 83912b7be7f789a47945b88bc72d2385, type: 3}
   _isPassive: 0
   _cooldown: 10

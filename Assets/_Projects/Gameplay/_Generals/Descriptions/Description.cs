@@ -1,37 +1,32 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Asce.Game
 {
     [System.Serializable]
-    public static class Description
+    public class Description
     {
-        public static readonly string pattern = @"\{([^{}]+)\}";
+        [SerializeField, TextArea(3, 10)] private string _text;
+        [SerializeField, TextArea(2, 5)] private string _sideNote;
 
-        /// <summary> Extract all placeholder keys inside curly brackets: {Key}. </summary>
-        public static List<string> ExtractKeys(this string description)
+        public string RawText
         {
-            List<string> keys = new();
-
-            // Regex to match {AnythingInside}
-            MatchCollection matches = Regex.Matches(description, pattern);
-
-            foreach (Match match in matches)
-            {
-                string key = match.Groups[1].Value; // Group 1 = content inside {}
-                if (!keys.Contains(key)) keys.Add(key);
-            }
-
-            return keys;
+            get => _text;
+            set => _text = value;
         }
 
-        public static string GetDescription(this string description, Dictionary<string, string> replaceContents)
+        public string SideNote
         {
-            if (string.IsNullOrEmpty(description)) return string.Empty;
-            if (replaceContents == null) return description;
+            get => _sideNote;
+            set => _sideNote = value;
+        }
 
-            List<string> keys = description.ExtractKeys();
+        public string GetDescription(Dictionary<string, string> replaceContents)
+        {
+            if (string.IsNullOrEmpty(_text)) return string.Empty;
+            List<string> keys = _text.ExtractKeys();
+
+            string description = _text;
             foreach (string key in keys)
             {
                 if (replaceContents.TryGetValue(key, out string value))
@@ -41,6 +36,22 @@ namespace Asce.Game
             }
 
             return description;
+        }
+
+        public string GetSideNote(Dictionary<string, string> replaceContents)
+        {
+            if (string.IsNullOrEmpty(_sideNote)) return string.Empty;
+            List<string> keys = _sideNote.ExtractKeys();
+
+            string sideNote = _sideNote;
+            foreach (string key in keys)
+            {
+                if (replaceContents.TryGetValue(key, out string value))
+                {
+                    sideNote = sideNote.Replace($"{{{key}}}", value);
+                }
+            }
+            return sideNote;
         }
     }
 }

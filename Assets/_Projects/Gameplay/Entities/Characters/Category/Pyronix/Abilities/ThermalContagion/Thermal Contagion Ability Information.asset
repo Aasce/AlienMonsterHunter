@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: ThermalContagion
   _name: ThermalContagion
-  _description: 'Fires a thermal projectile forward, dealing <color=orange>{Damage}
-    damage</color> and <color=#ff99dd>Ignite</color> the first enemy it hits.
+  _description:
+    _text: 'Fires a thermal projectile forward, dealing <color=orange>{Damage} damage</color>
+      and <color=#ff99dd>Ignite</color> the first enemy it hits.
 
-    If
-    the target is already <color=#ff99dd>Ignited</color>, the projectile releases
-    a thermal burst, dealing <color=orange>half of its base damage</color> and <color=#ff99dd>Ignite</color>
-    all enemies within a <color=white>{ContagionRadius}m</color> radius.
+      If the target
+      is already <color=#ff99dd>Ignited</color>, the projectile releases a thermal
+      burst, dealing <color=orange>half of its base damage</color> and <color=#ff99dd>Ignite</color>
+      all enemies within a <color=white>{ContagionRadius}m</color> radius.
 
 
-    Damage
-    dealt is doubled against <color=#ff99dd>Ignited</color> targets.'
-  _sideNote: <color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength} damage</color>
-    over <color=white>{IgniteDuration}s</color>.
+      Damage
+      dealt is doubled against <color=#ff99dd>Ignited</color> targets.'
+    _sideNote: <color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength}
+      damage</color> over <color=white>{IgniteDuration}s</color>.
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: d084719efd042bb4983ea6795040d5b2, type: 3}
   _isPassive: 0
   _cooldown: 3

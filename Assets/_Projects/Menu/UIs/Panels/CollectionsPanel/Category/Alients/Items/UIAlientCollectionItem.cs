@@ -11,6 +11,9 @@ namespace Asce.MainMenu.UIs.Panels.Collections
         [SerializeField] protected TextMeshProUGUI _nameText;
         [SerializeField] protected Image _icon;
 
+        [SerializeField] private TextMeshProUGUI _speciesText;
+        [SerializeField] private Slider _dangerLevelSlider;
+
         public override bool IsUnlocked => true;
 
         protected override void Register()
@@ -25,6 +28,9 @@ namespace Asce.MainMenu.UIs.Panels.Collections
             this.IsShowContent(true);
             _nameText.text = Item.Information.Name;
             _icon.sprite = Item.Information.Icon;
+            _speciesText.text = Item.Information.Species.ToString();
+            _dangerLevelSlider.value = Item.Information.DangerLevel;
+
             this.SetLockedState();
         }
 		

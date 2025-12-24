@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Ghost Step
   _name: Ghost Step
-  _description: Instantly heals for <color=green>{HealAmount} health</color> and
-    becomes <color=#ff99dd>Untargetable</color> for <color=white>{Duration}s</color>.
-    During this time, movement speed is increased by <color=#80ffff>*{SpeedBuff}
-    Speed</color>.
-  _sideNote: <color=#ff99dd>Untargetable</color> prevents enemies from seeing or
-    attacking.
+  _description:
+    _text: Instantly heals for <color=green>{HealAmount} health</color> and becomes
+      <color=#ff99dd>Untargetable</color> for <color=white>{Duration}s</color>. During
+      this time, movement speed is increased by <color=#80ffff>*{SpeedBuff} Speed</color>.
+    _sideNote: <color=#ff99dd>Untargetable</color> prevents enemies from seeing or
+      attacking.
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: 3561a492424272a47a2f2faba5c9d4dc, type: 3}
   _isPassive: 0
   _cooldown: 10

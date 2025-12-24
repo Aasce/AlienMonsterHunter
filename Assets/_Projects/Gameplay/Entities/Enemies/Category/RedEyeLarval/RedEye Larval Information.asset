@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: RedEye Larval Information
   m_EditorClassIdentifier: 
   _name: Red Eye Larval
-  _description: 
+  _description:
+    _text: 'A larval-stage organism of an unidentified alien species. Exhibits high
+      mobility and aggressive behavior despite its early evolutionary form. Capable
+      of rapid engagement and sustained attack pressure.
+
+
+      Rapid, repetitive
+      attacks that deal <color=orange>{AttackDamage} damage</color> with <color=orange>{AttackPenetration}
+      penetration</color> to the target.'
+    _sideNote: <color=orange>Penetration</color> ignores a portion <color=yellow>Armor</color>
+      of the target.
   _icon: {fileID: 21300000, guid: 2440082236e2dfb4783c74a7f63d7f60, type: 3}
   _stats: {fileID: 11400000, guid: 8d28fdd2599cf8244bbc85b12cb4ec80, type: 2}
   _leveling: {fileID: 11400000, guid: dbe3d7bc7e8f4e048a04e1afae4e4508, type: 2}
   _droppedSpoils: {fileID: 11400000, guid: b17a2834a650a7b4fbada425f6e4664c, type: 2}
+  _species: 5
+  _dangerLevel: 1

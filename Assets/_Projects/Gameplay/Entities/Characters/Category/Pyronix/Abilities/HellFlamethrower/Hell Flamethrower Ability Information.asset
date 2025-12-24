@@ -14,22 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Hell Flamethrower
   _name: Hell Flamethrower
-  _description: 'Deploys a Flamethrower that lasts for <color=white>{DespawnTime}s</color>,
-    continuously spewing flames forward until it overheats. The flames burn <b>all
-    entities</b> for <color=orange>{Damage} damage</color> and <color=#ff99dd>Ignite</color>
-    them. When detecting an enemy, the Flamethrower automatically adjusts its aim.
+  _description:
+    _text: 'Deploys a Flamethrower that lasts for <color=white>{DespawnTime}s</color>,
+      continuously spewing flames forward until it overheats. The flames burn <b>all
+      entities</b> for <color=orange>{Damage} damage</color> and <color=#ff99dd>Ignite</color>
+      them. When detecting an enemy, the Flamethrower automatically adjusts its aim.
 
 
-    While
-    overheated, it cannot fire until it recovers.'
-  _sideNote: '<color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength}
-    damage</color> over <color=white>{IgniteDuration}s</color>.
+      While
+      overheated, it cannot fire until it recovers.'
+    _sideNote: '<color=#ff99dd>Ignite</color> deals <color=orange>{IgniteStrength}
+      damage</color> over <color=white>{IgniteDuration}s</color>.
 
-    The Flamethrower
-    has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
-    <color=white>{ViewRadius} View Radius</color>.
+      The Flamethrower
+      has <color=green>{Health} Health</color>, <color=yellow>{Armor} Armor</color>,
+      <color=white>{ViewRadius} View Radius</color>.
 
-    It cannot move.'
+      It cannot move.'
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: b2d8c83808178014fa64c221df36a766, type: 3}
   _isPassive: 0
   _cooldown: 16

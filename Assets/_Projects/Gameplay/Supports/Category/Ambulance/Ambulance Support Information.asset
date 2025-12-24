@@ -14,15 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _key: Ambulance
   _name: Ambulance
-  _description: '<b>Call</b>: Call an Ambulance that travels from the base to the
-    target location, healing all Characters within <color=white>{HealRadius}m</color>
-    for <color=green>{HealAmount} Health</color> every <color=white>{HealInterval}s</color>.
+  _description:
+    _text: '<b>Call</b>: Call an Ambulance that travels from the base to the target
+      location, healing all Characters within <color=white>{HealRadius}m</color>
+      for <color=green>{HealAmount} Health</color> every <color=white>{HealInterval}s</color>.
 
 
-    <b>Recall</b>:
-    If an Ambulance is already deployed, it will move to the newly designated location.'
-  _sideNote: The Ambulance has <color=green>{Health} Health</color>, <color=yellow>{Armor}
-    Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>7 View Radius</color>.
+      <b>Recall</b>:
+      If an Ambulance is already deployed, it will move to the newly designated location.'
+    _sideNote: The Ambulance has <color=green>{Health} Health</color>, <color=yellow>{Armor}
+      Armor</color>, <color=#80ffff>{Speed} Speed</color>, <color=white>7 View Radius</color>.
+    _keys: []
+  _detailedDescription:
+    _text: 
+    _sideNote: 
+    _keys: []
   _icon: {fileID: 21300000, guid: bf2ec21a028aff945ade31434c6c6816, type: 3}
   _leveling: {fileID: 11400000, guid: 420afabc5f5db48409e0496015e5996c, type: 2}
   _progress: {fileID: 11400000, guid: 8bdc5d2e97d00194c94996ab781372ee, type: 2}

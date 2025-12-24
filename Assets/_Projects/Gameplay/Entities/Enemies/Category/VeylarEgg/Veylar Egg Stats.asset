@@ -17,9 +17,13 @@ MonoBehaviour:
   _speed: 0
   _customStats:
     _list:
+    - _name: AttackDamage
+      _value: 0
+    - _name: AttackSpeed
+      _value: 0
+    - _name: AttackRange
+      _value: 0
+    - _name: ViewRange
+      _value: 0
     - _name: HatchCooldown
       _value: 8
-  _attackDamage: 0
-  _attackSpeed: 0
-  _attackRange: 0
-  _viewRange: 0

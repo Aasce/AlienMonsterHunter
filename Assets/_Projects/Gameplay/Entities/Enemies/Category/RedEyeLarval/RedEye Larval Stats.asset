@@ -17,9 +17,13 @@ MonoBehaviour:
   _speed: 6
   _customStats:
     _list:
+    - _name: AttackDamage
+      _value: 5
+    - _name: AttackSpeed
+      _value: 1
+    - _name: AttackRange
+      _value: 1.5
+    - _name: ViewRange
+      _value: 15
     - _name: AttackPenetration
       _value: 10
-  _attackDamage: 5
-  _attackSpeed: 1
-  _attackRange: 1.5
-  _viewRange: 15

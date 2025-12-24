@@ -60,32 +60,11 @@ namespace Asce.Game.UIs.Elements
 
         private void SetDescription()
         {
-            Dictionary<string, string> values = new()
-            {
-                { "DespawnTime", $"{_ability.Information.DespawnTime:0.#}" },
-                { "UseRangeRadius", $"{_ability.Information.UseRangeRadius:0.#}" },
-                { "Cooldown", $"{_ability.Information.Cooldown:0.#}" },
-                { "ReactiveCooldown", $"{_ability.Information.ReactiveCooldown:0.#}" }
-            };
-            foreach (var custom in _ability.Information.Customs)
-            {
-                values.Add(custom.Name, $"{custom.Value:0.#}");
-            }
-            if (_ability is IControlMachineAbility controlMachineAbility)
-            {
-                values.Add("Health", $"{controlMachineAbility.Machine.Information.Stats.MaxHealth:0.#}");
-                values.Add("Armor", $"{controlMachineAbility.Machine.Information.Stats.Armor:0.#}");
-                values.Add("Speed", $"{controlMachineAbility.Machine.Information.Stats.Speed:0.#}");
-                foreach (var custom in controlMachineAbility.Machine.Information.Stats.CustomStats)
-                {
-                    values.Add(custom.Name, $"{custom.Value:0.#}");
-                }
-            }
-
+            Dictionary<string, string> values = DescriptionUtils.GetAbilityDescriptionKeys(_ability);
             string description = _ability.Information.Description.GetDescription(values);
             _descriptionText.text = description;
 
-            if (string.IsNullOrEmpty(_ability.Information.SideNote))
+            if (string.IsNullOrEmpty(_ability.Information.Description.SideNote))
             {
                 _descriptionDivider.gameObject.SetActive(false);
                 _sideNotesText.text = string.Empty;
@@ -94,7 +73,7 @@ namespace Asce.Game.UIs.Elements
 
             _descriptionDivider.gameObject.SetActive(true);
 
-            string sideNotes = _ability.Information.SideNote.GetDescription(values);
+            string sideNotes = _ability.Information.Description.GetSideNote(values);
             _sideNotesText.text = sideNotes;
         }
 

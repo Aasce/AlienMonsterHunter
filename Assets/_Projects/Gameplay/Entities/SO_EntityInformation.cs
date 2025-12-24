@@ -8,7 +8,7 @@ namespace Asce.Game.Entities
     public class SO_EntityInformation : ScriptableObject
     {
         [SerializeField] private string _name;
-        [SerializeField, TextArea(3, 10)] private string _description;
+        [SerializeField] private Description _description = new();
         [SerializeField, SpritePreview] private Sprite _icon;
 
         [Space]
@@ -16,7 +16,7 @@ namespace Asce.Game.Entities
         [SerializeField] protected SO_LevelingInformation _leveling;
 
         public string Name => _name;
-        public string Description => _description;
+        public Description Description => _description;
         public Sprite Icon => _icon;
 
         public SO_EntityStats Stats => _stats;

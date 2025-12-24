@@ -17,6 +17,14 @@ MonoBehaviour:
   _speed: 4
   _customStats:
     _list:
+    - _name: AttackDamage
+      _value: 4
+    - _name: AttackSpeed
+      _value: 1.5
+    - _name: AttackRange
+      _value: 2.5
+    - _name: ViewRange
+      _value: 14
     - _name: ExplosionDamage
       _value: 5
     - _name: ExplosionRadius
@@ -29,7 +37,3 @@ MonoBehaviour:
       _value: 0.15
     - _name: LayCooldown
       _value: 28
-  _attackDamage: 4
-  _attackSpeed: 1.5
-  _attackRange: 2.5
-  _viewRange: 14

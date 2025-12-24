@@ -80,26 +80,11 @@ namespace Asce.MainMenu.UIs.Panels.Collections
 
         private void SetDescription()
         {
-            Dictionary<string, string> values = new()
-            {
-                { "Cooldown", $"{Item.Information.Cooldown:0.#}" },
-                { "CooldownOnRecall", $"{Item.Information.CooldownOnRecall:0.#}" }
-            };
-            if (Item is IControlMachineAbility controlMachineAbility)
-            {
-                values.Add("Health", $"{controlMachineAbility.Machine.Information.Stats.MaxHealth:0.#}");
-                values.Add("Armor", $"{controlMachineAbility.Machine.Information.Stats.Armor:0.#}");
-                values.Add("Speed", $"{controlMachineAbility.Machine.Information.Stats.Speed:0.#}");
-                foreach (var custom in controlMachineAbility.Machine.Information.Stats.CustomStats)
-                {
-                    values.Add(custom.Name, $"{custom.Value:0.#}");
-                }
-            }
-
+            Dictionary<string, string> values = DescriptionUtils.GetSupportDescriptionKeys(Item);
             string description = Item.Information.Description.GetDescription(values);
             _descriptionText.text = description;
 
-            if (string.IsNullOrEmpty(Item.Information.SideNote))
+            if (string.IsNullOrEmpty(Item.Information.Description.SideNote))
             {
                 _descriptionDivider.gameObject.SetActive(false);
                 _sideNotesText.text = string.Empty;
@@ -108,7 +93,7 @@ namespace Asce.MainMenu.UIs.Panels.Collections
 
             _descriptionDivider.gameObject.SetActive(true);
 
-            string sideNotes = Item.Information.SideNote.GetDescription(values);
+            string sideNotes = Item.Information.Description.GetSideNote(values);
             _sideNotesText.text = sideNotes;
         }
 
