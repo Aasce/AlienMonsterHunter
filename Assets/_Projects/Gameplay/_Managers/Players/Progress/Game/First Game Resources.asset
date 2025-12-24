@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5114104da905f974481bd65b808943b8, type: 3}
+  m_Name: First Game Resources
+  m_EditorClassIdentifier: 
+  _items:
+    _list:
+    - _name: Credits
+      _value: 2000
+  _firstGameStartUnlock: {fileID: 11400000, guid: 9aa3f97210f8f074a89c6eaa61adb87c, type: 2}

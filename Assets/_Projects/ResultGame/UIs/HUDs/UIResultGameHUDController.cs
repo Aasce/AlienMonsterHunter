@@ -37,6 +37,15 @@ namespace Asce.ResultGame
             if (resultData == null) Title.Set(GameResultType.Unknown);
             else Title.Set(resultData.FinalResult);
 
+            if (resultData.FinalResult == GameResultType.Victory)
+            {
+                _nextGameButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                _nextGameButton.gameObject.SetActive(false);
+            }
+
             _mainResults.Ready();
         }
 
@@ -48,7 +57,7 @@ namespace Asce.ResultGame
 
         private void NextGameButton_OnClick()
         {
-            ResultGameManager.Instance.PlayNewGame();
+            ResultGameManager.Instance.PlayNextGame();
 
         }
 

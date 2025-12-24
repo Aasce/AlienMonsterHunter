@@ -21,9 +21,6 @@ namespace Asce.Game.Players
 
         public virtual void Initialize()
         {
-            SaveLoadPlayerProgressController playerProgressController = SaveLoadManager.Instance.GetController("Player Progress") as SaveLoadPlayerProgressController;
-            if (playerProgressController == null) return;
-
             foreach (T item in Collection)
             {
                 TProgress itemProgress = CreateProgressInstance(item);

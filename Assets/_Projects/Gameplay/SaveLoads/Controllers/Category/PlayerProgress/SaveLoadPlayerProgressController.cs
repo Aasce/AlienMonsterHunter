@@ -13,6 +13,8 @@ namespace Asce.SaveLoads
 
         public void SaveAllProgress()
         {
+            this.SaveGameProgress(PlayerManager.Instance.Progress.GameProgress);
+
             foreach (CharacterProgress progress in PlayerManager.Instance.Progress.CharactersProgress.AllProgresses)
             {
                 this.SaveCharacterProgress(progress);
@@ -26,6 +28,24 @@ namespace Asce.SaveLoads
             foreach (SupportProgress progress in PlayerManager.Instance.Progress.SupportsProgress.AllProgresses)
             {
                 this.SaveSupportProgress(progress);
+            }
+        }
+
+        public void SaveGameProgress(GameProgress gameProgress)
+        {
+            if (gameProgress is not ISaveable<GameProgressSaveData> saveable) return;
+            GameProgressSaveData saveData = saveable.Save();
+
+            SaveLoadManager.Instance.Save("GameProgress", saveData);
+        }
+
+        public void LoadGameProgress(GameProgress gameProgress)
+        {
+            GameProgressSaveData saveData = SaveLoadManager.Instance.Load<GameProgressSaveData>("GameProgress");
+            if (saveData == null) return;
+            if (gameProgress is ILoadable<GameProgressSaveData> loadable)
+            {
+                loadable.Load(saveData);
             }
         }
 

@@ -2,6 +2,7 @@ using Asce.Game.Entities.Characters;
 using Asce.Game.Managers;
 using Asce.SaveLoads;
 using System.Collections.Generic;
+
 namespace Asce.Game.Players
 {
     public class CharactersProgress : PlayerCollectionProgress<Character, CharacterProgress>

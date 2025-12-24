@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveFiles:
     _list:
+    - _name: GameProgress
+      _path: progress/game.json
     - _name: SoundSettings
       _path: settings/sound_settings.json
     - _name: CurrentGameConfig

@@ -75,6 +75,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7917278351045334549}
   - {fileID: 742799970140187632}
   - {fileID: 7190066105523411053}
   - {fileID: 5169670586424601943}
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a8a18bf3f25754eb132044dbb6567c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameProgress: {fileID: 6809063100066854809}
   _charactersProgress: {fileID: 7686821017454153705}
   _gunsProgress: {fileID: 1082104218155325083}
   _supportsProgress: {fileID: 6048779359435748343}
@@ -362,4 +364,77 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4236574587593712910, guid: 6695ee1c9d7768441a4c9309fb56231b, type: 3}
   m_PrefabInstance: {fileID: 6414085894939409763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8328899130149718070
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5385461981484837059}
+    m_Modifications:
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478419878771991615, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+      propertyPath: m_Name
+      value: Game Progress
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+--- !u!114 &6809063100066854809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3308060438462611375, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+  m_PrefabInstance: {fileID: 8328899130149718070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6932a24987a0c3b4d81c75db1e189fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &7917278351045334549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2182525182685535779, guid: 4d08f75defa6e1242b6add5d45676944, type: 3}
+  m_PrefabInstance: {fileID: 8328899130149718070}
   m_PrefabAsset: {fileID: 0}

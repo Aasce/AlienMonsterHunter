@@ -25,6 +25,17 @@ namespace Asce.Game.Players
             this.LoadComponent(out _progress);
         }
 
+        private void Start()
+        {
+            _items.Initialize();
+            _progress.Initialize();
+
+            if (_progress.GameProgress.OpenGamesCount <= 1)
+            {
+                this.AddFirstGameResources();
+            }
+        }
+
         /// <summary>
         ///     Registers the active player.
         /// </summary>
@@ -40,6 +51,17 @@ namespace Asce.Game.Players
         {
             if (Player == player)
                 Player = null;
+        }
+
+        public void AddFirstGameResources()
+        {
+            foreach (var item in Progress.GameProgress.FirstGameResources.Items)
+            {
+                Items.Add(item.Name, (int)item.Value);
+            }
+
+            Progress.CharactersProgress.Get("Blue Soldier").Unlock(Progress.GameProgress.FirstGameResources.FirstGameStartUnlock);
+            Progress.GunsProgress.Get("Frontier").Unlock(Progress.GameProgress.FirstGameResources.FirstGameStartUnlock);
         }
     }
 }

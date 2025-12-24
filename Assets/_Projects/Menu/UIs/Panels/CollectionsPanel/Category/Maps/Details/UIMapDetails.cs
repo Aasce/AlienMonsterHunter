@@ -33,7 +33,7 @@ namespace Asce.MainMenu.UIs.Panels
             this.SetLockedState();
             _fullMap.sprite = Item.Information.FullMap;
             _nameText.text = Item.Information.Name;
-            _mapSizeText.text = $"{Item.Information.MapSize.x}m x {Item.Information.MapSize.y}m";
+            _mapSizeText.text = $"{Item.Information.MapSize.x * 10f}m x {Item.Information.MapSize.y * 10f}m";
         }
 
         private void Unregister()
