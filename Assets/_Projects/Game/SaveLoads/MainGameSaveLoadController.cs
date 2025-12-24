@@ -11,6 +11,7 @@ using Asce.Core;
 using Asce.SaveLoads;
 using System.Collections.Generic;
 using UnityEngine;
+using Asce.Game.Enviroments;
 
 namespace Asce.MainGame
 {
@@ -29,6 +30,7 @@ namespace Asce.MainGame
         public void SaveCurrentGame()
         {
             this.SaveGameConfig();
+            this.SaveMap();
             this.SaveWinLoseCondition();
             this.SaveEnemies();
             this.SaveSpawners();
@@ -42,6 +44,7 @@ namespace Asce.MainGame
         public void LoadCurrentGame()
         {
             this.LoadGameConfig();
+            this.LoadMap();
             this.LoadWinLoseCondition();
             this.LoadEnemies();
             this.LoadSpawners();
@@ -64,6 +67,14 @@ namespace Asce.MainGame
             configData.playTime = MainGameManager.Instance.PlayTimeController.ElapsedTime;
 
             SaveLoadManager.Instance.Save("CurrentGameConfig", configData);
+        }
+
+        public void SaveMap()
+        {
+            MapSaveData mapData = new MapSaveData();
+            mapData.mapName = EnviromentController.Instance.Map.Information.Name;
+
+            SaveLoadManager.Instance.Save("CurrentGameMap", mapData);
         }
 
         public void SaveWinLoseCondition()
@@ -175,6 +186,15 @@ namespace Asce.MainGame
 			MainGameManager.Instance.PlayTimeController.SetElapsedTime(configData.playTime);
 
             _isLoadeds["GameConfig"] = true;
+        }
+
+        private void LoadMap()
+        {
+            MapSaveData mapData = SaveLoadManager.Instance.Load<MapSaveData>("CurrentGameMap");
+            if (mapData == null) return;
+
+            EnviromentController.Instance.SetMap(mapData.mapName);
+            _isLoadeds["Map"] = true;
         }
 
         private void LoadWinLoseCondition()

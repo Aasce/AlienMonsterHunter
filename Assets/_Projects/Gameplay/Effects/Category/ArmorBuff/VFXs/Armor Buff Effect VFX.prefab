@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 8852173263793575829}
   - component: {fileID: 2175662086970628414}
   - component: {fileID: 2784398268749372615}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Particle System Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

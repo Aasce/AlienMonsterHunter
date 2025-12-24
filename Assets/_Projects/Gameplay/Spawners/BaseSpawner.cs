@@ -16,6 +16,7 @@ namespace Asce.Game.Spawners
         [SerializeField] protected bool _active = true;
 
         public string Name => _name;
+        public SpawnArea SpawnArea => _spawnArea;
         public bool Active
         {
             get => _active;

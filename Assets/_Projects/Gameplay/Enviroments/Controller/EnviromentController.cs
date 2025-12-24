@@ -1,4 +1,5 @@
 using Asce.Core;
+using Asce.Game.Managers;
 using Asce.Game.Maps;
 using UnityEngine;
 
@@ -20,8 +21,11 @@ namespace Asce.Game.Enviroments
         /// <summary> Map bounds in world space. </summary>
         public Bounds MapBounds => _mapBounds;
 
-        public void SetMap(Map map)
+        public void SetMap(string mapName)
         {
+            Map mapPrefab = GameManager.Instance.AllMaps.Get(mapName);
+            Map map = Instantiate(mapPrefab);
+
             _map = map;
             _mapBounds.extents = new Vector3(map.Information.MapSize.x, map.Information.MapSize.y, 0f);
             _filter.localScale = new Vector3(map.Information.MapSize.x * 2f, map.Information.MapSize.y * 2f, 1f);

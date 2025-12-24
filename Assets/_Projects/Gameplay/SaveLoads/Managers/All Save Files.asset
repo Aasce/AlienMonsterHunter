@@ -18,6 +18,8 @@ MonoBehaviour:
       _path: settings/sound_settings.json
     - _name: CurrentGameConfig
       _path: current/game_config.json
+    - _name: CurrentGameMap
+      _path: current/map.json
     - _name: CurrentGameWinLoseCondition
       _path: current/winlose_conditions.json
     - _name: CurrentGameCharacter
