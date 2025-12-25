@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audio:
     _list:
-    - {fileID: 11400000, guid: c6a174891e695624cb3856cd00aa2574, type: 2}
+    - {fileID: 11400000, guid: 6b823d22e0ccfe14fbb4aaa942751ae3, type: 2}
     - {fileID: 11400000, guid: 63915ee3177f1ea4ca6588a0c5207000, type: 2}
+    - {fileID: 11400000, guid: 6014665141d3bee42b7fdad8e24c6b3d, type: 2}
     - {fileID: 11400000, guid: 96f547c2370b8394ab6c4e503b651862, type: 2}
     - {fileID: 11400000, guid: 709301ca7e6e92e4a93974a895416dbc, type: 2}
     - {fileID: 11400000, guid: f36a9feb6a711b1448e09a1351b01c4a, type: 2}

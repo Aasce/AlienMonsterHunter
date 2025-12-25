@@ -59,5 +59,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicNames:
   - Dark Ambient
-  _playMode: 2
+  - Alien White Space
   _loopPlaylist: 1
+  _startPlayRandom: 1

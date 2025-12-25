@@ -2342,6 +2342,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7654056804597471019, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
+      propertyPath: m_text
+      value: Unlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654056804597471019, guid: fa47a6fbd7063344ebf8080f7ffaa1c3, type: 3}
       propertyPath: m_fontSize
       value: 50
       objectReference: {fileID: 0}

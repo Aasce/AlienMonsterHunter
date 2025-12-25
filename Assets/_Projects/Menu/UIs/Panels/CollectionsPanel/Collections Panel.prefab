@@ -878,7 +878,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1878167559023650960, guid: e5c6b34e7f0428d42a30dc8a03f01eb2, type: 3}
       propertyPath: m_Name
-      value: Alients View
+      value: Aliens View
       objectReference: {fileID: 0}
     - target: {fileID: 2922498655506425043, guid: e5c6b34e7f0428d42a30dc8a03f01eb2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1692,11 +1692,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4016167861106509273, guid: b8da5619d1f82b446abf2b6c4a979044, type: 3}
       propertyPath: m_text
-      value: Alients
+      value: Aliens
       objectReference: {fileID: 0}
     - target: {fileID: 5300648382687105235, guid: b8da5619d1f82b446abf2b6c4a979044, type: 3}
       propertyPath: m_Name
-      value: Alients Button
+      value: Aliens Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

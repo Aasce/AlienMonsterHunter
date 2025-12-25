@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicNames:
-  - Brain Implant
+  - Desolate World
   - Experimental SciFi
-  _playMode: 2
   _loopPlaylist: 1
+  _startPlayRandom: 1
